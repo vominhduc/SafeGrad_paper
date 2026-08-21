@@ -1,0 +1,8 @@
+build/
+*.log
+*.aux
+*.out
+*.blg
+*.brf
+*.synctex.gz
+.DS_Store

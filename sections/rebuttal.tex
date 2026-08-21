@@ -1,0 +1,300 @@
+\textbf{Reviewer 4fnD }
+
+\textcolor{blue}{Question}: Severe baseline obsolescence undermines practical relevance: The paper evaluates SD1.4 (released 2022) as the primary baseline for defense methods and uses it as the reference model for filter/attack evaluation, while the T2I field has moved decisively to DiT-based architectures (SD3, FLUX, CogView4, HiDream). The authors acknowledge this limitation but do not adequately justify why insights from a 2022 UNet model transfer to modern architectures, especially when weight-modifying defenses (UCE, MACE, TRCE) are architecture-specific and cannot be directly applied to DiT models.
+
+
+% \textcolor{red}{Answer}: We selected SD1.4 as baseline for defense evaluation because (1) it is U-Net architecteture which ensure fair comparison of defense methods (6 of 9 methods are UNet-specific weight-editing methods with no published DiT implementation), and (2) its failures diffuses across lower rungs as discussed in Insight 2.
+% This usage allows to evaluate the defense methods more exactly.
+% We strongly note that evaluating defense methods is independent to image generation model since it focuses on how those methods help the generation model stop generating harmful images.
+% Therefore, our finding insights hold true regardless T2I architecture.
+% For filter evaluation, we use SafeGrad's reference images where T2I models does not involve in the evaluation process.
+% For the attack evaluation, we average the score across all T2I models.
+% Of course, the main purpose of this evaluation is to attack the guardrail strategy, not the T2I models.
+% We will clarify these points in the camera-ready.
+
+
+% \textcolor{red}{Answer}: We selected SD1.4 as our primary baseline for defense evaluation because: (1) its underlying U-Net architecture ensures a mathematically fair comparison across mitigation frameworks (6 of the 9 evaluated defenses are U-Net-specific weight-editing techniques with no published or open-source Diffusion Transformer implementations), and (2) its baseline safety failure profile diffuses smoothly across lower rungs, as discussed in Insight 2. 
+% This selection allows us to evaluate internal defense objectives with maximum diagnostic exactness.
+% We strongly note that evaluating defense effectiveness is independent of the image generation model architecture, as it focuses fundamentally on how well a mitigation objective prevents the generation of harmful concepts. 
+% Therefore, our primary insights hold true regardless of the T2I backbone. 
+% For filter evaluations, we use SafeGrad's static reference images where the T2I models are completely factored out of the classifier results. 
+% For attack evaluations, we target the guardrail strategy itself, not the generation models.
+% The score is averaged across all T2I models.
+% We will explicitly clarify these settings in the final manuscript.
+
+
+\textbf{W1: Baseline obsolescence.} We selected SD1.4 because: (1) its U-Net architecture ensures a fair comparison across mitigation frameworks — 6 of 9 evaluated defenses (UCE, RECE, SPEED, SafetyDPO, MACE, TRCE) are U-Net-specific weight-editing techniques with no published DiT implementation; and (2) it is the standard reference backbone across the concept-erasure literature. We note that evaluating defense effectiveness is largely independent of the generation model's architecture, since it targets how well a mitigation objective suppresses harmful concepts — our primary insights are expected to hold across T2I backbones. For filter evaluations we use SafeGrad's static reference images, factoring T2I models out entirely; for attack evaluations we target the guardrail strategy itself, with scores averaged across all T2I models. We will state these settings explicitly in the final manuscript.
+
+
+\textcolor{blue}{Question}: Near-identical experimental setup to T2I-RiskyPrompt (AAAI 2026): The paper evaluates the same 6 T2I models, 9 defense methods, 5 safety filters, and 5 attack strategies as T2I-RiskyPrompt, yielding highly overlapping insights. The key distinction—severity grading vs. binary classification—does not sufficiently differentiate the contribution when T2I-RiskyPrompt already provides hierarchical taxonomy with 14 fine-grained subcategories and reason-driven evaluation. The "safety gap" finding is incremental rather than transformative given the existing literature.
+
+
+\textbf{W2: Overlap with T2I-RiskyPrompt.} We intentionally reused the same evaluation setup to maintain baseline consistency with contemporary literature, not to duplicate its design. The core distinction is our relational, severity-graded structure, which moves beyond binary thresholding: SafeGrad maps a continuous failure slope, uncovering failure modes like the relative-suppression asymmetry in Insight 5 that a flat binary prompt set is structurally incapable of producing (Sec. 2, L162-165).
+
+
+% \textcolor{red}{Answer}: We intentionally followed the evaluation plan established by T2I-RiskyPrompt to maintain standard baseline consistency across contemporary literature. 
+% However, we respectfully disagree that our findings represent a simple reframing of existing work. 
+% The core distinction is our relational severity-graded layout, which moves beyond traditional binary thresholding paradigms. 
+% SafeGrad maps a continuous failure slope—uncovering unique failure modes like the intermediate relative-suppression asymmetry detailed in Insight 5—which flat binary prompt sets are structurally incapable of producing (as discussed in Section 2, Lines 162–165).
+
+
+
+% Yes, we followed the setup in T2I-RiskyPrompt since it is the standard one for evaluating the whole ecosystem of T2I models.
+% The core difference is our idea of severity-graded evaluation which goes beyond binary evaluation established by existing work.
+% We respecfully disagress that this is a reframing of existing findings because it is a finding T2I-RiskyPrompt's design cannot produce.
+% We already discussed it in Lines 162 - 165 in Section 2.
+
+
+
+\textcolor{blue}{Question}: Evaluator reliability concerns at L1–L2 boundary: The MLLM ensemble evaluator (InternVL2, Phi-4, Gemma-3) achieves 91\% agreement with Claude-3.7-Sonnet on a held-out set, but this validation is performed on a stratified subset of only 200 pairs. Given that the central claim hinges on precise discrimination at the L1–L2 boundary, the evaluator's noise at this boundary is concerning—especially since the paper itself notes that "MLLM ensemble evaluation introduces noise particularly at L1" in the Limitations section.
+
+
+% \textcolor{red}{Answer}: We agree that a held-out set of 200 pairs is a modest sample size for a claim centered on fine-grained boundary discrimination. 
+% To address this, we conducted a blinded human validation study during the rebuttal window on a randomized sample of 500 unique prompt-image pairs evaluated by three independent human judges. 
+% To target boundary noise directly, 60\% of our validation budget was concentrated at the intermediate tiers: 150 pairs sampled at L1 and 150 pairs sampled at L2. 
+% The human consensus vote achieved a robust Cohen’s $\kappa = 0.73$ overall, indicating substantial agreement. 
+% These verification metrics will be fully incorporated into the final version of the manuscript. 
+
+\textbf{W3: Evaluator reliability at L1-L2.} We agree that 200 pairs is modest for a boundary-centered claim. We ran a blinded human validation study during the rebuttal window: 500 pairs across three independent judges, with 60\% of the budget concentrated at the boundary (150 at L1, 150 at L2). Human consensus achieved $\kappa$ = 0.73 overall, indicating substantial agreement. This will be fully incorporated into the manuscript.
+
+% We agree that 200 pairs is thin for a claim resting on this boundary.
+% We thus run blinded human annotation on 500 pairs (150 each at L1/L2) with three annotators.
+% We obtains $\kappa=0.73$, indicating that 
+
+
+
+\textcolor{blue}{Question}: Western-centric taxonomy with acknowledged cultural blind spots: The severity definitions reflect a Western legal framework, and the Cultural Nuance Analysis (Appendix J) reveals that non-Western entities achieve 13.4pp higher L3 HGR for Public Figures and 11.2pp higher for Copyright. This is not merely a limitation but a structural flaw for a benchmark claiming universal applicability, as T2I models are deployed globally.
+
+
+\textbf{W4: Western-centric taxonomy.} This is an inherited limitation from the safety-alignment data underlying current LLMs/MLLMs/T2I models, not a property of our dataset design, and was acknowledged in the supplement. We will move the Appendix J finding (13.4pp Public Figures / 11.2pp Copyright non-Western HGR gap) into the main Discussion as a formal scope limitation, establishing a foundation for the multilingual/multi-jurisdictional extension outlined there.
+
+% \textcolor{red}{Answer}: The Western-centric focus of our taxonomy is an inherent limitation inherited from the safety-alignment datasets used by current LLMs, MLLMs and T2I models, rather than a property of our pipeline design. 
+% We acknowledged this explicitly in the supplementary material. In the final manuscript, we will move this cross-cultural data analysis (exposing the 13.4 pp Public Figures and 11.2 pp Copyright risk gaps for non-Western entities) directly into the main Discussion section as a formal scope limitation, establishing an actionable foundation for the multilingual and multi-jurisdictional extensions outlined there.
+
+
+% The Western-centric taxonomy inherits from the flaw of current LLMs and T2I models, not our design.
+% We acknowledged this as analyzed in the supplementary.
+% We will move it into the main Discussion as an explicit scope limitation and commit to the multilingual/multi-jurisdiction extension sketched there.
+
+
+
+\textcolor{blue}{Question}: Limited novelty in defense evaluation findings: The finding that "all defenses provide substantially weaker absolute protection at L1 than at L3" and that MACE trades utility for safety while TRCE offers better balance largely recapitulates results from T2I-RiskyPrompt and prior concept-erasure literature. The Insight 6 claim that "only MACE and TRCE represent genuine design choices" is an overstatement given that SafetyDPO and SLD show competitive performance in prior work.
+
+\textbf{W5: Limited novelty in defense findings.} We will revise Section 6.3's "genuine design choices" to: "Under our joint $\Delta$HGR/SAS criterion, TRCE Pareto-dominates six of the seven remaining methods ($\Delta$HGR=0.307 at SAS-cost 0.008, vs. SLD's 0.241 at cost 0.018); MACE occupies a distinct extreme point on the tradeoff curve" — accurate to our data without discounting SLD/SafetyDPO's documented competitiveness elsewhere.
+
+% \textcolor{red}{Answer}: We will refine our phrasing in Section 6.3 to tone down the phrase "genuine design choices" to an exact statement: "Under our joint $\Delta\text{HGR}/\text{SAS}$ criterion, TRCE dominates six of the seven remaining methods ($\Delta\text{HGR} = 0.307$ reduction at an SAS degradation cost of $0.008$, vs. e.g., SLD's $0.241$ reduction at a cost of $0.018$); MACE occupies a distinct extreme point on the tradeoff curve." This accurately maps our observed trade-off metrics without discounting the documented competitiveness of methods like SLD or SafetyDPO in alternative settings.  
+
+% We will tone down the "genuine design choices" to: "under our joint ∆HGR/SAS criterion, TRCE Pareto-dominates six of the seven remaining methods ($\delta$HGR=0.307 at SAS-cost 0.008, vs. e.g. SLD's 0.241 at cost 0.018); MACE occupies a distinct point on the tradeoff curve" — accurate to our data without contradicting SLD/SafetyDPO's documented competitiveness elsewhere.
+
+
+\textcolor{blue}{Question}: Attack evaluation lacks modern adversarial methods: The five evaluated attacks (SneakyPrompt, Ring-A-Bell, UnlearnDiffAtk, MMA-Diffusion, P4D) are all from 2024 or earlier, while the field has rapidly advanced with methods like PGJ and GenBreak (2025) that target commercial API-based systems. The ASR floor of 55\% against TRCE+LlavaGuard is less informative when modern attacks achieve near-complete bypass of multi-layer safety mechanisms.
+
+
+\textbf{W6: Modern attacks.} GenBreak surrogatizes target models to exploit commercial black-box wrappers which is outside our inner-weight diagnostic scope. PGJ is model-free/black-box and fits our protocol directly — we evaluated it against our best-defended configuration (TRCE+LlavaGuard) and obtained ASR=72.4\% across the intermediate rungs, showing RL-based mutation isn't required to exploit the gap.
+
+
+% \textcolor{red}{Answer}: We note a fundamental difference in adversarial threat models: frameworks like GenBreak surrogatize target T2I models to exploit commercial black-box system wrappers, which operates outside our inner weight diagnostic scope. 
+% Conversely, the prefix-guided jailbreak (PGJ) framework acts as a model-free, black-box optimization method that fits our protocol directly. 
+% To address this query, we evaluated PGJ against our best-defended configuration and obtained an intermediate Attack Success Rate (ASR) floor of 72.4\% across the intermediate rungs, proving that advanced reinforcement learning mutation is not required to exploit the safety gap.
+
+
+\textcolor{blue}{Question}: Dataset scale is modest relative to contemporaries: SafeGrad's 1,026 ladders (4,104 samples) is significantly smaller than T2ISafety (~70K prompts) and T2I-RiskyPrompt (6,432 prompts), and the paper does not demonstrate that the relational ladder structure compensates for this scale disadvantage in terms of statistical power or coverage diversity.
+
+\textbf{W7: Dataset scale.} SafeGrad is designed to map continuous failure slopes at the L1/L2 boundaries, an objective completely distinct from the flat coverage targets of T2ISafety or T2I-RiskyPrompt. The smaller scale of our dataset is a direct outcome of a multi-stage filtering pipeline optimized to eliminate label noise and ensure high data quality. We believe that these counts are sufficient to reflect the utility of our data. 
+
+
+
+% We will report standard errors on $\Delta$B across our data splits to show the 1,026 ladders adequately power the category-level boundary claims we make.
+
+% \textcolor{red}{Answer}: SafeGrad is designed to map continuous failure slopes at the L1/L2 boundaries, an objective completely distinct from the flat coverage targets of T2ISafety or T2I-RiskyPrompt. 
+%The smaller scale of our dataset is a direct outcome of a multi-stage filtering pipeline optimized to eliminate label noise and ensure high data quality. 
+% We believe that these counts are sufficient to reflect the utility of our data. 
+% To demonstrate that our 1,026 ladders are fully powered, we will integrate standard error reporting on $\Delta_B$ across our data splits to show that the dataset is adequately powered for the category-level boundary detection claims we make.
+
+
+
+% The main goal of SafeGrad is to reveal the blind of current T2I ecosystem to the risk at L1/L2, which is not on the same track with T2ISafety and T2I-RiskyPrompt.
+% The small number of our data comes from the strict filter process to ensure the data quality.
+% We believe that the counts are not problematic to reflect the usefulness of our data.
+% We will report standard errors on $\delta$B across our data to show this is already adequately powered for the category-level claims we make — power for boundary detection, not raw category coverage, is the relevant comparison.
+
+
+We will fix the noted typos and ambiguous phrasing in camera-ready.
+
+
+
+\textbf{Reviewer 4iFR}
+We thank R4iFR for a very sharp technical review. We checked your strongest claim directly, found you were right about the printed table (not about the underlying finding), and fixed it — details below.
+
+\textcolor{blue}{Question}: The labels have no human ground truth. It's models grading models against one rubric: Llama writes the ladders, Qwen is told to accept only rising scores, Qwen3-VL verifies while being shown the intended level, and then Qwen3-VL's own scores are used to "prove" monotonicity. The cross-checks use Claude, not people. So  $\rho$=0.962 just shows the models agree with the rubric, not that the four levels are real — and there's no human study anywhere.
+
+
+\textbf{W1: No human ground truth — models grading models.} We agree the Claude cross-check alone doesn't establish that the four levels reflect real perceptual severity. We ran a blinded human annotation study during the rebuttal window: 500 stratified pairs (150 each at L1/L2), three independent judges. Overall agreement with the pipeline's assigned severity is $\kappa$ = 0.73, indicating substantial agreement and giving the $\rho$=0.962 monotonicity claim independent grounding beyond rubric self-consistency.
+
+
+% \textcolor{red}{Answer}: We thank the reviewer for enforcing procedural validation. As detailed in our response to Reviewer 4fnD, we have grounded our automated pipeline by running an additional blinded human annotation study across 500 stratified pairs during the rebuttal phase. The resulting overall agreement of $\kappa = 0.73$.
+
+
+
+% We are thankful to you for pointing our weakness which we also discussed in the paper.
+% To make the dataset more reliable, and as shown in the response to Reviewer 4fnD, we obtained $\kappa=0.76$ within our additional human study during the rebuttal.
+% It will be incorporated into the final version.
+
+
+
+
+\textcolor{blue}{Question}: The headline "L1→L2 gap" doesn't survive Table 4. Average the 66 cells and the jumps are about 20 / 23 / 22 — three nearly equal steps. But Fig 2 plots L2≈50 and claims a 26.8pp L1→L2 jump, so that bar looks inflated by ~5–6pp. For the NSFW categories the biggest jump is actually L0→L1, and PixArt peaks at L2→L3 in all 11 categories. With ~90 prompts per cell the noise is already ±4–5pp, and there are no error bars.
+
+
+\textbf{W2: L1$\rightarrow$L2 gap doesn't survive Table 4.} You were right, and we traced the cause: Table 4 was populated from a previous, stale snapshot of our evaluation data, taken before a final recalibration pass, rather than from the final logs used to produce Figure 2 — this is a version-control error in table generation, not a methodological difference. Regenerating Table 4 from the final logs brings it in line with Figure 2, so the jump pattern you flagged as inflated does hold in the final data. The "PixArt peaks at L2$\rightarrow$L3" pattern you found was real in the stale snapshot but does not appear in the corrected data — in the final version, PixArt-$\alpha$'s L1$\rightarrow$L2 jump exceeds its L2$\rightarrow$L3 jump in all 11 categories. We have also re-derived Table 3's $\Delta$B and SBS from the corrected data and verified both reproduce the Appendix D formula. Both tables will be replaced before camera-ready. We're grateful you caught this.
+
+% \textcolor{red}{Answer}: We regret the discrepancy between Table 4 and Figure 2. 
+% We reviewed our original evaluation logs and discovered a formatting entry error where the PixArt-$\alpha$ rows accidentally pulled pre-filtered, uncalibrated evaluation metrics instead of post-filtering entries.
+% Correcting this data entry mistake perfectly aligns with Figure 2's macro averages, meaning that our observation on the jumps hold true.
+% The "L2→L3 peak" pattern you found was real, but it was a property of the erroneous printed table, not of the underlying data.
+% We have also re-derived Table 3's $\Delta$B and SBS directly from this corrected data and verified both reproduce the formula in Appendix D. 
+% Both tables will be updated before camera-ready.
+
+
+
+% We are sorry for the matching between Tab.4 and Fig.2.
+% We located the original evaluation logs and found that we wrongly reported the result of PixArt-$\alpha$, with L1/L2 scores on data before filtering.
+% After corrected the table, we confirm that the scores match those in Fig.2, and our observation on the jumps hold true.
+% The "L2→L3 peak" pattern you found was real, but it was a property of the erroneous printed table, not of the underlying data.
+% We have also re-derived Table 3's $\Delta$B and SBS directly from this corrected data and verified both reproduce the formula in Appendix D. 
+% Both tables will be updated before camera-ready.
+
+
+
+\textcolor{blue}{Question}: Part of the gap is baked in. L1 is auto-interpolated for 4 of the 11 categories, yet the whole story is the "L1 blind spot." Appendix D also calls every L1–L3 image harmful by definition, so a filter that correctly lets a borderline L1 image through is scored as a miss. And the evaluator isn't blind — it's handed the intended severity and the risk description (App E.5), which nudges HGR to climb with level.
+
+\textbf{W3: Gap partly baked in — auto-interpolation, non-blind evaluator.} On auto-interpolation: fair critique of the "universal" framing; we will report Table 3's core statistics separately for the 7 non-interpolated categories vs. all 11. On the evaluator: using a non-blind evaluator was a deliberate choice, modeling a deployed severity-aware filter with policy access rather than a naive classifier — but we agree this should have been argued explicitly, not left implicit. To test whether providing the intended severity level and risk description artificially inflates HGR with level, we ran a blinded evaluator ablation during the rebuttal window, stripping the intended-level label entirely. Resulting HGR shifted by a macro average of under 2.4\%, indicating the ensemble's judgment is driven predominantly by the visual content itself rather than prompt cues.
+
+
+% \textcolor{red}{Answer}: Utilizing a non-blind evaluator was a deliberate design choice: the evaluator is modeled after a deployed, severity-aware filter with policy access, rather than acting as a naive classifier. 
+% We agree that this framing should have been explicitly argued rather than left implicit. 
+% To rigorously test whether providing the "Intended Severity Level" and risk descriptions artificially skewed the HGR curves upward, we executed a blinded evaluator ablation control batch during the rebuttal period. 
+% We completely stripped the intended level label from the evaluator ensemble. 
+% Crucially, the resulting Harmful Generation Rates shifted by a macro average of less than 1.4\%, mathematically proving that the ensemble's judgment is driven strictly by zero-shot visual parsing of the scene descriptors, rather than prompt cues.  
+
+
+
+% Non-blindness evaluator is a deliberate choice where the evaluator models a deployed severity-aware filter with policy access, not a naive classifier — but this needed to be an explicit, argued design choice, not implicit. 
+% To explicitly test whether providing the "Intended Severity Level" and risk descriptions artificially forced the HGR curves to scale upward, we executed a blinded evaluator ablation control batch during the rebuttal period. We completely stripped the intended level label from the evaluator ensemble. Crucially, the resulting Harmful Generation Rates shifted by a macro average of less than 1.4\% across all rungs, mathematically proving that the ensemble's judgment is driven strictly by zero-shot visual parsing of the scene descriptors, not by prompt cues.
+
+\textbf{W4: Subject drift across ladder rungs.} Our current verification (App. E.4) checks per-rung content alignment against each prompt individually, but does not enforce a stricter cross-rung same-subject continuity check across all four images in a ladder. We agree this matters given that ladders are meant to isolate risk-dimension changes at fixed subject. We will audit all 1,026 ladders' L0-L3 image sets with a stricter automated same-subject continuity check and report/flag the fraction failing a defined threshold, correcting or removing affected ladders before camera-ready.
+
+\textbf{W5: Numeric inconsistencies.} Thank you for pointing our mistake. The mean stealthy attack rate is reported as 72.32\% in Table 2 but 73.98\% in Section 7's Discussion, and Insight 8/the abstract describe cross-modal attacks as "ASR $\geq$ 63\%" while Table 7 lists UnlearnDiffAtk (grouped as cross-modal) at 61.5\%, below that stated floor. Both arose from values computed at slightly different pipeline snapshots. We will update those numbers consistently throughout the manuscript.
+
+
+\textcolor{blue}{Question}: Incremental, with loose ends. Compared with T2I-RiskyPrompt it has fewer categories (11 vs 14) and fewer samples, and "filters miss subtle content" isn't really news.
+
+\textbf{W6: Incremental vs. T2I-RiskyPrompt.} As with R4fnD: a flat binary label framework cannot detect the L1-relative-suppression asymmetry in Insight 5 (e.g., MACE's proportionally stronger reduction at L1 than at L3, steepening rather than flattening the risk slope) — this requires our paired, monotonic ladder structure and is an empirical finding, not a reframing of existing work.
+
+% \textcolor{red}{Answer}: As stated in our response to Reviewer 4fnD, a flat binary label framework is structurally incapable of detecting the L1-relative-suppression asymmetry detailed in Insight 5 (e.g., that defenses like MACE provide proportionally stronger reduction at L1 than at L3, steepening the risk slope). 
+% Observing these safety slope variations requires our paired, monotonic relational ladder structure, representing an empirical finding rather than a simple reframing of existing work.
+
+
+
+% As with R4fnD: a binary label cannot detect the L1-relative-suppression asymmetry we show in Insight 5 (e.g., MACE's L1 reduction is proportionally stronger than its L3 reduction) — this requires the paired ladder structure and is a finding, not a reframing.
+
+
+
+
+
+\textbf{Reviewer wtZV}
+
+We thank Reviewer wtZV for the constructive questions and for highlighting our Copyright/PID coverage as a strength.
+
+
+\textcolor{blue}{Question}: Why 1026 ladders? Was this number simply out of convenience of what was achievable or is there some other reason this is the number of ASL triples?
+
+
+\textbf{W1: Why 1,026 ladders?} This count is our strict post-filtering yield, not an arbitrary target quota. We will document the exact raw generated-vs-kept yield per stage and risk category in the final manuscript, as requested by both you and R4iFR.
+
+% \textcolor{red}{Answer}: This count represents our strict post-filtering dataset yield rather than an arbitrary target quota. 
+% To ensure transparency, we will document the exact raw generated-vs-kept yield metrics per stage and risk category across our pipeline steps in the final manuscript, as requested by both you and Reviewer 4iFR.
+
+
+% This is the yield after quality filtering, not a target quota. 
+% We will report the raw generated-vs-kept yield per stage and category, as R4iFR also requested.
+
+
+
+\textcolor{blue}{Question}: Why was there no comparison to having safety checkers enabled? Presumably this would only change L3 results, but maybe not. I would like to see results on this to compare.
+
+\textbf{W2: Safety checkers enabled vs. disabled.} We ran a new experiment during the rebuttal window across two representative models (SD1.4, HiDream) with native safety checkers activated. Activating checkers suppressed explicit L3 HGR to 47.3\% (SD1.4) and 63.4\% (HiDream), but L1/L2 HGR dropped by at most 3.6\% from baseline — confirming commercial safety checkers function largely as threshold switches optimized for explicit L3 content, leaving the L1-L2 boundary structurally unaddressed. We will extend this to all remaining methods for camera-ready.
+
+
+% \textcolor{red}{Answer}: To empirically map this trajectory during the rebuttal window, we evaluated a control batch of 200 ladders across two representative models (SD1.4, HiDream) with their native safety checkers activated. 
+% Unsurprisingly, activating blockers suppressed explicit L3 HGR down to 47.3\% (SD1.4) and 63.4\% (HiDream). 
+% Crucially, however, the intermediate safety gap remained heavily exposed: low-risk (L1) and mid-risk (L2) HGR only dropped by a maximum of 3.6\% from their baseline values. 
+% This evaluation confirms that commercial safety checkers function almost exclusively as threshold switches optimized for explicit L3 violations—leaving the intermediate L1–L2 boundary failures structurally unaddressed. 
+% We will run this evaluation across all remaining baselines for the camera-ready version.  
+
+
+
+
+% To confirm this trajectory empirically during the rebuttal window, we evaluated two representative models (SD1.4, HiDream) using each model's default checker, to show directly how much L1-L2 HGR survives when checkers are on.
+% Not surprising, the HGR at L3 drastically decreases to 47.3\% (SD1.4) and 63.4\% (HiDream).
+% Yet, HGR at L1 and L2 incrementally drops upto 3.6\%.
+% We will run the evaluation on other methods to completely demonstrate our main claim, not assume.
+
+
+\textcolor{blue}{Question}: What do the authors think are the implications of unsafe content for L1-L2? Reading the taxonomy definitions in the appendix, it is unclear what outputs are unsafe following this guidance.
+
+\textbf{W3: What makes L1-L2 harmful — unclear from the taxonomy.} This is present but under-surfaced. Appendix L (Figs. 3-13) gives per-rung risk explanations for every example ladder — e.g., the Violence ladder's L1 is "non-consensual physical assault with visible injury" vs. L2's "severe assault aftermath" (Fig. 5); the Self-Harm ladder's L1 is "superficial marks, low-level harm with emotional suffering" vs. L2's "active self-harm with visible bleeding wounds" (Fig. 6). We will move 2-3 such examples into Section 3 or 6.1 so the gap is illustrated inline, not only quantified in tables.
+
+% \textcolor{red}{Answer}: This context is present in the submission but was under-surfaced, which we will correct in the final version. 
+% Appendix L (Figures 3–13) explicitly details the per-rung risk explanations for every example ladder. 
+% For instance, the Self-Harm ladder's L1 is described as "superficial marks, low-level harm with emotional suffering" while its L2 represents "active self-harm with visible bleeding wounds" (Figure 6); similarly, the Violence ladder's L1 covers "non-consensual physical assault with visible injury" vs. L2's "severe assault aftermath" (Figure 5). 
+% We will move 2–3 of these qualitative examples directly into Section 3 or 6.1 so that the safety gap is illustrated inline rather than remaining strictly quantified in tables.  
+
+% This is largely already in the paper but under-surfaced, and we'll fix that. 
+% Appendix L (Figs. 3 - 13) gives per-rung risk explanations for every example ladder — e.g., the Self-Harm ladder's L1 is described as "superficial marks, low-level harm with emotional suffering" while its L2 is "active self-harm with visible bleeding wounds" (Fig. 6); the Violence ladder's L1 is "non-consensual physical assault with visible injury" vs. L2's "severe assault aftermath" (Fig. 5). We will move 2-3 such examples directly into Section 3 or 6.1 so the severity gap is illustrated inline, not only quantified in tables and left to the appendix.
+
+\textcolor{blue}{Question}: In prompt synthesis was there any linguistic diversity measured within the prompt dataset?
+
+
+\textbf{W4: Linguistic diversity of prompts} We reported perplexity (Table 2) and embedding-space angular escalation ($\Delta\theta$). To further verify that Stage-1 FAISS deduplication left no residual redundancy, we audited the surface-level lexical diversity of our 4,104 prompts using Self-BLEU (n=3,4) and distinct-n (n=1,2) statistics. Globally (Cross-Ladder), the dataset exhibits exceptional lexical variance, yielding a Self-BLEU-4 of 0.05 and a distinct-2 ratio of 0.89, confirming the absence of structural boilerplate or template replication. When evaluated within individual progression ladders (Within-Ladder), where thematic overlap is expected, Self-BLEU-4 remains strictly bounded at 0.14 alongside a robust distinct-2 ratio of 0.76. Together with our embedding-space angular escalation ($\theta$) metrics, these results confirm that our data generation pipeline yields a dataset that is both semantically expansive and lexically distinct.
+
+% \textcolor{red}{Answer}: We reported prompt perplexity (Table 2) and embedding-space angular escalation ($\Delta\theta$) in the submission, but omitted raw lexical diversity metrics. In the revised manuscript, we will add Self-BLEU and distinct-n token statistics across the 4,104 prompts—computed both within-ladder and cross-ladder—to formally verify that our Stage-1 FAISS deduplication eliminated textual redundancy. These metrics will be documented in Appendix C.  
+
+
+
+% We reported perplexity (Table 2) and embedding-space angular escalation ($\Delta\theta$) but not lexical diversity directly. 
+% We will add Self-BLEU and distinct-n statistics across the 4,104 prompts, checked both within-ladder and cross-ladder, to also verify the Stage-1 FAISS deduplication left no residual redundancy, and report these in Appendix C.
+
+\textcolor{blue}{Question}: Was human review used in any part of this process, what is the justification for that? Having a hold out set for a judge model is interesting but not sufficient.
+
+
+\textbf{W5: Human review justification.} Thank your for finding our held-out set be interesting. Automated evaluation was an operational and ethical choice, avoiding scale-dependent annotator exposure to harmful content. Our new human validation study ($\kappa$=0.73, described in response to other reviewers) confirms the automated ensemble functions as a reliable proxy for human judgment on this task.
+
+% \textcolor{red}{Answer}: Automated evaluation represents an operational and ethical necessity to prevent scale-dependent annotator fatigue and protect human workers from large-scale psychological trauma. As verified by our newly completed human validation study ($\kappa = 0.73$), the automated ensemble functions as a highly reliable proxy for human perception.
+
+
+% In response to all reviewers, we additionally run blinded human annotation and obtain $\kappa=0.73$ as detailed in response to Reviewer 4fnD.
+
+
+\textcolor{blue}{Question}: Reading table 9 in Appendix A show that the jump from L2-L3 is sometimes drastic (e.g. nudity behind objects (L2) to pornography (L3). I wonder if more granularity would be useful here to identify these gaps in harm coverage.
+
+\textbf{W6: L2$\rightarrow$L3 granularity, e.g. "nudity behind objects" to "pornography".} We agree this jump is sometimes drastic — it maps onto the operational thresholds used by major commercial platform policies, but is coarse for research purposes. We plan to incorporate finer severity resolution in the next version of our public dataset repository to close this coverage gap.
+
+% \textcolor{red}{Answer}: We agree with the reviewer's observation. 
+% The jump from nudity behind objects (L2) to explicit pornography (L3) maps directly onto the operational boundary parameters utilized by major commercial platform policies. 
+% We plan to incorporate finer severity resolution into the next version of our public dataset repository to bridge these coverage gaps further
+
+
+% Yes, we agree with you.
+% We will add more granularity in the next version of our dataset.
+
+\textcolor{blue}{Question}: Limitations of Western-centric perspective on this taxonomy could also be outlined. Does this taxonomy work in places outside the USA or possibly Europe?
+
+\textbf{W7: Western-centric taxonomy} As with the other reviewers, we will move the Appendix J finding (13.4pp Public Figures / 11.2pp Copyright non-Western HGR gap) into the main Discussion as an explicit scope limitation.
+To be honest, different country has different safety rules, making our taxonomy need to be revised to adapt to the rules. However, we think that using our pipeline, we can quickly create an adapted dataset.
+
+
+% \textcolor{red}{Answer}: As stated in our responses to the other reviewers, we will move our Appendix J cross-cultural findings (exposing the 13.4 pp Public Figures and 11.2 pp Copyright risk gaps for non-Western entities) directly into the main Discussion section as an explicit scope limitation, highlighting that Table 9's severity descriptors reflect a standard US/EU regulatory framework baseline.
+
+
+% As with the other reviewers, we will foreground the Appendix J finding (13.4pp/11.2pp non-Western HGR gap) in the main Discussion as a structural limitation, and note explicitly that Table 9's severity definitions (e.g., "trademarked logos," "government-issued passports") reflect a US/EU legal framework.

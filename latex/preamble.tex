@@ -1,0 +1,128 @@
+%
+% --- inline annotations
+%
+\ifdefined\XeTeXversion\else\pdfoutput=1\fi % only force PDF output under pdfTeX; breaks hyperref's driver detection under XeTeX
+\usepackage[dvipsnames, table]{xcolor}
+\usepackage{color}
+% \usepackage[nointegrals]{wasysym} 
+\usepackage{tikz,pgfplots,pgfplotstable}
+% \usepackage{stix}
+\usepackage{float}
+\usepackage{amsthm}
+\usepackage{diagbox}
+\usepackage{xspace}
+\usepackage{multirow}
+\usepackage{tabularx}
+\usepackage{xr}
+\usepackage{caption}
+\usepackage{pifont}
+\usepackage{amsmath}
+\makeatletter\@ifpackageloaded{hyperref}{}{\usepackage{hyperref}}\makeatother
+\usepackage{wrapfig}
+\usepackage{enumitem}
+
+% \newcommand{\vmduc}[1]{\textcolor{red}{}}
+\newcommand{\vmduc}[1]{\textcolor{red}{\small VMDuc: #1}}
+% \newcommand{\hh}[1]{\textcolor{blue}{#1}}
+\newcommand{\hh}[1]{#1}
+\newcommand{\E}[1]{\mathbb{E}_{P_t}\left[#1\right]}
+\newcommand{\Var}[1]{\mathrm{Var}_{P_t}\left(#1\right)}
+
+% Define 
+\newcommand{\method}[0]{PeTTA\xspace}
+\newcommand{\setting}[0]{recurring\xspace}
+\newcommand{\Setting}[0]{Recurring\xspace}
+
+
+\newcommand{\cmark}{\ding{51}}%
+\newcommand{\xmark}{\ding{55}}%
+\definecolor{ClrHighlight}{RGB}{210, 255, 255}
+\definecolor{green01270}{RGB}{80, 200, 120}
+\definecolor{ForestGreen}{RGB}{34,139,34}
+\definecolor{darkgray}{RGB}{113, 121, 126}
+
+\newcommand{\red}[1]{{\color{red}#1}}
+% \newcommand{\todo}[1]{{\color{red}#1}}
+% \newcommand{\TODO}[1]{\textbf{\color{red}[TODO: #1]}}
+
+\newtheorem{thm}{Theorem}[subsection]
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{corollary}{Corollary}
+\newtheorem{assumption}{Assumption}
+\newtheorem{definition}{Definition}
+
+\newenvironment{shortthm}{\textbf{Theorem.}\space\em}{\par}
+
+% --- disable by uncommenting  
+% \renewcommand{\TODO}[1]{}
+% \renewcommand{\todo}[1]{#1}
+\newcommand{\changes}[1]{\textcolor{black}{#1}}
+\newcommand{\justification}[1]{\textcolor{blue}{#1}}
+\newcommand{\remove}[1]{\textcolor{red}{#1}}
+% Setup embedded hyperlinks
+\definecolor{cvprblue}{rgb}{0,0.20,0.74}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=cvprblue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+    % pdftitle={Overleaf Example},
+    % pdfpagemode=FullScreen,
+    }
+    
+\newcommand{\Sec}[1]{{Sec.}~#1}
+\newcommand{\Tab}[1]{{Tab.}~#1}
+\newcommand{\Fig}[1]{{Fig.}~#1}
+\newcommand{\Appdx}[1]{{Appdx.}~#1}
+\newcommand{\Eq}[1]{{Eq.}~#1}
+\newcommand{\Alg}[1]{{Alg.}~#1}
+
+\usepackage{algorithm} 
+\usepackage{algorithmic}  
+\usepackage[algo2e]{algorithm2e} 
+\usetikzlibrary{fit,calc}
+% For highlighting a segment of code block
+%define a marking command
+\newcommand*{\tikzmk}[1]{\tikz[remember picture,overlay,] \node (#1) {};\ignorespaces}
+%define a boxing command, argument = colour of box
+\newcommand{\boxit}[1]{\tikz[remember picture,overlay]{\node[yshift=3pt,fill=#1,opacity=.25,fit={(StartHere)($(EndHere)+(.95\linewidth,.8\baselineskip)$)}] {};}\ignorespaces}
+%define some colours according to algorithm parts (or any other method you like)
+\colorlet{codehighlightpink}{red!40}
+\colorlet{codehighlightblue}{cyan!60}
+
+\newcommand{\dataname}{SafeGrad\xspace}
+
+\definecolor{bestresult}{RGB}{198,224,180}  % Light green for best
+\definecolor{worstresult}{RGB}{248,203,173} % Light orange for worst
+\definecolor{highlight}{RGB}{255,242,204}    % Light yellow for notable
+
+% \usepackage{floatrow}
+
+\usepackage[utf8]{inputenc} % allow utf-8 input
+\usepackage[T1]{fontenc}    % use 8-bit T1 fonts
+\makeatletter\@ifpackageloaded{hyperref}{}{\usepackage{hyperref}}\makeatother       % hyperlinks
+\usepackage{url}            % simple URL typesetting
+\usepackage{booktabs}       % professional-quality tables
+\usepackage{amsfonts}       % blackboard math symbols
+\usepackage{nicefrac}       % compact symbols for 1/2, etc.
+\usepackage{microtype}      % microtypography
+\usepackage{xcolor}         % colors
+\usepackage{xspace}
+
+\usepackage{tikz}             % The engine for the diagram
+\usepackage{xcolor}           % For defining the safety level colors (Green/Red/etc.)
+\usepackage{caption}          % For professional caption styling
+\usepackage{subcaption}       % If you plan to have Figure 1a and 1b
+\usepackage{amsmath, amssymb} % For any math symbols in the rules
+\usetikzlibrary{shapes.geometric} % For the Category Wheel and rounded boxes
+\usetikzlibrary{arrows.meta}      % For professional, modern arrowheads
+\usetikzlibrary{positioning}      % For relative placement (e.g., "right=of category")
+\usetikzlibrary{calc}             % To calculate coordinates for the 'Safety Gap' arrow
+\usetikzlibrary{shadows}          % Optional: to give boxes a subtle drop-shadow
+\definecolor{safe_green}{RGB}{220, 245, 220}
+\definecolor{low_yellow}{RGB}{255, 250, 205}
+\definecolor{mid_orange}{RGB}{255, 225, 180}
+\definecolor{high_red}{RGB}{255, 210, 210}
+\definecolor{safety_gap_red}{RGB}{190, 0, 0}
+\usepackage{gensymb}

@@ -1,0 +1,481 @@
+\section{Results and Analysis}
+
+
+% \begin{table*}[!t]
+%   \centering
+%   % --- LEFT SIDE: FIGURE ---
+%   \begin{minipage}{0.25\textwidth}
+%     \centering
+%     \includegraphics[width=\linewidth]{figures/safety_gap.pdf}
+%     \captionof{figure}{The Safety Gap: Universal failure at low-severity boundaries. Overall HGR (Harmful Generation Rate) progression, aggregated across six T2I models, reveals non-uniform escalation with the steepest increase at L1$\rightarrow$L2 (mean $\Delta$HGR = 26.8 pp), exposing a systematic vulnerability at the low-severity boundary.}
+%     \label{fig:safety_gap}
+%   \end{minipage}
+%   \hfill % Adds spacing between the two
+%   % --- RIGHT SIDE: TABLE ---
+%   \begin{minipage}{0.73\textwidth}
+%     \begin{minipage}{\textwidth}
+%     \centering    
+%     \resizebox{0.4\linewidth}{!}{%
+%       \input{tables/boundary_delta}% <--- No blank space after this
+%     }%
+%     \caption{Boundary Delta ($\Delta_B$, \%) and peak severity transition per model (averaged across 11 categories). All six models collapse at L1$\to$L2.}
+%     \label{tab:delta}
+%     \end{minipage}
+%     \vspace{20pt}
+%     \begin{minipage}{\textwidth}
+    
+%     \centering
+    
+%     \resizebox{\linewidth}{!}{%
+%       \input{tables/T2I_full_1}
+%     }
+
+%     \vspace{6pt}
+
+%     \resizebox{\textwidth}{!}{%
+%     \input{tables/T2I_full_2}
+%     }
+%     \caption{HGR (\%) at each severity level and Safety Boundary Sharpness (SBS) and Boundary Delta ($\Delta_B$, \%) for six evaluated T2I models across 11 risk categories. \textbf{Bold} = highest HGR per column; \colorbox{gray!20}{shaded} = lowest. Models are ordered by increasing generative capability. PID = Personal Identification Documents.}
+%     \label{tab:t2i_models}
+%     \end{minipage}
+%   \end{minipage}
+% \end{table*}
+
+
+\begin{figure}[tb]
+    \centering
+    \includegraphics[width=0.825\linewidth]{figures/safety_gap.pdf}
+    \caption{The Safety Gap: Universal failure at low-severity boundaries. Overall HGR progression, aggregated across six T2I models, reveals non-uniform escalation with the steepest increase at L1$\rightarrow$L2 (mean $\Delta$HGR = 26.8 pp), exposing a systematic vulnerability at the low-severity boundary.}
+    \label{fig:safety_gap}
+\end{figure}
+
+\input{tables/boundary_delta}
+
+
+
+\begin{table*}[tb]
+      \centering
+      \resizebox{0.9\linewidth}{!}{%
+        \input{tables/T2I_full_1}%
+      }
+      \vspace{6pt}
+      \resizebox{0.9\textwidth}{!}{%
+        \input{tables/T2I_full_2}%
+      }
+      \caption{HGR (\%) at each severity level and Safety Boundary Sharpness (SBS) and Boundary Delta ($\Delta_B$, \%) for six evaluated T2I models across 11 risk categories. \textbf{Bold} indicates highest HGR per column; \colorbox{gray!20}{shaded} indicates lowest one. Models are ordered by increasing generative capability.}
+    \label{tab:t2i_models}
+\end{table*}
+
+% \begin{table*}[!t]
+%   \centering
+%   % --- LEFT SIDE: FIGURE ---
+%   \begin{minipage}{0.45\textwidth}
+%     \centering
+%     \includegraphics[width=\linewidth]{figures/safety_gap.pdf}
+%     \captionof{figure}{The Safety Gap: Universal failure at low-severity boundaries. Overall HGR progression, aggregated across six T2I models, reveals non-uniform escalation with the steepest increase at L1$\rightarrow$L2 (mean $\Delta$HGR = 26.8 pp), exposing a systematic vulnerability at the low-severity boundary.}
+%     \label{fig:safety_gap}
+%   \end{minipage}
+%   \hfill 
+%   % --- RIGHT SIDE: TWO TABLES ---
+%   \begin{minipage}{0.45\textwidth}
+%     \begin{minipage}{\textwidth}
+%       \centering    
+%       \resizebox{\linewidth}{!}{%
+%         \input{tables/boundary_delta}%
+%       }%
+%       \caption{Boundary Delta ($\Delta_B$, \%) and peak severity transition per model (averaged across 11 categories). All six models collapse at L1$\to$L2.}
+%     \label{tab:delta}
+%     \end{minipage}
+
+    % \vspace{12pt}
+
+    % \begin{minipage}{\textwidth}
+    %   \centering
+    %   \resizebox{\linewidth}{!}{%
+    %     \input{tables/T2I_full_1}%
+    %   }
+    %   \vspace{6pt}
+    %   \resizebox{\textwidth}{!}{%
+    %     \input{tables/T2I_full_2}%
+    %   }
+    %   \caption{HGR (\%) at each severity level and Safety Boundary Sharpness (SBS) and Boundary Delta ($\Delta_B$, \%) for six evaluated T2I models across 11 risk categories. \textbf{Bold} indicates highest HGR per column; \colorbox{gray!20}{shaded} indicates lowest one. Models are ordered by increasing generative capability.}
+    % \label{tab:t2i_models}
+    % \end{minipage}
+%   \end{minipage}
+% \end{table*}
+
+We present our evaluation results organized around the central finding of this work: a systematic safety gap at the low-to-mid severity boundary that is universal across models, defenses, and filters. 
+We begin by characterizing this gap empirically, then analyze how different components of the T2I safety ecosystem respond to graduated severity.
+
+\subsection{The Safety Gap: A Universal Failure Mode}
+
+
+
+
+
+% \input{tables/T2I_full}
+
+% \begin{figure}[tb]
+%   \centering
+%   \includegraphics[width=\textwidth]{figures/safety_gap.pdf}
+%   \caption{The Safety Gap: Universal failure at low-severity boundaries. (a) Overall HGR (Harmful Generation Rate) progression reveals non-uniform escalation with the steepest increase at L1→L2 (9.2percentage points), exposing a systematic vulnerability. (b) Per-category HGR@L3 shows Violence (75\%) and Hate Speech (49\%) as highest-risk, while Copyright and PID (Personal Identification Documents) remain undetectable. (c) SBS (Safety Boundary Sharpness) vs. HGR@L3 demonstrates that higher risk correlates with sharper boundaries; color indicates baseline safety (HGR@L0). (d) Escalation heatmap confirms universal safety gap across all categories from L0 to L3.}
+%   \label{fig:safety_gap}
+% \end{figure}
+
+
+% \begin{figure}[tb]
+%   \centering
+%   \begin{minipage}[tb]{0.52\textwidth}
+%     \centering
+%     \includegraphics[width=\textwidth]{figures/safety_gap.pdf}
+%     \caption{The Safety Gap: Universal failure at low-severity boundaries. (a) Overall HGR (Harmful Generation Rate) progression reveals non-uniform escalation with the steepest increase at L1→L2 (9.2percentage points), exposing a systematic vulnerability. (b) Per-category HGR@L3 shows Violence (75\%) and Hate Speech (49\%) as highest-risk, while Copyright and PID (Personal Identification Documents) remain undetectable. (c) SBS (Safety Boundary Sharpness) vs. HGR@L3 demonstrates that higher risk correlates with sharper boundaries; color indicates baseline safety (HGR@L0). (d) Escalation heatmap confirms universal safety gap across all categories from L0 to L3.}
+%     \label{fig:safety_gap}
+%   \end{minipage}
+%   \hfill
+%   \begin{minipage}[tb]{0.45\textwidth}
+%     \centering
+%     \captionof{table}{T2I model safety summary, including AVG@L3 (HGR across all 11 categories at L3), SBS, and FFR. \textbf{Bold} = highest risk; \colorbox{gray!20}{shaded} = lowest.}
+%     \label{tab:t2i_models}
+%     \resizebox{\textwidth}{!}{
+%       \input{tables/T2I_summary}
+%     }
+%     \vspace{1em} % Spacing between the two tables
+%     \captionof{table}{Evaluation of nine defense methods applied to SD1.4 baseline. We report SAS and $\Delta$HGR meaning average HGR reduction relative to undefended baseline. \textbf{Bold} = best; \underline{underline} = second best. `--' = training collapse.}
+%     \label{tab:defense_summary}
+%     \resizebox{\textwidth}{!}{
+%       \input{tables/defense_summary}
+%     }
+%   \end{minipage}
+% \end{figure}
+
+
+
+
+
+% \begin{figure}[tb]
+%     \centering
+%     \includegraphics[width=0.7\linewidth]{figures/safety_gap.pdf} 
+%     \caption{The Safety Gap: Universal failure at low-severity boundaries. (a) Overall HGR progression reveals non-uniform escalation with the steepest increase at L1→L2 (9.2pp), exposing a systematic vulnerability. (b) Per-category HGR@L3 shows Violence (75\%) and Hate Speech (49\%) as highest-risk, while Copyright and PID remain undetectable. (c) SBS vs. HGR@L3 demonstrates that higher risk correlates with sharper boundaries; color indicates baseline safety (HGR@L0). (d) Escalation heatmap confirms universal safety gap across all categories from L0 to L3.}
+%     \label{fig:safetygap}
+% \end{figure}
+
+% \Fig{\ref{fig:safety_gap}} presents aggregated HGR across all six evaluated T2I models, revealing the core empirical finding of this work. 
+% While the average HGR at L3 (high-risk) across all models is 65.8\%, indicating that most models eventually fail under sufficient semantic escalation, the gradient between L0 and L3 is far from uniform. 
+% The L0$\rightarrow$L1 transition already produces a mean HGR jump of 21.4 percentage points (pp), confirming that harmful generation begins at the lowest non-safe rung -- precisely where existing text filters and visual classifiers are least calibrated.
+% The escalation steepens further at L1$\rightarrow$L2 (mean $\Delta$HGR = 26.8 pp), where models begin faithfully rendering moderate-severity content.
+% The L1 vulnerability constitutes the safety gap: a severity band where prompts appear benign to text filters yet produce visually harmful outputs that evade visual classifiers trained primarily on explicit L3 content.
+
+\Fig{\ref{fig:safety_gap}} shows the aggregated HGR gradient is far from uniform: while mean HGR@L3 is 65.8\%, the L0$\rightarrow$L1 transition already produces a 21.4 percentage points (pp) jump at the rung where filters are least calibrated.
+The escalation steepens at L1$\rightarrow$L2 (mean $\Delta$HGR = 26.8 pp), defining the safety gap: prompts appear benign to text filters yet produce visually harmful outputs that evade classifiers trained on explicit L3 content.
+
+
+
+
+% While HGR at L3 (high-risk) averages 73.2\%, indicating that most models eventually fail under sufficient semantic escalation, the gradient between L0 and L3 is far from uniform. 
+% The steepest increase occurs between L1 and L2 (mean $\Delta$B = 26.8 percentage points), while the L0→L1 transition shows the weakest protection (mean $\Delta$HGR = 21.4 pp). 
+% This L1 vulnerability constitutes the safety gap: a severity band where prompts appear benign to keyword-based text filters yet produce visually harmful outputs that evade visual classifiers trained primarily on explicit L3 content.
+
+
+% \remove{move to appendix}
+% To validate that this gap reflects genuine model behavior rather than evaluator bias, we replicate the analysis on our Gold Standard subset with full human consensus (n=500). 
+% The gap persists: $\Delta$HGR(L1→L3) on the Gold Standard is 51.7 pp compared to 51.6 pp on the full benchmark (Appendix~\ref{app:goldstandard}). 
+% This 0.1 pp difference falls within inter-annotator variation, confirming that the safety gap is a real failure mode, not an artifact of our automated evaluation.
+
+
+\textbf{Insight 1: Universal L1 blind spot.} \textit{Current T2I safety systems exhibit a systematic blind spot at the L1 boundary.}
+It is universal across all evaluated models and is invisible to binary safe/unsafe evaluation paradigms.
+\Tab{\ref{tab:delta}} confirms this universality: the L1$\to$L2 transition is the peak transition for every evaluated model, with Boundary Delta ranging from 22.1 pp (PixArt-$\alpha$) to 29.1 pp (HiDream).
+% To confirm this gap reflects genuine model behavior rather than evaluator noise, we replicate the analysis on a Gold Standard subset ($n = 500$, stratified across all 11 categories and four levels, re-labeled by three independent human annotators with full consensus required).
+% The gap persists: mean HGR@L1 = 21.4\% (vs.\ 22.7\% automated, $\Delta = 1.3$ pp) and HGR@L3 = 73.1\% (vs.\ 74.3\%, $\Delta = 1.2$ pp), within inter-annotator variance, confirming the gap is a genuine model failure rather than an evaluation artifact.
+We now examine how this gap manifests across different components.
+
+% \begin{table}[tb]
+% \centering
+% \small
+% \begin{tabular}{l ccc}
+% \toprule
+% \textbf{Model} & $\boldsymbol{\Delta_B}$ & \textbf{Peak Trans.} & \textbf{SBS} \\
+% \midrule
+% SD1.4           & 27.3 & L1$\to$L2 & 0.31 \\
+% SD2.1           & 25.6 & L1$\to$L2 & 0.36 \\
+% PixArt-$\alpha$ & 22.1 & L1$\to$L2 & 0.42 \\
+% CogView4        & 26.4 & L1$\to$L2 & 0.39 \\
+% Janus-Pro       & 28.7 & L1$\to$L2 & 0.61 \\
+% HiDream         & 29.1 & L1$\to$L2 & 0.74 \\
+% \bottomrule
+% \end{tabular}
+% \caption{Boundary Delta ($\Delta_B$, \%) and peak severity transition per model (averaged across 11 categories). All six models collapse at L1$\to$L2.}
+% \label{tab:delta}
+% \end{table}
+% Due to length limitations, only aggregated results are reported hereafter. For a more comprehensive understanding of the data, the reader is referred to the detailed analysis in Appendix~\ref{app:full_results}.
+
+% \input{tables/defense_compact}
+
+% \begin{table*}[tb]
+%   \centering
+%   % --- LEFT SIDE ---
+%   \begin{minipage}{0.55\textwidth}
+%     \centering    
+%     \resizebox{\linewidth}{!}{%
+%       \input{tables/defense_compact}% <--- No blank space after this
+%     }%
+%     \caption{Evaluation of nine defense methods applied to SD1.4 baseline. We report HGR (\%) at L1, L2, L3 and SAS for three category groups: NSFW (Sexual Content, Minors, Violence, Self-Harm, Disturbing Content), Legal (Illegal Activities, Copyright, PID), and Social (Hate Speech, Misinformation, Public Figures). $\Delta$HGR = average HGR reduction relative to undefended baseline. \textbf{Bold} = best; \underline{underline} = second best. `--' = training collapse.}
+%     \label{tab:defense}
+%   \end{minipage}
+%   \hfill % This pushes the two minipages to the far left and right
+%   % --- RIGHT SIDE ---
+%   \begin{minipage}{0.43\textwidth}
+%     \begin{minipage}{\textwidth}
+%     \centering    
+%     \resizebox{\linewidth}{!}{%
+%       \input{tables/filter}
+%     }%
+%     \caption{Safety filter evaluation on SafeGrad reference images. Detection rate shown per severity level (L0--L3) alongside overall metrics. TPR@L3 = detection rate on high-risk images; FPR@L0 = false alarm rate on safe images; FBR = filter bypass rate; L3$-$L0 = severity sensitivity. \textbf{Bold} = best per column; \underline{underline} = second best. \colorbox{gray!20}{Shaded} row = best overall filter. Random and ideal baselines included for reference.}
+% \label{tab:filter}
+%     \end{minipage}
+%     \vspace{12pt}
+%     \begin{minipage}{\textwidth}    
+%     \centering
+%     \resizebox{\linewidth}{!}{%
+%       \input{tables/attack_summary}
+%     }
+%     \caption{Attack Success Rate (ASR, \%) for five adversarial attack strategies against the best-defended configuration (TRCE + LlavaGuard), evaluated on L2 and L3 severity prompts across all 11 risk categories. \textbf{Bold} is highest; \underline{underline} is second highest. AVG = macro-average ASR across all categories and levels.}
+%     \label{tab:attacks}
+%     \end{minipage}
+    
+%   \end{minipage}
+% \end{table*}
+
+
+
+\subsection{Generative Model Analysis: Capability Correlates with Risk}
+
+\Tab{\ref{tab:t2i_models}} depicts the evaluations on six T2I models across all categories.
+
+
+
+% \input{tables/T2I_summary}
+
+% \input{tables/T2I_full}
+
+\textbf{Insight 2: Capability vs. Failure concentration.}
+\textit{Higher-capability models achieve higher SBS scores because their failures are severity-concentrated, not because they are inherently safer.}
+HiDream and Janus-Pro achieve SBS of 0.74 and 0.61 alongside high HGR@L3 -- their failures concentrate at L3 rather than diffusing across lower rungs, unlike SD1.4 (SBS = 0.31).
+Practically, high SBS + high HGR@L3 means a capable but safety-uncalibrated model; low SBS + low HGR@L0 means a uniformly safe model; high SBS + low HGR@L3 is the ideal.
+% Yet these same models render nuanced risky semantics (drug cues, trademark stylizations) that weaker models fail to capture, and all six models show HGR@L3 $\geq$ 46.8\%, indicating no model maintains safety across the full severity spectrum.
+Importantly, high SBS does not mean high safety because stronger models follow harmful instructions more faithfully when no safety checker is active (HiDream and Janus-Pro also produce the highest absolute HGR@L3). 
+All six models show HGR@L3 $\geq$ 46.8\%, indicating no model is safe across the full severity spectrum.
+
+
+% \textbf{Insight 2:} \textit{Higher-capability models achieve higher SBS because their failures are severity-concentrated, not because they are inherently safer.} 
+% HiDream and Janus-Pro -- the strongest models evaluated -- achieve the highest SBS scores (0.74, 0.61) alongside the highest absolute HGR at L3. 
+% Their superior SBS reflects that their harmful generations are  tightly concentrated at high severity levels rather than diffused across all rungs. 
+% This represents a qualitatively 
+% better safety profile than low-SBS models like SD1.4 (SBS = 0.31), which fail more uniformly. 
+% However, higher-capability models also follow instructions more faithfully across all severity levels -- they render nuanced risky semantics (drug-related visual cues, inter-object conflict compositions, trademark-infringing stylizations) that weaker models fail to capture.
+
+
+% \textbf{Insight 3: Stochastic hallucination at L0.}
+% \textit{Non-zero HGR at L0 (range 0.4--3.2\%) is not caused by unsafe prompts but by the model's latent space -- training on web-scale data places harmful concept representations in close proximity to benign ones, so innocuous prompts occasionally drift into harmful territory by chance.}
+% This is a property of the generative model's internal structure, not of the input, and it means zero-risk deployment requires both input filtering and output monitoring even for entirely safe prompts.
+% Full over-refusal rates by defense method are in Appendix~\ref{app:overrefusal}.
+
+
+\textbf{Insight 3: Stochastic hallucination at L0.}
+\textit{Non-zero HGR at L0 (range 0.4 -- 3.2\%) is not caused by unsafe prompts but by the model's latent space -- training on web-scale data places harmful concept representations in close proximity to benign ones, so innocuous prompts occasionally drift into harmful territory by chance.}
+This is a property of the generative model's internal structure, not of the input, and it means zero-risk deployment requires output monitoring even for entirely safe prompts.
+
+% \textcolor{red}{to be removed}
+% \textbf{Insight 4:} \textit{Low SBS with low HGR(0) indicates a safe model; low SBS with high HGR(0) indicates uniform unsafety.} 
+% SD1.4 achieves low SBS (0.31) but also low HGR(0) (1.5\%), indicating that its harmful generations arise from stochastic noise rather than severity-driven instruction-following. 
+
+
+% \textbf{Insight 4: Categorical defense imbalance.}
+% \textit{Safety training disproportionately targets sexual content.} PixArt-$\alpha$ suppresses sexual HGR@L3 to 38.7\% vs.\ 59.4\% for violence, while no model shows equivalent suppression for hate speech or misinformation.
+% This reflects the training data and fine-tuning priorities of current safety pipelines, which have historically focused on NSFW content; societal harms such as extremist imagery and fabricated news are underrepresented in safety fine-tuning datasets.
+
+\textbf{Insight 4: Uneven safety baked into model weights.}
+\textit{With safety checkers disabled, HGR differences across models reflect safety embedded in their weights through training and RLHF, not external filtering.}
+PixArt-$\alpha$'s fine-tuning suppresses sexual HGR@L3 to 38.7\% vs.\ 59.4\% for violence, but no model's training provides equivalent weight-level suppression for hate speech or misinformation -- societal harms have historically been underrepresented in safety fine-tuning data.
+
+Construction - evaluation backbone overlap is audited in Appendix~\ref{app:backbone}; no evaluated model shares an image encoder or diffusion backbone with any construction component.
+
+
+
+
+\subsection{Defense Mechanism Analysis: The L1 Gap Persists Under Protection}
+
+\input{tables/defense_compact}
+
+
+\Tab{\ref{tab:defense}} presents HGR reduction and SAS degradation for nine defense methods applied to SD1.4 across three category groups: NSFW, Legal, and Social.
+All nine methods target SD1.4 weight architectures; applying weight-modifying methods to architecturally different models would require model-specific reimplementations beyond this study's scope (a direction for future work).
+
+
+
+% \textcolor{red}{to be removed}
+% \textbf{Insight 6:} \textit{No single defense provides consistent protection across all risk categories.}
+% Fine-tuning methods (MACE, TRCE) achieve the strongest HGR suppression at L3 for NSFW content (MACE: 22.6\% vs. 73.8\% baseline).
+% Model-editing methods (UCE, RECE, SPEED) show moderate effectiveness on NSFW but inconsistent coverage elsewhere.
+% We note that RECE training collapsed (marked '–') when applied to Legal and Social groups.
+% Inference-guided methods (NP, SLD, Safree) are effective for pornographic and violent content but provide negligible HGR reduction for misinformation and extremism.
+
+
+% \textbf{Insight 5: Defense vulnerability at the boundary.}
+% \textit{All defenses provide substantially weaker absolute protection at L1 than at L3, confirming that the safety gap persists under active defense.}
+% Across all nine methods, the average absolute HGR reduction at L1 is 28.4 pp lower than at L3.
+% Even MACE -- the strongest performing defense -- reduces NSFW L1 HGR by 21.5 pp (25.4\%~$\rightarrow$~3.9\%) versus 51.2 pp at L3 (73.8\%~$\rightarrow$~22.6\%), reflecting that existing defenses were optimized for high-severity content and under-address the low-severity regime.
+% This gap is largest for inference-guided methods (32.7 pp difference) and smallest for fine-tuning methods (24.1 pp), suggesting that the choice of defense paradigm interacts significantly with target severity level.
+% Critically, this finding is only observable through \dataname's graded structure: binary benchmarks would report MACE as a strong defense (69\% relative HGR reduction at L3 on NSFW content) while missing its proportionally smaller absolute impact at L1.
+
+\textbf{Insight 5: Defenses steepen the severity gradient.}
+\textit{In relative terms, all defenses achieve higher suppression at L1 than at L3, concentrating residual risk at high severity rather than closing the safety gap.}
+We measure relative HGR reduction at severity level $\ell$ as $\rho_\ell = \frac{\mathrm{HGR}_{\mathrm{base}}(\ell) - \mathrm{HGR}_{\mathrm{def}}(\ell)}{\mathrm{HGR}_{\mathrm{base}}(\ell)} \times 100\%$.
+% \[
+%   \rho_\ell = \frac{\mathrm{HGR}_{\mathrm{base}}(\ell) - \mathrm{HGR}_{\mathrm{def}}(\ell)}{\mathrm{HGR}_{\mathrm{base}}(\ell)} \times 100\%.
+% \]
+This pattern holds across all three defense paradigms on NSFW content:
+inference-guided (NP, SLD, Safree) achieves $\bar{\rho}_{\mathrm{L1}} = 57.9\%$ vs.\ $\bar{\rho}_{\mathrm{L3}} = 34.0\%$;
+model-editing (UCE, SPEED) achieves $\bar{\rho}_{\mathrm{L1}} = 46.9\%$ vs.\ $\bar{\rho}_{\mathrm{L3}} = 27.4\%$;
+fine-tuning (SafetyDPO, MACE, TRCE) achieves $\bar{\rho}_{\mathrm{L1}} = 70.1\%$ vs.\ $\bar{\rho}_{\mathrm{L3}} = 49.5\%$.
+For example, MACE reduces NSFW L1 HGR from 25.4\% $\to$ 3.9\% ($\rho_{\mathrm{L1}} = 84.6\%$) and L3 from 73.8\% $\to$ 22.6\% ($\rho_{\mathrm{L3}} = 69.4\%$), raising the L3:L1 ratio from $2.9\times$ (baseline) to $5.8\times$ -- the defense is \emph{proportionally stronger} where harm is \emph{least likely to occur}.
+For Legal and Social categories, inference-guided methods are near-inert at L3 ($\bar{\rho}_{\mathrm{L3}} = 4.8\%$ and $9.2\%$, respectively) while still reducing L1 by 15--30\%, leaving residual L3 HGR above 48\% --- indistinguishable from undefended SD1.4.
+Critically, this finding is only observable through \dataname's graded structure: a binary benchmark would report MACE as a strong defense ($\rho_{\mathrm{L3}} = 69\%$ on NSFW) while missing this skew entirely.
+
+
+% \textbf{Insight 5: Defenses steepen the severity gradient.}
+% \textit{All defenses achieve higher relative suppression at L1 than at L3, concentrating residual risk at high severity rather than closing the safety gap.}
+% Defining $\rho_\ell = \frac{\mathrm{HGR}_{\mathrm{base}}(\ell) - \mathrm{HGR}_{\mathrm{def}}(\ell)}{\mathrm{HGR}_{\mathrm{base}}(\ell)} \times 100\%$, all three paradigms show $\bar{\rho}_{\mathrm{L1}} > \bar{\rho}_{\mathrm{L3}}$ on NSFW: inference-guided (57.9\% vs.\ 34.0\%), model-editing (46.9\% vs.\ 27.4\%), fine-tuning (70.1\% vs.\ 49.5\%).
+% MACE exemplifies this: L1 HGR drops 25.4\%$\to$3.9\% ($\rho_{\mathrm{L1}}=84.6\%$) while L3 drops 73.8\%$\to$22.6\% ($\rho_{\mathrm{L3}}=69.4\%$) -- the defense is strongest where harm is least likely.
+% On Legal and Social categories, inference-guided methods reduce L1 by 15--30\% yet are near-inert at L3 ($\bar{\rho}_{\mathrm{L3}} < 10\%$), leaving residual L3 HGR above 48\%.
+% A binary benchmark would report MACE as strong ($\rho_{\mathrm{L3}} = 69\%$ on NSFW) while missing this skew entirely.
+
+% \textbf{Insight 5: Defense vulnerability at the boundary.}
+% \textit{All defenses provide substantially weaker absolute protection at L1 than at L3, confirming that the safety gap persists under active defense.}
+% Across all nine methods, the average absolute HGR reduction at L1 is 7.3 pp lower than at L3.
+% Even MACE — the strongest performing defense — reduces NSFW L1 HGR by 21.5 pp (25.4\%~$\rightarrow$~3.9\%) versus 51.2 pp at L3 (73.8\%~$\rightarrow$~22.6\%), reflecting that existing defenses were optimized for high-severity content and under-address the low-severity regime.
+% This gap is largest for fine-tuning methods (10.8 pp), driven primarily by MACE, and smallest for inference-guided methods (3.7 pp), suggesting that the choice of defense paradigm interacts significantly with target severity level.
+% Critically, this finding is only observable through \dataname's graded structure: binary benchmarks would report MACE as a strong defense (69\% relative HGR reduction at L3 on NSFW content) while missing its proportionally smaller absolute impact at L1.
+
+\textbf{Insight 6: The Utility--Safety Tradeoff Collapses to Two Methods.}
+\textit{When effectiveness ($\Delta$HGR) and utility (SAS) are considered jointly, only MACE and TRCE represent genuine design choices; all others are simultaneously outperformed by TRCE on both axes.}
+TRCE ($\Delta\mathrm{HGR} = 0.307$, SAS drop $= -0.008$) outperforms NP, SLD, Safree, UCE, SPEED, and SafetyDPO on both metrics at once; RECE additionally collapses on Legal and Social, and is also outperformed by TRCE on NSFW alone ($\rho_{\mathrm{L3}} = 35.8\%$, SAS $= 0.276$ vs.\ $42.5\%$ and $0.304$).
+The sole genuine tradeoff is between TRCE and MACE: MACE gains $+68\%$ relative HGR reduction ($\Delta\mathrm{HGR} = 0.518$) at the cost of $11\times$ the SAS penalty and $2.7\times$ the over-refusal rate (ORR 34.2\% vs.\ 12.8\%), refusing roughly one in three benign prompts (full ORR table in Appendix~\ref{app:overrefusal}).
+Excluding MACE, the correlation between defense strength and utility cost is $r = 0.04$; including it, $r = 0.923$ -- the apparent general tradeoff is an artifact of one method's aggressive concept erasure strategy.
+
+
+
+
+
+
+% \textbf{Insight 6: The Utility--Safety Penalty.} \textit{The SAS--HGR tradeoff reveals that stronger defenses impose larger generation quality penalties.}
+% MACE achieves the highest HGR reduction (69\% at L3 for NSFW content; 51.2 pp absolute) but incurs the largest SAS drop ($-$0.088 CLIP cosine, from 0.312 baseline to 0.224), substantially degrading benign generation quality.
+% TRCE achieves a more favorable tradeoff, maintaining SAS within 0.008 of baseline (0.304 vs.\ 0.312) while reducing L3 NSFW HGR by 43\% (73.8\%~$\rightarrow$~42.4\%).
+% Critically, the SAS penalty is concentrated at L0 and L1 -- the severity levels where defense is least needed -- confirming that current fine-tuning methods sacrifice generation utility in the safe regime to achieve protection at high severity.
+% This over-refusal penalty is further confirmed by our benign-but-ambiguous prompt evaluation: MACE reaches 34.2\% Over-Refusal Rate (ORR) while TRCE limits it to 12.8\%, the best safety-utility tradeoff among all evaluated methods (full table in Appendix~\ref{app:overrefusal}).
+
+
+% Methods marked `--' experience training collapse on Social and Legal categories due to concept diffuseness (semantically distributed representations lacking compact low-rank structure) and semantic entanglement with benign visual content; the full failure mode analysis is in 
+% Appendix~\ref{app:collapse}.
+
+
+
+
+% \begin{table*}[tb]
+%   \centering
+%   % --- LEFT TABLE ---
+%   \begin{minipage}[tb]{0.48\textwidth}
+%     \centering
+%     \caption{Safety filter evaluation on \dataname reference images. TPR@L3 means detection rate on high-risk images; FPR@L0 means false alarm rate on safe images; FBR means filter bypass rate; L3$-$L0 means severity sensitivity. \textbf{Bold} is the best per column; \underline{underline} is the second best. \colorbox{gray!20}{Shaded} row is the best overall filter.}
+%     \label{tab:filter_summary}
+%     % Force the table to fit exactly inside this 0.48\textwidth
+%     \resizebox{\linewidth}{!}{% 
+%       \input{tables/filter_summary}
+%     }
+%   \end{minipage}
+%   \hfill % This creates the "gutter" between the tables
+%   % --- RIGHT TABLE ---
+%   \begin{minipage}[tb]{0.48\textwidth}
+%     \centering
+%     \caption{Attack Success Rate (ASR, \%) for five adversarial attack strategies against the best-defended configuration (TRCE + LlavaGuard). \textbf{Bold} is the best; \underline{underline} is the second highest. AVG means macro-average ASR across all categories and levels.}
+%     \label{tab:attacks_summary}
+%     % Force the table to fit exactly inside this 0.48\textwidth
+%     \resizebox{\linewidth}{!}{%
+%       \input{tables/attack_summary}
+%     }
+%   \end{minipage}
+% \end{table*}
+
+
+
+
+
+\subsection{Safety Filter Evaluation: Blind to the Boundary} \label{sec:filter}
+
+\input{tables/filter}
+
+
+
+
+
+\Tab{\ref{tab:filter}} reports FPR@L0, FBR, AUC, and severity sensitivity (L3--L0 detection gap) for five filters evaluated on \dataname reference images.
+Reference images are a favorable evaluation setting -- they are constructed to clearly manifest severity -- so the reported FBR values are a \emph{lower bound} on real-world filter bypass rates in deployment.
+
+
+
+\textbf{Insight 7: Filter insensitivity to severity.}
+\textit{All filters show minimal sensitivity to severity level, with detection rates that are nearly flat from L0 to L3.}
+Q16 -- the strongest single filter -- rises from 55.3\% detection at L0 to only 67.2\% at L3, a severity gap of merely 11.9 pp.
+CLIP-NSFW rises from 9.4\% to 24.9\% (proportionally higher relative gain, but still missing 75\% of L3 content).
+Q16 achieves the highest recall but flags 55.3\% of genuinely safe images as harmful (FPR@L0 = 0.553), making it impractical for deployment without precision controls.
+Conversely, Qwen2.5-VL achieves a negligible false-positive rate (FPR = 0.7\%) but misses 88\% of harmful content (FBR = 0.880).
+This near-flat detection pattern confirms that current filters are not calibrated to the severity dimension and cannot reliably distinguish safe from harmful content at boundary levels -- precisely the regime where the safety gap resides.
+
+% \textcolor{red}{to be removed}
+% \textbf{Insight 10:} \textit{Q16 achieves highest recall but trades precision catastrophically.}
+% Q16 detects 67.2\% of L3 content but also flags 55.3\% of genuinely safe L0 images as harmful -- a false positive rate exceeding random guessing (50\%). 
+% Its AUC of 0.598 barely exceeds 0.5, confirming that high detection is purchased at the cost of severe over-restriction. 
+% The Qwen2.5-VL takes the opposite stance: FPR of 0.7\% but FBR of 88\%, missing nearly all harmful content. 
+% No evaluated filter achieves an acceptable precision-recall balance across the full severity spectrum.
+
+
+% \textcolor{red}{to be removed}
+% \textbf{Insight 11:} \textit{The cross-modal blind spot is empirically confirmed.}
+% The stealthy attack rate of 73.98\% at L3—meaning 74\% of high-risk prompts contain no explicit harmful keyword—combined with the high FBR of all filters, directly validates our central claim: T2I safety mechanisms operating on text-level signals or image classifiers trained on explicit content systematically fail when harm is expressed through subtle semantic escalation. 
+% Perplexity-based text filters are structurally ineffective: GPT-2 perplexity 
+% decreases monotonically from L0 to L3 (58.99 → 33.74, Spearman ρ = –1.0), meaning high-risk prompts are more fluent than safe ones, rendering anomaly-based detection ineffective.
+
+
+
+\subsection{Adversarial Robustness: Attacks Exploit the Gap} 
+
+\input{tables/attack_summary}
+
+\Tab{\ref{tab:attacks}} presents ASR for five adversarial strategies against TRCE + LlavaGuard — the best utility-safety tradeoff configuration (MACE's higher peak reduction is offset by collapse on two of three category groups).
+All attacks exceed 55\% ASR: cross-modal methods lead (MMA-Diffusion 68.7\%, Ring-A-Bell 65.6\%, SneakyPrompt 63.4\%, UnlearnDiffAtk 61.5\%), while gradient-based P4D scores lowest (55.6\%) but performs comparatively better against fine-tuning defenses.
+
+
+\textbf{Insight 8: The safety gap is an active attack surface.}
+\textit{A 55\% ASR floor across all five methods against the best-defended configuration confirms that the safety gap is not a passive evaluation artifact but a structurally exploitable channel.}
+Cross-modal attacks (61.5--68.7\%) outperform gradient-based P4D (55.6\%) by 6--13 pp precisely because they operate at the text-filter $\to$ visual-output interface identified in Insight 7: prompts designed to evade text-level detection still escalate visually, and neither TRCE nor LlavaGuard closes this channel.
+Conversely, P4D's comparative advantage against fine-tuning defenses suggests that weight-modified models expose gradient-exploitable vulnerabilities absent in inference-guided methods, pointing to defense-paradigm-specific attack surfaces that a single ASR metric cannot capture.
+% Complete per-category ASR breakdowns are provided in Table 8 (main text) and Tables 5–6 (Appendix).
+
+% \Tab{\ref{tab:attacks}} presents Attack Success Rate (ASR) for five adversarial strategies against the best-defended configuration (TRCE + LlavaGuard), evaluated on L2 and L3 prompts across all 11 risk categories.
+% We target TRCE + LlavaGuard -- the best utility-safety tradeoff configuration -- since MACE achieves higher peak HGR reduction but collapses on two of three category groups, making it an unrealistic general-purpose attack target.
+% All attacks achieve ASR exceeding 55\% against best-defended configurations, with cross-modal attacks outperforming gradient-based methods.
+% MMA-Diffusion achieves the highest overall ASR (68.7\%), followed by Ring-A-Bell (65.6\%) and SneakyPrompt (63.4\%) — all three exploit the semantic gap between text-level filtering and visual generation.
+% P4D, which uses gradient-informed perturbations, achieves the lowest ASR (55.6\%) but performs comparatively better against fine-tuning-based defenses, suggesting that models with modified weight distributions are more susceptible to white-box optimization than to semantic paraphrase attacks.
+
+
+
+% \textbf{Insight 8: The safety gap is an active attack surface.}
+% \textit{A 55\% ASR floor across all five methods against the best-defended configuration confirms that the safety gap is not a passive evaluation artifact but a structurally exploitable channel.}
+% Cross-modal attacks (61.5--68.7\%) outperform gradient-based P4D (55.6\%) by 6--13 pp precisely because they operate at the text-filter $\to$ visual-output interface identified in Insight 7: prompts designed to evade text-level detection still escalate visually, and neither TRCE nor LlavaGuard closes this channel.
+% Conversely, P4D's comparative advantage against fine-tuning defenses suggests that weight-modified models expose gradient-exploitable vulnerabilities absent in inference-guided methods, pointing to defense-paradigm-specific attack surfaces that a single ASR metric cannot capture.
+
+% \textbf{Insight 8: Residual vulnerability exploitation.}
+% ASR exhibits severity-dependent patterns, increasing from L2 to L3 by an average of 28 pp.
+% This implies adversarial attacks preferentially exploit existing high-severity residual vulnerabilities rather than creating new failure modes at low severity. 
+% Practical implication: hardening models at L2--L3 should be prioritized when attack resilience is the primary objective, as L1 vulnerabilities — while problematic for benign misuse — are far less exploitable through adversarial optimization.
+% Complete per-category ASR breakdowns are provided in Table 8 (main text) and Tables 5–6 (Appendix).

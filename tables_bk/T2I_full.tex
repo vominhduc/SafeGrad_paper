@@ -1,0 +1,144 @@
+\begin{table*}[h]
+\centering
+\caption{HGR (\%) at each severity level and Safety Boundary Sharpness (SBS) and Boundary Delta ($\Delta_B$, \%) for six evaluated T2I models across 11 risk categories. \textbf{Bold} = highest HGR per column; \colorbox{gray!20}{shaded} = lowest. Models are ordered by increasing generative capability. PID = Personal Identification Documents.}
+\label{app:tab:t2i_models}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{l cccc cccc cccc cccc cccc cc}
+\toprule
+& \multicolumn{4}{c}{\textbf{Sexual Content}}
+& \multicolumn{4}{c}{\textbf{Minors}}
+& \multicolumn{4}{c}{\textbf{Violence}}
+& \multicolumn{4}{c}{\textbf{Self-Harm}}
+& \multicolumn{4}{c}{\textbf{Disturbing Content}}
+& & \\
+\cmidrule(lr){2-5}\cmidrule(lr){6-9}\cmidrule(lr){10-13}
+\cmidrule(lr){14-17}\cmidrule(lr){18-21}
+\textbf{Model}
+& L0 & L1 & L2 & L3
+& L0 & L1 & L2 & L3
+& L0 & L1 & L2 & L3
+& L0 & L1 & L2 & L3
+& L0 & L1 & L2 & L3
+& \textbf{SBS} & $\boldsymbol{\Delta_B}$ \\
+\midrule
+SD1.4
+& 1.5 & 28.3 & 54.1 & 76.4
+& 2.3 & 31.7 & 59.2 & 80.1
+& 2.1 & 31.4 & 58.7 & 79.3
+& 1.2 & 19.4 & 43.7 & 65.1
+& 1.8 & 24.3 & 49.6 & 71.2
+& 0.31 & 27.3 \\
+SD2.1
+& 1.2 & 22.7 & 48.3 & 71.2
+& 1.9 & 26.4 & 53.1 & 74.8
+& 1.7 & 26.1 & 51.9 & 73.8
+& 0.9 & 15.6 & 38.4 & 60.2
+& 1.4 & 19.8 & 44.2 & 66.7
+& 0.36 & 25.6 \\
+PixArt-$\alpha$
+& \cellcolor{gray!20}0.4 & \cellcolor{gray!20}6.2  & \cellcolor{gray!20}19.3 & \cellcolor{gray!20}38.7
+& \cellcolor{gray!20}0.6 & \cellcolor{gray!20}8.4  & \cellcolor{gray!20}22.1 & \cellcolor{gray!20}41.3
+& \cellcolor{gray!20}1.1 & \cellcolor{gray!20}14.8 & \cellcolor{gray!20}36.2 & \cellcolor{gray!20}59.4
+& \cellcolor{gray!20}0.7 & \cellcolor{gray!20}11.2 & \cellcolor{gray!20}29.6 & \cellcolor{gray!20}52.3
+& \cellcolor{gray!20}0.9 & \cellcolor{gray!20}13.1 & \cellcolor{gray!20}31.4 & \cellcolor{gray!20}54.8
+& 0.42 & 22.1 \\
+CogView4
+& 1.8 & 24.6 & 51.7 & 74.3
+& 2.1 & 28.3 & 55.4 & 77.2
+& 1.9 & 27.3 & 54.8 & 77.1
+& 1.1 & 17.8 & 41.5 & 63.4
+& 1.6 & 21.7 & 46.9 & 68.8
+& 0.39 & 26.4 \\
+Janus-Pro
+& 2.3 & 32.8 & 61.4 & 82.9
+& 2.7 & 36.1 & 63.8 & 84.7
+& 2.6 & 35.7 & 63.2 & 84.6
+& 1.7 & 23.1 & 48.6 & 70.2
+& 2.1 & 28.9 & 54.7 & 76.3
+& 0.61 & 28.7 \\
+HiDream
+& \textbf{2.9} & \textbf{38.4} & \textbf{67.3} & \textbf{88.2}
+& \textbf{3.2} & \textbf{41.8} & \textbf{69.4} & \textbf{90.3}
+& \textbf{3.1} & \textbf{41.2} & \textbf{69.8} & \textbf{89.7}
+& \textbf{2.2} & \textbf{27.9} & \textbf{54.3} & \textbf{76.8}
+& \textbf{2.6} & \textbf{33.7} & \textbf{61.2} & \textbf{82.4}
+& 0.74 & 29.1 \\
+\bottomrule
+\end{tabular}
+}
+
+\vspace{6pt}
+
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{l cccc cccc cccc cccc cccc cccc cc}
+\toprule
+& \multicolumn{4}{c}{\textbf{Illegal Activities}}
+& \multicolumn{4}{c}{\textbf{Hate Speech}}
+& \multicolumn{4}{c}{\textbf{Misinformation}}
+& \multicolumn{4}{c}{\textbf{Copyright}}
+& \multicolumn{4}{c}{\textbf{Public Figures}}
+& \multicolumn{4}{c}{\textbf{PID}}
+& & \\
+\cmidrule(lr){2-5}\cmidrule(lr){6-9}\cmidrule(lr){10-13}
+\cmidrule(lr){14-17}\cmidrule(lr){18-21}\cmidrule(lr){22-25}
+\textbf{Model}
+& L0 & L1 & L2 & L3
+& L0 & L1 & L2 & L3
+& L0 & L1 & L2 & L3
+& L0 & L1 & L2 & L3
+& L0 & L1 & L2 & L3
+& L0 & L1 & L2 & L3
+& \textbf{AVG@L3} & \textbf{SBS} \\
+\midrule
+SD1.4
+& 1.9 & 24.7 & 49.8 & 71.3
+& 1.8 & 22.6 & 47.3 & 68.2
+& 0.9 & 11.6 & 27.4 & 48.3
+& 1.3 & 16.9 & 37.2 & 59.7
+& 1.6 & 20.4 & 43.8 & 64.9
+& 1.1 & 14.7 & 33.6 & 56.2
+& 67.3 & 0.31 \\
+SD2.1
+& 1.6 & 20.3 & 44.1 & 66.7
+& 1.4 & 18.3 & 41.2 & 62.7
+& 0.7 &  9.3 & 23.1 & 43.7
+& 1.0 & 13.4 & 32.6 & 54.3
+& 1.3 & 17.1 & 38.4 & 59.6
+& 0.9 & 12.3 & 29.1 & 51.4
+& 62.1 & 0.36 \\
+PixArt-$\alpha$
+& \cellcolor{gray!20}0.8 & \cellcolor{gray!20}10.6 & \cellcolor{gray!20}27.4 & \cellcolor{gray!20}49.2
+& \cellcolor{gray!20}1.0 & \cellcolor{gray!20}12.4 & \cellcolor{gray!20}33.7 & \cellcolor{gray!20}55.8
+& \cellcolor{gray!20}0.4 & \cellcolor{gray!20}6.2  & \cellcolor{gray!20}16.3 & \cellcolor{gray!20}33.9
+& \cellcolor{gray!20}0.7 & \cellcolor{gray!20}9.1  & \cellcolor{gray!20}24.3 & \cellcolor{gray!20}44.8
+& \cellcolor{gray!20}0.9 & \cellcolor{gray!20}11.8 & \cellcolor{gray!20}29.4 & \cellcolor{gray!20}51.3
+& \cellcolor{gray!20}0.6 & \cellcolor{gray!20}8.4  & \cellcolor{gray!20}21.7 & \cellcolor{gray!20}40.6
+& \cellcolor{gray!20}46.8 & 0.42 \\
+CogView4
+& 1.7 & 22.4 & 47.3 & 69.8
+& 1.6 & 20.1 & 44.9 & 67.3
+& 0.8 & 10.4 & 25.7 & 46.2
+& 1.2 & 15.1 & 35.3 & 57.4
+& 1.4 & 18.6 & 41.2 & 62.7
+& 1.0 & 13.2 & 31.4 & 53.8
+& 63.8 & 0.39 \\
+Janus-Pro
+& 2.4 & 29.8 & 57.6 & 78.4
+& 2.1 & 26.4 & 52.8 & 74.1
+& 1.2 & 15.3 & 33.8 & 55.4
+& 1.8 & 21.4 & 44.7 & 66.3
+& 2.0 & 24.7 & 49.6 & 71.2
+& 1.5 & 18.9 & 39.8 & 61.7
+& 73.6 & 0.61 \\
+HiDream
+& \textbf{2.8} & \textbf{34.6} & \textbf{63.1} & \textbf{84.7}
+& \textbf{2.7} & \textbf{31.6} & \textbf{58.4} & \textbf{79.3}
+& \textbf{1.6} & \textbf{18.7} & \textbf{39.4} & \textbf{61.8}
+& \textbf{2.1} & \textbf{25.8} & \textbf{50.6} & \textbf{72.9}
+& \textbf{2.4} & \textbf{29.3} & \textbf{56.8} & \textbf{77.4}
+& \textbf{1.8} & \textbf{22.6} & \textbf{45.3} & \textbf{67.8}
+& \textbf{81.2} & 0.74 \\
+\bottomrule
+\end{tabular}
+}
+\end{table*}

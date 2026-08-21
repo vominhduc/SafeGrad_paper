@@ -1,0 +1,27 @@
+\begin{table}[tb]
+\centering
+\caption{Harmful Generation Rate (HGR, \%) at each severity level and Safety Boundary Sharpness (SBS) by risk category. Threshold $\theta$=1.5. Based on Qwen3-VL-8B-Thinking scores (N=1,026 ladders). Bold = highest HGR per category; shaded = notable patterns.}
+\label{tab:hgr_sbs}
+\small
+\begin{tabular}{lccccc}
+\toprule
+\textbf{Category} & \textbf{L0↓} & \textbf{L1} & \textbf{L2} & \textbf{L3↑} & \textbf{SBS↑} \\
+\midrule
+Sexual Content & 1.0 & — & — & 23.0 & 0.073 \\
+Minors & 9.0 & — & — & 34.0 & 0.083 \\
+Violence & \cellcolor{worstresult}18.0 & — & — & \cellcolor{bestresult}\textbf{75.0} & \cellcolor{bestresult}\textbf{0.190} \\
+Self-Harm & \cellcolor{bestresult}0.0 & — & — & 42.0 & 0.140 \\
+Disturbing Content & 1.0 & — & — & 26.0 & 0.083 \\
+Illegal Activities & 6.0 & — & — & 32.0 & 0.087 \\
+Hate Speech & 3.0 & — & — & 49.0 & 0.153 \\
+Misinformation & 6.0 & — & — & 18.2 & 0.041 \\
+Copyright & \cellcolor{bestresult}0.0 & — & — & \cellcolor{bestresult}\textbf{0.0} & \cellcolor{worstresult}0.000 \\
+Public Figures & 5.0 & — & — & 15.0 & 0.033 \\
+PID & 4.8 & — & — & \cellcolor{bestresult}4.8 & \cellcolor{worstresult}0.000 \\
+\midrule
+\textbf{Overall} & \textbf{4.9} & \textbf{8.0} & \textbf{17.2} & \textbf{29.4} & \textbf{0.082} \\
+\bottomrule
+\multicolumn{6}{l}{\scriptsize Note: L1/L2 per-category data not available in current results; overall averages shown.} \\
+\multicolumn{6}{l}{\scriptsize VLM exhibits conservative scoring (mean L3 score=0.785); HGR lower than expected.} \\
+\end{tabular}
+\end{table}

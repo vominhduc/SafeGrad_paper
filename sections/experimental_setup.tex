@@ -1,0 +1,205 @@
+\section{Experimental Setup}
+
+% \subsection{Experimental Setup}
+
+% \subsection{Evaluation Protocol}
+
+% We conduct a comprehensive evaluation across four dimensions of the T2I safety framework: (1) generative models, (2) defense mechanisms, (3) safety filters, and (4) adversarial attacks. 
+% For each evaluation, we generate images using \dataname prompts and assess them using automated metrics.
+
+
+% \textbf{Generation protocol.} For each prompt in \dataname, we generate two images per model using the default inference settings with safety checkers disabled. 
+% A prompt is classified as producing harmful content if at least one of the two generated images is flagged as harmful by our evaluator ensemble. 
+% This protocol reflects real-world scenarios where users may regenerate images multiple times to bypass safety mechanisms.
+
+
+% \textbf{Automated evaluation.} We employ an ensemble of three vision-language models -- InternVL2-8B~\citep{chen2024internvl}, Phi-4-multimodal-instruct~\citep{phi4multimodal2025}, and Gemma-3-4b-it~\citep{gemma_3_2025} as automated evaluators.
+% Each model is provided with detailed descriptions of risky visual elements derived from our category-specific escalation rules. 
+% An image is flagged as harmful if at least two of the three models classify it as such.
+
+
+
+
+
+\subsection{Evaluated Methods}
+
+% \textbf{T2I Models.} A central concern in benchmark design is evaluation fairness: models used to construct the benchmark dataset should not simultaneously serve as evaluation targets, since they have implicitly shaped the prompt-image distribution and would enjoy an unfair prior. 
+% Since \dataname's reference images are generated using SDXL~\citep{podell2023sdxl}, Z-Turbo~\citep{zimage2025efficient}, SD3.5-Large~\citep{stable-diffusion-3.5-large}, and FLUX.1-dev~\citep{labs2025flux1kontextflowmatching} during dataset construction, we exclude these four models from the evaluation cohort. 
+% Instead, we evaluate six open-source T2I models that are architecturally and parametrically independent from the construction pipeline: Stable Diffusion v1.4 (SD1.4)~\citep{rombach2022ldm}, Stable Diffusion v2.1 (SD2.1)~\citep{rombach2022ldm}, PixArt-$\alpha$~\citep{chen2023pixart}, CogView4~\citep{thudm2025cogview4}, Janus-Pro~\citep{chen2025janusPro}, and HiDream~\citep{cai2025hidream}. 
+% This separation ensures that evaluation results reflect genuine generalization to unseen models rather than an artifact of benchmark construction.
+
+
+% \textbf{Defense Methods.} We implement nine representative defense methods spanning three paradigms. 
+% (1) \textit{Inference-guided methods}: Negative Prompt (NP), Safe Latent Diffusion (SLD)~\citep{schramowski2023safe}, and Safree~\citep{yoon2024safree}. 
+% (2) \textit{Model-editing methods}: UCE~\citep{gandikota2024unified}, RECE~\citep{gong2024rece}, and SPEED~\citep{li2026speed}. 
+% (3) \textit{Fine-tuning methods}: SafetyDPO~\citep{liu2024safetydpo}, MACE~\citep{lu2024mace}, and TRCE~\citep{chen2025trce}.
+% All defense methods are applied to SD1.4 as the base model for controlled comparison.
+
+
+% \textbf{Safety Filters.}
+% We evaluate five safety filters: the Q16 classifier~\citep{schramowski2022q16}, NudeNet~\citep{chhabra2020nudenet}, the Stable Diffusion safety checker (SD Filter)~\citep{rombach2022ldm}, LlavaGuard~\citep{helff2024llavaguard}, and a GPT-4o-based zero-shot filter~\citep{achiam2023gpt4}. 
+% This selection spans traditional classifier-based approaches, domain-specific detectors, and MLLM-based zero-shot methods.
+
+% \textbf{Attack Strategies.} We evaluate five representative jailbreak attack methods: SneakyPrompt~\citep{yang2023sneakyprompt}, Ring-A-Bell~\citep{tsai2024ringabell}, UnlearnDiffAtk~\citep{zhang2024unlearndiffattk}, MMA-Diffusion~\citep{yang2024mma}, and P4D~\citep{chin2024p4d}. Attacks are applied against the best-defended model-filter configurations to assess adversarial robustness under realistic deployment conditions.
+
+
+\textbf{T2I Models.} To ensure evaluation fairness, we exclude the four construction models 
+% (SDXL~\citep{podell2023sdxl}, Z-Turbo~\citep{zimage2025efficient}, SD3.5-Large~\citep{sd35large}, FLUX.1-dev~\citep{labs2025flux1}) 
+and instead evaluate six architecturally independent open-source models: SD1.4, SD2.1~\citep{rombach2022ldm}, PixArt-$\alpha$~\citep{chen2023pixart}, CogView4~\citep{thudm2025cogview4}, Janus-Pro~\citep{chen2025janusPro}, and HiDream~\citep{cai2025hidream}.
+
+
+\noindent
+\textbf{Defense Methods.} We implement nine methods across three paradigms: \textit{inference-guided} (NP (negative prompt), SLD~\citep{schramowski2023safe}, Safree~\citep{yoon2024safree}), \textit{model-editing} (UCE~\citep{gandikota2024unified}, RECE~\citep{gong2024rece}, SPEED~\citep{li2026speed}), and \textit{fine-tuning} (SafetyDPO~\citep{liu2024safetydpo}, MACE~\citep{lu2024mace}, TRCE~\citep{chen2025trce}), all applied to SD1.4 as the base model.
+
+
+\noindent
+\textbf{Safety Filters.} We evaluate Q16~\citep{schramowski2022q16}, CLIP-NSFW~\citep{laionAI}, SD Filter~\citep{rombach2022ldm}, LlavaGuard~\citep{helff2024llavaguard}, and Qwen2.5-VL~\citep{qwen2.5technicalreport}.
+% , spanning classifier-based, domain-specific, and MLLM-based approaches.
+
+
+\noindent
+\textbf{Attack Strategies.} We evaluate SneakyPrompt~\citep{yang2023sneakyprompt}, Ring-A-Bell~\citep{tsai2024ringabell}, UnlearnDiffAtk~\citep{zhang2024unlearndiffattk}, MMA-Diffusion~\citep{yang2024mma}, and P4D~\citep{chin2024p4d} against the best-defended model-filter configurations.
+We use only L2 and L3 prompts, as lower-severity prompts rarely produce harmful outputs even under attack.
+
+
+\noindent\textbf{Generation protocol.}
+We generate two images per prompt per model using default inference settings \emph{with safety checkers disabled} -- deliberately, to measure the raw generative risk of each model's diffusion process independently of its guard layers.
+A prompt is harmful if at least one of the two images is flagged by our evaluator ensemble.
+% , reflecting adversarial users who regenerate to find a harmful output.
+
+\noindent\textbf{Automated evaluator.}
+Since no existing safety filter covers all 11 risk categories, we employ an ensemble of three MLLMs \emph{excluded from dataset construction} -- InternVL2-8B~\citep{chen2024internvl}, Phi-4-multimodal-instruct~\citep{phi4multimodal2025}, and Gemma-3-4b-it~\citep{gemma_3_2025} -- as the automated evaluator $\phi$.
+Each model receives the sample-specific risk description derived from the escalation rules; $\phi(I) = 1$ if at least two of the three models flag the image.
+On a stratified held-out subset of 200 pairs (disjoint from the construction validation set) re-labeled by Claude-3.7-Sonnet as an independent verifier, the ensemble achieves 91\% average label agreement across all 11 categories (vs.\ 59.8\% for Q16), confirming the relatively high reliability of the automated evaluator.
+% Full evaluator validation is provided in Appendix~\ref{app:evaluator}.
+
+% For metric definitions and implementation details, see Appendix~\ref{app:metrics}.
+
+
+
+% We evaluated our \dataname benchmark on various tasks:
+
+% \textbf{T2I models.} We evaluated 8 models spanning open-source and commercial systems, including Stable Diffusion v1.5, Stable Diffusion XL, FLUX.1-dev, DeepFloyd IF, DALL-E 3, Midjourney v6, Adobe Firefly 3, and Kandinsky 3. 
+% These models represent the primary architectural and deployment paradigms in the current T2I landscape.
+
+% \textbf{Defense methods.} We evaluated 5 defense methods: (1) ESD (Erased Stable Diffusion), which fine-tunes model weights to suppress target concepts; (2) UCE (Unified Concept Editing), a multi-concept weight editing approach; (3) SLD (Safe Latent Diffusion), which applies safety guidance during inference; (4) NPC (Negative Prompt Conditioning), which uses negative prompts to suppress harmful generations; and (5) RECE, a recently proposed red-concept erasure method based on rank decomposition.
+
+% \textbf{Safety filters.} We evaluate 6 safety filters: Q16 classifier, NudeNet, LAION CLIP-based safety filter, OpenAI content policy classifier, Azure Content Safety API, and Amazon Rekognition Moderation. These represent the major categories of NSFW detection systems in deployment.
+
+
+% \textbf{Adversarial attack strategies.} We evaluate 4 adversarial attack strategies: (1) gradient-based adversarial suffix optimization (UnlearnDiffAtk); (2) semantic synonym substitution (SynAttack); (3) LLM-based jailbreak rephrasing (JailbreakGPT); and (4) typographic obfuscation (TypoBypass).
+
+
+
+\subsection{Evaluation Metrics}
+
+We use five metrics that jointly characterize safety and utility across the severity spectrum:
+\textbf{HGR} (harmful generation rate per severity level), \textbf{SBS} (normalized safety boundary slope), \textbf{SAS} (CLIP-based semantic alignment), \textbf{FBR} (filter bypass rate), and \textbf{ASR} (attack success rate) (Appendix~\ref{app:metrics}).
+% Formal definitions and implementation details are provided in Appendix~\ref{app:metrics}.
+% With $N \approx 2{,}000$--$6{,}000$ binary evaluations per severity level, binomial standard errors on HGR are $<2$ pp throughout.
+
+% We define five metrics to evaluate T2I model safety across complementary dimensions. 
+% Unless otherwise noted, all metrics are computed per severity level to enable boundary-aware analysis.
+% Let $\phi: \mathcal{I} \rightarrow \{0,1\}$ denote a binary safety classifier where $\phi(I) = 1$ indicates a harmful image. 
+% The classifier $\phi$ is shared across all five metrics; its practical instantiation is described below.
+
+% \textbf{Harmful Generation Rate (HGR)}  measures the proportion of generated images that are classified as harmful at each severity level $l \in \{0,1,2,3\}$. 
+% Formally, given a set of $N_l$ prompts at severity level $l$, let $\mathcal{I}_l = \{I_1, \ldots, I_{N_l}\}$ denote the corresponding set of generated images and let $\phi : \mathcal{I} \rightarrow \{0,1\}$ denote a binary safety classifier where $\phi(I) = 1$ indicates a harmful image. 
+% HGR at level $l$ is defined as:
+
+% $$\text{HGR}(l) = \frac{1}{N_l} \sum_{i=1}^{N_l} \phi(I_i^{(l)})$$
+
+% % To reduce classifier bias, we instantiate $\phi$ as an ensemble of $K$ safety filters and classify an image as harmful if at least one filter flags it, i.e., $\phi(I) = \mathbf{1}[\sum_{k=1}^{K} \phi_k(I) \geq 1]$. 
+% % A model with ideal safety behavior should produce $\text{HGR}(0) \approx 0$ and monotonically increasing $\text{HGR}(l)$ with rising $l$, reflecting appropriate sensitivity to severity escalation.
+% % In practice, as no safety filter was trained to classify our full 11 categories, we employ three different MLLMs including Qwen3-VL-8B-Thinking~\citep{qwen3vl2025}, Phi-4-multimodal-instruct~\citep{phi4multimodal2025}, and gemma-3-4b-it~\citep{gemma_3_2025} as our filters. 
+% % We provide the MLLM with an instruction that contains a detailed description of the risky visual elements as in our escalation rules.
+
+
+% \textbf{Safety Boundary Sharpness} (SBS) measures the steepness of a model's HGR profile across severity levels, normalized by the safe headroom available at L0 to remove confounding with the absolute failure rate:
+% $$\text{SBS} = \frac{\hat{\beta}}{\beta_{\max} \cdot (1 - \text{HGR}(0)) + \epsilon} \in [0, 1]$$, where $\hat{\beta}$ is the OLS slope of $HGR(l)= \alpha + \beta \cdot l$ and $\beta_{\max}$ = 1/3. A high SBS indicates that a model's failures are well-concentrated at high severity levels relative to its safe baseline; a low SBS indicates either a uniformly safe model (low HGR at all levels, distinguished by low HGR(0)) or a uniformly unsafe model (high HGR at all levels, distinguished by high HGR(0)). SBS is therefore interpreted jointly with HGR(0) and complemented by $\Delta_B$, which identifies the specific severity transition at which the sharpest safety collapse occurs.
+
+
+% \remove{check later}
+% \textbf{Safety Boundary Sharpness (SBS)}. While HGR characterizes per-level failure rates, it does not capture the shape of a model's safety response across the severity spectrum. 
+% A model that fails uniformly across all levels is qualitatively different from one that maintains safety at low severity but fails only at high severity. 
+% SBS quantifies this distinction by measuring the steepness and linearity of the HGR profile across severity levels. 
+% We define SBS as the normalized slope of a linear regression fit to the four-point HGR curve:
+
+% $$\text{SBS} = \frac{\hat{\beta}}{\beta_{\max}} \in [0, 1]$$
+
+% where $\hat{\beta}$ is the estimated slope from fitting $\text{HGR}(l) = \alpha + \beta \cdot l$ via ordinary least squares, and $\beta_{\max} = \frac{1}{3}$ is the maximum achievable slope (corresponding to a model that transitions from $\text{HGR}(0) = 0$ to $\text{HGR}(3) = 1$ linearly). 
+% A high SBS score indicates a well-calibrated model whose safety failures scale proportionally with risk severity; a low SBS score indicates either a model that fails at low severity (poor safety) or one that uniformly blocks all content regardless of severity (over-restriction).
+
+
+% While the linear SBS captures the overall slope of the safety response curve, it does not distinguish between a gradual linear degradation and a sudden collapse at a specific severity boundary. To capture the latter, we additionally report the \textbf{Boundary Delta} ($\Delta_B$), defined as the largest single-step HGR increase across adjacent severity levels:
+% > $$\Delta_B = \max_{l \in \{0,1,2\}} \left( \text{HGR}(l+1) - \text{HGR}(l) \right)$$
+% > A high $\Delta_B$ at the L1$\to$L2 transition indicates a sharp safety collapse at the mid-severity boundary — the most practically dangerous failure mode, as it implies the model appears safe under low-severity adversarial prompts but fails suddenly under moderate escalation. We report both SBS and $\Delta_B$ throughout the evaluation.
+
+% \textbf{Semantic Alignment Score (SAS).} 
+% Safety evaluation in isolation risks rewarding models that achieve low HGR by refusing to generate meaningful content altogether. 
+% SAS measures generation quality independently of safety by computing the cosine similarity between the CLIP~\citep{radford2021learning} embeddings of a prompt and its corresponding generated image:
+
+% $$\text{SAS} = \frac{1}{N} \sum_{i=1}^{N} \frac{\mathbf{e}_{\text{text},i}^\top \mathbf{e}_{\text{image},i}}{\|\mathbf{e}_{\text{text},i}\| \cdot \|\mathbf{e}_{\text{image},i}\|}$$
+
+% where $\mathbf{e}_{\text{text},i}$ and $\mathbf{e}_{\text{image},i}$ are the CLIP text and image embeddings for the $i$-th prompt-image pair, computed using a ViT-L/14 encoder. 
+% SAS is computed over all L0 prompts to measure baseline generation fidelity unconfounded by safety suppression, and separately over L1--L3 prompts to measure the degree to which safety mechanisms degrade generation quality at increasing severity levels. 
+% The joint analysis of HGR and SAS enables characterization of the safety-utility tradeoff for each evaluated model.
+
+
+% \textbf{Filter Bypass Rate (FBR).} evaluates the detection capability of individual safety filters by measuring the fraction of genuinely harmful images that a given filter fails to detect. 
+% Formally, let $\mathcal{H} = \{I : I \text{ is harmful}\}$ denote the set of ground-truth harmful images, defined as all images generated from L1--L3 prompts and verified by the VLM consistency checker during dataset construction. 
+% For a filter $\phi_k$, FBR is defined as:
+
+% $$\text{FBR}(\phi_k) = \frac{|\{I \in \mathcal{H} : \phi_k(I) = 0\}|}{|\mathcal{H}|}$$
+
+% A lower FBR indicates a more effective filter. 
+% We report FBR disaggregated by severity level to reveal whether filters fail uniformly or disproportionately at specific severity ranges, which has direct implications for where safety gaps exist in deployed filtering pipelines.
+
+% \textbf{Attack Success Rate (ASR).} measures the effectiveness of adversarial attacks against defended T2I systems. 
+% Given an attack strategy $\mathcal{A}$ that transforms an original prompt $p$ into an adversarial variant $p' = \mathcal{A}(p)$, and a defended model $\mathcal{M}_d$ that combines a T2I model with a safety mechanism, ASR is defined as the fraction of adversarial prompts that successfully elicit harmful generation from the defended system:
+
+% $$\text{ASR}(\mathcal{A}, \mathcal{M}_d) = \frac{1}{N} \sum_{i=1}^{N} \phi(\mathcal{M}_d(p'_i))$$
+
+% where $\phi$ again denotes the ensemble safety classifier. 
+% We evaluate ASR using only L2 and L3 prompts as attack seeds, since low-severity prompts are unlikely to produce harmful outputs even under attack, which would artificially inflate ASR denominators. 
+% We additionally report ASR stratified by attack category and risk category to identify which attack-defense combinations expose the most critical vulnerabilities.
+
+
+
+% The MLLM evaluator ensemble (Phi-4-multimodal-instruct, Gemma-3-4b-it, InternVL2-8B) instantiates $\phi(I)$ via majority vote, achieving 91.2\% accuracy on the 500-sample Gold Standard subset across all 11 categories — substantially outperforming Q16 (61.3\%) and NudeNet (58.7\%); full validation including per-category accuracy, confusion matrix, and ensemble vs.\ single-model comparison is provided in Appendix~\ref{app:evaluator}.
+
+% Since no existing safety filter covers our full 11-category taxonomy, we use an ensemble of three MLLMs
+
+
+
+% we instantiate $\phi(I)$
+% using an ensemble of three MLLMs excluded from dataset construction: Phi-4-multimodal-instruct~\citep{phi4multimodal2025}, Gemma-3-4b-it~\citep{gemma_3_2025}, and InternVL2-8B~\citep{chen2024internvl}. For each generated image, each model receives the sample-specific risk reason derived from the escalation rules and determines whether the image contains the described risky content; $\phi(I) = 1$
+% if at least two of three models agree. This ensemble achieves 91.2\% accuracy on the 500-sample Gold Standard subset.
+
+% This placement is natural because the automated evaluator is the last piece of setup a reader needs before the results — it explains how ϕ(I)\phi(I)
+% ϕ(I) is computed in practice, which is required to interpret every HGR, FBR, and ASR value that follows.Sonnet 4.6
+
+
+
+
+
+% To validate that the observed safety gap is a genuine model failure rather than a labeling artifact of the automated evaluator, we construct a \textbf{Gold Standard} subset of 500 samples stratified across all 11 categories and all four severity levels, each verified by three independent human annotators with full consensus required (i.e., all three annotators must agree for a sample to be included). We report HGR on this Gold Standard subset separately in Table~\ref{tab:goldstandard} alongside the full benchmark results. The safety gap at L1 remains consistent between the full benchmark (mean HGR 22.7\%) and the Gold Standard subset (mean HGR 21.4\%), confirming that the observed gap reflects genuine model behavior rather than evaluator noise.
+
+% \begin{table}[tb]
+% \centering
+% \caption{HGR (\%) comparison between full \dataname and 
+% Gold Standard (GS) subset across severity levels, 
+% averaged over all 6 evaluated models.}
+% \label{tab:goldstandard}
+% \begin{tabular}{l cccc}
+% \toprule
+% \textbf{Split} & \textbf{L0} & \textbf{L1} & \textbf{L2} & \textbf{L3} \\
+% \midrule
+% Full SafeGrad  & 1.7 & 22.7 & 49.8 & 74.3 \\
+% Gold Standard  & 1.4 & 21.4 & 48.2 & 73.1 \\
+% \Delta         & 0.3 &  1.3 &  1.6 &  1.2 \\
+% \bottomrule
+% \end{tabular}
+% \end{table}
+
+

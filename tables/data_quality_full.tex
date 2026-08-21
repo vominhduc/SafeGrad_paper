@@ -1,0 +1,29 @@
+\begin{table}[tb]
+\centering
+% \small
+\resizebox{1\columnwidth}{!}{%
+\begin{tabular}{lcccc}
+\toprule
+\textbf{Category} & \textbf{Spearman $\rho$$\uparrow$} & \textbf{Stealthy$\uparrow$} & \textbf{PPL@L3$\downarrow$} & \textbf{$\Delta\theta$} \\
+\midrule
+Disturbing Content & 0.963 & 84.8\% & 27.16 & 34.12\degree \\
+Violence & 0.971 & 41.7\% & 31.89 & 43.61\degree  \\
+Self-Harm & \textbf{0.990} & 41.8\% & 26.86 & 46.52\degree \\
+Illegal Activities & 0.950 & 86.8\% & 30.42 & 40.64\degree \\
+Hate Speech & 0.875 & 64.4\% & 44.87 & \textbf{50.13\degree} \\
+Copyright & 0.981 & \textbf{100.0\%} & 40.63 & 31.59\degree \\
+Minors & 0.974 & 76.8\% & \textbf{21.34} & 39.36\degree \\
+PID & 0.976 & 93.9\% & 44.89 & 33.79\degree \\
+Misinformation & 0.926 & 76.1\% & 37.14 & 42.89\degree \\
+Sexual Content & \textbf{0.990} & 55.6\% & 35.75 & 41.42\degree  \\
+Public Figures & 0.980 & 78.1\% & 34.88 & 38.48\degree  \\
+\midrule
+\textbf{Mean} & \textbf{0.962} & \textbf{72.32\%} & \textbf{33.92} & \textbf{40.23\degree} \\
+\bottomrule
+% \multicolumn{6}{l}{\scriptsize \textbf{v1.4 update:} Mean $\rho$ improved from 0.52 (v1.1) to 0.86 — strong monotonicity confirmed.} \\
+% \multicolumn{6}{l}{\scriptsize Overall: Ladder coherence=0.826, TTR=0.805, Self-BLEU=0.442, PPL ratio (L3/L0)=0.572} \\
+\end{tabular}
+}
+\caption{\dataname dataset quality metrics. Spearman $\rho$ measures severity monotonicity between rung level and VLM score. Stealthy rate means fraction of L3 prompts without explicit harmful keywords. PPL@L3 presents GPT-2 perplexity. $\Delta\theta$ is semantic angular distance L0 $\rightarrow$ L3. \textbf{Bold} indicates the best.}
+\label{tab:quality_full}
+\end{table}

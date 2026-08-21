@@ -1,0 +1,73 @@
+% WACV 2027 Paper; WACV uses the official CVPR author kit
+% (https://github.com/cvpr-org/author-kit) with \confName/\confYear set below.
+
+% xcolor option "table" must be active before cvpr.sty loads xcolor,
+% so the \PassOptionsToPackage lines must precede \documentclass.
+\PassOptionsToPackage{dvipsnames,table}{xcolor}
+% hyperref is loaded inside latex/preamble; pass the recommended options early
+\PassOptionsToPackage{pagebackref,breaklinks,colorlinks}{hyperref}
+
+\documentclass[10pt,twocolumn,letterpaper]{article}
+
+%%%%%%%%% PAPER TYPE  - PLEASE UPDATE FOR FINAL VERSION
+% \usepackage{cvpr}              % To produce the CAMERA-READY version
+\usepackage[review]{cvpr}      % To produce the REVIEW version
+% \usepackage[pagenumbers]{cvpr} % To force page numbers, e.g. for an arXiv version
+
+% Import additional packages in the preamble file, before hyperref
+\input{latex/preamble}
+
+%%%%%%%%% PAPER ID  - PLEASE UPDATE
+\def\paperID{*****} % *** Enter the Paper ID here
+\def\confName{WACV}
+\def\confYear{2027}
+
+%%%%%%%%% TITLE - PLEASE UPDATE
+\title{\dataname: A Severity-Graded Benchmark for Safety Evaluation, Defense, and Attack of Text-to-Image Models}
+
+%%%%%%%%% AUTHORS - PLEASE UPDATE
+\author{First Author\\
+Institution1\\
+Institution1 address\\
+{\tt\small firstauthor@i1.org}
+% For a paper whose authors are all at the same institution,
+% omit the following lines up until the closing ``}''.
+% Additional authors and addresses can be added with ``\and'',
+% just like the second author.
+% To save space, use either the email address or home page, not both
+\and
+Second Author\\
+Institution2\\
+First line of institution2 address\\
+{\tt\small secondauthor@i2.org}
+}
+
+\begin{document}
+\maketitle
+
+\input{sections/abstract}
+\input{sections/introduction}
+\input{sections/related_work}
+\input{sections/benchmark}
+\input{sections/data_construction}
+\input{sections/experimental_setup}
+\input{sections/experimental_results}
+\input{sections/discussion}
+\input{sections/conclusion}
+\input{sections/limitations}
+
+% \input{sections/rebuttal}
+
+{
+    \small
+    \bibliographystyle{ieeenat_fullname}
+    \bibliography{latex/egbib,latex/custom}
+}
+
+% \newpage
+
+% \appendix
+\input{sections/appendix}
+
+
+\end{document}
