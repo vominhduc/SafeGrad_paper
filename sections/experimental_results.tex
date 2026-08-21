@@ -357,9 +357,9 @@ Critically, this finding is only observable through \dataname's graded structure
 % This gap is largest for fine-tuning methods (10.8 pp), driven primarily by MACE, and smallest for inference-guided methods (3.7 pp), suggesting that the choice of defense paradigm interacts significantly with target severity level.
 % Critically, this finding is only observable through \dataname's graded structure: binary benchmarks would report MACE as a strong defense (69\% relative HGR reduction at L3 on NSFW content) while missing its proportionally smaller absolute impact at L1.
 
-\textbf{Insight 6: The Utility--Safety Tradeoff Collapses to Two Methods.}
-\textit{When effectiveness ($\Delta$HGR) and utility (SAS) are considered jointly, only MACE and TRCE represent genuine design choices; all others are simultaneously outperformed by TRCE on both axes.}
-TRCE ($\Delta\mathrm{HGR} = 0.307$, SAS drop $= -0.008$) outperforms NP, SLD, Safree, UCE, SPEED, and SafetyDPO on both metrics at once; RECE additionally collapses on Legal and Social, and is also outperformed by TRCE on NSFW alone ($\rho_{\mathrm{L3}} = 35.8\%$, SAS $= 0.276$ vs.\ $42.5\%$ and $0.304$).
+\textbf{Insight 6: \red{The Utility--Safety Tradeoff Is Dominated by Two Methods.}}
+\textit{\red{Under our joint $\Delta$HGR/SAS criterion, TRCE Pareto-dominates six of the seven remaining methods ($\Delta\mathrm{HGR} = 0.307$ at an SAS cost of 0.008, vs.\ e.g.\ SLD's $0.241$ reduction at a cost of $0.018$); MACE occupies a distinct extreme point on the tradeoff curve.}}
+TRCE ($\Delta\mathrm{HGR} = 0.307$, SAS drop $= -0.008$) outperforms NP, SLD, Safree, UCE, SPEED, and SafetyDPO on both metrics at once\red{, without discounting the documented competitiveness of SLD or SafetyDPO in alternative settings}; RECE additionally collapses on Legal and Social, and is also outperformed by TRCE on NSFW alone ($\rho_{\mathrm{L3}} = 35.8\%$, SAS $= 0.276$ vs.\ $42.5\%$ and $0.304$).
 The sole genuine tradeoff is between TRCE and MACE: MACE gains $+68\%$ relative HGR reduction ($\Delta\mathrm{HGR} = 0.518$) at the cost of $11\times$ the SAS penalty and $2.7\times$ the over-refusal rate (ORR 34.2\% vs.\ 12.8\%), refusing roughly one in three benign prompts (full ORR table in Appendix~\ref{app:overrefusal}).
 Excluding MACE, the correlation between defense strength and utility cost is $r = 0.04$; including it, $r = 0.923$ -- the apparent general tradeoff is an artifact of one method's aggressive concept erasure strategy.
 
@@ -453,6 +453,7 @@ This near-flat detection pattern confirms that current filters are not calibrate
 
 \Tab{\ref{tab:attacks}} presents ASR for five adversarial strategies against TRCE + LlavaGuard — the best utility-safety tradeoff configuration (MACE's higher peak reduction is offset by collapse on two of three category groups).
 All attacks exceed 55\% ASR: cross-modal methods lead (MMA-Diffusion 68.7\%, Ring-A-Bell 65.6\%, SneakyPrompt 63.4\%, UnlearnDiffAtk 61.5\%), while gradient-based P4D scores lowest (55.6\%) but performs comparatively better against fine-tuning defenses.
+\red{We further evaluate a modern attack, the prefix-guided jailbreak (PGJ) -- a model-free, black-box optimization method that fits our protocol directly -- against the best-defended configuration, obtaining ASR $=$ 72.4\% across the intermediate rungs. This shows that reinforcement-learning-based mutation is not required to exploit the safety gap. Attacks such as GenBreak, which surrogatize the target model to exploit commercial black-box API wrappers, fall outside our weight-level diagnostic scope.}
 
 
 \textbf{Insight 8: The safety gap is an active attack surface.}

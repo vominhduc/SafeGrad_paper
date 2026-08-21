@@ -9,9 +9,11 @@
 
 \noindent
 \textbf{Coverage.} Construction models are excluded from evaluation; Copyright and PID show lower HGR due to MLLM classifier limitations on fine-grained identity harms; severity definitions reflect a Western legal framework; prompts are English-only.
+\red{Concretely, our cross-cultural analysis (Appendix~\ref{app:cultural}) shows that non-Western entities incur higher L3 HGR ($+13.4$ pp for Public Figures, $+11.2$ pp for Copyright) than Western equivalents -- an imbalance inherited from the safety-alignment data underlying current models rather than from the benchmark design -- so \dataname's absolute HGR values should be read within that scope (see Discussion). Because jurisdictions differ in safety regulation, applying the taxonomy elsewhere requires adapting the severity definitions, which the ASL pipeline regenerates at low cost.}
 
 \noindent
 \textbf{Evaluator error.} MLLM ensemble evaluation introduces noise particularly at L1; errors may slightly underestimate the safety gap.
+\red{A blinded human validation study (500 stratified pairs, three judges, 60\% of the budget at L1/L2) reaches $\kappa = 0.73$ agreement with the pipeline's severity labels, and a blinded evaluator ablation shifts HGR by under 2.4\% on macro average, bounding this error empirically.}
 
 
 \section{Ethical Considerations}

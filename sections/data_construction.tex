@@ -44,6 +44,7 @@ The same model and seed are used for all four rungs within a ladder, isolating s
 
 \noindent\textbf{Stage 4 -- Verification.}
 Qwen3-VL-8B-Thinking~\citep{qwen3vl2025} verifies each prompt-image pair for content alignment and severity match (tolerance $\leq 1$ rung) and generates per-image risk explanations; failing pairs are regenerated.
+\red{Verification checks per-rung content alignment against each prompt individually; a stricter cross-rung same-subject continuity audit across all four images in a ladder is reported in the extended analysis.}
 Ladders without a complete valid set are excluded, yielding 1,026 validated ladders. 
 The full pipeline requires approximately 32 GPU-hours on A100 GPUs.
 
@@ -70,6 +71,9 @@ The full pipeline requires approximately 32 GPU-hours on A100 GPUs.
 \textbf{Prompt fluency} (mean PPL@L3 $= 33.92$) indicates that high-risk prompts are naturally fluent -- lower than T2I-RiskyPrompt (PPL $= 86$) -- further undermining perplexity-based detection.
 \textbf{Semantic escalation magnitude} (mean $\Delta\theta = 40.23\degree$) quantifies the angular distance in embedding space from L0 to L3; Hate Speech achieves the largest shift ($50.13\degree$), while Copyright shows the smallest ($31.59\degree$), consistent with their lower semantic escalation magnitude relative to other categories.
 To validate pipeline reliability, we sample 100 ladders (400 pairs) and re-label them with Claude-3.7-Sonnet as an independent verifier; the automated evaluator agrees on 96\% of pairs (Cohen's $\kappa = 0.76$), confirming strong inter-system consistency.
+
+
+\red{\noindent\textbf{Lexical diversity.} Beyond perplexity and embedding-space angular escalation, we audit the surface-level lexical diversity of all 4,104 prompts using Self-BLEU ($n = 3,4$) and distinct-$n$ ($n = 1,2$) statistics. Globally (cross-ladder), the dataset exhibits high lexical variance (Self-BLEU-4 $= 0.05$, distinct-2 $= 0.89$), confirming the absence of structural boilerplate or template replication; within individual ladders, where thematic overlap is expected, Self-BLEU-4 remains bounded at $0.14$ with distinct-2 $= 0.76$. Together with the angular escalation metrics, these confirm that Stage-1 FAISS deduplication left no residual redundancy and that the pipeline produces text that is both semantically expansive and lexically distinct.}
 
 
 \input{tables/data_quality_full}
