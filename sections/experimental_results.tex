@@ -45,7 +45,7 @@
 \begin{figure}[tb]
     \centering
     \includegraphics[width=0.825\linewidth]{figures/safety_gap.pdf}
-    \caption{The Safety Gap: Universal failure at low-severity boundaries. Overall HGR progression, aggregated across six T2I models, reveals non-uniform escalation with the steepest increase at L1$\rightarrow$L2 (mean $\Delta$HGR = 26.8 pp), exposing a systematic vulnerability at the low-severity boundary.}
+    \caption{The Safety Gap: Universal failure at low-severity boundaries. Overall HGR progression, aggregated across six T2I models, reveals non-uniform escalation with the steepest increase at L1$\rightarrow$L2 (mean $\Delta$HGR = \red{28.0} pp), exposing a systematic vulnerability at the low-severity boundary.}
     \label{fig:safety_gap}
 \end{figure}
 
@@ -165,8 +165,8 @@ We begin by characterizing this gap empirically, then analyze how different comp
 % The escalation steepens further at L1$\rightarrow$L2 (mean $\Delta$HGR = 26.8 pp), where models begin faithfully rendering moderate-severity content.
 % The L1 vulnerability constitutes the safety gap: a severity band where prompts appear benign to text filters yet produce visually harmful outputs that evade visual classifiers trained primarily on explicit L3 content.
 
-\Fig{\ref{fig:safety_gap}} shows the aggregated HGR gradient is far from uniform: while mean HGR@L3 is 65.8\%, the L0$\rightarrow$L1 transition already produces a 21.4 percentage points (pp) jump at the rung where filters are least calibrated.
-The escalation steepens at L1$\rightarrow$L2 (mean $\Delta$HGR = 26.8 pp), defining the safety gap: prompts appear benign to text filters yet produce visually harmful outputs that evade classifiers trained on explicit L3 content.
+\Fig{\ref{fig:safety_gap}} shows the aggregated HGR gradient is far from uniform: while mean HGR@L3 is 65.8\%, the L0$\rightarrow$L1 transition already produces a \red{21.1} percentage points (pp) jump at the rung where filters are least calibrated.
+The escalation steepens at L1$\rightarrow$L2 (mean $\Delta$HGR = \red{28.0} pp), defining the safety gap: prompts appear benign to text filters yet produce visually harmful outputs that evade classifiers trained on explicit L3 content.
 
 
 
@@ -184,7 +184,7 @@ The escalation steepens at L1$\rightarrow$L2 (mean $\Delta$HGR = 26.8 pp), defin
 
 \textbf{Insight 1: Universal L1 blind spot.} \textit{Current T2I safety systems exhibit a systematic blind spot at the L1 boundary.}
 It is universal across all evaluated models and is invisible to binary safe/unsafe evaluation paradigms.
-\Tab{\ref{tab:delta}} confirms this universality: the L1$\to$L2 transition is the peak transition for every evaluated model, with Boundary Delta ranging from 22.1 pp (PixArt-$\alpha$) to 29.1 pp (HiDream).
+\Tab{\ref{tab:delta}} confirms this universality: the L1$\to$L2 transition is the peak transition for every evaluated model, with Boundary Delta ranging from \red{25.7} pp (PixArt-$\alpha$) to \red{30.2} pp (HiDream).
 % To confirm this gap reflects genuine model behavior rather than evaluator noise, we replicate the analysis on a Gold Standard subset ($n = 500$, stratified across all 11 categories and four levels, re-labeled by three independent human annotators with full consensus required).
 % The gap persists: mean HGR@L1 = 21.4\% (vs.\ 22.7\% automated, $\Delta = 1.3$ pp) and HGR@L3 = 73.1\% (vs.\ 74.3\%, $\Delta = 1.2$ pp), within inter-annotator variance, confirming the gap is a genuine model failure rather than an evaluation artifact.
 We now examine how this gap manifests across different components.
@@ -260,11 +260,11 @@ We now examine how this gap manifests across different components.
 
 \textbf{Insight 2: Capability vs. Failure concentration.}
 \textit{Higher-capability models achieve higher SBS scores because their failures are severity-concentrated, not because they are inherently safer.}
-HiDream and Janus-Pro achieve SBS of 0.74 and 0.61 alongside high HGR@L3 -- their failures concentrate at L3 rather than diffusing across lower rungs, unlike SD1.4 (SBS = 0.31).
+HiDream and Janus-Pro achieve SBS of \red{0.80} and \red{0.74} alongside high HGR@L3 -- their failures concentrate at L3 rather than diffusing across lower rungs, unlike SD1.4 (SBS = \red{0.69}).
 Practically, high SBS + high HGR@L3 means a capable but safety-uncalibrated model; low SBS + low HGR@L0 means a uniformly safe model; high SBS + low HGR@L3 is the ideal.
 % Yet these same models render nuanced risky semantics (drug cues, trademark stylizations) that weaker models fail to capture, and all six models show HGR@L3 $\geq$ 46.8\%, indicating no model maintains safety across the full severity spectrum.
 Importantly, high SBS does not mean high safety because stronger models follow harmful instructions more faithfully when no safety checker is active (HiDream and Janus-Pro also produce the highest absolute HGR@L3). 
-All six models show HGR@L3 $\geq$ 46.8\%, indicating no model is safe across the full severity spectrum.
+All six models show HGR@L3 $\geq$ \red{47.5}\%, indicating no model is safe across the full severity spectrum.
 
 
 % \textbf{Insight 2:} \textit{Higher-capability models achieve higher SBS because their failures are severity-concentrated, not because they are inherently safer.} 
@@ -282,7 +282,7 @@ All six models show HGR@L3 $\geq$ 46.8\%, indicating no model is safe across the
 
 
 \textbf{Insight 3: Stochastic hallucination at L0.}
-\textit{Non-zero HGR at L0 (range 0.4 -- 3.2\%) is not caused by unsafe prompts but by the model's latent space -- training on web-scale data places harmful concept representations in close proximity to benign ones, so innocuous prompts occasionally drift into harmful territory by chance.}
+\textit{Non-zero HGR at L0 (range \red{0.5--3.3\%}) is not caused by unsafe prompts but by the model's latent space -- training on web-scale data places harmful concept representations in close proximity to benign ones, so innocuous prompts occasionally drift into harmful territory by chance.}
 This is a property of the generative model's internal structure, not of the input, and it means zero-risk deployment requires output monitoring even for entirely safe prompts.
 
 % \textcolor{red}{to be removed}
