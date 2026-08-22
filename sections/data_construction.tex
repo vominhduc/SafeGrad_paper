@@ -7,13 +7,13 @@ We introduce the Adversarial Severity Ladders (ASL) pipeline, an automated const
 The ASL pipeline operates in four stages described below.
 
 
-\noindent\textbf{Stage 1 -- Safe Prompt Generation.}
+\noindent\textbf{Stage 1: Safe Prompt Generation.}
 For each category, we generate seed safe prompts using Mistral-7B-Instruct~\citep{Mistral} (36.5\%), Llama-2-7b-chat-hf~\citep{llama2} (31.6\%), Dolphin-2.9-Llama3-8B~\citep{hartford2024dolphin} (23.4\%), and Vicuna-7B~\citep{vicuna} (8.6\%), spanning the safety-alignment spectrum to maximize stylistic diversity.
 Near-duplicate prompts are removed via FAISS clustering on \texttt{all-MiniLM-L6-v2} embeddings (cosine threshold $\geq 0.95$), retaining one representative per cluster.
 
-\noindent\textbf{Stage 2 -- Risky Prompt Synthesis.}
+\noindent\textbf{Stage 2: Risky Prompt Synthesis.}
 Llama-3-70B-Instruct~\citep{llama3herdofmodels} escalates each seed through four severity rungs by modulating risk dimensions (subject, action, context, intensity) per category-specific escalation rules.
-Qwen2.5-7B-Instruct~\citep{qwen2.5technicalreport} scores each ladder; any transition with inter-level gap $<0.4$ on a 0 -- 3 scale triggers automatic regeneration of the full ladder.
+Qwen2.5-7B-Instruct~\citep{qwen2.5technicalreport} scores each ladder; any transition with inter-level gap $<0.4$ on a 0--3 scale triggers automatic regeneration of the full ladder.
 % the Safe, Low-, Mid-, and High-risk rungs.
 
 
@@ -29,7 +29,7 @@ Qwen2.5-7B-Instruct~\citep{qwen2.5technicalreport} scores each ladder; any trans
 % Any transition failing this threshold will result in regeneration of all related prompts.
 % This self-refinement loop typically converges within 1-2 iterations for over 95\% of quadruples.
 
-\noindent\textbf{Stage 3 -- Reference Image Generation.}
+\noindent\textbf{Stage 3: Reference Image Generation.}
 Images are generated using SDXL~\citep{podell2023sdxl} (55.8\%), Z-Turbo~\citep{zimage2025efficient} (26.8\%), FLUX.1-dev~\citep{labs2025flux1} (16.3\%), and SD3.5-Large~\citep{sd35large} (1.1\%) with safety checkers disabled.
 The same model and seed are used for all four rungs within a ladder, isolating severity differences from generative variance.
 
@@ -42,7 +42,7 @@ The same model and seed are used for all four rungs within a ladder, isolating s
 
 
 
-\noindent\textbf{Stage 4 -- Verification.}
+\noindent\textbf{Stage 4: Verification.}
 Qwen3-VL-8B-Thinking~\citep{qwen3vl2025} verifies each prompt-image pair for content alignment and severity match (tolerance $\leq 1$ rung) and generates per-image risk explanations; failing pairs are regenerated.
 \red{Verification checks per-rung content alignment against each prompt individually; a stricter cross-rung same-subject continuity audit across all four images in a ladder is reported in the extended analysis.}
 Ladders without a complete valid set are excluded, yielding 1,026 validated ladders. 
@@ -68,7 +68,7 @@ The full pipeline requires approximately 32 GPU-hours on A100 GPUs.
 \Tab{\ref{tab:quality_full}} reports four quality dimensions across all 11 categories.
 \textbf{Severity monotonicity} (Spearman $\rho = 0.962$) confirms that VLM risk scores increase reliably with rung index throughout the benchmark.
 \textbf{Adversarial stealthiness} (mean stealthy rate 72.32\%) shows that the majority of L3 prompts contain no explicit harmful keyword, making them resistant to keyword-based text filters.
-\textbf{Prompt fluency} (mean PPL@L3 $= 33.92$) indicates that high-risk prompts are naturally fluent -- lower than T2I-RiskyPrompt (PPL $= 86$) -- further undermining perplexity-based detection.
+\textbf{Prompt fluency} (mean PPL@L3 $= 33.92$) indicates that high-risk prompts are naturally fluent, lower than T2I-RiskyPrompt (PPL $= 86$), further undermining perplexity-based detection.
 \textbf{Semantic escalation magnitude} (mean $\Delta\theta = 40.23\degree$) quantifies the angular distance in embedding space from L0 to L3; Hate Speech achieves the largest shift ($50.13\degree$), while Copyright shows the smallest ($31.59\degree$), consistent with their lower semantic escalation magnitude relative to other categories.
 To validate pipeline reliability, we sample 100 ladders (400 pairs) and re-label them with Claude-3.7-Sonnet as an independent verifier; the automated evaluator agrees on 96\% of pairs (Cohen's $\kappa = 0.76$), confirming strong inter-system consistency.
 

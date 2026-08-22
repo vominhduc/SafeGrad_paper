@@ -3,10 +3,10 @@
 \subsection{Overview and Design Philosophy}
 
 \dataname is designed around a core hypothesis: safety evaluation in T2I systems should be gradient-aware rather than threshold-based.
-Rather than providing a large flat set of binary-labeled examples, \dataname provides a smaller set of \emph{relational} examples -- severity ladders -- in which a single ladder of four prompts encodes more information about a model's safety boundary than four independent binary-labeled samples, because it exposes \emph{where} along the severity spectrum the model first fails.
+Rather than providing a large flat set of binary-labeled examples, \dataname provides a smaller set of \emph{relational} examples (severity ladders) in which a single ladder of four prompts encodes more information about a model's safety boundary than four independent binary-labeled samples, because it exposes \emph{where} along the severity spectrum the model first fails.
 
 
-This motivates our severity-gradated design, in which every ladder in \dataname consists of four prompts and corresponding images, risk explanations escalating through four severity levels: Safe (L0), Low-risk (L1), Mid-risk (L2), and High-risk (L3). 
+This motivates our severity-graded design, in which every ladder in \dataname consists of four prompts and corresponding images, risk explanations escalating through four severity levels: Safe (L0), Low-risk (L1), Mid-risk (L2), and High-risk (L3). 
 This structure enables analysis not just of whether a model fails at maximum risk, but of where along the severity spectrum its safety boundary lies and how sharply that boundary is defined. 
 \red{To make the intermediate regime concrete, consider the per-rung risk explanations attached to each ladder: in the Violence ladder (\Fig{\ref{app:fig:sample_3}}), L1 depicts ``non-consensual physical assault with visible injury'' while L2 escalates to ``severe assault aftermath''; in the Self-Harm ladder (\Fig{\ref{app:fig:sample_4}}), L1 shows ``superficial marks, low-level harm with emotional suffering'' while L2 shows ``active self-harm with visible bleeding wounds''. Such explanations are provided for every ladder in Appendix~\ref{app:examples}, letting readers inspect directly what the L1--L2 boundary contains rather than inferring it from scores alone.}
 % Models with a sharp, well-calibrated boundary are preferable to those that either fail at low severity (over-generation of harmful content) or succeed only at maximum severity (under-restriction that misses borderline cases).
@@ -52,7 +52,7 @@ Each category is further organized into four severity levels with escalation rul
 \dataname contains 1,026 ladders (4,104 prompts) spanning 11 categories; each rung holds a prompt, reference image, and risk explanation. All ladders pass the monotonic quality filter; each category contributes 82--99 ladders (Table~\ref{app:tab:stats}). Each rung's four prompts are independently generated (naturalness), and all four images share the same model and seed (generative variance control).
 Categories are not mutually exclusive at high severity: cross-category co-occurrence analysis (Appendix~\ref{app:comatrix}) shows Violence--Disturbing as the highest overlap pair (18.9\%/21.4\%), while Hate Speech and Misinformation show moderate mutual overlap (11.8\%/12.6\%), reflecting fluid boundaries between semantically adjacent categories.
 \Tab{\ref{tab:comparison}} compares \dataname against existing benchmarks.
-\red{We note that the 1,026 ladders are the strict post-filtering \emph{yield} of the pipeline rather than an arbitrary quota: \dataname is designed to map continuous failure slopes at the L1/L2 boundary -- an objective fundamentally distinct from the flat coverage targets of larger binary benchmarks -- and its compact size directly reflects multi-stage filtering optimized to eliminate label noise and ensure high data quality.}
+\red{We note that the 1,026 ladders are the strict post-filtering \emph{yield} of the pipeline rather than an arbitrary quota: \dataname is designed to map continuous failure slopes at the L1/L2 boundary, an objective fundamentally distinct from the flat coverage targets of larger binary benchmarks; its compact size directly reflects multi-stage filtering optimized to eliminate label noise and ensure high data quality.}
 
 
 
@@ -114,6 +114,6 @@ T2I-RiskyPrompt~\citep{zhang2025t2iriskyprompt} & 6,432  & 14 & 2 & \xmark & 86 
 \end{tabular}%
 }
 \caption{Comparison of \dataname with existing benchmarks.
-\textbf{Grad.} is severity-graded levels (vs.\ binary safe/unsafe); \textbf{PPL} is mean L3 prompt perplexity -- lower means more fluent, so metaphorical high-risk prompts avoid explicit keywords and defeat perplexity-based anomaly detection simultaneously; \textbf{Reason.} is per-sample risk explanation annotation. \dataname is the only benchmark with graded severity, low-perplexity adversarial prompts, and risk explanations.}
+\textbf{Grad.} is severity-graded levels (vs.\ binary safe/unsafe); \textbf{PPL} is mean L3 prompt perplexity (lower means more fluent, so metaphorical high-risk prompts avoid explicit keywords and defeat perplexity-based anomaly detection simultaneously); \textbf{Reason.} is per-sample risk explanation annotation. \dataname is the only benchmark with graded severity, low-perplexity adversarial prompts, and risk explanations.}
 \label{tab:comparison}
 \end{table}

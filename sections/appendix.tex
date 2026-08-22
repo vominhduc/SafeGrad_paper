@@ -527,7 +527,7 @@ We details the analysis reported in \Tab{\ref{tab:quality_full}}
 % \input{tables/data_quality_full}
 
 \noindent\textbf{Severity monotonicity.} We measure monotonicity using Spearman's rank correlation $\rho$ between assigned severity level and the VLM risk score assigned by Qwen3-VL-8B-Thinking (n = 1,026 ladders; mean $\rho$ = 0.962).
-Self-Harm and Sexual Content show the strongest monotonicity (both $\rho$ = 0.990), followed by Copyright ($\rho$ = 0.981), while Hate Speech ($\rho$ = 0.875) is the weakest -- consistent with this category relying on subtle stylistic cues rather than explicit visual escalation.
+Self-Harm and Sexual Content show the strongest monotonicity (both $\rho$ = 0.990), followed by Copyright ($\rho$ = 0.981), while Hate Speech ($\rho$ = 0.875) is the weakest, consistent with this category relying on subtle stylistic cues rather than explicit visual escalation.
 
 \noindent\textbf{Adversarial stealthiness.} We measure the stealthy attack rate as the fraction of L3 prompts containing no explicit harmful keyword.
 Overall stealthy attack rate is \textbf{72.32\%}: nearly three in four high-risk prompts bypass keyword-based detection entirely.
@@ -537,7 +537,7 @@ This varies substantially by category: Copyright (100\%), PID (93.9\%), and Ille
 Hate Speech (50.13\degree) and Self-Harm (46.52\degree) show the largest divergence, reflecting explicit semantic escalation, while Copyright (31.59\degree) and Disturbing Content (34.12\degree) show the smallest, reflecting subtler stylistic escalation.
 
 \noindent\textbf{Linguistic stealthiness via prompt perplexity.} We compute GPT-2 perplexity~\citep{radford2019language} for all 4,104 prompts.
-Mean PPL decreases monotonically from 60.32 at L0 to 33.92 at L3 (PPL ratio = 0.562, Spearman $\rho = -1.0$), confirming that higher-severity prompts are more fluent — making anomaly-based text filters structurally ineffective.
+Mean PPL decreases monotonically from 60.32 at L0 to 33.92 at L3 (PPL ratio = 0.562, Spearman $\rho = -1.0$), confirming that higher-severity prompts are more fluent, making anomaly-based text filters structurally ineffective.
 The safety implications are discussed in Section~\ref{sec:filter} (Insight~7).
 
 
@@ -1005,8 +1005,8 @@ When concept erasure targets these shared representations, it causes
 catastrophic forgetting of benign generation capability. We measure 
 this via SAS on a held-out set of 100 benign prompts in the same 
 visual domain: after MACE is applied to the Public Figures category, 
-SAS on benign portrait prompts drops from 0.312 to 0.187 — a 40.1\% 
-relative degradation — confirming that entanglement causes collateral 
+SAS on benign portrait prompts drops from 0.312 to 0.187, a 40.1\% 
+relative degradation, confirming that entanglement causes collateral 
 damage to legitimate generation capability.
 
 These findings suggest that future concept erasure methods for Social 
@@ -1106,7 +1106,7 @@ Public Figures and Copyright categories, averaged over all 6 models.}
 \end{table}
 
 Non-Western entities consistently achieve higher L3 HGR than Western 
-equivalents -- by 13.4 percentage points for Public Figures and 11.2 
+equivalents, by 13.4 percentage points for Public Figures and 11.2 
 points for Copyright. This gap likely reflects training data imbalance: 
 non-Western public figures and IP are underrepresented in the safety 
 fine-tuning datasets used by all evaluated models, resulting in weaker 

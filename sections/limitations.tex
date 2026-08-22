@@ -5,11 +5,11 @@
 % \textbf{Evaluator error.} The MLLM ensemble achieves 91.2\% accuracy; the 8.8\% error rate introduces noise particularly at L1.
 
 
-\textbf{Evaluation scope.} T2I models are evaluated with safety checkers disabled (raw generative risk); defenses are tested only on SD1.4 because weight-modifying methods (UCE, RECE, MACE, TRCE) require architecture-specific reimplementation for DiT-based models -- extending to newer architectures is an important direction for future work. Architecture-agnostic findings (relative HGR reduction patterns, the MACE vs.\ TRCE tradeoff) are expected to transfer; paradigm rankings may not.
+\textbf{Evaluation scope.} T2I models are evaluated with safety checkers disabled (raw generative risk); defenses are tested only on SD1.4 because weight-modifying methods (UCE, RECE, MACE, TRCE) require architecture-specific reimplementation for DiT-based models; extending to newer architectures is an important direction for future work. Architecture-agnostic findings (relative HGR reduction patterns, the MACE vs.\ TRCE tradeoff) are expected to transfer; paradigm rankings may not.
 
 \noindent
 \textbf{Coverage.} Construction models are excluded from evaluation; Copyright and PID show lower HGR due to MLLM classifier limitations on fine-grained identity harms; severity definitions reflect a Western legal framework; prompts are English-only.
-\red{Concretely, our cross-cultural analysis (Appendix~\ref{app:cultural}) shows that non-Western entities incur higher L3 HGR ($+13.4$ pp for Public Figures, $+11.2$ pp for Copyright) than Western equivalents -- an imbalance inherited from the safety-alignment data underlying current models rather than from the benchmark design -- so \dataname's absolute HGR values should be read within that scope (see Discussion). Because jurisdictions differ in safety regulation, applying the taxonomy elsewhere requires adapting the severity definitions, which the ASL pipeline regenerates at low cost.}
+\red{Concretely, our cross-cultural analysis (Appendix~\ref{app:cultural}) shows that non-Western entities incur higher L3 HGR ($+13.4$ pp for Public Figures, $+11.2$ pp for Copyright) than Western equivalents, an imbalance inherited from the safety-alignment data underlying current models rather than from the benchmark design, so \dataname's absolute HGR values should be read within that scope (see Discussion). Because jurisdictions differ in safety regulation, applying the taxonomy elsewhere requires adapting the severity definitions, which the ASL pipeline regenerates at low cost.}
 
 \noindent
 \textbf{Evaluator error.} MLLM ensemble evaluation introduces noise particularly at L1; errors may slightly underestimate the safety gap.
@@ -34,7 +34,7 @@ All existing T2I models and evaluators are used under their respective research 
 
 \noindent\textbf{Personal data and offensive content.}
 \dataname is entirely synthetic: all prompts are LLM-generated and all images are T2I-generated; no real personal data was collected from any individual.
-The PID category contains only simulated documents (fictitious passports, ID cards, and credentials) and the Public Figures category uses only AI-generated depictions — no real photographs are reproduced.
+The PID category contains only simulated documents (fictitious passports, ID cards, and credentials) and the Public Figures category uses only AI-generated depictions; no real photographs are reproduced.
 The full dataset was manually spot-checked to confirm no real personally identifying information was inadvertently included.
 The offensive and harmful visual content produced at L2--L3 is an intended property of the benchmark and is handled under the access restrictions described above.
 
@@ -50,7 +50,7 @@ A datasheet documenting dataset composition, collection procedure, intended uses
 \section*{Acknowledgment}
 
 In preparing this manuscript and its accompanying artifacts, we made use of Google Gemini and Anthropic Claude as productivity tools for (i) refactoring, debugging the pipeline, and figure-generation code; (ii) stylistic revision of textual passages.
-All research decisions -- including problem framing, experimental design, baseline and metric selection, result interpretation, and scientific claims -- were made solely by the human authors.
+All research decisions, including problem framing, experimental design, baseline and metric selection, result interpretation, and scientific claims, were made solely by the human authors.
 Every AI-assisted output was reviewed and verified against the underlying data, code, and experimental logs by the authors.
 Any remaining errors are our own.
 

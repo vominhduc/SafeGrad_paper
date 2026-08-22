@@ -39,34 +39,12 @@
 
 
 \begin{abstract}
-% Testing the safety of Text-to-Image (T2I) model to avoid the inevitable and diverse risks inherited in its training data is a critical task.
-% Yet, existing T2I safety benchmarks primarily reply on binary "safe/unsafe" prompt classification, failing to capture the nuanced "safety gap" where subtle semantic escalations bypass text filters to produce harmful visuals.
-% Moving beyond binary moderation toward boundary-aware, we present a completely synthetic benchmark, namely \dataname designed to probe the gradated safety boundaries of generative models.
-% Starting from our defined hierarchical risk taxonomy, including 11 categories and 4 levels of severity each, we leverage an automatically data construction pipeline using highly capable open-source large language model, vision -- language model, and T2I models, proposing a novel adversarial severity interpolation pipeline to automatically construct the while ensuring visual-semantic consistency across the risk gradient.
-% As a result, unlike previous works, our \dataname provides XXXX risky samples where each of them consists of four adversarial severity prompts paired with corresponding high-fidelity reference images, escalating through four distinct rungs (Safe, Low-, Mid-, High-risk).
-% Using \dataname, we conduct a comprehensive evaluation of ??? T2I models, ??? defense methods, ??? safety filters, and ??? attack strategies, offering
-% ??? key insights into the strengths and limitations of T2I model safety.
 
+Existing Text-to-Image (T2I) safety benchmarks rely on binary safe/unsafe classification, which fails to capture the ``safety gap'' in which subtly escalated prompts pass text filters yet produce harmful visuals.
+We present \textbf{\dataname}, a benchmark for boundary-aware safety evaluation built from 1,026 adversarial severity ladders spanning 11 risk categories.
+Each ladder escalates through four rungs (Safe, Low-risk, Mid-risk, High-risk) with paired prompts, reference images, and risk explanations, all constructed automatically by our Adversarial Severity Ladders (ASL) pipeline without manual authoring.
+Using \dataname, we evaluate 6 T2I models, 9 defense methods, 5 safety filters, and 5 adversarial attack strategies, yielding 8 insights into the T2I safety ecosystem.
+Our central finding is a universal safety gap: existing mechanisms are calibrated for high-risk (L3) violations while leaving the low-to-mid-risk (L1--L2) regime largely undefended, a failure mode invisible to binary benchmarks.
+\dataname and the ASL pipeline will be publicly released to support boundary-aware safety research.
 
-Existing Text-to-Image (T2I) safety benchmarks rely on binary safe/unsafe classification, failing to capture the ``safety gap'' where subtle semantic escalations bypass text filters to produce harmful visuals.
-Moving beyond binary moderation toward boundary-aware evaluation, we present \textbf{\dataname}, a benchmark designed to probe the graduated safety boundaries of generative models. 
-It consists of 1,026 adversarial severity ladders spanning 11 risk categories.
-Each ladder includes four prompts, reference images, and risk explanations escalating through Safe (L0), Low-risk (L1), Mid-risk (L2), and High-risk (L3).
-\dataname is constructed automatically via our Adversarial Severity Ladders (ASL) pipeline without manual authoring.
-Using \dataname, we evaluate 6 T2I models, 9 defense methods, 5 safety filters, and 5 adversarial attack strategies, yielding 8 key insights.
-Our central finding is a universal safety gap: existing mechanisms are calibrated for L3 violations while leaving L1--L2 largely undefended -- a failure mode invisible to binary benchmarks.
-\dataname with its ASL pipeline will be publicly released to support boundary-aware safety research.
-\red{Warning: this paper includes potentially offensive content.}
-
-
-
-
-
-
-
-% Current Text-to-Image (T2I) safety benchmarks primarily rely on binary "Safe/Unsafe" prompt classifications, failing to capture the nuanced "Safety Gap" where subtle semantic escalations bypass text filters to produce harmful visuals. 
-% We present \dataname, a synthetic multimodal benchmark designed to probe the gradated safety boundaries of generative models. 
-% Unlike previous works, \dataname provides adversarial severity ladders: [X,XXX] semantically aligned chains that escalate through four distinct rungs (Safe, Low, Mid, and High-risk) that cover 11? risk categories.
-
-% Our dataset consists of [X] text prompts paired with [Y] high-fidelity reference images, enriched with multimodal reasoning labels. By leveraging a novel Adversarial Severity Interpolation pipeline, we ensure visual-semantic consistency across the risk gradient. We evaluate state-of-the-art models—including DALL-E 4, Flux.2, and Stable Diffusion 4—revealing that current safety guardrails exhibit a significant "blind spot" for Mid-risk escalations, with visual violations occurring in up to [Z]% of prompts that bypass text-based filters. Furthermore, we demonstrate that T2I-Escalate serves as a superior training target for multimodal safety evaluators, reducing over-refusal by [W]% while maintaining robust detection of stealthy adversarial content. T2I-Escalate provides a rigorous foundation for moving beyond binary moderation toward boundary-aware, nuanced AI safety.
 \end{abstract}

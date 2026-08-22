@@ -260,7 +260,7 @@ We now examine how this gap manifests across different components.
 
 \textbf{Insight 2: Capability vs. Failure concentration.}
 \textit{Higher-capability models achieve higher SBS scores because their failures are severity-concentrated, not because they are inherently safer.}
-HiDream and Janus-Pro achieve SBS of \red{0.80} and \red{0.74} alongside high HGR@L3 -- their failures concentrate at L3 rather than diffusing across lower rungs, unlike SD1.4 (SBS = \red{0.69}).
+HiDream and Janus-Pro achieve SBS of \red{0.80} and \red{0.74} alongside high HGR@L3; their failures concentrate at L3 rather than diffusing across lower rungs, unlike SD1.4 (SBS = \red{0.69}).
 Practically, high SBS + high HGR@L3 means a capable but safety-uncalibrated model; low SBS + low HGR@L0 means a uniformly safe model; high SBS + low HGR@L3 is the ideal.
 % Yet these same models render nuanced risky semantics (drug cues, trademark stylizations) that weaker models fail to capture, and all six models show HGR@L3 $\geq$ 46.8\%, indicating no model maintains safety across the full severity spectrum.
 Importantly, high SBS does not mean high safety because stronger models follow harmful instructions more faithfully when no safety checker is active (HiDream and Janus-Pro also produce the highest absolute HGR@L3). 
@@ -361,7 +361,7 @@ Critically, this finding is only observable through \dataname's graded structure
 \textit{\red{Under our joint $\Delta$HGR/SAS criterion, TRCE Pareto-dominates six of the seven remaining methods ($\Delta\mathrm{HGR} = 0.307$ at an SAS cost of 0.008, vs.\ e.g.\ SLD's $0.241$ reduction at a cost of $0.018$); MACE occupies a distinct extreme point on the tradeoff curve.}}
 TRCE ($\Delta\mathrm{HGR} = 0.307$, SAS drop $= -0.008$) outperforms NP, SLD, Safree, UCE, SPEED, and SafetyDPO on both metrics at once\red{, without discounting the documented competitiveness of SLD or SafetyDPO in alternative settings}; RECE additionally collapses on Legal and Social, and is also outperformed by TRCE on NSFW alone ($\rho_{\mathrm{L3}} = 35.8\%$, SAS $= 0.276$ vs.\ $42.5\%$ and $0.304$).
 The sole genuine tradeoff is between TRCE and MACE: MACE gains $+68\%$ relative HGR reduction ($\Delta\mathrm{HGR} = 0.518$) at the cost of $11\times$ the SAS penalty and $2.7\times$ the over-refusal rate (ORR 34.2\% vs.\ 12.8\%), refusing roughly one in three benign prompts (full ORR table in Appendix~\ref{app:overrefusal}).
-Excluding MACE, the correlation between defense strength and utility cost is $r = 0.04$; including it, $r = 0.923$ -- the apparent general tradeoff is an artifact of one method's aggressive concept erasure strategy.
+Excluding MACE, the correlation between defense strength and utility cost is $r = 0.04$; including it, $r = 0.923$: the apparent general tradeoff is an artifact of one method's aggressive concept erasure strategy.
 
 
 
@@ -419,17 +419,17 @@ Excluding MACE, the correlation between defense strength and utility cost is $r 
 
 
 \Tab{\ref{tab:filter}} reports FPR@L0, FBR, AUC, and severity sensitivity (L3--L0 detection gap) for five filters evaluated on \dataname reference images.
-Reference images are a favorable evaluation setting -- they are constructed to clearly manifest severity -- so the reported FBR values are a \emph{lower bound} on real-world filter bypass rates in deployment.
+Reference images are a favorable evaluation setting (they are constructed to clearly manifest severity), so the reported FBR values are a \emph{lower bound} on real-world filter bypass rates in deployment.
 
 
 
 \textbf{Insight 7: Filter insensitivity to severity.}
 \textit{All filters show minimal sensitivity to severity level, with detection rates that are nearly flat from L0 to L3.}
-Q16 -- the strongest single filter -- rises from 55.3\% detection at L0 to only 67.2\% at L3, a severity gap of merely 11.9 pp.
+Q16, the strongest single filter, rises from 55.3\% detection at L0 to only 67.2\% at L3, a severity gap of merely 11.9 pp.
 CLIP-NSFW rises from 9.4\% to 24.9\% (proportionally higher relative gain, but still missing 75\% of L3 content).
 Q16 achieves the highest recall but flags 55.3\% of genuinely safe images as harmful (FPR@L0 = 0.553), making it impractical for deployment without precision controls.
 Conversely, Qwen2.5-VL achieves a negligible false-positive rate (FPR = 0.7\%) but misses 88\% of harmful content (FBR = 0.880).
-This near-flat detection pattern confirms that current filters are not calibrated to the severity dimension and cannot reliably distinguish safe from harmful content at boundary levels -- precisely the regime where the safety gap resides.
+This near-flat detection pattern confirms that current filters are not calibrated to the severity dimension and cannot reliably distinguish safe from harmful content at boundary levels, precisely the regime where the safety gap resides.
 
 % \textcolor{red}{to be removed}
 % \textbf{Insight 10:} \textit{Q16 achieves highest recall but trades precision catastrophically.}
@@ -451,9 +451,9 @@ This near-flat detection pattern confirms that current filters are not calibrate
 
 \input{tables/attack_summary}
 
-\Tab{\ref{tab:attacks}} presents ASR for five adversarial strategies against TRCE + LlavaGuard — the best utility-safety tradeoff configuration (MACE's higher peak reduction is offset by collapse on two of three category groups).
+\Tab{\ref{tab:attacks}} presents ASR for five adversarial strategies against TRCE + LlavaGuard, the best utility-safety tradeoff configuration (MACE's higher peak reduction is offset by collapse on two of three category groups).
 All attacks exceed 55\% ASR: cross-modal methods lead (MMA-Diffusion 68.7\%, Ring-A-Bell 65.6\%, SneakyPrompt 63.4\%, UnlearnDiffAtk 61.5\%), while gradient-based P4D scores lowest (55.6\%) but performs comparatively better against fine-tuning defenses.
-\red{We further evaluate a modern attack, the prefix-guided jailbreak (PGJ) -- a model-free, black-box optimization method that fits our protocol directly -- against the best-defended configuration, obtaining ASR $=$ 72.4\% across the intermediate rungs. This shows that reinforcement-learning-based mutation is not required to exploit the safety gap. Attacks such as GenBreak, which surrogatize the target model to exploit commercial black-box API wrappers, fall outside our weight-level diagnostic scope.}
+\red{We further evaluate a modern attack, the prefix-guided jailbreak (PGJ), a model-free, black-box optimization method that fits our protocol directly, against the best-defended configuration, obtaining ASR $=$ 72.4\% across the intermediate rungs. This shows that reinforcement-learning-based mutation is not required to exploit the safety gap. Attacks such as GenBreak, which surrogatize the target model to exploit commercial black-box API wrappers, fall outside our weight-level diagnostic scope.}
 
 
 \textbf{Insight 8: The safety gap is an active attack surface.}
