@@ -5,7 +5,7 @@
 \dataname is designed around a core hypothesis: safety evaluation in T2I systems should be gradient-aware rather than threshold-based.
 Rather than providing a large flat set of binary-labeled examples, \dataname provides a smaller set of \emph{relational} examples (severity ladders): a single ladder of four prompts encodes more information about a model's safety boundary than four independent binary-labeled samples, exposing \emph{where} along the severity spectrum the model first fails and how sharply its boundary is defined.
 Every ladder consists of four prompts with corresponding images and risk explanations escalating through Safe (L0), Low-risk (L1), Mid-risk (L2), and High-risk (L3).
-\red{To make the intermediate regime concrete, consider the per-rung risk explanations attached to each ladder: in the Violence ladder (\Fig{\ref{app:fig:sample_3}}), L1 depicts ``non-consensual physical assault with visible injury'' while L2 escalates to ``severe assault aftermath''; in the Self-Harm ladder (\Fig{\ref{app:fig:sample_4}}), L1 shows ``superficial marks, low-level harm with emotional suffering'' while L2 shows ``active self-harm with visible bleeding wounds''. Every ladder carries such explanations (Appendix~\ref{app:examples}).}
+\red{Per-rung risk explanations make the intermediate regime concrete: in the Violence ladder (\Fig{\ref{app:fig:sample_3}}), L1 depicts ``non-consensual physical assault with visible injury'' while L2 escalates to ``severe assault aftermath''; in the Self-Harm ladder (\Fig{\ref{app:fig:sample_4}}), L1 shows ``superficial marks, low-level harm with emotional suffering'' while L2 shows ``active self-harm with visible bleeding wounds''. Every ladder carries such explanations (Appendix~\ref{app:examples}).}
 % Models with a sharp, well-calibrated boundary are preferable to those that either fail at low severity (over-generation of harmful content) or succeed only at maximum severity (under-restriction that misses borderline cases).
 
 
@@ -49,7 +49,7 @@ Each category defines four severity levels with escalation rules (Appendix~\ref{
 \dataname contains 1,026 ladders (4,104 prompts) spanning 11 categories; each rung holds a prompt, reference image, and risk explanation, and all ladders pass the monotonic quality filter (82--99 ladders per category; Table~\ref{app:tab:stats}).
 Categories are not mutually exclusive at high severity: co-occurrence analysis (Appendix~\ref{app:comatrix}) shows the largest overlap for Violence--Disturbing (18.9\%/21.4\%) and moderate overlap for Hate Speech--Misinformation (11.8\%/12.6\%).
 \Tab{\ref{tab:comparison}} compares \dataname against existing benchmarks.
-\red{The 1,026 ladders are the strict post-filtering \emph{yield} of the pipeline, not a quota: \dataname targets continuous failure slopes at the L1/L2 boundary, an objective distinct from the flat coverage targets of larger binary benchmarks, and its compact size reflects multi-stage filtering that eliminates label noise.}
+\red{The 1,026 ladders are the strict post-filtering \emph{yield} of the pipeline, not a quota: \dataname targets continuous failure slopes at the L1/L2 boundary, an objective distinct from flat coverage targets; its compact size reflects multi-stage filtering that eliminates label noise.}
 
 
 

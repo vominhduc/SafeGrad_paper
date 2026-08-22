@@ -14,8 +14,8 @@
 \paragraph{Rethinking the safety calibration target.}
 All evaluated mechanisms are calibrated on binary distinctions, concentrating protection at L3 while leaving L1--L2 underserved and steepening the severity gradient; deployments in sensitive contexts must evaluate L1--L2 explicitly rather than trust L3-derived claims. Severity-aware defense (optimizing for L1 and L2 suppression using ASL-generated training data) is the most direct fix.
 
-\paragraph{The cross-modal gap as a root cause.}
-Text filters cannot decode visually adversarial prompts, and image classifiers trained on explicit L3 content fail at L1--L2 violations: the \red{72.32\%} stealthy attack rate at L3 shows this gap is by adversarial design. Future systems require classifiers trained jointly on text and image signals across the full severity spectrum.
+\paragraph{The cross-modal gap.}
+Text filters cannot decode visually adversarial prompts, and image classifiers trained on explicit L3 content fail at L1--L2 violations; the \red{72.32\%} stealth rate at L3 shows the gap is by adversarial design.
 
 \paragraph{Scope boundaries.}
 Copyright and PID exhibit structurally lower HGR than NSFW categories (\Tab{\ref{tab:t2i_models}}), not because models are safer there but because MLLM classifiers are weaker at fine-grained identity harms (e.g., character likeness); the safety gap in these categories is likely \emph{underestimated}.
