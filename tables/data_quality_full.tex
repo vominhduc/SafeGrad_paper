@@ -1,5 +1,7 @@
 \begin{table}[tb]
 \centering
+\caption{\dataname dataset quality metrics. Spearman $\rho$ measures severity monotonicity between rung level and VLM score. Stealthy rate means fraction of L3 prompts without explicit harmful keywords. PPL@L3 presents GPT-2 perplexity. $\Delta\theta$ is semantic angular distance L0 $\rightarrow$ L3. \textbf{Bold} indicates the best.}
+\label{tab:quality_full}
 % \small
 \resizebox{1\columnwidth}{!}{%
 \begin{tabular}{lcccc}
@@ -24,6 +26,4 @@ Public Figures & 0.980 & 78.1\% & 34.88 & 38.48\degree  \\
 % \multicolumn{6}{l}{\scriptsize Overall: Ladder coherence=0.826, TTR=0.805, Self-BLEU=0.442, PPL ratio (L3/L0)=0.572} \\
 \end{tabular}
 }
-\caption{\dataname dataset quality metrics. Spearman $\rho$ measures severity monotonicity between rung level and VLM score. Stealthy rate means fraction of L3 prompts without explicit harmful keywords. PPL@L3 presents GPT-2 perplexity. $\Delta\theta$ is semantic angular distance L0 $\rightarrow$ L3. \textbf{Bold} indicates the best.}
-\label{tab:quality_full}
 \end{table}

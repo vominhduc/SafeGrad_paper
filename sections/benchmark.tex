@@ -95,6 +95,9 @@ Categories are not mutually exclusive at high severity: co-occurrence analysis (
 
 \begin{table}[tb]
 \centering
+\caption{Comparison of \dataname with existing benchmarks.
+\textbf{Grad.} is severity-graded levels (vs.\ binary safe/unsafe); \textbf{PPL} is mean L3 prompt perplexity (lower means more fluent, so metaphorical high-risk prompts avoid explicit keywords and defeat perplexity-based anomaly detection simultaneously); \textbf{Reason.} is per-sample risk explanation annotation. \dataname is the only benchmark with graded severity, low-perplexity adversarial prompts, and risk explanations.}
+\label{tab:comparison}
 \resizebox{0.47\textwidth}{!}{%
 \begin{tabular}{lrrrccc}
 \toprule
@@ -109,7 +112,4 @@ T2I-RiskyPrompt~\citep{zhang2025t2iriskyprompt} & 6,432  & 14 & 2 & \xmark & 86 
 \bottomrule
 \end{tabular}%
 }
-\caption{Comparison of \dataname with existing benchmarks.
-\textbf{Grad.} is severity-graded levels (vs.\ binary safe/unsafe); \textbf{PPL} is mean L3 prompt perplexity (lower means more fluent, so metaphorical high-risk prompts avoid explicit keywords and defeat perplexity-based anomaly detection simultaneously); \textbf{Reason.} is per-sample risk explanation annotation. \dataname is the only benchmark with graded severity, low-perplexity adversarial prompts, and risk explanations.}
-\label{tab:comparison}
 \end{table}

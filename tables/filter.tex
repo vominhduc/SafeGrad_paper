@@ -22,6 +22,8 @@
 
 \begin{table}[tb]
 \centering
+\caption{Safety filter evaluation on SafeGrad reference images. Detection rate shown per severity level (L0--L3) alongside overall metrics. TPR@L3 is detection rate on high-risk images; FPR@L0 is false alarm rate on safe images; FBR is filter bypass rate; L3$-$L0 is severity sensitivity. \textbf{Bold} indicates the best per column; \underline{underline} indicates the second best. \colorbox{gray!20}{Shaded} row means best overall filter. ``---'' indicates the filter produces only a binary Safe/Unsafe verdict and cannot be thresholded at intermediate severity levels w/o additional calibration.}
+\label{tab:filter}
 \resizebox{\columnwidth}{!}{%
 \begin{tabular}{lcccccccc}
 \toprule
@@ -65,6 +67,4 @@ Qwen2.5-VL
 % & \textit{0.000} & \textit{0.000} & \textit{1.000} & \textit{+1.000} \\
 \bottomrule
 \end{tabular}}
-\caption{Safety filter evaluation on SafeGrad reference images. Detection rate shown per severity level (L0--L3) alongside overall metrics. TPR@L3 is detection rate on high-risk images; FPR@L0 is false alarm rate on safe images; FBR is filter bypass rate; L3$-$L0 is severity sensitivity. \textbf{Bold} indicates the best per column; \underline{underline} indicates the second best. \colorbox{gray!20}{Shaded} row means best overall filter. ``---'' indicates the filter produces only a binary Safe/Unsafe verdict and cannot be thresholded at intermediate severity levels w/o additional calibration.}
-\label{tab:filter}
 \end{table}
