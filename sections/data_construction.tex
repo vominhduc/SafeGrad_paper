@@ -4,7 +4,7 @@
 \subsection{Pipeline Overview}
 % As we mentioned above, to ensure rigorous and scalable annotation while reducing human-related cost, 
 We introduce the Adversarial Severity Ladders (ASL) pipeline, an automated construction approach \red{operating under human oversight: the taxonomy, severity definitions, and escalation rules are authored and reviewed by the human authors}, with four advantages over fully human annotation: (1) scale without annotator self-selection bias; (2) programmatic severity calibration via escalation rules, bypassing inter-rater inconsistency ($\kappa < 0.6$) on fine-grained severity judgments~\citep{aroyo2015truth}; (3) deterministic reproducibility given fixed seeds and checkpoints; and (4) no large-scale harmful-content exposure for workers, which carries documented psychological risks~\citep{steiger2021psychological}.
-The ASL pipeline operates in four stages described below.
+The pipeline operates in four stages.
 
 
 \noindent\textbf{Stage 1: Safe Prompt Generation.}
