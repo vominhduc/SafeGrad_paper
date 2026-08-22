@@ -183,6 +183,7 @@ The escalation steepens at L1$\rightarrow$L2 (mean $\Delta$HGR = \red{28.0} pp),
 
 \textbf{Insight 1: Universal L1 blind spot.} \textit{Current T2I safety systems exhibit a systematic blind spot at the L1 boundary, universal across all evaluated models and invisible to binary safe/unsafe evaluation.}
 \Tab{\ref{tab:delta}} confirms this universality \red{(per-category SEM on $\Delta_B$ is 0.8--1.9 pp; Insight~5 addresses the within-model defense response)}: the L1$\to$L2 transition is the peak transition for every evaluated model, with Boundary Delta ranging from \red{25.7} pp (PixArt-$\alpha$) to \red{30.2} pp (HiDream).
+\red{The peak pattern is not an artifact of auto-interpolated levels: restricted to the 7 categories with fully hand-authored L1 descriptors (excluding Minors, PID, Hate Speech, and Public Figures; Appendix~\ref{app:taxonomy}), per-model $\Delta_B$ remains in \red{25.6--30.3} pp.}
 % To confirm this gap reflects genuine model behavior rather than evaluator noise, we replicate the analysis on a Gold Standard subset ($n = 500$, stratified across all 11 categories and four levels, re-labeled by three independent human annotators with full consensus required).
 % The gap persists: mean HGR@L1 = 21.4\% (vs.\ 22.7\% automated, $\Delta = 1.3$ pp) and HGR@L3 = 73.1\% (vs.\ 74.3\%, $\Delta = 1.2$ pp), within inter-annotator variance, confirming the gap is a genuine model failure rather than an evaluation artifact.
 We now examine how this gap manifests across different components.
@@ -326,7 +327,7 @@ All nine methods target SD1.4's U-Net architecture; applying them to DiT backbon
 \textit{All defenses achieve higher \emph{relative} suppression at L1 than at L3; yet absolute residual harm still peaks at L3, so the safety gap persists in absolute terms.}
 We measure relative HGR reduction at severity level $\ell$ as $\rho_\ell = \frac{\mathrm{HGR}_{\mathrm{base}}(\ell) - \mathrm{HGR}_{\mathrm{def}}(\ell)}{\mathrm{HGR}_{\mathrm{base}}(\ell)} \times 100\%$.
 This pattern holds across all three defense paradigms on NSFW content: inference-guided (NP, SLD, Safree) reaches $\bar{\rho}_{\mathrm{L1}} = 57.9\%$ vs.\ $\bar{\rho}_{\mathrm{L3}} = 34.0\%$, model-editing (UCE, SPEED) reaches $46.9\%$ vs.\ $27.4\%$, and fine-tuning (SafetyDPO, MACE, TRCE) reaches $70.1\%$ vs.\ $49.5\%$.
-For example, MACE reduces NSFW L1 HGR from 25.4\% $\to$ 3.9\% ($\rho_{\mathrm{L1}} = 84.6\%$) and L3 from 73.8\% $\to$ 22.6\% ($\rho_{\mathrm{L3}} = 69.4\%$), raising the L3:L1 ratio from $2.9\times$ (baseline) to $5.8\times$: \red{the strongest defense comes close to closing the L1 gap on NSFW, but its residual L3 rate remains the dominant failure mode,} so the defense is \emph{proportionally stronger} where harm is \emph{least likely to occur}.
+For example, MACE reduces NSFW L1 HGR from 25.4\% $\to$ 3.9\% ($\rho_{\mathrm{L1}} = 84.6\%$) and L3 from 73.8\% $\to$ 22.6\% ($\rho_{\mathrm{L3}} = 69.4\%$), raising the L3:L1 ratio from $2.9\times$ (baseline) to $5.8\times$: \red{the strongest defense comes close to closing the L1 gap on NSFW, yet residual L3 harm dominates,} so the defense is \emph{proportionally stronger} where harm is \emph{least likely to occur}.
 For Legal and Social categories, inference-guided methods are near-inert at L3 ($\bar{\rho}_{\mathrm{L3}} = 4.8\%$ and $9.2\%$, respectively) while still reducing L1 by 15--30\%, leaving residual L3 HGR above 48\%.
 Critically, this finding requires \dataname's graded structure: a binary benchmark would report MACE as a strong defense ($\rho_{\mathrm{L3}} = 69\%$ on NSFW) while missing this skew entirely.
 
@@ -413,8 +414,8 @@ Excluding MACE, the correlation between defense strength and utility cost is $r 
 \textbf{Insight 7: Filter insensitivity to severity.}
 \textit{All filters show nearly flat detection rates from L0 to L3.}
 Q16, the strongest single filter, rises only from 55.3\% detection at L0 to 67.2\% at L3 (11.9 pp), while CLIP-NSFW misses 75\% of L3 content.
-Q16 also flags 55.3\% of safe images as harmful (FPR@L0 = 0.553); conversely, Qwen2.5-VL nearly never false-alarms (FPR = 0.7\%) but misses 88\% of harmful content (FBR = 0.880).
-This near-flat pattern confirms that filters are not calibrated to severity and cannot separate safe from harmful content at boundary levels, precisely where the safety gap resides.
+Q16 also flags 55.3\% of safe images as harmful (FPR@L0 = 0.553); Qwen2.5-VL nearly never false-alarms (FPR = 0.7\%) but misses 88\% of harmful content (FBR = 0.880).
+This near-flat pattern confirms that filters are not calibrated to severity and cannot separate safe from harmful content at the boundary levels where the safety gap resides.
 
 % \textcolor{red}{to be removed}
 % \textbf{Insight 10:} \textit{Q16 achieves highest recall but trades precision catastrophically.}

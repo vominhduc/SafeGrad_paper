@@ -527,6 +527,7 @@ We details the analysis reported in \Tab{\ref{tab:quality_full}}
 % \input{tables/data_quality_full}
 
 \noindent\textbf{Severity monotonicity.} We measure monotonicity using Spearman's rank correlation $\rho$ between assigned severity level and the VLM risk score assigned by Qwen3-VL-8B-Thinking (n = 1,026 ladders; mean $\rho$ = 0.962).
+\red{Since the verifier is shown the intended level (Appendix~\ref{app:prompts:verify}), this correlation reflects internal pipeline self-consistency rather than independent confirmation; independent grounding comes from the blinded human study in Appendix~\ref{app:human}.}
 Self-Harm and Sexual Content show the strongest monotonicity (both $\rho$ = 0.990), followed by Copyright ($\rho$ = 0.981), while Hate Speech ($\rho$ = 0.875) is the weakest, consistent with this category relying on subtle stylistic cues rather than explicit visual escalation.
 
 \noindent\textbf{Adversarial stealthiness.} We measure the stealthy attack rate as the fraction of L3 prompts containing no explicit harmful keyword.
@@ -1043,6 +1044,7 @@ weapons). For each model-defense configuration, we report the
 prompts that the defended model refuses to generate or generates a 
 substantially degraded output for, as measured by SAS falling below 
 0.25.
+\red{ORR is thus a combined refusal-and-degradation rate; the SAS threshold is an operational proxy, not a direct detector of refusals.}
 
 \begin{table}[tb]
 \centering
