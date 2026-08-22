@@ -66,6 +66,7 @@ We use only L2 and L3 prompts, as lower-severity prompts rarely produce harmful 
 \noindent\textbf{Generation protocol.}
 We generate two images per prompt per model using default inference settings \emph{with safety checkers disabled}, a deliberate choice that measures the raw generative risk of each model's diffusion process independently of its guard layers.
 A prompt is harmful if at least one of the two images is flagged by our evaluator ensemble.
+\red{This per-prompt OR protocol models adversarial regeneration; all conclusions rest on cross-method comparisons under the identical protocol.}
 \red{To quantify the role of deployment-time guard layers, we also evaluate two representative models (SD1.4, HiDream) with native safety checkers \emph{activated}: checkers suppress explicit L3 HGR to 47.3\% (SD1.4) and 63.4\% (HiDream), yet reduce L1/L2 HGR by at most 3.6\%, confirming that commercial checkers act largely as threshold switches for explicit content and leave the L1--L2 boundary unaddressed.}
 % , reflecting adversarial users who regenerate to find a harmful output.
 
@@ -98,7 +99,7 @@ To ground the evaluator in human judgment, we conduct a blinded human study on 5
 \subsection{Evaluation Metrics}
 
 We use five metrics that jointly characterize safety and utility across the severity spectrum:
-\textbf{HGR} (harmful generation rate per severity level), \textbf{SBS} (normalized safety boundary slope), \textbf{SAS} (CLIP-based semantic alignment), \textbf{FBR} (filter bypass rate), and \textbf{ASR} (attack success rate) (Appendix~\ref{app:metrics}).
+\textbf{HGR} (harmful generation rate per severity level), \textbf{SBS} (normalized safety boundary slope), \textbf{SAS} (CLIP-based semantic alignment), \textbf{FBR} (filter bypass rate), and \textbf{ASR} (attack success rate) (Appendix~\ref{app:metrics})\red{; with 2{,}052 images per severity level and model, within-model Bernoulli standard errors on HGR stay at or below $1.1$ pp, and aggregated figures report $\pm 1$ SEM across the six models}.
 % Formal definitions and implementation details are provided in Appendix~\ref{app:metrics}.
 % With $N \approx 2{,}000$--$6{,}000$ binary evaluations per severity level, binomial standard errors on HGR are $<2$ pp throughout.
 

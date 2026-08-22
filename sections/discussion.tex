@@ -15,13 +15,12 @@
 All evaluated mechanisms are calibrated on binary distinctions, concentrating protection at L3 while leaving the L1--L2 regime underserved; defenses trained this way steepen the severity gradient rather than closing it. Deployments in sensitive contexts must evaluate the L1--L2 regime explicitly rather than trusting L3-derived safety claims. Severity-aware defense (optimizing for L1 and L2 suppression using ASL-generated training data) is the most direct path to closing the gap.
 
 \paragraph{The cross-modal gap as a root cause.}
-Text filters cannot decode visually adversarial prompts, and image classifiers trained on explicit L3 content fail at L1--L2 violations: the \red{72.32\%} stealthy attack rate at L3 shows this gap is by adversarial design. Future systems require multimodal classifiers trained jointly on text and image signals across the full severity spectrum.
+Text filters cannot decode visually adversarial prompts, and image classifiers trained on explicit L3 content fail at L1--L2 violations: the \red{72.32\%} stealthy attack rate at L3 shows this gap is by adversarial design. Future systems require classifiers trained jointly on text and image signals across the full severity spectrum.
 
 \paragraph{Category-specific implications.}
 Copyright and PID exhibit structurally lower HGR than NSFW categories (\Tab{\ref{tab:t2i_models}}), not because models are safer on these topics but because MLLM classifiers are weaker at fine-grained identity harms (e.g., character likeness), calling for specialized recognizers alongside general-purpose MLLM evaluators; the safety gap in these categories is likely \emph{underestimated}.
 
 \red{\paragraph{Cross-cultural scope.}
-Our severity definitions reflect a Western (US/EU) legal and regulatory framework, inherited from the safety-alignment data underlying current models. Our cultural nuance analysis (Appendix~\ref{app:cultural}) shows non-Western entities are less protected ($13.4$ pp higher L3 HGR for Public Figures and $11.2$ pp for Copyright), likely because they are underrepresented in safety fine-tuning data. We treat this as an explicit scope limitation and a foundation for a multilingual, multi-jurisdictional extension of \dataname.}
+Severity definitions reflect a Western (US/EU) legal framework inherited from current models' safety-alignment data. Our cultural nuance analysis (Appendix~\ref{app:cultural}) shows non-Western entities are less protected ($13.4$ pp higher L3 HGR for Public Figures and $11.2$ pp for Copyright), pointing to underrepresentation in safety fine-tuning data. We treat this as an explicit scope limitation and a foundation for a multilingual, multi-jurisdictional extension of \dataname.}
 
-\red{\paragraph{Toward finer severity resolution.}
-Several L2$\to$L3 transitions (e.g., ``nudity behind objects'' to pornography) intentionally map onto the operational thresholds of major commercial platform policies; we will add finer severity gradations in the next public release to close these residual coverage gaps.}
+\red{\noindent\textbf{Toward finer severity resolution.} Several L2$\to$L3 transitions (e.g., ``nudity behind objects'' to pornography) intentionally map onto commercial platform policy thresholds; we will add finer gradations in the next public release.}
