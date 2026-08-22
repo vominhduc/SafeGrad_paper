@@ -445,7 +445,7 @@ Cross-modal attacks (61.5--68.7\%) outperform gradient-based P4D (55.6\%) by 6--
 
 \red{\subsection{Toward Remediation: A Severity-Aware Filter} \label{sec:remediation}
 Beyond diagnosis, we ask whether \dataname can directly \emph{close} the gap it exposes: we fine-tune Qwen2.5-VL-7B with LoRA on (image, risk explanation) $\rightarrow$ YES/NO pairs under a ladder-respecting 80/10/10 split (Appendix~\ref{app:remediation}).
-Evaluated exactly as in \Sec{\ref{sec:filter}} on the held-out test split, the severity-aware filter attains FBR@L1 of \textbf{TBD} (vs.\ \textbf{TBD} for zero-shot Qwen2.5-VL), FPR@L0 of \textbf{TBD}, and overall FBR of \textbf{TBD} (Table~\ref{app:tab:remediation}).
+Evaluated exactly as in \Sec{\ref{sec:filter}} on the held-out test split, the severity-aware filter attains an L1 detection rate of \textbf{TBD} (vs.\ \textbf{TBD} for the zero-shot Qwen2.5-VL baseline), with FPR@L0 of \textbf{TBD} and overall FBR of \textbf{TBD} (Table~\ref{app:tab:remediation}).
 
 \textbf{Insight 7: The safety gap is trainable-away.}
 \textit{A filter fine-tuned on ladder data recovers the mid-severity band without inflating false alarms, converting \dataname from a diagnostic into a mitigation instrument.}}
