@@ -1,15 +1,5 @@
 \section{Conclusion}
 
-% We presented SafeGrad, a fully synthetic benchmark for severity-graded safety evaluation of Text-to-Image generative models. Unlike existing benchmarks that treat safety as a binary property, SafeGrad probes the gradated safety boundary through a hierarchical risk taxonomy of 11 categories and 4 severity levels, constructed via an automated adversarial severity interpolation pipeline that ensures semantic coherence and visual consistency across the risk gradient. Using SafeGrad, we conducted a comprehensive evaluation of 6 T2I models, 9 defense methods, 5 safety filters, and 5 adversarial attacks, yielding 11 key insights into the strengths and limitations of current T2I safety mechanisms.
-
-
-% Our evaluation consistently reveals that existing safety mechanisms are calibrated for high-severity violations while leaving the low-severity boundary — where subtle semantic escalation bypasses deployed protections — largely undefended. This safety gap is universal across models, defenses, and filters, and is only observable through SafeGrad's graded structure. We hope SafeGrad, together with its publicly released construction pipeline, serves as a foundation for developing more robust, boundary-aware T2I safety systems that protect against the full spectrum of risk rather than its most obvious extremes.
-
-% We presented \dataname, a benchmark of 1,026 adversarial severity ladders across 11 risk categories and four severity levels, with a comprehensive evaluation of 6 T2I models, 9 defense methods, 5 safety filters, and 5 attack strategies yielding 8 key insights.
-% Our central finding is a universal safety gap: existing mechanisms leave the L1 -- L2 regime undefended, manifesting as a 21.4 pp HGR jump at L0$\rightarrow$L1 and a further 26.8 pp surge at L1$\rightarrow$L2, persisting across all evaluated models, defenses, and filters -- invisible to binary benchmarks.
-% We hope \dataname and its released ASL pipeline serve as a foundation for more robust, boundary-aware T2I safety systems.
-
-
 T2I safety evaluation has been measuring the wrong target: existing mechanisms certify safety at the most explicit extreme while the real deployment risk lives in the L1--L2 regime, where prompts appear benign yet images do not.
 \dataname (1,026 severity ladders across 11 categories and four levels, each with prompts, reference images, and per-rung risk explanations) makes this gap measurable through graded relational evaluation rather than binary labels.
-Our results show the gap is universal across model families, defense paradigms, and filters, and structurally exploitable via adversarial attacks: closing it requires calibrated response across the full severity spectrum, not L3 suppression alone; we release \dataname and the ASL pipeline as living tools for that effort.
+Our results show the gap holds across every model, defense paradigm, and filter we tested (6 T2I models, 9 defenses on a common SD1.4 backbone, 5 filters), and is structurally exploitable via adversarial attacks: closing it requires calibrated response across the full severity spectrum, not L3 suppression alone; we release \dataname and the ASL pipeline as living tools for that effort.

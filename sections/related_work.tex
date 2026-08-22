@@ -4,63 +4,15 @@ The landscape of T2I safety evaluation has evolved from simple NSFW detection to
 Early benchmarks like I2P~\citep{schramowski2023safe} (4,703 prompts, 7 categories) and Unsafe Diffusion~\citep{qu2023unsafe} (434 prompts) sourced real user prompts from Lexica to study NSFW generation.
 SneakyPrompt~\citep{yang2023sneakyprompt} introduced 200 adversarially crafted prompts targeting pornographic and violent imagery.
 Recent efforts~\citep{dai2024safesora,miao2024t2vsafetybench,li2025t2isafety,zhang2025t2iriskyprompt} expanded coverage to more risk dimensions.
-Most related to our work, T2ISafety~\citep{li2025t2isafety} established a broad framework assessing fairness, toxicity, and privacy across $\sim$70K prompts; T2I-RiskyPrompt~\citep{zhang2025t2iriskyprompt} introduced a hierarchical taxonomy of 6 primary and 14 fine-grained categories with reasoning-based annotation.
-Yet, all of these benchmarks treat safety as a binary property: a prompt is either safe or unsafe.
-% \dataname departs from this paradigm in a fundamental way: rather than cataloging the breadth of unsafe content, we probe the \emph{depth} of the safety boundary through Adversarial Severity Ladders that map the incremental transition from benign to high-severity violations.
-% This design enables us to quantify the safety gap -- the L1--L2 severity band where models pass binary safety filters yet produce visually harmful outputs -- a failure mode that is structurally invisible to prior benchmarks.
-\dataname instead probes the \emph{depth} of the safety boundary via Adversarial Severity Ladders, enabling quantification of the L1--L2 safety gap that is structurally invisible to binary benchmarks.
-\red{Although our evaluation matrix (models, defenses, filters, attacks) follows the protocol of contemporary work for baseline consistency, \dataname's relational, severity-graded structure yields findings that flat binary prompt sets cannot produce, e.g., the relative-suppression asymmetry at L1 in Insight~3, which requires paired, monotonic ladders to observe.}
-
-
-% \subsection{External guardrails and internal defenses}
-% T2I systems deploy two layers of protection: internal model modifications and external filters.
-% Internally, Concept Erasing~\citep{gandikota2023concept} and Unified Concept Editing (UCE)~\citep{gandikota2024unified} modify model weights to suppress target concepts; fine-tuning approaches like SafetyDPO~\citep{liu2024safetydpo} and MACE~\citep{lu2024mace} retrain safety objectives directly.
-% Externally, text filters employ keyword blacklists~\citep{george} or classifier-based detection~\citep{li_NSFW_text_classifier,Detoxify,khader2024diffguard}, while image-level filters~\citep{laionAI,Chhabra,schramowski2023safe,Giphy} classify generated outputs as safe or unsafe.
-% They all have been evaluated exclusively on binary safe/unsafe distinctions, typically targeting L3-equivalent explicit content.
-% \dataname provides the first graded diagnostic: by testing these defenses against all four severity rungs, we demonstrate that methods may successfully suppress high-risk concept generation yet remain entirely vulnerable to low-to-mid-risk metaphorical escalation producing nearly equivalent visual harm -- a finding with direct practical consequences for deployed safety systems.
-
-% \textbf{T2I safety benchmarks.}
-% Prior benchmarks -- I2P~\citep{schramowski2023safe}, Unsafe Diffusion~\citep{qu2023unsafe}, SneakyPrompt~\citep{yang2023sneakyprompt}, T2ISafety~\citep{li2025t2isafety}, and T2I-RiskyPrompt~\citep{zhang2025t2iriskyprompt} -- all treat safety as a binary property (Table~\ref{tab:comparison}).
-% \dataname instead probes the \emph{depth} of the safety boundary via Adversarial Severity Ladders, enabling quantification of the L1--L2 safety gap that is structurally invisible to binary benchmarks.
+Most related to our work, T2ISafety~\citep{li2025t2isafety} established a broad framework assessing fairness, toxicity, and privacy across $\sim$70K prompts, and T2I-RiskyPrompt~\citep{zhang2025t2iriskyprompt} introduced a hierarchical taxonomy of 6 primary and 14 fine-grained categories with reasoning-based annotation.
+Both, however, still assign each prompt a single, independently sampled safe/unsafe verdict: neither pairs multiple severity instances of the same underlying scenario under matched generation conditions, so neither can compute how a defense's harm suppression at one severity relates to its suppression at another for a fixed scenario.
+This distinction is not cosmetic: it is precisely what Insight~3 (\Sec{\ref{sec:filter}}) requires.
+Every defense we test achieves higher \emph{relative} HGR reduction at L1 than at L3 -- e.g., MACE reduces NSFW L1 HGR by $\rho_{L1}=84.6\%$ versus $\rho_{L3}=69.4\%$ at L3 -- yet absolute residual harm still peaks at L3, so a binary evaluation would report MACE as simply ``strong'' while missing that its protection is skewed toward the severity band least likely to be probed.
+Observing this skew requires holding the underlying scenario fixed while varying severity (the same T2I model and seed across all four rungs of a ladder); a flat, independently sampled prompt set cannot hold scenario fixed this way, making the asymmetry structurally invisible to it.
+\dataname's Adversarial Severity Ladders are designed specifically to enable this comparison, and our evaluation matrix (models, defenses, filters, attacks) otherwise follows the protocol of contemporary work for baseline consistency.
 
 \noindent
 \textbf{Defenses and filters.}
 Internal defenses modify model weights~\citep{gandikota2023concept,gandikota2024unified} or retrain safety objectives~\citep{liu2024safetydpo,lu2024mace,chen2025trce}; external ones apply keyword lists~\citep{george}, text classifiers~\citep{li_NSFW_text_classifier,Detoxify,khader2024diffguard}, image-level detectors~\citep{laionAI,Chhabra,schramowski2023safe,Giphy}.
 They all target L3-equivalent explicit content under a binary safe/unsafe protocol.
 \dataname provides the first graded diagnostic across all four severity rungs, revealing that defenses effective at L3 remain vulnerable to low-to-mid-risk escalation.
-
-
-
-
-% \subsection{MLLM-based safety auditing}
-
-% ---
-
-% ### **Adversarial Attacks and Red-Teaming**
-% Adversarial research has evolved from simple keyword-dodging to sophisticated semantic bypasses. **SneakyPrompt (Yang et al., 2023)** utilizes reinforcement learning to find character-level perturbations that bypass text filters. **Ring-A-Bell (Tsai et al., 2023)** demonstrates how "concept-shadowing" can trigger forbidden concepts via benign-looking descriptions. More recently, **Word-Play (Zhu et al., 2024)** explored how phonetic and visual similarities in text can deceive multimodal encoders. 
-
-% **Difference from T2I-Escalate:** Our work pivots away from character-level noise or phonetic trickery and instead focuses on **Semantic Escalation**. We investigate how metaphorical and atmospheric language—which remains linguistically "clean" to text-based guardrails—can be used to systematically climb a severity ladder. We show that "Mid-risk" prompts are often more dangerous than "High-risk" ones because they are designed specifically to bypass textual defenses while still triggering harmful visual outputs.
-
-% ---
-
-% ### **Defense Mechanisms and Concept Erasing**
-% Internal and external defenses represent the two primary pillars of T2I safety. Internal methods, such as **Erasing Concepts from Diffusion Models (Gandikota et al., 2023)** and **Unified Concept Editing (UCE) (Kumari et al., 2023)**, attempt to modify model weights to remove harmful distributions. External methods, such as **Safe Latent Diffusion (SLD) (Schramowski et al., 2023)**, perform safety-guidance during the sampling process to steer away from "unsafe" regions of the latent space.
-
-% **Difference from T2I-Escalate:** Most defense evaluations, including those for *SLD* and *Concept Erasing*, prioritize the rejection of "High-risk," explicit content. Our study provides a more granular diagnostic by testing these defenses against **all four rungs** of our severity ladders. We reveal that current defense strategies are highly inconsistent: they may successfully erase a "Level 4" (High-risk) concept but remain completely vulnerable to a "Level 3" (Mid-risk) metaphorical attack that yields nearly identical visual harm.
-
-% ---
-
-% ### **MLLM-Based Safety Auditing**
-% The emergence of Multimodal Large Language Models (MLLMs) has revolutionized automated evaluation. **T2I-RiskyPrompt (Qu et al., 2024)** proposes a reason-driven detection method that aligns MLLMs with human rationales. **InternVL (Chen et al., 2024)** and **LLaVA-v1.6 (Liu et al., 2024)** have demonstrated that MLLMs can act as sophisticated "Zero-shot" auditors for image-text alignment. Recently, **ShieldLM (Zhang et al., 2024)** proposed a framework for aligning LLM safety judges with human-centric safety standards.
-
-% **Difference from T2I-Escalate:** To overcome the scalability and subjectivity issues of human crowd-work, **T2I-Escalate** utilizes a **Policy-Grounded MLLM Audit**. Unlike previous methods that rely on broad MLLM "intuition" or simple binary labels, our framework requires the auditor to provide a visual rationale specifically anchored to the **specified policy rules** of each severity rung. This ensures that our automated verdicts are reproducible, principled, and directly tied to the technical definitions of the "Safety Gap."
-
-% ---
-
-% ### **Final Polishing Notes:**
-% 1.  **Gandikota et al. (2023):** This is the "Concept Erasing" paper. It’s a must-cite for defense.
-% 2.  **Schramowski et al. (2023):** This is "Safe Latent Diffusion." It’s the gold standard for sampling-time defense.
-% 3.  **Tsai et al. (2023):** "Ring-A-Bell" is a great attack paper that fits your "semantic" theme.
-% 4.  **Ke et al. (2025) / Zhu et al. (2024):** These represent the "2026 perspective"—showing the reviewer you are up-to-date with the absolute latest in multimodal research.
-
-% **How does this look?** I can help you weave these into a table if you want to show a "Feature Comparison" between your paper and these related works!

@@ -2,98 +2,32 @@
 
 \red{\noindent\textbf{Content warning:} this paper includes potentially offensive examples.}
 
-
-
-The rapid proliferation of Text-to-Image (T2I) generative models, such as Stable Diffusion 3~\citep{SD3}, DALL-E 3~\citep{dalle3}, and Midjourney~\citep{midjourney}, has transformed digital content creation. 
-Yet, as these models gain capability, their susceptibility to generating harmful, violative, or graphic content has become a primary bottleneck for safe deployment~\citep{bird2023typology,yang2023sneakyprompt}. 
-To mitigate these risks, developers have implemented sophisticated safety guardrails, typically consisting of prompt-level filters and post-generation visual checkers. 
+The rapid proliferation of Text-to-Image (T2I) generative models, such as Stable Diffusion 3~\citep{SD3}, DALL-E 3~\citep{dalle3}, and Midjourney~\citep{midjourney}, has transformed digital content creation.
+Yet, as these models gain capability, their susceptibility to generating harmful, violative, or graphic content has become a primary bottleneck for safe deployment~\citep{bird2023typology,yang2023sneakyprompt}.
+To mitigate these risks, developers have implemented sophisticated safety guardrails, typically consisting of prompt-level filters and post-generation visual checkers.
 While these defenses are effective against ``high-risk'' explicit violations such as direct requests for nudity or graphic violence, they remain fragile when confronted with nuanced, adversarial, or metaphor-based inputs~\citep{zhang2025adversarial}.
 Consequently, what is missing is an evaluation framework that pinpoints not whether these systems fail, but where along the harm spectrum their safety boundary breaks.
 
-
-
 Current safety evaluation benchmarks, like SneakyPrompt~\citep{yang2023sneakyprompt}, Unsafe Diffusion~\citep{qu2023unsafe}, I2P~\citep{schramowski2023safe}, T2ISafety~\citep{li2025t2isafety}, and T2I-RiskyPrompt~\citep{zhang2025t2iriskyprompt}, predominantly assess model robustness through a binary ``safe/unsafe'' classification paradigm.
 We argue that this binary lens fails to capture the nuanced, severity-graded nature of harm: real adversaries navigate safety boundaries through incremental escalation, and different application contexts demand graded rather than binary safety judgments.
-% While these defenses are effective against "High-risk" explicit violations—such as direct requests for graphic violence or explicit nudity—they remain remarkably fragile when confronted with nuanced, adversarial, or metaphor-based inputs~\citep{zhang2025adversarial}.
-% Current safety evaluation benchmarks predominantly assess model robustness through a binary classification paradigm. 
-% Benchmarks such as SneakyPrompt~\citep{yang2023sneakyprompt}, Unsafe Diffusion~\citep{qu2023unsafe}, I2P~\citep{schramowski2023safe}, T2ISafety~\citep{li2025t2isafety}, and T2I-RiskyPrompt~\citep{zhang2025t2iriskyprompt} focus on determining whether a generated output is definitively "Safe" or "Unsafe (w/ or w/o risk category)".
-% We argue that this binary lens fails to capture the nuanced, severity-graded nature of harm. 
-% In real-world adversarial scenarios, malicious actors rarely initiate their "probing" with blatant violations; instead, they navigate safety boundaries through a process of incremental escalation. 
-
-
-
-
-% We identify a critical "safety gap" rooted in this systematic underestimation of graded harm. 
-% This gap exists because text-based filters fail to decode adversarial prompts, and visual checkers frequently misclassify mid-risk imagery as "safe". 
-% For instance, a text filter may permit a prompt describing "the deep, realistic slicing of a red, juicy pomegranate with a sharp steel blade". 
-% Subsequently, a visual checker may label the resulting image as "safe," failing to recognize that the output effectively simulates severe physical trauma through semantic metaphor. 
-% By misclassifying these mid-risk probes, the system allows models to skip intermediate risk assessments, masking high-severity violations.
-
 
 We identify a critical ``safety gap'' rooted in this systematic underestimation of graded harm.
 This gap exists not only because text-based filters fail to decode adversarial prompts, but also because visual checkers frequently misclassify low- or mid-risk imagery as entirely ``safe''.
 Within this gap, prompts appear linguistically benign to text filters, yet they produce low/mid-severity visual harm that visual checkers label as ``safe,'' failing to recognize harm simulated through semantic metaphor.
-% For instance, a text filter may permit a prompt describing "the deep, realistic slicing of a red, juicy pomegranate with a sharp steel blade".
-% Subsequently, a visual checker may label the resulting image as "safe," failing to recognize that the visual output effectively simulates severe physical trauma through semantic metaphor. 
-% By misclassifying these mid-risk probes as "safe", the system allows the model to skip intermediate risk assessments entirely, effectively masking high-severity violations. 
 Such classification slippage is particularly hazardous for sensitive applications, including child-oriented platforms or professional safe-search tools where the failure to distinguish between ``safe'' and ``low-to-mid-risk'' contents results in the unintended exposure of harmful material.
 
-
-
-
-We address this gap with \dataname, a benchmark that maps the severity-graded landscape of T2I safety rather than binary compliance (\Fig{\ref{fig:overview}}). 
-% As shown in \Fig{\ref{fig:overview}}, 
-We synthesize the usage policies of leading T2I platforms
-% , including~\citep{midjourney_guideline,microsoft, metaAI, google, helff2024llavaguard, li2025t2isafety, zhang2025t2iriskyprompt}, 
-into a principled taxonomy of 11 risk categories with pre-defined escalation rules.
+We address this gap with \dataname, a benchmark that maps the severity-graded landscape of T2I safety rather than binary compliance (\Fig{\ref{fig:overview}}).
+We synthesize the usage policies of leading T2I platforms into a principled taxonomy of 11 risk categories with pre-defined escalation rules.
 Using our Adversarial Severity Ladders (ASL) pipeline, we generate 1,026 ladders escalated through four rungs, from Safe (L0) to High-risk (L3), each carrying prompts, reference images, and risk explanations.
-
-
-
-% Departing from the static, binary prompt lists typical of prior work~\citep{li2025t2isafety, zhang2025t2iriskyprompt}, we construct a novel framework of Multimodal Adversarial Severity Ladders. 
-% We implement a multi-stage pipeline to generate [X,XXX] ladders, where each prompt is systematically escalated through four rungs—Safe, Low-risk, Mid-risk, and High-risk.
-% To ensure rigorous and scalable annotation, we introduce an automated, reasoning-driven multimodal audit process. 
-% By leveraging the zero-shot reasoning capabilities of SOTA MLLMs, we ensure that every severity classification is directly anchored to our specified policy rubrics, mitigating the subjectivity and variance inherent in human crowd-work. 
-% This auditor provides not only a safety verdict but also a detailed visual rationale for each image, identifying precisely where visual harm emerges even when textual intent remains ostensibly benign. 
-
-
-% To facilitate robust evaluation, we propose a reasoning-driven multimodal safety auditor that aligns model verdicts with these structured rationales. Experimental results demonstrate that our method achieves [XX.X]% accuracy in detecting nuanced risky content using only a 3B MLLM, significantly outperforming existing binary safety filters and baseline detectors.
-
-
-
-% Leveraging the \dataname benchmark, we conduct a multifaceted evaluation of the current Text-to-Image (T2I) safety ecosystem, encompassing generative models, internal and external defense mechanisms, and adversarial attack vectors. 
-% Our analysis yields four critical findings. 
-% First, we assess the risky image generation capabilities of eight leading open-source T2I models, revealing a concerning correlation: as generative fidelity and performance improve, the associated safety risks become increasingly pronounced and harder to contain. 
-% Second, we implement nine representative internal defense methods (e.g., concept erasing) and find that these strategies consistently struggle to defend against multiple risk categories simultaneously, often failing to generalize across our severity rungs. 
-% Third, our evaluation of five external safety filters uncovers a systemic "Safety Gap," where individual filters fail to identify the broad spectrum of nuanced risks—particularly at the Mid-risk level—mapped within our taxonomy. 
-% Finally, we test five jailbreaking attack methods, demonstrating their continued efficacy in bypassing existing safeguards to elicit high-severity violations. 
-% Collectively, these evaluations culminate in nine key insights into the strengths and limitations of current safety measures. 
-% Our findings posit that despite recent advancements, modern T2I models still exhibit significant, gradated safety risks that current binary defense strategies are ill-equipped to mitigate, underscoring the necessity of the multimodal, laddered approach proposed in this work.
-
-
-
-% In summary, this paper makes the following contributions:
-
-% Taxonomy  Benchmark: We present T2I-Escalate, a dataset of [X,XXX] gradated ladders across 14 safety categories, providing the most granular look at T2I boundary failures to date.
-
-% The Severity Ladder Framework: We propose a novel methodology for red-teaming T2I models by escalating prompts from benign usage to graphic violations, allowing for the measurement of "safety trigger points."
-
-% The Safety Gap Analysis: We quantify the "Safety Gap," demonstrating that current models consistently fail to recognize harmful visual content when it is cloaked in "Mid-risk" adversarial language.
-
-% MLLM-Based Auditing: We demonstrate that MLLMs can serve as effective automated safety auditors, providing reasoning-based verdicts that outperform traditional binary classifiers.
-
-% Using \dataname, we conduct a comprehensive evaluation of the current T2I safety ecosystem across four dimensions (T2I models are evaluated with safety checkers disabled to measure raw generative risk independently of guard layers; defenses and filters are then evaluated separately in controlled conditions):
 
 Using \dataname, we conduct a comprehensive evaluation of the current T2I safety ecosystem.
 \textbf{(1) T2I models:} we evaluate 6 open-source T2I models, revealing that generative capability and safety risk are positively correlated.
-% -- stronger models more faithfully render harmful semantics across all severity levels.
 \textbf{(2) Defense methods:} we benchmark 9 representative mechanisms spanning inference-guided, model-editing, and fine-tuning paradigms, finding that all defenses suppress failures proportionally more at L1 than at L3, steepening the severity gradient rather than closing the safety gap.
 \textbf{(3) Safety filters:} we evaluate 5 filters and uncover a systemic insensitivity to severity: no filter reliably detects L1--L2 content, confirming the safety gap is not addressable by existing filtering alone.
 \textbf{(4) Adversarial attacks:} we test 5 jailbreak strategies, showing that cross-modal attacks (\red{ASR $\geq$ 61.5\%}) outperform gradient-based methods against the best-defended configurations.
 \red{\textbf{(5) Remediation:} a severity-aware filter fine-tuned on ladder data recovers the boundary band that zero-shot filters miss (Insight~6, \Sec{\ref{sec:filter}}).}
 Each dimension is evaluated independently: T2I models are tested raw, defenses on a common base model (SD1.4), filters on benchmark reference images, and attacks against the best-defended configuration.
 Collectively, these evaluations yield 7 insights showing that current binary safety strategies are fundamentally ill-equipped to address the severity-graded nature of T2I risk.
-% More about related work can be found in~\ref{app:related_work}
 Our contributions:
 
 \begin{itemize}[leftmargin=*]
@@ -101,9 +35,7 @@ Our contributions:
 
 \item We propose an automated Adversarial Severity Ladders (ASL) pipeline that constructs semantically coherent, monotonically escalating prompt--image--explanation triplets without manual prompt authoring.
 
-
 \item We present \dataname, a benchmark of 1,026 ladders (4,104 prompt--image--explanation triplets) offering the most granular view of T2I safety boundaries to date.
 
 \item We systematically evaluate the T2I ecosystem, yielding 7 key insights, from a universal L1 blind spot invisible to binary benchmarks to a SafeGrad-trained filter that detects boundary content missed by zero-shot filters.
 \end{itemize}
-

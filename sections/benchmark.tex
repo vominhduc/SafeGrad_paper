@@ -6,93 +6,18 @@
 Rather than providing a large flat set of binary-labeled examples, \dataname provides a smaller set of \emph{relational} examples (severity ladders): a single ladder of four prompts encodes more information about a model's safety boundary than four independent binary-labeled samples, exposing \emph{where} along the severity spectrum the model first fails and how sharply its boundary is defined.
 Every ladder consists of four prompts with corresponding images and risk explanations escalating through Safe (L0), Low-risk (L1), Mid-risk (L2), and High-risk (L3).
 \red{Per-rung risk explanations make the intermediate regime concrete: in the Violence ladder (\Fig{\ref{app:fig:sample_3}}), L1 depicts ``non-consensual physical assault with visible injury'' while L2 escalates to ``severe assault aftermath''; in the Self-Harm ladder (\Fig{\ref{app:fig:sample_4}}), L1 shows ``superficial marks, low-level harm with emotional suffering'' while L2 shows ``active self-harm with visible bleeding wounds''. Every ladder carries such explanations (Appendix~\ref{app:examples}).}
-% Models with a sharp, well-calibrated boundary are preferable to those that either fail at low severity (over-generation of harmful content) or succeed only at maximum severity (under-restriction that misses borderline cases).
-
 
 \subsection{Hierarchical Risk Taxonomy}
-
 
 We define a hierarchical taxonomy covering 11 top-level risk categories (\Fig{\ref{fig:overview}}), each a distinct dimension of potential harm in T2I generation, synthesized from platform policies and existing literature~\citep{dalle3,midjourney_guideline,helff2024llavaguard,li2025t2isafety,zhang2025t2iriskyprompt,google,microsoft,metaAI}.
 Each category defines four severity levels with escalation rules (Appendix~\ref{app:taxonomy}, \Tab{\ref{app:tab:severity}}, \Tab{\ref{app:tab:taxonomy}}).
 \red{The categories, severity definitions, and escalation rules are human-authored and reviewed against these sources, with boundary cases adjudicated manually; the automated pipeline instantiates these human-written rules rather than defining severity levels itself.}
-
-
-
-% calibrated to reflect escalating degrees of potential harm as shown in Appendix~\ref{app:taxonomy}, \Tab{\ref{app:tab:severity}}.
-% We also define escalation rules (Appendix~\ref{app:taxonomy}, \Tab{\ref{app:tab:taxonomy}} (i.e., what should appear at each level of each risk category) to better instruct the data creation pipeline and evaluate the dataset. 
-% Our policy covers both open-source and proprietary safety standards.
-% To ensure structural consistency throughout the benchmark, the focus of these 11 categories is defined as follows: 
-
-
-% We define a hierarchical risk taxonomy covering 11 top-level categories (see \Fig{\ref{fig:overview}}), each representing a distinct dimension of potential harm in T2I generation. 
-% The categories were identified through a synthesis of existing T2I safety literature, content moderation guidelines from major platforms including open-source models DALL-E 3~\citep{dalle3}, Midjourney~\citep{midjourney_guideline}, LLaVAGuard~\citep{helff2024llavaguard}, T2ISafety~\citep{li2025t2isafety}, T2I-RiskyPrompt~\citep{zhang2025t2iriskyprompt}, along with proprietary models Google~\citep{google}, Microsoft~\citep{microsoft}, and Meta AI~\citep{metaAI}.
-% Our policy is also reviewed by internal governance office.
-% At a glance, the focus contents of 11 categories are:
-
-
-
-% Each category is further organized into four severity levels, calibrated to reflect escalating degrees of potential harm as shown in Appendix~\ref{app:taxonomy}, \Tab{\ref{app:tab:severity}}.
-% We also define escalation rules (Appendix~\ref{app:taxonomy}, \Tab{\ref{app:tab:taxonomy}} (i.e., what should appear at each level of each risk category) to better instruct the data creation pipeline and evaluate the dataset. 
-
-
-
-
-
-
-
-% \subsection{Dataset Statistics}
-% \dataname contains 1,026 ladders (4,104 prompts) spanning 11 categories; each rung holds a prompt, reference image, and risk explanation. 
-% All ladders pass the monotonic quality filter; each category contributes 82 - 99 ladders (Appendix~\ref{app:statistics}, Table~\ref{app:tab:stats}). 
-% Each rung's four prompts are independently generated (naturalness), and all four images share the same model and seed (generative variance control). \Tab{\ref{tab:comparison}} compares \dataname against existing ones.
 
 \subsection{Dataset Statistics}
 \dataname contains 1,026 ladders (4,104 prompts) spanning 11 categories; each rung holds a prompt, reference image, and risk explanation, and all ladders pass the monotonic quality filter (82--99 ladders per category; Table~\ref{app:tab:stats}).
 Categories are not mutually exclusive at high severity: co-occurrence analysis (Appendix~\ref{app:comatrix}) shows the largest overlap for Violence--Disturbing (18.9\%/21.4\%) and moderate overlap for Hate Speech--Misinformation (11.8\%/12.6\%).
 \Tab{\ref{tab:comparison}} compares \dataname against existing benchmarks.
 \red{The 1,026 ladders are the strict post-filtering \emph{yield} of the pipeline, not a quota: \dataname targets continuous failure slopes at the L1/L2 boundary, an objective distinct from flat coverage targets; its compact size reflects multi-stage filtering that eliminates label noise.}
-
-
-
-% This gives $100$ scenarios per category $\times$ $11$ categories $\times$ $4$ severity levels = $4,400$ prompt-image pairs. 
-% This results in $1,100$ unique scenarios ($100$ per category), providing a total of $4,400$ unique prompt-image pairs. 
-% Each prompt-image pair is unique; prompts at each level are semantically related but independently generated to ensure naturalness and avoid template-based artifacts.
-
-
-% In practice, risky visual content does not always map cleanly to a single category. 
-% A violent scene may simultaneously trigger disturbing content; a fabricated image of a public figure may span both misinformation and public figures. 
-% To quantify this overlap, we compute a \textbf{cross-category co-occurrence matrix} (Appendix~\ref{app:comatrix}) reporting the fraction of L2--L3 images flagged by our MLLM evaluator as belonging to more than one category. 
-% When multi-label overlap occurs, HGR is computed per primary category as assigned during construction, ensuring that each sample contributes to exactly one category's HGR. 
-% Co-occurrence is reported descriptively to characterize the taxonomy's boundaries rather than treated as a labeling error.
-
-
-% SafeGrad contains 4,400 samples in total. Each sample corresponds to a unique risk scenario drawn from one of the 11 categories, instantiated at all four severity levels. This results in 1,100 unique scenarios (100 per category), providing a total of 4,400 unique prompt-image pairs. 
-
-
-% \begin{table}[tb]
-% \centering
-% \caption{\dataname dataset statistics by category.}
-% \label{tab:stats}
-% \begin{tabular}{lrrrr}
-% \toprule
-% \textbf{Category} & \textbf{\# Scenarios} & \textbf{\# Prompts} & \textbf{\# Images} & \textbf{Avg. Prompt Length} \\
-% \midrule
-% Violence \& Physical Harm       & 100   & 400   & 400   & 18.3 words \\
-% Sexual Content                  & 100   & 400   & 400   & 16.7 words \\
-% Hate Speech \& Discrimination   & 100   & 400   & 400   & 19.1 words \\
-% Self-Harm \& Suicide            & 100   & 400   & 400   & 17.4 words \\
-% Dangerous \& Illegal Activities & 100   & 400   & 400   & 20.2 words \\
-% Privacy Violations              & 100   & 400   & 400   & 15.8 words \\
-% Political Extremism             & 100   & 400   & 400   & 21.0 words \\
-% Misinformation \& Manipulation  & 100   & 400   & 400   & 18.9 words \\
-% Copyright Infringement          & 100   & 400   & 400   & 14.3 words \\
-% Stereotyping \& Bias            & 100   & 400   & 400   & 17.8 words \\
-% Graphic Disturbing Content      & 100   & 400   & 400   & 16.2 words \\
-% \midrule
-% \textbf{Total}                  & \textbf{1,100} & \textbf{4,400} & \textbf{4,400} & \textbf{18.0 words} \\
-% \bottomrule
-% \end{tabular}
-% \end{table}
-
 
 \begin{table}[tb]
 \centering

@@ -1,25 +1,3 @@
-% \begin{table}[tb]
-% \centering
-% \caption{Safety filter evaluation on SafeGrad reference images. Detection rate shown per severity level (L0–L3) alongside overall metrics. TPR@L3 = true positive rate on high-risk images; FPR@L0 = false positive rate on safe images; FBR = filter bypass rate; $\Delta$ = severity sensitivity (L3−L0). Bold = best per column.}
-% \label{tab:filter_eval}
-% \small
-% \begin{tabular}{lccccccc}
-% \toprule
-% \textbf{Filter} & \textbf{L0↓} & \textbf{L1} & \textbf{L2} & \textbf{L3↑} & \textbf{FPR@L0↓} & \textbf{FBR↓} & \textbf{$\Delta$↑} \\
-% \midrule
-% Q16 & 54.7 & — & — & \cellcolor{bestresult}\textbf{66.4} & 54.7 & \cellcolor{bestresult}\textbf{33.6} & 11.7 \\
-% CLIP-NSFW & 8.4 & — & — & 24.4 & 8.4 & 75.6 & \cellcolor{bestresult}\textbf{16.0} \\
-% SD Filter & \cellcolor{bestresult}\textbf{2.2} & — & — & 8.0 & \cellcolor{bestresult}\textbf{2.2} & \cellcolor{worstresult}92.0 & 5.8 \\
-% LlavaGuard-v1.2 & 2.6 & — & — & 21.0 & 2.6 & 79.0 & \cellcolor{bestresult}18.4 \\
-% \midrule
-% \textbf{Ensemble (All)} & — & — & — & — & — & \cellcolor{bestresult}\textbf{2.9} & — \\
-% \bottomrule
-% \multicolumn{8}{l}{\scriptsize Ensemble = images bypassing all 4 filters simultaneously (defense-in-depth).} \\
-% \multicolumn{8}{l}{\scriptsize InternVL2-8B excluded due to tokenizer cache corruption.} \\
-% \end{tabular}
-% \end{table}
-
-
 \begin{table}[tb]
 \centering
 \caption{Safety filter evaluation on SafeGrad reference images. Detection rate shown per severity level (L0--L3) alongside overall metrics. TPR@L3 is detection rate on high-risk images; FPR@L0 is false alarm rate on safe images; FBR is filter bypass rate; L3$-$L0 is severity sensitivity. \textbf{Bold} indicates the best per column; \underline{underline} indicates the second best. \colorbox{gray!20}{Shaded} row means best overall filter. ``---'' indicates the filter produces only a binary Safe/Unsafe verdict and cannot be thresholded at intermediate severity levels w/o additional calibration. $^*$The \dataname-tuned row is evaluated on the held-out ladder-respecting test split; all other rows use the full reference set.}

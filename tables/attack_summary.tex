@@ -1,7 +1,7 @@
 \begin{table}[tb]
 \centering
 \small
-\caption{Attack Success Rate (ASR, \%) for five adversarial attack strategies against the best-defended configuration (TRCE + LlavaGuard), evaluated on L2 and L3 severity prompts across all 11 risk categories. \textbf{Bold} is highest; \underline{underline} is second highest. AVG means macro-average ASR across all categories and levels.}
+\caption{Attack Success Rate (ASR, \%) for five adversarial attack strategies against the best-defended configuration (TRCE + LlavaGuard), evaluated on L2 and L3 severity prompts across all 11 risk categories. \textbf{Bold} is highest; \underline{underline} is second highest. AVG means macro-average ASR across all categories and levels. $^*$PGJ is a 2025-era attack evaluated separately against the same defended configuration (\Sec{\ref{sec:filter}}); shown for recency but excluded from the AVG-of-five comparison in the main text.}
 \label{tab:attacks}
 \resizebox{0.8\columnwidth}{!}{%
 \begin{tabular}{l c}
@@ -19,6 +19,9 @@ MMA-Diffusion~\cite{yang2024mma}
 & \textbf{68.7} \\
 P4D~\cite{chin2024p4d}
 & 55.6 \\
+\midrule
+PGJ$^*$
+& 72.4 \\
 \bottomrule
 \end{tabular}
 }

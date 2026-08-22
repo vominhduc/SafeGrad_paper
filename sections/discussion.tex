@@ -1,16 +1,5 @@
 \section{Discussion}
 
-% \paragraph{Rethinking the safety calibration target.}
-% All evaluated mechanisms — model-editing, fine-tuning, and external filters — are calibrated on binary distinctions, systematically concentrating protection at L3 while leaving the L1--L2 regime underserved. Defenses trained this way steepen the severity gradient rather than closing it, and deployments in sensitive contexts must explicitly evaluate the L1--L2 regime rather than trusting L3-derived safety claims.
-
-% \paragraph{The cross-modal gap as a root cause.}
-% Text filters cannot decode visually adversarial prompts, and image classifiers trained on explicit L3 content fail at L1--L2 violations — the 73.98\% stealthy attack rate at L3 shows this gap is by adversarial design. Future safety systems require multimodal classifiers jointly trained on text and image signals across the full severity spectrum.
-
-% \paragraph{Future directions.}
-% Severity-aware defense using the released ASL pipeline — optimizing explicitly for L1 and L2 suppression rather than L3 alone — is the most direct path to closing the boundary gap.
-% The ASL pipeline's determinism also enables periodic benchmark refresh as model capabilities evolve, ensuring \dataname remains a living standard rather than a static snapshot.
-
-
 \paragraph{Rethinking the safety calibration target.}
 All evaluated mechanisms are calibrated on binary distinctions, concentrating protection at L3 while leaving L1--L2 underserved and steepening the severity gradient; deployments in sensitive contexts must evaluate L1--L2 explicitly rather than trust L3-derived claims.
 
@@ -18,7 +7,7 @@ All evaluated mechanisms are calibrated on binary distinctions, concentrating pr
 Text filters cannot decode visually adversarial prompts, and image classifiers trained on explicit L3 content fail at L1--L2 violations; the \red{72.32\%} stealth rate at L3 shows the gap is by adversarial design.
 
 \paragraph{From diagnosis to mitigation.}
-\red{Insight 6 turns the benchmark from a measurement tool into an instrument: the filter trains only on \dataname's reference images and per-rung risk explanations, so practitioners can regenerate ladders under their own taxonomy and retrain, and the same graded data can supervise defense objectives directly.}
+\red{Insight 6 turns the benchmark from a measurement tool into an instrument: fine-tuning Qwen2.5-VL-7B with LoRA on \dataname's own reference images and per-rung risk explanations (Appendix~\ref{app:remediation}) recovers the L1--L2 band that zero-shot filters miss, without needing a differently-sourced training signal. Because the same recipe applies to any taxonomy, practitioners can regenerate ladders under their own policy definitions and retrain, and the same graded data can supervise defense objectives directly.}
 
 \paragraph{Scope boundaries.}
 Copyright and PID exhibit structurally lower HGR than NSFW categories (\Tab{\ref{tab:t2i_models}}): MLLM classifiers are weaker at fine-grained identity harms (e.g., character likeness), so the safety gap in these categories is likely \emph{underestimated}.
