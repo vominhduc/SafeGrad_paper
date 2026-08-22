@@ -182,8 +182,7 @@ The escalation steepens at L1$\rightarrow$L2 (mean $\Delta$HGR = \red{28.0} pp),
 % This 0.1 pp difference falls within inter-annotator variation, confirming that the safety gap is a real failure mode, not an artifact of our automated evaluation.
 
 
-\textbf{Insight 1: Universal L1 blind spot.} \textit{Current T2I safety systems exhibit a systematic blind spot at the L1 boundary.}
-It is universal across all evaluated models and is invisible to binary safe/unsafe evaluation paradigms.
+\textbf{Insight 1: Universal L1 blind spot.} \textit{Current T2I safety systems exhibit a systematic blind spot at the L1 boundary, universal across all evaluated models and invisible to binary safe/unsafe evaluation.}
 \Tab{\ref{tab:delta}} confirms this universality: the L1$\to$L2 transition is the peak transition for every evaluated model, with Boundary Delta ranging from \red{25.7} pp (PixArt-$\alpha$) to \red{30.2} pp (HiDream).
 % To confirm this gap reflects genuine model behavior rather than evaluator noise, we replicate the analysis on a Gold Standard subset ($n = 500$, stratified across all 11 categories and four levels, re-labeled by three independent human annotators with full consensus required).
 % The gap persists: mean HGR@L1 = 21.4\% (vs.\ 22.7\% automated, $\Delta = 1.3$ pp) and HGR@L3 = 73.1\% (vs.\ 74.3\%, $\Delta = 1.2$ pp), within inter-annotator variance, confirming the gap is a genuine model failure rather than an evaluation artifact.
@@ -258,13 +257,10 @@ We now examine how this gap manifests across different components.
 
 % \input{tables/T2I_full}
 
-\textbf{Insight 2: Capability vs. Failure concentration.}
-\textit{Higher-capability models achieve higher SBS scores because their failures are severity-concentrated, not because they are inherently safer.}
-HiDream and Janus-Pro achieve SBS of \red{0.80} and \red{0.74} alongside high HGR@L3; their failures concentrate at L3 rather than diffusing across lower rungs, unlike SD1.4 (SBS = \red{0.69}).
-Practically, high SBS + high HGR@L3 means a capable but safety-uncalibrated model; low SBS + low HGR@L0 means a uniformly safe model; high SBS + low HGR@L3 is the ideal.
-% Yet these same models render nuanced risky semantics (drug cues, trademark stylizations) that weaker models fail to capture, and all six models show HGR@L3 $\geq$ 46.8\%, indicating no model maintains safety across the full severity spectrum.
-Importantly, high SBS does not mean high safety because stronger models follow harmful instructions more faithfully when no safety checker is active (HiDream and Janus-Pro also produce the highest absolute HGR@L3). 
-All six models show HGR@L3 $\geq$ \red{47.5}\%, indicating no model is safe across the full severity spectrum.
+\textbf{Insight 2: Capability vs.\ failure concentration.}
+\textit{Higher-capability models achieve higher SBS because their failures are severity-concentrated, not because they are inherently safer.}
+HiDream and Janus-Pro reach SBS of \red{0.80} and \red{0.74} alongside high HGR@L3: their failures concentrate at L3, unlike SD1.4 (SBS = \red{0.69}), whose failures diffuse across lower rungs.
+Yet strong models also follow harmful instructions more faithfully (HiDream and Janus-Pro produce the highest absolute HGR@L3), and all six models show HGR@L3 $\geq$ \red{47.5}\%: no model is safe across the full severity spectrum.
 
 
 % \textbf{Insight 2:} \textit{Higher-capability models achieve higher SBS because their failures are severity-concentrated, not because they are inherently safer.} 
@@ -282,8 +278,8 @@ All six models show HGR@L3 $\geq$ \red{47.5}\%, indicating no model is safe acro
 
 
 \textbf{Insight 3: Stochastic hallucination at L0.}
-\textit{Non-zero HGR at L0 (range \red{0.5--3.3\%}) is not caused by unsafe prompts but by the model's latent space -- training on web-scale data places harmful concept representations in close proximity to benign ones, so innocuous prompts occasionally drift into harmful territory by chance.}
-This is a property of the generative model's internal structure, not of the input, and it means zero-risk deployment requires output monitoring even for entirely safe prompts.
+\textit{Non-zero HGR at L0 (range \red{0.5--3.3\%}) arises from the model's latent space rather than unsafe prompts: web-scale training places harmful representations near benign ones, so innocuous prompts occasionally drift into harmful territory.}
+This means zero-risk deployment requires output monitoring even for entirely safe prompts.
 
 % \textcolor{red}{to be removed}
 % \textbf{Insight 4:} \textit{Low SBS with low HGR(0) indicates a safe model; low SBS with high HGR(0) indicates uniform unsafety.} 
@@ -339,8 +335,8 @@ inference-guided (NP, SLD, Safree) achieves $\bar{\rho}_{\mathrm{L1}} = 57.9\%$ 
 model-editing (UCE, SPEED) achieves $\bar{\rho}_{\mathrm{L1}} = 46.9\%$ vs.\ $\bar{\rho}_{\mathrm{L3}} = 27.4\%$;
 fine-tuning (SafetyDPO, MACE, TRCE) achieves $\bar{\rho}_{\mathrm{L1}} = 70.1\%$ vs.\ $\bar{\rho}_{\mathrm{L3}} = 49.5\%$.
 For example, MACE reduces NSFW L1 HGR from 25.4\% $\to$ 3.9\% ($\rho_{\mathrm{L1}} = 84.6\%$) and L3 from 73.8\% $\to$ 22.6\% ($\rho_{\mathrm{L3}} = 69.4\%$), raising the L3:L1 ratio from $2.9\times$ (baseline) to $5.8\times$ -- the defense is \emph{proportionally stronger} where harm is \emph{least likely to occur}.
-For Legal and Social categories, inference-guided methods are near-inert at L3 ($\bar{\rho}_{\mathrm{L3}} = 4.8\%$ and $9.2\%$, respectively) while still reducing L1 by 15--30\%, leaving residual L3 HGR above 48\% --- indistinguishable from undefended SD1.4.
-Critically, this finding is only observable through \dataname's graded structure: a binary benchmark would report MACE as a strong defense ($\rho_{\mathrm{L3}} = 69\%$ on NSFW) while missing this skew entirely.
+For Legal and Social categories, inference-guided methods are near-inert at L3 ($\bar{\rho}_{\mathrm{L3}} = 4.8\%$ and $9.2\%$, respectively) while still reducing L1 by 15--30\%, leaving residual L3 HGR above 48\%.
+Critically, this finding requires \dataname's graded structure: a binary benchmark would report MACE as a strong defense ($\rho_{\mathrm{L3}} = 69\%$ on NSFW) while missing this skew entirely.
 
 
 % \textbf{Insight 5: Defenses steepen the severity gradient.}
@@ -418,18 +414,15 @@ Excluding MACE, the correlation between defense strength and utility cost is $r 
 
 
 
-\Tab{\ref{tab:filter}} reports FPR@L0, FBR, AUC, and severity sensitivity (L3--L0 detection gap) for five filters evaluated on \dataname reference images.
-Reference images are a favorable evaluation setting (they are constructed to clearly manifest severity), so the reported FBR values are a \emph{lower bound} on real-world filter bypass rates in deployment.
+\Tab{\ref{tab:filter}} reports FPR@L0, FBR, AUC, and severity sensitivity (L3--L0 detection gap) for five filters evaluated on \dataname reference images (a favorable setting, since reference images clearly manifest severity; the reported FBR values are thus a \emph{lower bound} on deployment bypass rates).
 
 
 
 \textbf{Insight 7: Filter insensitivity to severity.}
-\textit{All filters show minimal sensitivity to severity level, with detection rates that are nearly flat from L0 to L3.}
-Q16, the strongest single filter, rises from 55.3\% detection at L0 to only 67.2\% at L3, a severity gap of merely 11.9 pp.
-CLIP-NSFW rises from 9.4\% to 24.9\% (proportionally higher relative gain, but still missing 75\% of L3 content).
-Q16 achieves the highest recall but flags 55.3\% of genuinely safe images as harmful (FPR@L0 = 0.553), making it impractical for deployment without precision controls.
-Conversely, Qwen2.5-VL achieves a negligible false-positive rate (FPR = 0.7\%) but misses 88\% of harmful content (FBR = 0.880).
-This near-flat detection pattern confirms that current filters are not calibrated to the severity dimension and cannot reliably distinguish safe from harmful content at boundary levels, precisely the regime where the safety gap resides.
+\textit{All filters show nearly flat detection rates from L0 to L3.}
+Q16, the strongest single filter, rises only from 55.3\% detection at L0 to 67.2\% at L3 (11.9 pp), while CLIP-NSFW misses 75\% of L3 content.
+Q16 also flags 55.3\% of safe images as harmful (FPR@L0 = 0.553); conversely, Qwen2.5-VL nearly never false-alarms (FPR = 0.7\%) but misses 88\% of harmful content (FBR = 0.880).
+This near-flat pattern confirms that filters are not calibrated to severity and cannot separate safe from harmful content at boundary levels, precisely where the safety gap resides.
 
 % \textcolor{red}{to be removed}
 % \textbf{Insight 10:} \textit{Q16 achieves highest recall but trades precision catastrophically.}

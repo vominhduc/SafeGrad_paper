@@ -104,7 +104,7 @@ Using \dataname, we conduct a comprehensive evaluation of the current T2I safety
 \textbf{(2) Defense methods:} we benchmark 9 representative mechanisms spanning inference-guided, model-editing, and fine-tuning paradigms, finding that all defenses suppress failures proportionally more at L1 than at L3, steepening the severity gradient rather than closing the safety gap.
 \textbf{(3) Safety filters:} we evaluate 5 filters and uncover a systemic insensitivity to severity: no filter reliably detects L1--L2 content, confirming the safety gap is not addressable by existing filtering alone.
 \textbf{(4) Adversarial attacks:} we test 5 jailbreak strategies, showing that cross-modal attacks (\red{ASR $\geq$ 61.5\%}) outperform gradient-based methods against the best-defended configurations.
-We note that each dimension is evaluated independently: T2I models with safety checkers \emph{disabled} (raw generative risk), defenses applied to a common base model (SD1.4), filters applied to benchmark reference images, and attacks against the best-defended configuration, ensuring that findings within each dimension are not confounded by the others.
+We note that each dimension is evaluated independently, with T2I models tested raw, defenses on a common base model (SD1.4), filters on benchmark reference images, and attacks against the best-defended configuration.
 Collectively, these evaluations yield 8 insights showing that current binary safety strategies are fundamentally ill-equipped to address the severity-graded nature of T2I risk.
 % More about related work can be found in~\ref{app:related_work}
 Our contributions are as follows:

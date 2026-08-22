@@ -3,7 +3,7 @@
 
 \subsection{Pipeline Overview}
 % As we mentioned above, to ensure rigorous and scalable annotation while reducing human-related cost, 
-We introduce the Adversarial Severity Ladders (ASL) pipeline, an automated construction approach that offers four key advantages over human annotation: (1) scale without the coverage bias from annotator self-selection; (2) programmatic severity calibration via escalation rules, bypassing documented inter-rater inconsistency ($\kappa < 0.6$) on fine-grained severity judgments~\citep{aroyo2015truth}; (3) deterministic reproducibility given fixed seeds and model checkpoints; and (4) elimination of large-scale harmful-content exposure for workers, which carries documented psychological risks~\citep{steiger2021psychological}.
+We introduce the Adversarial Severity Ladders (ASL) pipeline, an automated construction approach with four advantages over human annotation: (1) scale without annotator self-selection bias; (2) programmatic severity calibration via escalation rules, bypassing inter-rater inconsistency ($\kappa < 0.6$) on fine-grained severity judgments~\citep{aroyo2015truth}; (3) deterministic reproducibility given fixed seeds and checkpoints; and (4) no large-scale harmful-content exposure for workers, which carries documented psychological risks~\citep{steiger2021psychological}.
 The ASL pipeline operates in four stages described below.
 
 
@@ -66,14 +66,14 @@ The full pipeline requires approximately 32 GPU-hours on A100 GPUs.
 
 \subsection{Dataset Quality Analysis} \label{sec:quality}
 \Tab{\ref{tab:quality_full}} reports four quality dimensions across all 11 categories.
-\textbf{Severity monotonicity} (Spearman $\rho = 0.962$) confirms that VLM risk scores increase reliably with rung index throughout the benchmark.
-\textbf{Adversarial stealthiness} (mean stealthy rate 72.32\%) shows that the majority of L3 prompts contain no explicit harmful keyword, making them resistant to keyword-based text filters.
-\textbf{Prompt fluency} (mean PPL@L3 $= 33.92$) indicates that high-risk prompts are naturally fluent, lower than T2I-RiskyPrompt (PPL $= 86$), further undermining perplexity-based detection.
-\textbf{Semantic escalation magnitude} (mean $\Delta\theta = 40.23\degree$) quantifies the angular distance in embedding space from L0 to L3; Hate Speech achieves the largest shift ($50.13\degree$), while Copyright shows the smallest ($31.59\degree$), consistent with their lower semantic escalation magnitude relative to other categories.
-To validate pipeline reliability, we sample 100 ladders (400 pairs) and re-label them with Claude-3.7-Sonnet as an independent verifier; the automated evaluator agrees on 96\% of pairs (Cohen's $\kappa = 0.76$), confirming strong inter-system consistency.
+\textbf{Severity monotonicity} (Spearman $\rho = 0.962$) confirms that VLM risk scores increase reliably with rung index.
+\textbf{Adversarial stealthiness} (mean stealthy rate 72.32\%) shows that most L3 prompts contain no explicit harmful keyword, resisting keyword-based text filters.
+\textbf{Prompt fluency} (mean PPL@L3 $= 33.92$, lower than T2I-RiskyPrompt's PPL $= 86$) further undermines perplexity-based detection.
+\textbf{Semantic escalation magnitude} (mean $\Delta\theta = 40.23\degree$) quantifies the angular distance from L0 to L3; Hate Speech shows the largest shift ($50.13\degree$) and Copyright the smallest ($31.59\degree$).
+As an independent check, we re-label 100 ladders (400 pairs) with Claude-3.7-Sonnet; the automated evaluator agrees on 96\% of pairs (Cohen's $\kappa = 0.76$).
 
 
-\red{\noindent\textbf{Lexical diversity.} Beyond perplexity and embedding-space angular escalation, we audit the surface-level lexical diversity of all 4,104 prompts using Self-BLEU ($n = 3,4$) and distinct-$n$ ($n = 1,2$) statistics. Globally (cross-ladder), the dataset exhibits high lexical variance (Self-BLEU-4 $= 0.05$, distinct-2 $= 0.89$), confirming the absence of structural boilerplate or template replication; within individual ladders, where thematic overlap is expected, Self-BLEU-4 remains bounded at $0.14$ with distinct-2 $= 0.76$. Together with the angular escalation metrics, these confirm that Stage-1 FAISS deduplication left no residual redundancy and that the pipeline produces text that is both semantically expansive and lexically distinct.}
+\red{\noindent\textbf{Lexical diversity.} We audit surface-level lexical diversity over all 4,104 prompts via Self-BLEU ($n = 3,4$) and distinct-$n$ ($n = 1,2$). Cross-ladder text is highly varied (Self-BLEU-4 $= 0.05$, distinct-2 $= 0.89$), ruling out boilerplate or template replication; within ladders, where thematic overlap is expected, Self-BLEU-4 stays bounded at $0.14$ with distinct-2 $= 0.76$. Stage-1 FAISS deduplication thus leaves no residual redundancy.}
 
 
 \input{tables/data_quality_full}
