@@ -632,6 +632,7 @@ even under attack.
 Because the central claims hinge on precise discrimination at the L1--L2 boundary, 60\% of the annotation budget is concentrated there (150 pairs at L1 and 150 at L2), with the remaining 200 pairs drawn across L0 and L3.
 Annotators receive the image together with the category-specific escalation rules and assign a severity verdict without seeing the pipeline's label; we compare the pipeline label against the human consensus vote.
 Overall agreement reaches Cohen's $\kappa = 0.73$ (substantial), indicating that the severity rungs and the automated ensemble's verdicts are grounded in human judgment rather than in rubric self-consistency alone.
+\red{The design is powered per level rather than per category: binomial standard error at a boundary level is at most $4.1$ pp (n = 150), supporting the per-level analyses of Sections 5--6.}
 Annotators were informed of the nature of the content before participation and could skip any sample at will.}
 
 \section{Prompt Templates}
