@@ -183,7 +183,7 @@ The escalation steepens at L1$\rightarrow$L2 (mean $\Delta$HGR = \red{28.0} pp),
 
 \textbf{Insight 1: Universal L1 blind spot.} \textit{Current T2I safety systems exhibit a systematic blind spot at the L1 boundary, universal across all evaluated models and invisible to binary safe/unsafe evaluation.}
 \Tab{\ref{tab:delta}} confirms this universality \red{(per-category SEM on $\Delta_B$ is 0.8--1.9 pp; Insight~5 addresses the within-model defense response)}: the L1$\to$L2 transition is the peak transition for every evaluated model, with Boundary Delta ranging from \red{25.7} pp (PixArt-$\alpha$) to \red{30.2} pp (HiDream).
-\red{The peak pattern is not an artifact of auto-interpolated levels: restricted to the 7 categories with fully hand-authored L1 descriptors (excluding Minors, PID, Hate Speech, and Public Figures; Appendix~\ref{app:taxonomy}), per-model $\Delta_B$ remains in \red{25.6--30.3} pp.}
+\red{The pattern is not driven by auto-interpolated levels: restricted to the 7 categories with hand-authored L1 descriptors (Appendix~\ref{app:taxonomy}), per-model $\Delta_B$ remains in \red{25.6--30.3} pp.}
 % To confirm this gap reflects genuine model behavior rather than evaluator noise, we replicate the analysis on a Gold Standard subset ($n = 500$, stratified across all 11 categories and four levels, re-labeled by three independent human annotators with full consensus required).
 % The gap persists: mean HGR@L1 = 21.4\% (vs.\ 22.7\% automated, $\Delta = 1.3$ pp) and HGR@L3 = 73.1\% (vs.\ 74.3\%, $\Delta = 1.2$ pp), within inter-annotator variance, confirming the gap is a genuine model failure rather than an evaluation artifact.
 We now examine how this gap manifests across different components.
@@ -446,6 +446,12 @@ All attacks exceed 55\% ASR: cross-modal methods lead (MMA-Diffusion 68.7\%, Rin
 \textbf{Insight 8: The safety gap is an active attack surface.}
 \textit{A 55\% ASR floor across all five methods against the best-defended configuration confirms that the safety gap is not a passive evaluation artifact but a structurally exploitable channel.}
 Cross-modal attacks (61.5--68.7\%) outperform gradient-based P4D (55.6\%) by 6--13 pp because they operate at the text-filter $\to$ visual-output interface identified in Insight 7: prompts that evade text-level detection still escalate visually, and neither TRCE nor LlavaGuard closes this channel.
+
+
+\red{\subsection{Toward Remediation: A Severity-Aware Filter} \label{sec:remediation}
+Beyond diagnosis, we ask whether \dataname can directly \emph{close} the gap it exposes: we fine-tune Qwen2.5-VL-7B with LoRA on (image, risk explanation) $\rightarrow$ YES/NO pairs under a ladder-respecting 80/10/10 split (Appendix~\ref{app:remediation}).
+Evaluated exactly as in \Sec{\ref{sec:filter}} on the held-out test split, the severity-aware filter attains FBR@L1 of \textbf{TBD} (vs.\ \textbf{TBD} for zero-shot Qwen2.5-VL), FPR@L0 of \textbf{TBD}, and overall FBR of \textbf{TBD} (Table~\ref{app:tab:remediation}).}
+% NOTE: all values marked TBD are placeholders pending the actual run; replace before submission. Expected narrative if positive: detection at L1--L2 rises materially above every zero-shot baseline without inflating FPR@L0, showing the benchmark closes the gap it diagnoses.
 % Complete per-category ASR breakdowns are provided in Table 8 (main text) and Tables 5–6 (Appendix).
 
 % \Tab{\ref{tab:attacks}} presents Attack Success Rate (ASR) for five adversarial strategies against the best-defended configuration (TRCE + LlavaGuard), evaluated on L2 and L3 prompts across all 11 risk categories.
