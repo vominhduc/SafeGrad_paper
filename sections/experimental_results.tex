@@ -104,8 +104,7 @@
 %   \end{minipage}
 % \end{table*}
 
-We present our evaluation results organized around the central finding of this work: a systematic safety gap at the low-to-mid severity boundary that is universal across models, defenses, and filters. 
-We begin by characterizing this gap empirically, then analyze how different components of the T2I safety ecosystem respond to graduated severity.
+We present our evaluation results organized around the central finding of this work: a systematic safety gap at the low-to-mid severity boundary that is universal across models, defenses, and filters.
 
 \subsection{The Safety Gap: A Universal Failure Mode}
 
@@ -304,8 +303,8 @@ Construction - evaluation backbone overlap is audited in Appendix~\ref{app:backb
 \input{tables/defense_compact}
 
 
-\Tab{\ref{tab:defense}} presents HGR reduction and SAS degradation for nine defense methods applied to SD1.4 across three category groups: NSFW, Legal, and Social.
-All nine methods target SD1.4 weight architectures; applying weight-modifying methods to architecturally different models would require model-specific reimplementations beyond this study's scope (a direction for future work).
+\Tab{\ref{tab:defense}} presents HGR reduction and SAS degradation for nine defense methods applied to SD1.4 across the NSFW, Legal, and Social groups.
+All nine methods target SD1.4's U-Net architecture; applying them to DiT backbones requires architecture-specific reimplementation (future work).
 
 
 
@@ -355,8 +354,8 @@ Critically, this finding requires \dataname's graded structure: a binary benchma
 
 \textbf{Insight 6: \red{The Utility--Safety Tradeoff Is Dominated by Two Methods.}}
 \textit{\red{Under our joint $\Delta$HGR/SAS criterion, TRCE Pareto-dominates six of the seven remaining methods ($\Delta\mathrm{HGR} = 0.307$ at an SAS cost of 0.008, vs.\ e.g.\ SLD's $0.241$ reduction at a cost of $0.018$); MACE occupies a distinct extreme point on the tradeoff curve.}}
-TRCE ($\Delta\mathrm{HGR} = 0.307$, SAS drop $= -0.008$) outperforms NP, SLD, Safree, UCE, SPEED, and SafetyDPO on both metrics at once\red{, without discounting the documented competitiveness of SLD or SafetyDPO in alternative settings}; RECE additionally collapses on Legal and Social, and is also outperformed by TRCE on NSFW alone ($\rho_{\mathrm{L3}} = 35.8\%$, SAS $= 0.276$ vs.\ $42.5\%$ and $0.304$).
-The sole genuine tradeoff is between TRCE and MACE: MACE gains $+68\%$ relative HGR reduction ($\Delta\mathrm{HGR} = 0.518$) at the cost of $11\times$ the SAS penalty and $2.7\times$ the over-refusal rate (ORR 34.2\% vs.\ 12.8\%), refusing roughly one in three benign prompts (full ORR table in Appendix~\ref{app:overrefusal}).
+TRCE ($\Delta\mathrm{HGR} = 0.307$, SAS drop $= -0.008$) outperforms NP, SLD, Safree, UCE, SPEED, and SafetyDPO on both metrics at once\red{, without discounting the documented competitiveness of SLD or SafetyDPO in alternative settings}; RECE additionally collapses on Legal and Social.
+The sole remaining tradeoff is between TRCE and MACE: MACE gains $+68\%$ relative HGR reduction ($\Delta\mathrm{HGR} = 0.518$) at the cost of $11\times$ the SAS penalty and $2.7\times$ the over-refusal rate (ORR 34.2\% vs.\ 12.8\%), refusing roughly one in three benign prompts (Appendix~\ref{app:overrefusal}).
 Excluding MACE, the correlation between defense strength and utility cost is $r = 0.04$; including it, $r = 0.923$: the apparent general tradeoff is an artifact of one method's aggressive concept erasure strategy.
 
 
@@ -451,8 +450,7 @@ All attacks exceed 55\% ASR: cross-modal methods lead (MMA-Diffusion 68.7\%, Rin
 
 \textbf{Insight 8: The safety gap is an active attack surface.}
 \textit{A 55\% ASR floor across all five methods against the best-defended configuration confirms that the safety gap is not a passive evaluation artifact but a structurally exploitable channel.}
-Cross-modal attacks (61.5--68.7\%) outperform gradient-based P4D (55.6\%) by 6--13 pp precisely because they operate at the text-filter $\to$ visual-output interface identified in Insight 7: prompts designed to evade text-level detection still escalate visually, and neither TRCE nor LlavaGuard closes this channel.
-Conversely, P4D's comparative advantage against fine-tuning defenses suggests that weight-modified models expose gradient-exploitable vulnerabilities absent in inference-guided methods, pointing to defense-paradigm-specific attack surfaces that a single ASR metric cannot capture.
+Cross-modal attacks (61.5--68.7\%) outperform gradient-based P4D (55.6\%) by 6--13 pp because they operate at the text-filter $\to$ visual-output interface identified in Insight 7: prompts that evade text-level detection still escalate visually, and neither TRCE nor LlavaGuard closes this channel.
 % Complete per-category ASR breakdowns are provided in Table 8 (main text) and Tables 5–6 (Appendix).
 
 % \Tab{\ref{tab:attacks}} presents Attack Success Rate (ASR) for five adversarial strategies against the best-defended configuration (TRCE + LlavaGuard), evaluated on L2 and L3 prompts across all 11 risk categories.

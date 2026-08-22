@@ -5,7 +5,7 @@
 % \textbf{Evaluator error.} The MLLM ensemble achieves 91.2\% accuracy; the 8.8\% error rate introduces noise particularly at L1.
 
 
-\textbf{Evaluation scope.} T2I models are evaluated with safety checkers disabled (raw generative risk); defenses are tested only on SD1.4 because weight-modifying methods (UCE, RECE, MACE, TRCE) require architecture-specific reimplementation for DiT-based models; extending to newer architectures is an important direction for future work. Architecture-agnostic findings (relative HGR reduction patterns, the MACE vs.\ TRCE tradeoff) are expected to transfer; paradigm rankings may not.
+\textbf{Evaluation scope.} T2I models are evaluated with safety checkers disabled (raw generative risk); defenses are tested only on SD1.4 because weight-modifying methods (UCE, RECE, MACE, TRCE) need architecture-specific reimplementation for DiT-based models. Architecture-agnostic findings are expected to transfer; paradigm rankings may not.
 
 \noindent
 \textbf{Coverage.} Construction models are excluded from evaluation; Copyright and PID show lower HGR due to MLLM classifier limitations on fine-grained identity harms; severity definitions reflect a Western legal framework; prompts are English-only.
@@ -17,25 +17,10 @@
 
 
 \section{Ethical Considerations}
-The construction and release of a T2I safety benchmark necessarily involves generating and handling harmful content; we take several precautions to minimize ethical risk.
-
-\noindent\textbf{Data access.}
-Reference images at L2 and L3 severity are distributed only to verified safety researchers under a restricted access agreement; the Minors category carries additional restrictions consistent with legal requirements in most jurisdictions, and we will consult our legal office before public release.
-
-\noindent\textbf{Dual-use risk.}
-The ASL pipeline can generate adversarial prompts at scale and could be misused to craft attacks rather than evaluate defenses; we therefore release only the validated benchmark ladders and pipeline code under a research-only license that prohibits harmful-content generation outside safety evaluation.
-All evaluated models and evaluators are used under their respective research licenses, and safety checkers are disabled solely as a controlled experimental condition, not for deployment.
-
-\noindent\textbf{Personal data and offensive content.}
-\dataname is entirely synthetic: all prompts are LLM-generated and all images T2I-generated. PID contains only simulated documents (fictitious passports, ID cards, credentials) and Public Figures only AI-generated depictions; the full dataset was manually spot-checked to confirm no real personally identifying information was inadvertently included.
-
-\noindent\textbf{Responsible disclosure and artifacts.}
-We will share evaluation results with the developers of all evaluated models and filters prior to public release, providing a 60-day window for remediation.
-SafeGrad (benchmark ladders, prompts, risk explanations) and the ASL pipeline code will be released under a CC BY-NC 4.0 license, with L2--L3 reference images under a separate restricted-access agreement; a datasheet documenting composition, collection procedure, intended uses, and known limitations is included in the repository.
-
-\section*{Acknowledgment}
-
-We used Google Gemini and Anthropic Claude as productivity tools for code refactoring and debugging and for stylistic revision of textual passages.
-All research decisions were made solely by the human authors, and every AI-assisted output was reviewed and verified against the underlying data, code, and experimental logs.
+\dataname necessarily involves generating and handling harmful content.
+L2--L3 reference images are released only to verified safety researchers under a restricted-access agreement (the Minors category carries additional restrictions); all evaluated models and evaluators are used under their research licenses; and safety checkers are disabled solely as a controlled experimental condition.
+To mitigate dual-use risk, we release only validated ladders and pipeline code under a research-only CC BY-NC 4.0 license prohibiting harmful-content generation outside safety evaluation, and will consult our legal office before public release.
+\dataname is entirely synthetic: prompts are LLM-generated and images T2I-generated, PID contains only simulated documents, and Public Figures only AI-generated depictions; the full dataset was manually spot-checked for inadvertent personal information.
+We will share evaluation results with all affected developers before release, with a 60-day remediation window, and include a datasheet documenting composition, intended uses, and known limitations.
 
 % All human annotators involved in the validation study provided informed consent, received trauma-informed briefings before exposure to harmful content, were offered opt-out provisions for any content subcategory, and were compensated above standard rates in recognition of the nature of the work. We follow responsible disclosure principles by sharing evaluation results with the developers of all evaluated models and filters prior to public release, providing a 60-day window for remediation. The Minors category reference images are subject to additional access restrictions beyond the general L2--L3 policy, consistent with legal requirements governing such content in most jurisdictions.
