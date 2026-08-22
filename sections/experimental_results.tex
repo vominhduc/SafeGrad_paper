@@ -418,7 +418,7 @@ This near-flat pattern confirms that filters are not calibrated to severity and 
 \red{The gap is diagnosable, but is it closable? As a remediation check, we fine-tune Qwen2.5-VL-7B with LoRA on (image, risk explanation) $\rightarrow$ YES/NO pairs under a ladder-respecting 80/10/10 split (Appendix~\ref{app:remediation}).
 Measured on the held-out test split with the same protocol, the tuned filter reaches L1 detection of \textbf{TBD} (vs.\ \textbf{TBD} zero-shot) with FPR@L0 of \textbf{TBD} and overall FBR of \textbf{TBD} (\Tab{\ref{tab:filter}}, bottom row).
 
-\textbf{Insight 7: The safety gap is trainable-away.}
+\textbf{Insight 6: The safety gap is trainable-away.}
 \textit{A filter fine-tuned on ladder data recovers the mid-severity band without inflating false alarms, converting \dataname from a diagnostic into a mitigation instrument.}}
 % NOTE: all values marked TBD are placeholders pending the actual run; replace before submission. Expected narrative if positive: detection at L1--L2 rises materially above every zero-shot baseline without inflating FPR@L0, showing the benchmark closes the gap it diagnoses.
 
@@ -447,7 +447,7 @@ All attacks exceed 55\% ASR: cross-modal methods lead (MMA-Diffusion 68.7\%, Rin
 \red{We further evaluate a modern attack, the prefix-guided jailbreak (PGJ), a model-free, black-box optimization method that fits our protocol directly, against the best-defended configuration, obtaining ASR $=$ 72.4\% across the intermediate rungs. This shows that reinforcement-learning-based mutation is not required to exploit the safety gap. Attacks such as GenBreak, which surrogatize the target model to exploit commercial black-box API wrappers, fall outside our weight-level diagnostic scope.}
 
 
-\textbf{Insight 6: The safety gap is an active attack surface.}
+\textbf{Insight 7: The safety gap is an active attack surface.}
 \textit{A 55\% ASR floor across all five methods against the best-defended configuration confirms that the safety gap is not a passive evaluation artifact but a structurally exploitable channel.}
 Cross-modal attacks (61.5--68.7\%) outperform gradient-based P4D (55.6\%) by 6--13 pp because they operate at the text-filter $\to$ visual-output interface identified in Insight 5: prompts that evade text-level detection still escalate visually, and neither TRCE nor LlavaGuard closes this channel.
 
@@ -460,7 +460,7 @@ Cross-modal attacks (61.5--68.7\%) outperform gradient-based P4D (55.6\%) by 6--
 
 
 
-% \textbf{Insight 6: The safety gap is an active attack surface.}
+% \textbf{Insight 7: The safety gap is an active attack surface.}
 % \textit{A 55\% ASR floor across all five methods against the best-defended configuration confirms that the safety gap is not a passive evaluation artifact but a structurally exploitable channel.}
 % Cross-modal attacks (61.5--68.7\%) outperform gradient-based P4D (55.6\%) by 6--13 pp precisely because they operate at the text-filter $\to$ visual-output interface identified in Insight 5: prompts designed to evade text-level detection still escalate visually, and neither TRCE nor LlavaGuard closes this channel.
 % Conversely, P4D's comparative advantage against fine-tuning defenses suggests that weight-modified models expose gradient-exploitable vulnerabilities absent in inference-guided methods, pointing to defense-paradigm-specific attack surfaces that a single ASR metric cannot capture.
