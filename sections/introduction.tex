@@ -23,14 +23,12 @@ Consequently, an evaluation framework that pinpoints the boundary failures of th
 
 
 Current safety evaluation benchmarks, like SneakyPrompt~\citep{yang2023sneakyprompt}, Unsafe Diffusion~\citep{qu2023unsafe}, I2P~\citep{schramowski2023safe}, T2ISafety~\citep{li2025t2isafety}, and T2I-RiskyPrompt~\citep{zhang2025t2iriskyprompt}, predominantly assess model robustness through a binary ``safe/unsafe'' classification paradigm.
-We argue that this binary lens fails to capture the nuanced, severity-graded nature of harm. 
-In the real world, malicious actors navigate safety boundaries through incremental escalation.
+We argue that this binary lens fails to capture the nuanced, severity-graded nature of harm: real adversaries navigate safety boundaries through incremental escalation, and different application contexts demand graded rather than binary safety judgments.
 % While these defenses are effective against "High-risk" explicit violations—such as direct requests for graphic violence or explicit nudity—they remain remarkably fragile when confronted with nuanced, adversarial, or metaphor-based inputs~\citep{zhang2025adversarial}.
 % Current safety evaluation benchmarks predominantly assess model robustness through a binary classification paradigm. 
 % Benchmarks such as SneakyPrompt~\citep{yang2023sneakyprompt}, Unsafe Diffusion~\citep{qu2023unsafe}, I2P~\citep{schramowski2023safe}, T2ISafety~\citep{li2025t2isafety}, and T2I-RiskyPrompt~\citep{zhang2025t2iriskyprompt} focus on determining whether a generated output is definitively "Safe" or "Unsafe (w/ or w/o risk category)".
 % We argue that this binary lens fails to capture the nuanced, severity-graded nature of harm. 
 % In real-world adversarial scenarios, malicious actors rarely initiate their "probing" with blatant violations; instead, they navigate safety boundaries through a process of incremental escalation. 
-Since different T2I applications interpret harm through varied contextual lenses, a simple binary classification cannot meet the practical demands of nuanced safety alignment.
 
 
 

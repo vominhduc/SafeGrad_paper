@@ -57,11 +57,11 @@
       \centering
       \caption{HGR (\%) at each severity level and Safety Boundary Sharpness (SBS) and Boundary Delta ($\Delta_B$, \%) for six evaluated T2I models across 11 risk categories. \textbf{Bold} indicates highest HGR per column; \colorbox{gray!20}{shaded} indicates lowest one. Models are ordered by increasing generative capability.}
     \label{tab:t2i_models}
-      \resizebox{0.9\linewidth}{!}{%
+      \resizebox{0.85\linewidth}{!}{%
         \input{tables/T2I_full_1}%
       }
       \vspace{6pt}
-      \resizebox{0.9\textwidth}{!}{%
+      \resizebox{0.85\textwidth}{!}{%
         \input{tables/T2I_full_2}%
       }
 \end{table*}
@@ -291,9 +291,9 @@ This means zero-risk deployment requires output monitoring even for entirely saf
 
 \textbf{Insight 4: Uneven safety baked into model weights.}
 \textit{With safety checkers disabled, HGR differences across models reflect safety embedded in their weights through training and RLHF, not external filtering.}
-PixArt-$\alpha$'s fine-tuning suppresses sexual HGR@L3 to 38.7\% vs.\ 59.4\% for violence, but no model's training provides equivalent weight-level suppression for hate speech or misinformation -- societal harms have historically been underrepresented in safety fine-tuning data.
+PixArt-$\alpha$'s fine-tuning suppresses sexual HGR@L3 to 38.7\% vs.\ 59.4\% for violence, but no model's training provides equivalent suppression for hate speech or misinformation; societal harms have been underrepresented in safety fine-tuning data.
 
-Construction - evaluation backbone overlap is audited in Appendix~\ref{app:backbone}; no evaluated model shares an image encoder or diffusion backbone with any construction component.
+Construction--evaluation backbone overlap is audited in Appendix~\ref{app:backbone}; no evaluated model shares an encoder or diffusion backbone with any construction component.
 
 
 
