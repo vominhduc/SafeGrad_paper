@@ -587,6 +587,7 @@ confounding with the absolute baseline, ensuring that a uniformly unsafe
 model (high HGR(0)) cannot achieve a high SBS score. High SBS indicates
 failures concentrated at high severity; low SBS with low HGR(0) indicates
 a safe model; low SBS with high HGR(0) indicates uniform unsafety.
+\red{Replacing SBS with the unnormalized OLS slope preserves the model ranking exactly (Spearman $\rho = 1.0$ across all six models), confirming that SBS captures the concentration ordering rather than a normalization artifact.}
 
 % \noindent\textbf{First Failure Rung (FFR).}
 % $$\text{FFR}(\ell) = \min \left\{ l \in \{0,1,2,3\} \mid
@@ -782,6 +783,7 @@ Reference images are generated using four T2I models across different
 severity levels to ensure visual diversity in the benchmark. 
 \Tab{\ref{app:tab:genconfig}} summarizes the generation configuration 
 for each model.
+\red{For the evaluation in Section 5, all evaluated T2I models use the default schedulers and guidance settings of their official releases, and two images are sampled per prompt as described there.}
 
 \begin{table}[tb]
 \centering

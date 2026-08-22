@@ -351,6 +351,7 @@ Critically, this finding requires \dataname's graded structure: a binary benchma
 TRCE ($\Delta\mathrm{HGR} = 0.307$, SAS drop $= -0.008$) outperforms NP, SLD, Safree, UCE, SPEED, and SafetyDPO on both metrics at once\red{, without discounting the documented competitiveness of SLD or SafetyDPO in alternative settings}; RECE additionally collapses on Legal and Social.
 The sole remaining tradeoff is between TRCE and MACE: MACE gains $+68\%$ relative HGR reduction ($\Delta\mathrm{HGR} = 0.518$) at the cost of $11\times$ the SAS penalty and $2.7\times$ the over-refusal rate (ORR 34.2\% vs.\ 12.8\%; Appendix~\ref{app:overrefusal}).
 Excluding MACE, the correlation between defense strength and utility cost is $r = 0.04$; including it, $r = 0.923$: the apparent general tradeoff is an artifact of one method's aggressive concept erasure strategy.
+\red{The TRCE--SLD margin ($6.6$ pp) far exceeds the worst-case Bernoulli SEM of per-method $\Delta$HGR ($\lesssim 0.5$ pp under independent cell-level noise), so the dominance relation is not a sampling artifact.}
 
 
 
