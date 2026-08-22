@@ -45,6 +45,7 @@ The same model and seed are used for all four rungs within a ladder, isolating s
 \noindent\textbf{Stage 4: Verification.}
 Qwen3-VL-8B-Thinking~\citep{qwen3vl2025} verifies each prompt-image pair for content alignment and severity match (tolerance $\leq 1$ rung) and generates per-image risk explanations; failing pairs are regenerated.
 \red{Verification checks per-rung content alignment against each prompt individually; a stricter cross-rung same-subject continuity audit is left for the extended analysis.}
+\red{Note that this verifier is not in tension with the filter failures of Insight 5: verification is a severity-conditioned, description-guided judgment, whereas deployed filters issue unguided binary decisions -- and Insight 6 shows that the guided variant is dramatically more reliable at the boundary.}
 Ladders without a complete valid set are excluded, yielding 1,026 validated ladders. 
 The full pipeline requires approximately 32 GPU-hours on A100 GPUs.
 

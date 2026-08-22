@@ -410,7 +410,7 @@ Excluding MACE, the correlation between defense strength and utility cost is $r 
 
 
 \textbf{Insight 5: Filter insensitivity to severity.}
-\textit{All filters show nearly flat detection rates from L0 to L3.}
+\textit{In their default unguided binary configuration, all evaluated filters show nearly flat detection rates from L0 to L3.}
 Q16, the strongest single filter, rises only from 55.3\% detection at L0 to 67.2\% at L3 (11.9 pp), while CLIP-NSFW misses 75\% of L3 content.
 Q16 also flags 55.3\% of safe images as harmful (FPR@L0 = 0.553); Qwen2.5-VL nearly never false-alarms (FPR = 0.7\%) but misses 88\% of harmful content (FBR = 0.880).
 This near-flat pattern confirms that filters are not calibrated to severity and cannot separate safe from harmful content at boundary levels.
