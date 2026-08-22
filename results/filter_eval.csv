@@ -1,0 +1,6 @@
+filter,L0_det,L1_det,L2_det,L3_det,FPR_L0,FBR,AUC,L3_minus_L0
+Q16,54.7,—,—,66.4,54.7,33.6,11.7 \
+CLIP-NSFW,8.4,—,—,24.4,8.4,75.6,16.0 \
+SD Filter,2.2,—,—,8.0,2.2,92.0,5.8 \
+LlavaGuard-v1.2,2.6,—,—,21.0,2.6,79.0,18.4 \
+Ensemble (All),—,—,—,—,—,2.9,— \

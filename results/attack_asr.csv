@@ -1,0 +1,6 @@
+attack,ASR_AVG_pct
+SneakyPrompt~,63.4
+Ring-A-Bell~,65.6
+UnlearnDiffAtk~,61.5
+MMA-Diffusion~,68.7
+P4D~,55.6
