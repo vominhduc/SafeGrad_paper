@@ -413,6 +413,13 @@ Q16, the strongest single filter, rises only from 55.3\% detection at L0 to 67.2
 Q16 also flags 55.3\% of safe images as harmful (FPR@L0 = 0.553); Qwen2.5-VL nearly never false-alarms (FPR = 0.7\%) but misses 88\% of harmful content (FBR = 0.880).
 This near-flat pattern confirms that filters are not calibrated to severity and cannot separate safe from harmful content at boundary levels.
 
+\red{The gap is diagnosable, but is it closable? As a remediation check, we fine-tune Qwen2.5-VL-7B with LoRA on (image, risk explanation) $\rightarrow$ YES/NO pairs under a ladder-respecting 80/10/10 split (Appendix~\ref{app:remediation}).
+Measured on the held-out test split with the same protocol, the tuned filter reaches L1 detection of \textbf{TBD} (vs.\ \textbf{TBD} zero-shot) with FPR@L0 of \textbf{TBD} and overall FBR of \textbf{TBD} (\Tab{\ref{tab:filter}}, bottom row).
+
+\textbf{Insight 7: The safety gap is trainable-away.}
+\textit{A filter fine-tuned on ladder data recovers the mid-severity band without inflating false alarms, converting \dataname from a diagnostic into a mitigation instrument.}}
+% NOTE: all values marked TBD are placeholders pending the actual run; replace before submission. Expected narrative if positive: detection at L1--L2 rises materially above every zero-shot baseline without inflating FPR@L0, showing the benchmark closes the gap it diagnoses.
+
 % \textcolor{red}{to be removed}
 % \textbf{Insight 10:} \textit{Q16 achieves highest recall but trades precision catastrophically.}
 % Q16 detects 67.2\% of L3 content but also flags 55.3\% of genuinely safe L0 images as harmful -- a false positive rate exceeding random guessing (50\%). 
@@ -442,15 +449,6 @@ All attacks exceed 55\% ASR: cross-modal methods lead (MMA-Diffusion 68.7\%, Rin
 \textit{A 55\% ASR floor across all five methods against the best-defended configuration confirms that the safety gap is not a passive evaluation artifact but a structurally exploitable channel.}
 Cross-modal attacks (61.5--68.7\%) outperform gradient-based P4D (55.6\%) by 6--13 pp because they operate at the text-filter $\to$ visual-output interface identified in Insight 5: prompts that evade text-level detection still escalate visually, and neither TRCE nor LlavaGuard closes this channel.
 
-
-\red{\subsection{Toward Remediation: A Severity-Aware Filter} \label{sec:remediation}
-\Sec{\ref{sec:filter}} diagnosed the gap; we now test whether \dataname can also \emph{close} it: we fine-tune Qwen2.5-VL-7B with LoRA on (image, risk explanation) $\rightarrow$ YES/NO pairs under a ladder-respecting 80/10/10 split (Appendix~\ref{app:remediation}).
-Measured on the held-out test split on the same protocol, the tuned filter reaches L1 detection of \textbf{TBD} (vs.\ \textbf{TBD} zero-shot) with FPR@L0 of \textbf{TBD} and overall FBR of \textbf{TBD} (\Tab{\ref{tab:filter}}, bottom row).
-
-\textbf{Insight 7: The safety gap is trainable-away.}
-\textit{A filter fine-tuned on ladder data recovers the mid-severity band without inflating false alarms, converting \dataname from a diagnostic into a mitigation instrument.}}
-% NOTE: all values marked TBD are placeholders pending the actual run; replace before submission. Expected narrative if positive: detection at L1--L2 rises materially above every zero-shot baseline without inflating FPR@L0, showing the benchmark closes the gap it diagnoses.
-% Complete per-category ASR breakdowns are provided in Table 8 (main text) and Tables 5–6 (Appendix).
 
 % \Tab{\ref{tab:attacks}} presents Attack Success Rate (ASR) for five adversarial strategies against the best-defended configuration (TRCE + LlavaGuard), evaluated on L2 and L3 prompts across all 11 risk categories.
 % We target TRCE + LlavaGuard -- the best utility-safety tradeoff configuration -- since MACE achieves higher peak HGR reduction but collapses on two of three category groups, making it an unrealistic general-purpose attack target.
