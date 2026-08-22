@@ -1182,29 +1182,7 @@ HGR or SAS results.
 \label{app:remediation}
 %-------------------------------------------------------
 
-\red{The severity-aware filter of Section~\ref{sec:remediation} is trained as follows. Qwen2.5-VL-7B is fine-tuned with LoRA on the vision--language projection on (image, risk explanation) $\rightarrow$ YES/NO pairs, with level-balanced oversampling of L1--L2 samples. Ladders are split 80/10/10 with ladder integrity: all four rungs of a ladder remain in one split, preventing subject leakage between train and test. Evaluation metrics match Section~6.4 (per-level detection, FPR@L0, FBR, AUC, severity sensitivity), and baselines reuse the published Table~\ref{tab:filter} values.}
-
-% PLACEHOLDER TABLE - fill with actual measurements before submission.
-\red{
-\begin{table}[h]
-\centering
-\caption{Severity-aware filter versus zero-shot baselines on the held-out test split. \textbf{TBD}: values to be filled after the training run.}
-\label{app:tab:remediation}
-\begin{tabular}{lccc}
-\toprule
-\textbf{Filter} & \textbf{FBR}$\downarrow$ & \textbf{FPR@L0}$\downarrow$ & \textbf{L3$-$L0}$\uparrow$ \\
-\midrule
-Q16                & TBD & TBD & TBD \\
-CLIP-NSFW          & TBD & TBD & TBD \\
-SD Filter          & TBD & TBD & TBD \\
-LlavaGuard         & TBD & TBD & TBD \\
-Qwen2.5-VL (zero-shot) & TBD & TBD & TBD \\
-\midrule
-\dataname-tuned (Ours) & \textbf{TBD} & \textbf{TBD} & \textbf{TBD} \\
-\bottomrule
-\end{tabular}
-\end{table}
-}
+\red{The severity-aware filter of Section~\ref{sec:remediation} is trained as follows. Qwen2.5-VL-7B is fine-tuned with LoRA on the vision--language projection on (image, risk explanation) $\rightarrow$ YES/NO pairs, with level-balanced oversampling of L1--L2 samples. Ladders are split 80/10/10 with ladder integrity: all four rungs of a ladder remain in one split, preventing subject leakage between train and test. Evaluation metrics match Section~6.4 (per-level detection, FPR@L0, FBR, AUC, severity sensitivity); results appear as the bottom row of Table~\ref{tab:filter}, and the baselines are re-evaluated on the same held-out test split.}
 
 \section{Dataset Examples} \label{app:examples}
 
