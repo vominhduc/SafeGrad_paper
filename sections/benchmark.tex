@@ -5,16 +5,16 @@
 \dataname is designed around a core hypothesis: safety evaluation in T2I systems should be gradient-aware rather than threshold-based.
 Rather than providing a large flat set of binary-labeled examples, \dataname provides a smaller set of \emph{relational} examples (severity ladders): a single ladder of four prompts encodes more information about a model's safety boundary than four independent binary-labeled samples, exposing \emph{where} along the severity spectrum the model first fails and how sharply its boundary is defined.
 Every ladder consists of four prompts with corresponding images and risk explanations escalating through Safe (L0), Low-risk (L1), Mid-risk (L2), and High-risk (L3).
-Per-rung risk explanations make the intermediate regime concrete: in the Violence ladder (\Fig{\ref{app:fig:sample_3}}), L1 depicts stylized, fictional conflict without realistic harm, while L2 escalates to realistic injury and aftermath; in the Self-Harm ladder (\Fig{\ref{app:fig:sample_4}}), L1 shows accidental injuries and emotional distress, while L2 shows ideation-adjacent self-harm imagery. These descriptions follow the level anchors of \Tab{\ref{app:tab:taxonomy}}; every ladder carries such explanations (Appendix~\ref{app:examples}).
+Per-rung risk explanations make the intermediate regime concrete: in the Violence ladder (\SuppFig{\ref{app:fig:sample_3}}), L1 depicts stylized, fictional conflict without realistic harm, while L2 escalates to realistic injury and aftermath; in the Self-Harm ladder (\SuppFig{\ref{app:fig:sample_4}}), L1 shows accidental injuries and emotional distress, while L2 shows ideation-adjacent self-harm imagery. These descriptions follow the level anchors of \SuppTab{\ref{app:tab:taxonomy}}; every ladder carries such explanations (Appendix~\ref{app:examples}).
 
 \subsection{Hierarchical Risk Taxonomy}
 
 We define a hierarchical taxonomy covering 11 top-level risk categories (\Fig{\ref{fig:overview}}), each a distinct dimension of potential harm in T2I generation, synthesized from platform policies and existing literature~\citep{dalle3,midjourney_guideline,helff2024llavaguard,li2025t2isafety,zhang2025t2iriskyprompt,google,microsoft,metaAI}.
-Each category defines four severity levels with escalation rules (Appendix~\ref{app:taxonomy}, \Tab{\ref{app:tab:severity}}, \Tab{\ref{app:tab:taxonomy}}).
+Each category defines four severity levels with escalation rules (Appendix~\ref{app:taxonomy}, \SuppTab{\ref{app:tab:severity}}, \SuppTab{\ref{app:tab:taxonomy}}).
 The categories, severity definitions, and escalation rules are human-authored and reviewed against these sources, with boundary cases adjudicated manually; the automated pipeline instantiates these human-written rules rather than defining severity levels itself.
 
 \subsection{Dataset Statistics}
-\dataname contains 1,026 ladders (4,104 prompts) spanning 11 categories; each rung holds a prompt, reference image, and risk explanation, and all ladders pass the monotonic quality filter (82--99 ladders per category; \Tab{\ref{app:tab:stats}}).
+\dataname contains 1,026 ladders (4,104 prompts) spanning 11 categories; each rung holds a prompt, reference image, and risk explanation, and all ladders pass the monotonic quality filter (82--99 ladders per category; \SuppTab{\ref{app:tab:stats}}).
 Categories are not mutually exclusive at high severity: co-occurrence analysis (Appendix~\ref{app:comatrix}) shows the largest overlap for Violence--Disturbing (18.9\%/21.4\%) and moderate overlap for Hate Speech--Misinformation (11.8\%/12.6\%).
 \Tab{\ref{tab:comparison}} compares \dataname against existing benchmarks.
 The 1,026 ladders are the strict post-filtering \emph{yield} of the pipeline, not a quota: \dataname targets continuous failure slopes at the L1/L2 boundary rather than flat coverage.
