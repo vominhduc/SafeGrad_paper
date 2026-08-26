@@ -17,6 +17,9 @@
 % Import additional packages in the preamble file, before hyperref
 \input{latex/preamble}
 
+% Resolve appendix labels (app:*) defined in the separate supplementary file.
+\externaldocument{wacv_2027_supplementary}
+
 %%%%%%%%% PAPER ID  - PLEASE UPDATE
 \def\paperID{2453} % *** Enter the Paper ID here
 \def\confName{WACV}
@@ -76,10 +79,6 @@ NSFW (Sexual Content, Minors, Violence, Self-Harm, Disturbing Content), Legal (I
     \bibliography{latex/egbib,latex/custom}
 }
 
-% \newpage
-
-% \appendix
-\input{sections/appendix}
-
+% Supplementary material is a separate document: wacv_2027_supplementary.tex
 
 \end{document}

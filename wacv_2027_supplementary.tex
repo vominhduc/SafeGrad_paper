@@ -1,0 +1,47 @@
+% WACV 2027 Supplementary Material (build separately from wacv_2027.tex)
+% Cross-references to the main paper resolve via xr (\externaldocument);
+% compile wacv_2027.tex first, then this file.
+\PassOptionsToPackage{dvipsnames,table}{xcolor}
+\PassOptionsToPackage{pagebackref,breaklinks,colorlinks}{hyperref}
+
+\documentclass[10pt,twocolumn,letterpaper]{article}
+
+% \usepackage{cvpr}              % To produce the CAMERA-READY version
+\usepackage[review]{cvpr}      % To produce the REVIEW version
+% \usepackage[pagenumbers]{cvpr} % To force page numbers, e.g. for an arXiv version
+
+\input{latex/preamble}
+
+% Resolve labels defined in the main paper (sec:*, tab:*, fig:*).
+\externaldocument{wacv_2027}
+
+\def\paperID{2453}
+\def\confName{WACV}
+\def\confYear{2027}
+
+\title{\dataname: A Severity-Graded Benchmark for Safety Evaluation, Defense, and Attack of Text-to-Image Models\\ \Large Supplementary Material}
+
+\author{First Author\\
+Institution1\\
+Institution1 address\\
+{\tt\small firstauthor@i1.org}
+\and
+Second Author\\
+Institution2\\
+First line of institution2 address\\
+{\tt\small secondauthor@i2.org}
+}
+
+\begin{document}
+\maketitle
+
+\appendix
+\input{sections/appendix}
+
+{
+    \small
+    \bibliographystyle{ieeenat_fullname}
+    \bibliography{latex/egbib,latex/custom}
+}
+
+\end{document}
