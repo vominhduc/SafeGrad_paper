@@ -377,3 +377,20 @@ Local TeX compile (no toolchain) — rebuild on Overleaf (U1); full broad lit sw
 
 ## Output self-check
 Section order follows the round-2 + scorecard contracts; tables are balanced; scores are internally consistent with panel stances; no TBD placeholders remain; every pending item has a concrete repair condition or named owner decision.
+
+---
+
+# Round 3 — Autonomous Revision Pass (2026-08-27, aimed at award readiness)
+
+Scope: end-to-end re-read of the current manuscript plus full consistency audit. Text-level revisions applied and verified:
+
+1. benchmark hypothesis wording: "gradient-aware" -> "severity-graded" (removes echo of the name-collided SafeGrad LLM method, per C9).
+2. Conclusion final paragraph rebuilt into three progressive sentences (attack surface -> closure -> release), eliminating the "; ... : ... ;" chain.
+3. Tab. 3 caption: "collapse at L1->L2" -> "peak at L1->L2".
+4. results/README.md: documents that dataset_quality.csv's Mean row is micro-averaged over prompts (matches text exactly; macro-over-categories mean differs slightly -- not an inconsistency).
+
+Audit results (all pass):
+- All headline numbers re-verified against results/ exports: Insight 1 transition means (21.1/28.0 pp), pooled HGR per rung (1.7/22.8/50.8/65.8), Delta_B range 25.7-30.2 (PixArt/HiDream poles), Table 2 means (rho 0.962, stealth 72.32, PPL 33.92, dtheta 40.23), Table 6 tuned row (FBR 0.022, L1 0.952), fresh-gen pooled (FBR 0.0244, L1 0.9465, FPR 0.040) and per-model range (2.24-2.71%), attack ASRs.
+- Insight numbering: 7 bold headers, all in-text "Insight N" references resolve to existing insights.
+- Supplementary label map synced: 14 appendix sections (A-N) == static aux (43 labels); Supp. Sec./Tab./Fig. markers in main text total 15 section refs + 5 float refs.
+- Zero em/en dashes in live text (humanization rule holds).
