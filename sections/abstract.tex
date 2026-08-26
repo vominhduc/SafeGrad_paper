@@ -6,7 +6,7 @@ Each ladder escalates through four rungs (Safe, Low-risk, Mid-risk, High-risk) w
 Using \dataname, we evaluate 6 T2I models, 9 defense methods, 5 safety filters, and 5 adversarial attack strategies, yielding 7 insights into the T2I safety ecosystem.
 Our central finding is a universal safety gap: existing mechanisms are calibrated for high-risk (L3) violations while leaving the low-to-mid-risk (L1--L2) regime largely undefended, a failure mode invisible to binary benchmarks.
 A severity-aware filter fine-tuned on ladder data attains 95.2\% detection at L1 with a 3.8\% L0 false-positive rate, cutting the overall bypass rate from 88.0\% to 2.2\% and dominating all five baselines on every detection metric evaluated.
-The result transfers to fresh generations from all six evaluated models (bypass rate at most 2.7\%), confirming that the diagnosed gap is trainable rather than intrinsic.
+The result transfers to fresh generations from all six evaluated models (bypass at most 2.7\%), confirming the diagnosed gap is trainable rather than intrinsic.
 \dataname and the ASL pipeline will be publicly released to support boundary-aware safety research.
 
 \end{abstract}

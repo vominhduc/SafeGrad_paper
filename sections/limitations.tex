@@ -3,7 +3,7 @@
 \textbf{Evaluation scope.} T2I models are evaluated with safety checkers disabled (raw generative risk); defenses are tested only on SD1.4 because weight-modifying methods need architecture-specific reimplementation for DiT backbones (paradigm rankings may not transfer).
 
 \noindent
-\textbf{Coverage.} Construction models are excluded from evaluation; severity definitions are Western-centric (Discussion); prompts are English-only. Dedicated single-category detectors (e.g., NudeNet~\citep{chhabra2020nudenet}) are excluded since they cannot be scored against the other 10 categories without arbitrary default verdicts. We also have not conducted a systematic demographic-balance audit within harmful content; this is left to a future release.
+\textbf{Coverage.} Construction models are excluded from evaluation; severity definitions are Western-centric (Discussion); prompts are English-only. Dedicated single-category detectors (e.g., NudeNet~\citep{chhabra2020nudenet}) are excluded since they cannot be scored against the other 10 categories without arbitrary default verdicts. A systematic demographic-balance audit within harmful content is left to a future release.
 
 \noindent
 \textbf{Evaluator error.} MLLM ensemble evaluation introduces noise particularly at L1; the blinded human study ($\kappa = 0.73$) and the blinded evaluator ablation ($<2.4\%$ macro shift) bound this error empirically.
