@@ -22,3 +22,7 @@ durable record independent of evaluation logs.
 
 Derived values quoted in the text (Fig 2 aggregates, SEM error bars,
 DeltaB SEM range) are computed from these CSVs.
+
+Note: the `Mean` row in `dataset_quality.csv` is micro-averaged over
+prompts (matching the paper text exactly); it differs slightly from the
+macro mean over the eleven category rows.
