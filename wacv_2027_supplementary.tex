@@ -1,4 +1,4 @@
-% WACV 2027 Supplementary Material (build separately from wacv_2027.tex)
+% WACV 2027 Supplementary Material (datasets track; build separately from wacv_2027.tex)
 % Cross-references to the main paper resolve via xr (\externaldocument);
 % compile wacv_2027.tex first, then this file.
 \PassOptionsToPackage{dvipsnames,table}{xcolor}
@@ -6,15 +6,16 @@
 
 \documentclass[10pt,twocolumn,letterpaper]{article}
 
-% \usepackage{cvpr}              % To produce the CAMERA-READY version
-\usepackage[review]{cvpr}      % To produce the REVIEW version
-% \usepackage[pagenumbers]{cvpr} % To force page numbers, e.g. for an arXiv version
+% \usepackage{wacv}              % To produce the CAMERA-READY version
+\usepackage[review,datasets]{wacv} % REVIEW version, datasets track
+% \usepackage[pagenumbers]{wacv} % To force page numbers, e.g. for an arXiv version
 
 \input{latex/preamble}
 
 % Resolve labels defined in the main paper (sec:*, tab:*, fig:*).
 \externaldocument{wacv_2027}
 
+\def\wacvPaperID{2453}
 \def\paperID{2453}
 \def\confName{WACV}
 \def\confYear{2027}

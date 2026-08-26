@@ -1,7 +1,6 @@
-% WACV 2027 Paper; WACV uses the official CVPR author kit
-% (https://github.com/cvpr-org/author-kit) with \confName/\confYear set below.
+% WACV 2027 Paper (official WACV 2027 author kit; datasets track, review version)
 
-% xcolor option "table" must be active before cvpr.sty loads xcolor,
+% xcolor option "table" must be active before the WACV style loads xcolor,
 % so the \PassOptionsToPackage lines must precede \documentclass.
 \PassOptionsToPackage{dvipsnames,table}{xcolor}
 % hyperref is loaded inside latex/preamble; pass the recommended options early
@@ -10,9 +9,9 @@
 \documentclass[10pt,twocolumn,letterpaper]{article}
 
 %%%%%%%%% PAPER TYPE  - PLEASE UPDATE FOR FINAL VERSION
-% \usepackage{cvpr}              % To produce the CAMERA-READY version
-\usepackage[review]{cvpr}      % To produce the REVIEW version
-% \usepackage[pagenumbers]{cvpr} % To force page numbers, e.g. for an arXiv version
+% \usepackage{wacv}              % To produce the CAMERA-READY version
+\usepackage[review,datasets]{wacv} % REVIEW version, datasets track
+% \usepackage[pagenumbers]{wacv} % To force page numbers, e.g. for an arXiv version
 
 % Import additional packages in the preamble file, before hyperref
 \input{latex/preamble}
@@ -21,7 +20,8 @@
 \externaldocument{wacv_2027_supplementary}
 
 %%%%%%%%% PAPER ID  - PLEASE UPDATE
-\def\paperID{2453} % *** Enter the Paper ID here
+\def\wacvPaperID{2453} % *** Enter the WACV Paper ID here
+\def\paperID{2453} % kept for backward compatibility with older headers
 \def\confName{WACV}
 \def\confYear{2027}
 
