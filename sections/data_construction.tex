@@ -25,7 +25,7 @@ The full pipeline requires approximately 32 GPU-hours on A100 GPUs.
 
 \subsection{Dataset Quality Analysis} \label{sec:quality}
 \Tab{\ref{tab:quality_full}} reports four quality dimensions across all 11 categories.
-\textbf{Severity monotonicity.} Spearman $\rho = 0.962$ between rung index and verifier risk scores measures rubric-internal consistency of the construction pipeline; human grounding of the rung labels is established separately by the blinded validation study ($\kappa = 0.73$; Appendix~\ref{app:human}).
+\textbf{Severity monotonicity.} Spearman $\rho = 0.962$ between rung index and verifier risk scores measures rubric-internal consistency of the construction pipeline; human grounding of the rung labels is established separately by the blinded validation study ($\kappa = 0.73$; \SuppSec{\ref{app:human}}).
 \textbf{Adversarial stealthiness} (mean stealthy rate 72.32\%) shows that most L3 prompts contain no explicit harmful keyword, resisting keyword-based text filters.
 \textbf{Prompt fluency} (mean PPL@L3 $= 33.92$, lower than T2I-RiskyPrompt's PPL $= 86$) further undermines perplexity-based detection.
 \textbf{Semantic escalation magnitude} (mean $\Delta\theta = 40.23\degree$) quantifies the angular distance from L0 to L3; Hate Speech shows the largest shift ($50.13\degree$) and Copyright the smallest ($31.59\degree$).

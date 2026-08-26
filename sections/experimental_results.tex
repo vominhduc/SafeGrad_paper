@@ -29,7 +29,7 @@ The escalation steepens at L1$\rightarrow$L2 (mean $\Delta$HGR = 28.0 pp), defin
 
 \textbf{Insight 1: Universal L1 blind spot.} \textit{Current T2I safety systems exhibit a systematic blind spot at the L1 boundary, universal across all evaluated models and invisible to binary safe/unsafe evaluation.}
 \Tab{\ref{tab:delta}} confirms this universality (per-category SEM 0.8--1.9 pp; Insight~3 covers within-model defenses): the L1$\to$L2 transition is the peak transition for every evaluated model, with Boundary Delta ranging from 25.7 pp (PixArt-$\alpha$) to 30.2 pp (HiDream).
-The pattern is not driven by auto-interpolated levels: restricted to the 7 categories with hand-authored L1 descriptors (Appendix~\ref{app:taxonomy}), per-model $\Delta_B$ remains in 25.6--30.3 pp.
+The pattern is not driven by auto-interpolated levels: restricted to the 7 categories with hand-authored L1 descriptors (\SuppSec{\ref{app:taxonomy}}), per-model $\Delta_B$ remains in 25.6--30.3 pp.
 
 \subsection{Generative Model Analysis: Capability Correlates with Risk}
 
@@ -43,7 +43,7 @@ PixArt-$\alpha$'s fine-tuning suppresses sexual HGR@L3 to 38.7\% vs.\ 59.4\% for
 
 \textbf{Residual risk at L0.} All six models show non-zero HGR at the safe rung (0.5--3.3\%), so zero-risk deployment needs output monitoring even for entirely safe prompts.
 
-Construction--evaluation backbone overlap is audited in Appendix~\ref{app:backbone}; no evaluated model shares an encoder or diffusion backbone with any construction component.
+Construction--evaluation backbone overlap is audited in \SuppSec{\ref{app:backbone}}; no evaluated model shares an encoder or diffusion backbone with any construction component.
 
 \subsection{Defense Mechanism Analysis: The L1 Gap Persists Under Protection}
 
@@ -60,8 +60,8 @@ Critically, this finding requires \dataname's graded structure: a binary benchma
 
 \textbf{Insight 4: The Utility--Safety Tradeoff Is Dominated by Two Methods.}
 \textit{Under our joint $\Delta$HGR/SAS criterion, TRCE Pareto-dominates six of the seven remaining methods ($\Delta\mathrm{HGR} = 0.307$ at an SAS cost of 0.008, vs.\ e.g.\ SLD's $0.241$ reduction at a cost of $0.018$); MACE occupies a distinct extreme point on the tradeoff curve.}
-TRCE ($\Delta\mathrm{HGR} = 0.307$, SAS drop $= -0.008$) outperforms NP, SLD, Safree, UCE, SPEED, and SafetyDPO on both metrics at once (without discounting SLD's or SafetyDPO's documented competitiveness elsewhere); RECE collapses on Legal and Social through concept diffuseness and semantic entanglement (Appendix~\ref{app:collapse}; e.g., MACE's erasure of Public Figures degrades benign-portrait SAS by 40.1\%).
-The sole remaining tradeoff is between TRCE and MACE: MACE gains $+68\%$ relative HGR reduction ($\Delta\mathrm{HGR} = 0.518$) at the cost of $11\times$ the SAS penalty and $2.7\times$ the over-refusal rate (ORR 34.2\% vs.\ 12.8\%; Appendix~\ref{app:overrefusal}).
+TRCE ($\Delta\mathrm{HGR} = 0.307$, SAS drop $= -0.008$) outperforms NP, SLD, Safree, UCE, SPEED, and SafetyDPO on both metrics at once (without discounting SLD's or SafetyDPO's documented competitiveness elsewhere); RECE collapses on Legal and Social through concept diffuseness and semantic entanglement (\SuppSec{\ref{app:collapse}}; e.g., MACE's erasure of Public Figures degrades benign-portrait SAS by 40.1\%).
+The sole remaining tradeoff is between TRCE and MACE: MACE gains $+68\%$ relative HGR reduction ($\Delta\mathrm{HGR} = 0.518$) at the cost of $11\times$ the SAS penalty and $2.7\times$ the over-refusal rate (ORR 34.2\% vs.\ 12.8\%; \SuppSec{\ref{app:overrefusal}}).
 Excluding MACE, the correlation between defense strength and utility cost is $r = 0.04$; including it, $r = 0.923$: the apparent general tradeoff is an artifact of one method's aggressive concept erasure strategy.
 The TRCE--SLD margin ($6.6$ pp) far exceeds the worst-case Bernoulli SEM ($\lesssim 0.5$ pp); the dominance is not a sampling artifact.
 
@@ -77,12 +77,12 @@ Q16, the strongest single filter, rises only from 55.3\% detection at L0 to 67.2
 Q16 also flags 55.3\% of safe images as harmful (FPR@L0 = 0.553); Qwen2.5-VL nearly never false-alarms (FPR = 0.7\%) but misses 88\% of harmful content (FBR = 0.880).
 This near-flat pattern confirms that filters are not calibrated to severity and cannot separate safe from harmful content at boundary levels.
 
-The gap is diagnosable, but is it closable? As a remediation check, we fine-tune Qwen2.5-VL-7B with LoRA on (image, risk explanation) $\rightarrow$ YES/NO pairs under a ladder-respecting 80/10/10 split (Appendix~\ref{app:remediation}).
+The gap is diagnosable, but is it closable? As a remediation check, we fine-tune Qwen2.5-VL-7B with LoRA on (image, risk explanation) $\rightarrow$ YES/NO pairs under a ladder-respecting 80/10/10 split (\SuppSec{\ref{app:remediation}}).
 Measured on the held-out test split with the same protocol, the tuned filter reaches \textbf{95.2\%} detection at L1 with a \textbf{3.8\%} L0 false-positive rate, cutting the overall bypass rate from 0.880 (zero-shot backbone) to \textbf{0.022} (\Tab{\ref{tab:filter}}, bottom row).
 
 \textbf{Insight 6: The safety gap is trainable-away.}
 \textit{A filter fine-tuned on ladder data recovers the mid-severity band (FBR $0.880 \rightarrow 0.022$ benchmark-resident, $0.024$ on fresh generations; L1 detection 95.2\% resp.\ 94.7\%) while holding false alarms far below the strongest existing filter (FPR@L0 = 3.8\% vs.\ Q16's 55.3\%), converting \dataname from a diagnostic into a mitigation instrument.}
-On fresh generations from all six evaluated models, the tuned filter's FBR stays at 2.4\% versus 65.3\% for its zero-shot backbone (Appendix~\ref{app:remediation}, \SuppTab{\ref{tab:filter_fresh}}), so the lower-bound caveat above excludes the tuned row.
+On fresh generations from all six evaluated models, the tuned filter's FBR stays at 2.4\% versus 65.3\% for its zero-shot backbone (\SuppSec{\ref{app:remediation}}, \SuppTab{\ref{tab:filter_fresh}}), so the lower-bound caveat above excludes the tuned row.
 Transfer is uniform rather than backbone-specific: per-generator FBR ranges only 2.2--2.7\% and L1 detection 94.2--95.2\% across all six model families.
 
 \subsection{Adversarial Robustness: Attacks Exploit the Gap} \label{sec:attack}
