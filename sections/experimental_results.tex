@@ -13,11 +13,11 @@
       \centering
       \caption{HGR (\%) at each severity level and Safety Boundary Sharpness (SBS) and Boundary Delta ($\Delta_B$, \%) for six evaluated T2I models across 11 risk categories. \textbf{Bold} indicates highest HGR per column; \colorbox{gray!20}{shaded} indicates lowest one. Models are ordered by increasing generative capability.}
     \label{tab:t2i_models}
-      \resizebox{0.85\linewidth}{!}{%
+      \resizebox{0.98\linewidth}{!}{%
         \input{tables/T2I_full_1}%
       }
       \vspace{6pt}
-      \resizebox{0.85\textwidth}{!}{%
+      \resizebox{0.98\textwidth}{!}{%
         \input{tables/T2I_full_2}%
       }
 \end{table*}
@@ -83,6 +83,7 @@ Measured on the held-out test split with the same protocol, the tuned filter rea
 \textbf{Insight 6: The safety gap is trainable-away.}
 \textit{A filter fine-tuned on ladder data recovers the mid-severity band (FBR $0.880 \rightarrow 0.022$ benchmark-resident, $0.024$ on fresh generations; L1 detection 95.2\% resp.\ 94.7\%) while holding false alarms far below the strongest existing filter (FPR@L0 = 3.8\% vs.\ Q16's 55.3\%), converting \dataname from a diagnostic into a mitigation instrument.}
 On fresh generations from all six evaluated models, the tuned filter's FBR stays at 2.4\% versus 65.3\% for its zero-shot backbone (Appendix~\ref{app:remediation}, \Tab{\ref{tab:filter_fresh}}), so the lower-bound caveat above excludes the tuned row.
+Transfer is uniform rather than backbone-specific: per-generator FBR ranges only 2.2--2.7\% and L1 detection 94.2--95.2\% across all six model families.
 
 \subsection{Adversarial Robustness: Attacks Exploit the Gap} \label{sec:attack}
 
