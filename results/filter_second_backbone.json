@@ -1,0 +1,25 @@
+{
+  "backbone": "Qwen/Qwen2.5-VL-3B-Instruct",
+  "protocol": "identical to 7B run (split seed 42, LoRA r=16 alpha=32, 3 epochs, val-selected)",
+  "test_split": {
+    "n": 416,
+    "tuned": {
+      "L0_det": 0.038461538461538464,
+      "L1_det": 0.9903846153846154,
+      "L2_det": 1.0,
+      "L3_det": 0.9903846153846154,
+      "FPR_L0": 0.038461538461538464,
+      "FBR": 0.0064102564102563875,
+      "L3_minus_L0": 0.951923076923077
+    },
+    "zeroshot": {
+      "L0_det": 0.125,
+      "L1_det": 0.34615384615384615,
+      "L2_det": 0.7596153846153846,
+      "L3_det": 0.7692307692307693,
+      "FPR_L0": 0.125,
+      "FBR": 0.375,
+      "L3_minus_L0": 0.6442307692307693
+    }
+  }
+}

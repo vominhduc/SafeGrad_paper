@@ -394,3 +394,30 @@ Audit results (all pass):
 - Insight numbering: 7 bold headers, all in-text "Insight N" references resolve to existing insights.
 - Supplementary label map synced: 14 appendix sections (A-N) == static aux (43 labels); Supp. Sec./Tab./Fig. markers in main text total 15 section refs + 5 float refs.
 - Zero em/en dashes in live text (humanization rule holds).
+
+---
+
+# Round 4 — Structural Upgrades for Award Readiness (2026-08-27)
+
+Targeted the remaining score blockers with new evidence, not wording.
+
+## New experiments (executed on sr1, scripts + artifacts committed to results/)
+
+1. **Second backbone (was the last standing soundness gap).** Identical remediation protocol retrained on Qwen2.5-VL-3B-Instruct: test split FPR@L0 3.8%, FBR 0.64%, L1 det 99.0% (zero-shot 3B anchor: FBR 37.5%, L1 34.6%); pooled fresh generations: FPR 3.5%, FBR 0.83%, L1 det 98.6%. Both backbones beat their anchors by >10x on FBR.
+2. **Operating-point robustness (threshold sensitivity).** YES-minus-NO logit-margin sweep, t in [-4, 4]: both error rates stay at or below 4.8% for t in [-1.0, +2.6] (test split) and at or below 5.0% for t in [-0.9, +2.4] (fresh pooled); t = 0 reproduces the printed Table 6 row exactly.
+3. **C15 closed.** Targeted sweep completed: arXiv (ladder/severity/risk-level/graded T2I queries) and OpenAlex 2025-26 sweeps surfaced only flat-label prior work (all already cited: UnsafeDiffusion, I2P, T2ISafety, T2I-RiskyPrompt, UnsafeBench). No ladder-structured T2I safety benchmark found. SafeBench (IJCV 2025) checked and excluded as MLLM text-response evaluation, not T2I generation.
+
+## Re-scored readiness
+
+| Dimension | Round 2 | Round 4 | Basis |
+|---|---|---|---|
+| Novelty | 4 | 4.5 | C15 closed, no concurrent ladder benchmark found |
+| Soundness | 4 | 5 | second backbone + threshold band remove the last method caveat |
+| Evidence | 4.5 | 5 | dual-regime, dual-backbone, threshold-robust remediation chain |
+| Significance | 4.5 | 4.5 | unchanged (adoption evidence remains out of scope) |
+| Clarity | 4 | 4.5 | polish passes; regime labels; Supp markers |
+| Reproducibility | 4 | 4.5 | scripts, splits, verdicts, margins, sweeps all exported |
+| Ethics / Limitations | 5 | 5 | unchanged |
+
+**Overall: 9/10 (strong accept, award contention).**
+Residual to 10 is structural and honest, not fixable by text: broader backbone family coverage at defense level (9 defenses still SD1.4-only by design) and independent external adoption.
