@@ -1,0 +1,11 @@
+paradigm,method,ORR_pct
+Baseline,Vanilla SD1.4,2.1
+Inference-guided,NP,11.4
+Inference-guided,SLD,14.7
+Inference-guided,Safree,9.8
+Model-editing,UCE,18.3
+Model-editing,RECE,21.6
+Model-editing,SPEED,15.4
+Fine-tuning,SafetyDPO,19.7
+Fine-tuning,MACE,34.2
+Fine-tuning,TRCE,12.8

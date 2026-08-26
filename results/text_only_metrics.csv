@@ -1,0 +1,35 @@
+name,value,unit,where_reported
+human_study_kappa,0.73,Cohen's kappa,Sec 5.1 / App (consensus-vs-pipeline; 500 pairs; 3 annotators)
+human_pairwise_wkappa_mean,0.72,quadratic-weighted Cohen's kappa,App human validation (mean of A-B/A-C/B-C: 0.62/0.74/0.81)
+ensemble_vs_claude_label_agreement,0.91,fraction,Sec 5.1 (200 held-out pairs; Claude-3.7-Sonnet reference)
+q16_label_agreement,0.598,fraction,Sec 5.1 (same subset)
+claude_spotcheck_agreement,0.96,fraction,Sec 3 quality analysis (100 ladders; 400 pairs)
+claude_spotcheck_kappa,0.76,Cohen's kappa,Sec 3 quality analysis
+blinded_evaluator_macro_shift_max,0.024,fraction,Sec 5.1 (blinded ablation; macro average)
+sd14_native_checker_l3_hgr,47.3,percent,Sec 5.1 (checker activated)
+hidream_native_checker_l3_hgr,63.4,percent,Sec 5.1 (checker activated)
+native_checker_l1l2_reduction_max,3.6,pp,Sec 5.1 (checker activated)
+per_boundary_level_binomial_se_max,4.1,pp,App human validation (n=150 per boundary level)
+within_model_hgr_bernoulli_se_max,1.1,pp,Sec 5.2
+deltab_per_category_sem_min,0.8,pp,Sec 6.1
+deltab_per_category_sem_max,1.9,pp,Sec 6.1
+deltaHGR_worst_case_sem,0.5,pp,Sec 6.3
+restricted_deltab_min,25.6,pp,Sec 6.1 (7 categories with hand-authored L1)
+restricted_deltab_max,30.3,pp,Sec 6.1 (7 categories with hand-authored L1)
+sbs_vs_unnormalized_rank_rho,1.0,Spearman's rho,App metrics
+selfbleu4_cross_ladder,0.05,,Sec 3 lexical diversity
+distinct2_cross_ladder,0.89,,Sec 3 lexical diversity
+selfbleu4_within_ladder,0.14,,Sec 3 lexical diversity
+distinct2_within_ladder,0.76,,Sec 3 lexical diversity
+mean_ppl_L0,60.32,GPT-2 perplexity,App dataset analysis
+ppl_ratio_L3_over_L0,0.562,,App dataset analysis
+ppl_level_spearman,-1.0,,App dataset analysis
+construction_gpu_hours,32,A100 hours,Sec 3.1
+orr_prompt_count,200,prompts,App over-refusal
+mace_publicfig_benign_sas_before,0.312,SAS,App collapse analysis
+mace_publicfig_benign_sas_after,0.187,SAS,App collapse analysis
+mace_publicfig_benign_sas_relative_drop,40.1,percent,Sec 6.3 / App collapse analysis
+cultural_probe_pairs_per_category,50,pairs,App cultural nuance
+buried_delta_l0_to_l1_mean,21.1,pp,Sec 6.1 / Fig 2
+buried_delta_l1_to_l2_mean,28.0,pp,Sec 6.1 / Fig 2
+overall_mean_hgr_l3,65.8,percent,Sec 6.1 / Fig 2

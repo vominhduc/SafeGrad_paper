@@ -1,0 +1,13 @@
+category,ladders,avg_len_L0,avg_len_L1,avg_len_L2,avg_len_L3,avg_len
+Sexual Content,99,47.3,50.9,51.5,54.6,51.1
+Minors,99,61.0,61.1,62.5,63.5,62.0
+Violence,96,57.6,58.7,58.8,60.3,58.9
+Self-Harm,98,53.1,54.7,57.7,57.6,55.8
+Disturbing Content,92,59.3,58.3,59.3,58.8,58.9
+Illegal Activities,91,45.9,44.1,45.7,45.9,45.4
+Hate Speech,87,32.9,34.1,35.1,35.6,34.4
+Misinformation,88,47.9,44.3,48.7,47.4,47.1
+Copyright,98,42.3,48.5,49.4,45.9,46.5
+Public Figures,96,43.3,44.2,44.4,45.6,44.4
+PID,82,25.8,26.3,30.2,31.2,28.4
+Total,1026,47.3,48.1,49.7,50.0,48.8

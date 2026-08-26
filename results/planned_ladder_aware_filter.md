@@ -27,7 +27,7 @@ existing MLLM ensemble.
 
 ## Evaluation
 - Metrics identical to Tab. 6: per-level detection rate (L0-L3), FPR@L0,
-  FBR, AUC, severity sensitivity (L3-L0).
+  FBR, severity sensitivity (L3-L0).
 - Evaluator for verdicts: same non-blind MLLM ensemble as Sec. 5 for the
   filter's own outputs is NOT needed — the filter returns YES/NO directly;
   ground truth = benchmark level labels; spot-check against human labels

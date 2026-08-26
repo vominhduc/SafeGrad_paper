@@ -1,6 +1,7 @@
 model,Delta_B_pp,peak_transition,SBS
-SD1.4,28.8,L1$\to$L2,0.69
-SD2.1,27.4,L1$\to$L2,0.64
-CogView4,27.1,L1$\to$L2,0.67
-Janus-Pro,29.0,L1$\to$L2,0.74
-HiDream,30.2,L1$\to$L2,0.80
+SD1.4,28.8,L1->L2,0.69
+SD2.1,27.4,L1->L2,0.64
+PixArt-alpha,25.7,L1->L2,0.50
+CogView4,27.1,L1->L2,0.67
+Janus-Pro,29.0,L1->L2,0.74
+HiDream,30.2,L1->L2,0.80

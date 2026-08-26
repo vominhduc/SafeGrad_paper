@@ -1,0 +1,316 @@
+{
+  "adapter": "data/filter_lora/adapter_best",
+  "fresh_root": "data/fresh_gen",
+  "results": {
+    "sd14": {
+      "n_per_level": {
+        "safe": 208,
+        "low_risk": 208,
+        "mid_risk": 208,
+        "high_risk": 208
+      },
+      "n_black_excluded_per_level": {
+        "safe": 0,
+        "low_risk": 0,
+        "mid_risk": 0,
+        "high_risk": 0
+      },
+      "black_rate": 0.0,
+      "L0_det": 0.038461538461538464,
+      "L1_det": 0.9423076923076923,
+      "L2_det": 0.9903846153846154,
+      "L3_det": 0.9903846153846154,
+      "FPR_L0": 0.038461538461538464,
+      "FBR": 0.02564102564102566,
+      "L3_minus_L0": 0.951923076923077
+    },
+    "sd21": {
+      "n_per_level": {
+        "safe": 208,
+        "low_risk": 208,
+        "mid_risk": 208,
+        "high_risk": 208
+      },
+      "n_black_excluded_per_level": {
+        "safe": 0,
+        "low_risk": 0,
+        "mid_risk": 0,
+        "high_risk": 0
+      },
+      "black_rate": 0.0,
+      "L0_det": 0.03365384615384615,
+      "L1_det": 0.9471153846153846,
+      "L2_det": 0.9903846153846154,
+      "L3_det": 0.9903846153846154,
+      "FPR_L0": 0.03365384615384615,
+      "FBR": 0.024038461538461564,
+      "L3_minus_L0": 0.9567307692307693
+    },
+    "pixart_alpha": {
+      "n_per_level": {
+        "safe": 208,
+        "low_risk": 208,
+        "mid_risk": 208,
+        "high_risk": 208
+      },
+      "n_black_excluded_per_level": {
+        "safe": 0,
+        "low_risk": 0,
+        "mid_risk": 0,
+        "high_risk": 0
+      },
+      "black_rate": 0.0,
+      "L0_det": 0.038461538461538464,
+      "L1_det": 0.9519230769230769,
+      "L2_det": 0.9903846153846154,
+      "L3_det": 0.9903846153846154,
+      "FPR_L0": 0.038461538461538464,
+      "FBR": 0.022435897435897467,
+      "L3_minus_L0": 0.951923076923077
+    },
+    "cogview4": {
+      "n_per_level": {
+        "safe": 208,
+        "low_risk": 208,
+        "mid_risk": 208,
+        "high_risk": 208
+      },
+      "n_black_excluded_per_level": {
+        "safe": 0,
+        "low_risk": 0,
+        "mid_risk": 0,
+        "high_risk": 0
+      },
+      "black_rate": 0.0,
+      "L0_det": 0.038461538461538464,
+      "L1_det": 0.9519230769230769,
+      "L2_det": 0.9903846153846154,
+      "L3_det": 0.9903846153846154,
+      "FPR_L0": 0.038461538461538464,
+      "FBR": 0.022435897435897467,
+      "L3_minus_L0": 0.951923076923077
+    },
+    "janus_pro": {
+      "n_per_level": {
+        "safe": 202,
+        "low_risk": 206,
+        "mid_risk": 198,
+        "high_risk": 208
+      },
+      "n_black_excluded_per_level": {
+        "safe": 6,
+        "low_risk": 2,
+        "mid_risk": 10,
+        "high_risk": 0
+      },
+      "black_rate": 0.021634615384615384,
+      "L0_det": 0.04950495049504951,
+      "L1_det": 0.941747572815534,
+      "L2_det": 0.98989898989899,
+      "L3_det": 0.9903846153846154,
+      "FPR_L0": 0.04950495049504951,
+      "FBR": 0.02614379084967322,
+      "L3_minus_L0": 0.9408796648895659
+    },
+    "hidream": {
+      "n_per_level": {
+        "safe": 115,
+        "low_risk": 121,
+        "mid_risk": 121,
+        "high_risk": 127
+      },
+      "n_black_excluded_per_level": {
+        "safe": 93,
+        "low_risk": 87,
+        "mid_risk": 87,
+        "high_risk": 81
+      },
+      "black_rate": 0.4182692307692308,
+      "L0_det": 0.043478260869565216,
+      "L1_det": 0.9421487603305785,
+      "L2_det": 0.9917355371900827,
+      "L3_det": 0.984251968503937,
+      "FPR_L0": 0.043478260869565216,
+      "FBR": 0.027100271002710064,
+      "L3_minus_L0": 0.9407737076343718
+    },
+    "pooled": {
+      "n_per_level": {
+        "safe": 1149,
+        "low_risk": 1159,
+        "mid_risk": 1151,
+        "high_risk": 1167
+      },
+      "n_black_excluded_per_level": {
+        "safe": 99,
+        "low_risk": 89,
+        "mid_risk": 97,
+        "high_risk": 81
+      },
+      "black_rate": 0.0733173076923077,
+      "L0_det": 0.04003481288076589,
+      "L1_det": 0.9465056082830026,
+      "L2_det": 0.9904430929626412,
+      "L3_det": 0.9897172236503856,
+      "FPR_L0": 0.04003481288076589,
+      "FBR": 0.02444636180615478,
+      "L3_minus_L0": 0.9496824107696197
+    }
+  },
+  "zeroshot_anchor_results": {
+    "sd14": {
+      "n_per_level": {
+        "safe": 208,
+        "low_risk": 208,
+        "mid_risk": 208,
+        "high_risk": 208
+      },
+      "n_black_excluded_per_level": {
+        "safe": 0,
+        "low_risk": 0,
+        "mid_risk": 0,
+        "high_risk": 0
+      },
+      "black_rate": 0.0,
+      "L0_det": 0.009615384615384616,
+      "L1_det": 0.11538461538461539,
+      "L2_det": 0.4375,
+      "L3_det": 0.42788461538461536,
+      "FPR_L0": 0.009615384615384616,
+      "FBR": 0.6730769230769231,
+      "L3_minus_L0": 0.4182692307692307
+    },
+    "sd21": {
+      "n_per_level": {
+        "safe": 208,
+        "low_risk": 208,
+        "mid_risk": 208,
+        "high_risk": 208
+      },
+      "n_black_excluded_per_level": {
+        "safe": 0,
+        "low_risk": 0,
+        "mid_risk": 0,
+        "high_risk": 0
+      },
+      "black_rate": 0.0,
+      "L0_det": 0.014423076923076924,
+      "L1_det": 0.15384615384615385,
+      "L2_det": 0.4807692307692308,
+      "L3_det": 0.5336538461538461,
+      "FPR_L0": 0.014423076923076924,
+      "FBR": 0.6105769230769231,
+      "L3_minus_L0": 0.5192307692307693
+    },
+    "pixart_alpha": {
+      "n_per_level": {
+        "safe": 208,
+        "low_risk": 208,
+        "mid_risk": 208,
+        "high_risk": 208
+      },
+      "n_black_excluded_per_level": {
+        "safe": 0,
+        "low_risk": 0,
+        "mid_risk": 0,
+        "high_risk": 0
+      },
+      "black_rate": 0.0,
+      "L0_det": 0.02403846153846154,
+      "L1_det": 0.17307692307692307,
+      "L2_det": 0.49038461538461536,
+      "L3_det": 0.5480769230769231,
+      "FPR_L0": 0.02403846153846154,
+      "FBR": 0.5961538461538461,
+      "L3_minus_L0": 0.5240384615384616
+    },
+    "cogview4": {
+      "n_per_level": {
+        "safe": 208,
+        "low_risk": 208,
+        "mid_risk": 208,
+        "high_risk": 208
+      },
+      "n_black_excluded_per_level": {
+        "safe": 0,
+        "low_risk": 0,
+        "mid_risk": 0,
+        "high_risk": 0
+      },
+      "black_rate": 0.0,
+      "L0_det": 0.028846153846153848,
+      "L1_det": 0.16346153846153846,
+      "L2_det": 0.5096153846153846,
+      "L3_det": 0.5721153846153846,
+      "FPR_L0": 0.028846153846153848,
+      "FBR": 0.5849358974358974,
+      "L3_minus_L0": 0.5432692307692307
+    },
+    "janus_pro": {
+      "n_per_level": {
+        "safe": 202,
+        "low_risk": 206,
+        "mid_risk": 198,
+        "high_risk": 208
+      },
+      "n_black_excluded_per_level": {
+        "safe": 6,
+        "low_risk": 2,
+        "mid_risk": 10,
+        "high_risk": 0
+      },
+      "black_rate": 0.021634615384615384,
+      "L0_det": 0.0297029702970297,
+      "L1_det": 0.17475728155339806,
+      "L2_det": 0.41414141414141414,
+      "L3_det": 0.49038461538461536,
+      "FPR_L0": 0.0297029702970297,
+      "FBR": 0.6405228758169934,
+      "L3_minus_L0": 0.4606816450875857
+    },
+    "hidream": {
+      "n_per_level": {
+        "safe": 115,
+        "low_risk": 121,
+        "mid_risk": 121,
+        "high_risk": 127
+      },
+      "n_black_excluded_per_level": {
+        "safe": 93,
+        "low_risk": 87,
+        "mid_risk": 87,
+        "high_risk": 81
+      },
+      "black_rate": 0.4182692307692308,
+      "L0_det": 0.0,
+      "L1_det": 0.01652892561983471,
+      "L2_det": 0.12396694214876033,
+      "L3_det": 0.07874015748031496,
+      "FPR_L0": 0.0,
+      "FBR": 0.926829268292683,
+      "L3_minus_L0": 0.07874015748031496
+    },
+    "pooled": {
+      "n_per_level": {
+        "safe": 1149,
+        "low_risk": 1159,
+        "mid_risk": 1151,
+        "high_risk": 1167
+      },
+      "n_black_excluded_per_level": {
+        "safe": 99,
+        "low_risk": 89,
+        "mid_risk": 97,
+        "high_risk": 81
+      },
+      "black_rate": 0.0733173076923077,
+      "L0_det": 0.019147084421235857,
+      "L1_det": 0.14150129421915444,
+      "L2_det": 0.4309296264118158,
+      "L3_det": 0.4670094258783205,
+      "FPR_L0": 0.019147084421235857,
+      "FBR": 0.6534368708656888,
+      "L3_minus_L0": 0.44786234145708465
+    }
+  }
+}
