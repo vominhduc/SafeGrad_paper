@@ -7,7 +7,7 @@ All evaluated mechanisms are calibrated on binary distinctions, concentrating pr
 Text filters cannot decode visually adversarial prompts, and image classifiers trained on explicit L3 content fail at L1--L2 violations; the 72.32\% stealth rate at L3 shows the gap is by adversarial design.
 
 \paragraph{From diagnosis to mitigation.}
-Insight 6 turns the benchmark from a measurement tool into an instrument: fine-tuning Qwen2.5-VL-7B with LoRA on \dataname's own reference images and per-rung risk explanations (Appendix~\ref{app:remediation}) recovers the L1--L2 band that zero-shot filters miss. The recipe is taxonomy-agnostic: practitioners can regenerate ladders under their own policy definitions and retrain, and the same graded data can supervise defense objectives directly.
+Insight 6 turns the benchmark from a measurement tool into an instrument: fine-tuning Qwen2.5-VL-7B with LoRA on \dataname's own reference images and per-rung risk explanations (Appendix~\ref{app:remediation}) recovers the L1--L2 band that zero-shot filters miss, and the recipe is taxonomy-agnostic (regenerate ladders under one's own policy, retrain).
 
 \paragraph{Scope boundaries.}
 Copyright and PID exhibit structurally lower HGR than NSFW categories (\Tab{\ref{tab:t2i_models}}): MLLM classifiers are weaker at fine-grained identity harms (e.g., character likeness), so the safety gap in these categories is likely \emph{underestimated}.

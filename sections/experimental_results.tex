@@ -22,8 +22,6 @@
       }
 \end{table*}
 
-We present our evaluation results organized around the central finding of this work: a systematic safety gap at the low-to-mid severity boundary that is universal across models, defenses, and filters.
-
 \subsection{The Safety Gap: A Universal Failure Mode}
 
 \Fig{\ref{fig:safety_gap}} shows the aggregated HGR gradient is far from uniform: while mean HGR@L3 is 65.8\%, the L0$\rightarrow$L1 transition already produces a 21.1 percentage points (pp) jump at the rung where filters are least calibrated.
@@ -37,13 +35,13 @@ The pattern is not driven by auto-interpolated levels: restricted to the 7 categ
 
 \Tab{\ref{tab:t2i_models}} reports the per-category HGR matrix for the six models together with the SBS and $\Delta_B$ summaries.
 
-\textbf{Reading note on SBS.} SBS measures failure concentration, not safety: the highest-SBS models (HiDream 0.80, Janus-Pro 0.74) also produce the highest absolute HGR@L3, and all six models reach at least 47.5\% HGR@L3. SBS must be read jointly with absolute HGR, never as a standalone safety score.
+\textbf{Reading note on SBS.} SBS measures failure concentration, not safety: the highest-SBS models (HiDream 0.80, Janus-Pro 0.74) also produce the highest absolute HGR@L3 (all six models $\geq$ 47.5\%); read SBS jointly with absolute HGR, never standalone.
 
 \textbf{Insight 2: Uneven safety baked into model weights.}
 \textit{With safety checkers disabled, HGR differences across models reflect safety embedded in their weights through training and RLHF, not external filtering.}
 PixArt-$\alpha$'s fine-tuning suppresses sexual HGR@L3 to 38.7\% vs.\ 59.4\% for violence, but no model's training provides equivalent suppression for hate speech or misinformation; societal harms have been underrepresented in safety fine-tuning data.
 
-\textbf{Residual risk at L0.} All six models exhibit non-zero HGR at the safe rung (range 0.5--3.3\%); whether from latent drift or evaluator boundary noise, zero-risk deployment requires output monitoring even for entirely safe prompts.
+\textbf{Residual risk at L0.} All six models show non-zero HGR at the safe rung (0.5--3.3\%), so zero-risk deployment needs output monitoring even for entirely safe prompts.
 
 Construction--evaluation backbone overlap is audited in Appendix~\ref{app:backbone}; no evaluated model shares an encoder or diffusion backbone with any construction component.
 
@@ -84,7 +82,7 @@ Measured on the held-out test split with the same protocol, the tuned filter rea
 
 \textbf{Insight 6: The safety gap is trainable-away.}
 \textit{A filter fine-tuned on ladder data recovers the mid-severity band (FBR $0.880 \rightarrow 0.022$ benchmark-resident, $0.024$ on fresh generations; L1 detection 95.2\% resp.\ 94.7\%) while holding false alarms far below the strongest existing filter (FPR@L0 = 3.8\% vs.\ Q16's 55.3\%), converting \dataname from a diagnostic into a mitigation instrument.}
-The result transfers off the benchmark: on fresh generations from all six evaluated models (held-out test prompts, Appendix~\ref{app:remediation}, \Tab{\ref{tab:filter_fresh}}), the tuned filter holds FBR at 2.4\% versus 65.3\% for its zero-shot backbone; the lower-bound caveat above therefore does not apply to the tuned row.
+On fresh generations from all six evaluated models, the tuned filter's FBR stays at 2.4\% versus 65.3\% for its zero-shot backbone (Appendix~\ref{app:remediation}, \Tab{\ref{tab:filter_fresh}}), so the lower-bound caveat above excludes the tuned row.
 
 \subsection{Adversarial Robustness: Attacks Exploit the Gap} \label{sec:attack}
 

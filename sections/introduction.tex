@@ -26,7 +26,6 @@ Using \dataname, we conduct a comprehensive evaluation of the current T2I safety
 \textbf{(3) Safety filters:} we evaluate 5 filters and uncover a systemic insensitivity to severity: no filter reliably detects L1--L2 content, confirming the safety gap is not addressable by existing filtering alone.
 \textbf{(4) Adversarial attacks:} we test 5 jailbreak strategies, showing that query-based and multimodal attacks (ASR $\geq$ 63.4\%) outperform white-box gradient methods against the best-defended configurations.
 \textbf{(5) Remediation:} a severity-aware filter fine-tuned on ladder data recovers the boundary band that zero-shot filters miss, dominating all five baselines on every evaluated detection metric while holding the L0 false-alarm rate below 4\% (Insight~6, \Sec{\ref{sec:filter}}).
-Each dimension is evaluated independently: T2I models are tested raw, defenses on a common base model (SD1.4), filters on benchmark reference images, and attacks against the best-defended configuration.
 Collectively, these evaluations yield 7 insights showing that current binary safety strategies are fundamentally ill-equipped to address the severity-graded nature of T2I risk.
 Our contributions:
 
