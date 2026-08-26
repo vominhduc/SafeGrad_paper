@@ -60,10 +60,10 @@ Critically, this finding requires \dataname's graded structure: a binary benchma
 
 \textbf{Insight 4: The Utility--Safety Tradeoff Is Dominated by Two Methods.}
 \textit{Under our joint $\Delta$HGR/SAS criterion, TRCE Pareto-dominates six of the seven remaining methods ($\Delta\mathrm{HGR} = 0.307$ at an SAS cost of 0.008, vs.\ e.g.\ SLD's $0.241$ reduction at a cost of $0.018$); MACE occupies a distinct extreme point on the tradeoff curve.}
-TRCE ($\Delta\mathrm{HGR} = 0.307$, SAS drop $= -0.008$) outperforms NP, SLD, Safree, UCE, SPEED, and SafetyDPO on both metrics at once, without discounting the documented competitiveness of SLD or SafetyDPO in alternative settings; RECE collapses on Legal and Social through concept diffuseness and semantic entanglement (Appendix~\ref{app:collapse}; e.g., MACE's erasure of Public Figures degrades benign-portrait SAS by 40.1\%).
+TRCE ($\Delta\mathrm{HGR} = 0.307$, SAS drop $= -0.008$) outperforms NP, SLD, Safree, UCE, SPEED, and SafetyDPO on both metrics at once (without discounting SLD's or SafetyDPO's documented competitiveness elsewhere); RECE collapses on Legal and Social through concept diffuseness and semantic entanglement (Appendix~\ref{app:collapse}; e.g., MACE's erasure of Public Figures degrades benign-portrait SAS by 40.1\%).
 The sole remaining tradeoff is between TRCE and MACE: MACE gains $+68\%$ relative HGR reduction ($\Delta\mathrm{HGR} = 0.518$) at the cost of $11\times$ the SAS penalty and $2.7\times$ the over-refusal rate (ORR 34.2\% vs.\ 12.8\%; Appendix~\ref{app:overrefusal}).
 Excluding MACE, the correlation between defense strength and utility cost is $r = 0.04$; including it, $r = 0.923$: the apparent general tradeoff is an artifact of one method's aggressive concept erasure strategy.
-The TRCE--SLD margin ($6.6$ pp) far exceeds the worst-case Bernoulli SEM of per-method $\Delta$HGR ($\lesssim 0.5$ pp under independent cell-level noise), so the dominance relation is not a sampling artifact.
+The TRCE--SLD margin ($6.6$ pp) far exceeds the worst-case Bernoulli SEM ($\lesssim 0.5$ pp); the dominance is not a sampling artifact.
 
 \subsection{Safety Filter Evaluation: Blind to the Boundary} \label{sec:filter}
 

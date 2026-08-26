@@ -4,7 +4,7 @@
 All evaluated mechanisms are calibrated on binary distinctions, concentrating protection at L3 while leaving L1--L2 underserved and steepening the severity gradient; deployments in sensitive contexts must evaluate L1--L2 explicitly rather than trust L3-derived claims.
 
 \paragraph{The cross-modal gap.}
-Text filters cannot decode visually adversarial prompts, and image classifiers trained on explicit L3 content fail at L1--L2 violations; the 72.32\% stealth rate at L3 shows the gap is by adversarial design.
+Text filters cannot decode visually adversarial prompts, and image classifiers trained on explicit L3 content fail at L1--L2 violations; the 72.32\% stealth rate at L3 shows the gap is adversarial by design.
 
 \paragraph{From diagnosis to mitigation.}
 Insight 6 turns the benchmark from a measurement tool into an instrument: fine-tuning Qwen2.5-VL-7B with LoRA on \dataname's own reference images and per-rung risk explanations (Appendix~\ref{app:remediation}) recovers the L1--L2 band that zero-shot filters miss, and the recipe is taxonomy-agnostic (regenerate ladders under one's own policy, retrain).
