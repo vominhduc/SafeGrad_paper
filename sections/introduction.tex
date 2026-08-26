@@ -12,8 +12,7 @@ Current safety evaluation benchmarks, like SneakyPrompt~\citep{yang2023sneakypro
 We argue that this binary lens fails to capture the nuanced, severity-graded nature of harm: real adversaries navigate safety boundaries through incremental escalation, and different application contexts demand graded rather than binary safety judgments.
 
 We identify a critical ``safety gap'' rooted in this systematic underestimation of graded harm.
-This gap exists not only because text-based filters fail to decode adversarial prompts, but also because visual checkers frequently misclassify low- or mid-risk imagery as entirely ``safe''.
-Within this gap, prompts appear linguistically benign to text filters, yet they produce low/mid-severity visual harm that visual checkers label as ``safe,'' failing to recognize harm simulated through semantic metaphor.
+This gap exists not only because text-based filters fail to decode adversarial prompts, but also because visual checkers misclassify low- or mid-risk imagery as ``safe,'' failing to recognize harm simulated through semantic metaphor.
 Such classification slippage is particularly hazardous for sensitive applications, including child-oriented platforms or professional safe-search tools where the failure to distinguish between ``safe'' and ``low-to-mid-risk'' contents results in the unintended exposure of harmful material.
 
 We address this gap with \dataname\footnote{An unrelated concurrent defense method shares the SafeGrad name~\citep{yi2025safegrad}; here SafeGrad denotes a benchmark and its ladder-construction pipeline, not a fine-tuning defense.}, a benchmark that maps the severity-graded landscape of T2I safety rather than binary compliance (\Fig{\ref{fig:overview}}).

@@ -7,10 +7,9 @@ Complementary image-safety benchmarks such as UnsafeBench~\citep{yiting2025unsaf
 Both, however, still assign each prompt a single, independently sampled binary verdict: neither pairs multiple severity instances of the same scenario under matched generation conditions, so neither can compute how a defense's suppression at one severity relates to its suppression at another for a fixed scenario.
 This distinction is not cosmetic: it is precisely the quantity Insight~3 requires.
 \dataname's paired ladders hold the scenario fixed (same T2I model and seed across all four rungs); a flat prompt set cannot, making the relative-suppression asymmetry structurally invisible to it.
-Our evaluation matrix (models, defenses, filters, attacks) otherwise follows the protocol of contemporary work for baseline consistency.
 
 \noindent
 \textbf{Defenses and filters.}
 Internal defenses modify model weights~\citep{gandikota2023concept,gandikota2024unified} or retrain safety objectives~\citep{liu2024safetydpo,lu2024mace,chen2025trce}; external ones apply keyword lists~\citep{george}, text classifiers~\citep{li_NSFW_text_classifier,Detoxify,khader2024diffguard}, image-level detectors~\citep{laionAI,Chhabra,schramowski2023safe,Giphy}.
 They all target L3-equivalent explicit content under a binary safe/unsafe protocol.
-\dataname provides the first graded diagnostic across all four severity rungs, revealing that defenses effective at L3 remain vulnerable to low-to-mid-risk escalation.
+\dataname provides the first graded diagnostic across all four severity rungs.
