@@ -159,7 +159,7 @@ Co-occurrence is reported descriptively to characterize the taxonomy's boundarie
 
 \begin{table}[tb]
 \centering
-\caption{SafeGrad dataset statistics by category. Average prompt length reported in words per severity level. PID means Personal Identification Documents (82 ladders after quality filtering). Totally, we have 1,026 ladders.}
+\caption{SafeGrad dataset statistics by category. Average prompt length reported in words per severity level. PID means Personal Identification Documents (82 ladders after quality filtering). In total, \dataname contains 1,026 ladders.}
 \label{app:tab:stats}
 \resizebox{\columnwidth}{!}{%
 \begin{tabular}{lcccccc}
@@ -187,10 +187,10 @@ PID & 82 & 25.8 & 26.3 & 30.2 & 31.2 & 28.4 \\
 \section{Dataset Analysis} \label{app:analysis}
 
 To validate that the \dataname construction pipeline produces a benchmark with the intrinsic properties required for graded safety evaluation, we conduct a systematic quality analysis on the 1,026-ladder dataset using automated metrics derived from the construction artifacts.
-We details the analysis reported in \Tab{\ref{tab:quality_full}}
+We detail the analysis reported in \Tab{\ref{tab:quality_full}}
 
 \noindent\textbf{Severity monotonicity.} We measure monotonicity using Spearman's rank correlation $\rho$ between assigned severity level and the VLM risk score assigned by Qwen3-VL-8B-Thinking (n = 1,026 ladders; mean $\rho$ = 0.962).
-\red{Since the verifier is shown the intended level (Appendix~\ref{app:prompts:verify}), this correlation reflects internal pipeline self-consistency rather than independent confirmation; independent grounding comes from the blinded human study in Appendix~\ref{app:human}.}
+Since the verifier is shown the intended level (Appendix~\ref{app:prompts:verify}), this correlation reflects internal pipeline self-consistency rather than independent confirmation; independent grounding comes from the blinded human study in Appendix~\ref{app:human}.
 Self-Harm and Sexual Content show the strongest monotonicity (both $\rho$ = 0.990), followed by Copyright ($\rho$ = 0.981), while Hate Speech ($\rho$ = 0.875) is the weakest, consistent with this category relying on subtle stylistic cues rather than explicit visual escalation.
 
 \noindent\textbf{Adversarial stealthiness.} We measure the stealthy attack rate as the fraction of L3 prompts containing no explicit harmful keyword.
@@ -226,7 +226,7 @@ confounding with the absolute baseline, ensuring that a uniformly unsafe
 model (high HGR(0)) cannot achieve a high SBS score. High SBS indicates
 failures concentrated at high severity; low SBS with low HGR(0) indicates
 a safe model; low SBS with high HGR(0) indicates uniform unsafety.
-\red{Replacing SBS with the unnormalized OLS slope preserves the model ranking exactly (Spearman $\rho = 1.0$ across all six models), confirming that SBS captures the concentration ordering rather than a normalization artifact.}
+Replacing SBS with the unnormalized OLS slope preserves the model ranking exactly (Spearman $\rho = 1.0$ across all six models), confirming that SBS captures the concentration ordering rather than a normalization artifact.
 
 \noindent\textbf{Semantic Alignment Score (SAS).}
 $$\text{SAS} = \frac{1}{N} \sum_{i=1}^{N}
@@ -254,12 +254,13 @@ even under attack.
 \section{Human Validation Study}
 \label{app:human}
 
-\red{To verify that the pipeline's severity labels reflect human perception rather than model self-consistency, we conduct a blinded human validation study on 500 stratified prompt--image pairs sampled from \dataname, judged by three independent annotators.
+To verify that the pipeline's severity labels reflect human perception rather than model self-consistency, we conduct a blinded human validation study on 500 stratified prompt--image pairs sampled from \dataname, judged by three independent volunteer annotators.
 Because the central claims hinge on precise discrimination at the L1--L2 boundary, 60\% of the annotation budget is concentrated there (150 pairs at L1 and 150 at L2), with the remaining 200 pairs drawn across L0 and L3.
-Annotators receive the image together with the category-specific escalation rules and assign a severity verdict without seeing the pipeline's label; we compare the pipeline label against the human consensus vote.
+Annotators are instructed with the category-specific escalation rules and assign a severity verdict to each image without seeing the pipeline's label; the consensus label is the majority vote among the three annotators, and we compare the pipeline label against it.
 Overall agreement reaches Cohen's $\kappa = 0.73$ (substantial), indicating that the severity rungs and the automated ensemble's verdicts are grounded in human judgment rather than in rubric self-consistency alone.
-\red{The design is powered per level rather than per category: binomial standard error at a boundary level is at most $4.1$ pp (n = 150), supporting the per-level analyses of Sections 5--6.}
-Annotators were informed of the nature of the content before participation and could skip any sample at will.}
+Agreement is also stable among annotators themselves: mean pairwise quadratic-weighted Cohen's $\kappa$ is $0.72$ (range $0.62$--$0.81$ across the three annotator pairs), so the labels do not rest on any single annotator's judgment.
+The design is powered per level rather than per category: binomial standard error at a boundary level is at most $4.1$ pp (n = 150), supporting the per-level analyses of Sections 5--6.
+Annotators were informed of the nature of the content before participation and could skip any sample at will.
 
 \section{Prompt Templates}
 \label{app:prompts}
@@ -410,7 +411,7 @@ Reference images are generated using four T2I models across different
 severity levels to ensure visual diversity in the benchmark.
 \Tab{\ref{app:tab:genconfig}} summarizes the generation configuration
 for each model.
-\red{For the evaluation in Section 5, all evaluated T2I models use the default schedulers and guidance settings of their official releases, and two images are sampled per prompt as described there.}
+For the evaluation in Section 5, all evaluated T2I models use the default schedulers and guidance settings of their official releases, and two images are sampled per prompt as described there.
 
 \begin{table}[tb]
 \centering
@@ -516,7 +517,7 @@ Copyright and PID show the lowest co-occurrence with other categories, confirmin
 \label{app:collapse}
 %-------------------------------------------------------
 
-Methods marked ``--'' in \Tab{\ref{tab:defense}} experienced training
+The method marked ``--'' in \Tab{\ref{tab:defense}} experienced training
 collapse when applied to Social (Hate Speech, Misinformation, Public
 Figures) and Legal (Illegal Activities, Copyright, PID) categories.
 We identify two distinct failure modes.
@@ -524,11 +525,13 @@ We identify two distinct failure modes.
 \textbf{Concept diffuseness.} Unlike Sexual Content or Violence,
 which are visually concentrated and representable by a small set of
 prototypical activations, Social and Legal concepts are semantically
-distributed across thousands of visual contexts. RECE and UCE operate
-by localizing concept-specific weight directions via low-rank
-decomposition; when the target concept lacks a compact representation
-in weight space, the optimization objective becomes ill-conditioned
-and diverges.
+distributed across thousands of visual contexts. RECE localizes
+concept-specific directions in weight space for iterative editing;
+when the target concept lacks a compact representation in weight
+space, its objective becomes ill-conditioned and the edit diverges.
+Closed-form editors such as UCE cannot diverge on these concepts, but
+their erasure strength is correspondingly more limited, consistent
+with RECE's stronger NSFW suppression in \Tab{\ref{tab:defense}}.
 
 
 \textbf{Semantic entanglement.} Political misinformation and public
@@ -565,7 +568,7 @@ weapons). For each model-defense configuration, we report the
 prompts that the defended model refuses to generate or generates a
 substantially degraded output for, as measured by SAS falling below
 0.25.
-\red{ORR is thus a combined refusal-and-degradation rate; the SAS threshold is an operational proxy, not a direct detector of refusals.}
+ORR is thus a combined refusal-and-degradation rate; the SAS threshold is an operational proxy, not a direct detector of refusals.
 
 \begin{table}[tb]
 \centering
@@ -700,7 +703,11 @@ HGR or SAS results.
 \label{app:remediation}
 %-------------------------------------------------------
 
-\red{The severity-aware filter of Section~\ref{sec:filter} is trained as follows. Qwen2.5-VL-7B is fine-tuned with LoRA on the vision--language projection on (image, risk explanation) $\rightarrow$ YES/NO pairs, with level-balanced oversampling of L1--L2 samples. Ladders are split 80/10/10 with ladder integrity: all four rungs of a ladder remain in one split, preventing subject leakage between train and test. Evaluation metrics match Section~6.4 (per-level detection, FPR@L0, FBR, AUC, severity sensitivity); results appear as the bottom row of Table~\ref{tab:filter}, and the baselines are re-evaluated on the same held-out test split.}
+The severity-aware filter of Section~\ref{sec:filter} is trained as follows. Qwen2.5-VL-7B is fine-tuned with LoRA on the language-model projections (rank 16, $\alpha = 32$; 47.6M trainable parameters) on (image, risk explanation) $\rightarrow$ YES/NO pairs, with level-balanced oversampling of L1--L2 samples. Ladders are split 80/10/10 (seed 42) with ladder integrity: all four rungs of a ladder remain in one split, preventing subject leakage between train and test. The checkpoint is selected on the validation split by boundary detection penalized by the L0 false-alarm rate. Evaluation metrics match Section~6.4 (per-level detection, FPR@L0, FBR, and severity sensitivity), computed on the 416 test-split pairs. Results appear as the bottom row of Table~\ref{tab:filter}: the tuned row is measured on the 10\% held-out test split, while baseline rows use the full reference set (which contains the test split) with identically computed rates, as stated in the table footnote. As a protocol-matched anchor, the zero-shot backbone evaluated with the same guidance-bearing prompt on the same test split reaches FBR 0.522 (L1 detection 0.240), confirming that the gains come from ladder-data training rather than the guidance prompt alone.
+
+\textbf{Fresh-generation (deployment-regime) evaluation.} To test whether the tuned filter transfers beyond benchmark-resident reference images, we regenerate the full held-out test split (104 ladders, four rungs per ladder) with all six evaluated T2I models under each model's default inference settings with native safety checkers disabled, using the ladder seed for image $0$ and $\mathrm{seed}{+}1$ for image $1$ (two images per prompt; 4,992 images in total). Degenerate all-black outputs are numeric failures of the generation stack rather than safety-relevant content; they are excluded from scoring and reported per rung (black rates: HiDream 41.8\%, Janus-Pro 2.2\%, others 0\%). Because the failure rate is statistically uniform across rungs and arises from numeric instability independent of prompt content, this exclusion is content-neutral; per-rung scored support remains $n \geq 115$ for HiDream and $n \geq 198$ for every other model. \Tab{\ref{tab:filter_fresh}} reports per-model results. On the remaining 4,626 images the tuned filter attains FPR@L0 of 4.0\%, detection of 94.7\%/99.0\%/99.0\% on L1--L3, and pooled FBR of 2.4\% (per-model range 2.2--2.7\%), versus FBR 65.3\% for the matched zero-shot anchor on the same images. Deployment-regime bypass rates therefore match the benchmark-resident ones (FBR 2.2\%), so the Insight~6 claim does not rely on the favorable reference-image setting. Per-image verdicts and per-model metrics are released with the benchmark artifacts.
+
+\input{tables/fresh_filter}
 
 \section{Dataset Examples} \label{app:examples}
 

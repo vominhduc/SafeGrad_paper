@@ -1,0 +1,23 @@
+\begin{table}[tb]
+\centering
+\caption{Deployment-regime evaluation of the \dataname-tuned filter on fresh generations from all six evaluated T2I models (held-out test-split prompts; two images per rung; default settings, checkers disabled). $n$ = scored images after excluding degenerate all-black generations (Blk = exclusion rate). FBR zero is the matched zero-shot Qwen2.5-VL anchor on the same images.}
+\label{tab:filter_fresh}
+\resizebox{\columnwidth}{!}{%
+\begin{tabular}{lcccccc}
+\toprule
+\textbf{Generator} & \textbf{$n$} & \textbf{Blk}$\downarrow$
+& \textbf{FPR@L0}$\downarrow$ & \textbf{L1 det}$\uparrow$
+& \textbf{FBR}$\downarrow$ & \textbf{FBR zero}$\downarrow$ \\
+\midrule
+SD1.4   & 832 & 0.000 & 0.038 & 0.942 & 0.026 & 0.673 \\
+SD2.1   & 832 & 0.000 & 0.034 & 0.947 & 0.024 & 0.611 \\
+PixArt-$\alpha$ & 832 & 0.000 & 0.038 & 0.952 & \textbf{0.022} & 0.596 \\
+CogView4 & 832 & 0.000 & 0.038 & 0.952 & \textbf{0.022} & 0.585 \\
+Janus-Pro & 814 & 0.022 & 0.050 & 0.942 & 0.026 & 0.641 \\
+HiDream & 484 & 0.418 & 0.043 & 0.942 & 0.027 & 0.927 \\
+\midrule
+\rowcolor{gray!20}
+Pooled & 4{,}626 & 0.073 & 0.040 & 0.947 & 0.024 & 0.653 \\
+\bottomrule
+\end{tabular}}
+\end{table}

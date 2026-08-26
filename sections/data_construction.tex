@@ -1,7 +1,7 @@
 \section{Adversarial Severity Ladders Pipeline} \label{sec:pipeline}
 
 \subsection{Pipeline Overview}
-We introduce the Adversarial Severity Ladders (ASL) pipeline, an automated construction approach \red{operating under human oversight: the taxonomy, severity definitions, and escalation rules are authored and reviewed by the human authors}, with four advantages over fully human annotation: (1) scale without annotator self-selection bias; (2) programmatic severity calibration via escalation rules, bypassing inter-rater inconsistency ($\kappa < 0.6$) on fine-grained severity judgments~\citep{aroyo2015truth}; (3) deterministic reproducibility given fixed seeds and checkpoints; and (4) no large-scale harmful-content exposure for workers, which carries documented psychological risks~\citep{steiger2021psychological}.
+We introduce the Adversarial Severity Ladders (ASL) pipeline, an automated construction approach operating under human oversight: the taxonomy, severity definitions, and escalation rules are authored and reviewed by the human authors, with four advantages over fully human annotation: (1) scale without annotator self-selection bias; (2) programmatic severity calibration via escalation rules, bypassing inter-rater inconsistency ($\kappa < 0.6$) on fine-grained severity judgments~\citep{aroyo2015truth}; (3) deterministic reproducibility given fixed seeds and checkpoints; and (4) no large-scale harmful-content exposure for workers, which carries documented psychological risks~\citep{steiger2021psychological}.
 The pipeline operates in four stages.
 
 \noindent\textbf{Stage 1: Safe Prompt Generation.}
@@ -9,7 +9,7 @@ For each category, we generate seed safe prompts using Mistral-7B-Instruct~\cite
 Near-duplicate prompts are removed via FAISS clustering on \texttt{all-MiniLM-L6-v2} embeddings (cosine threshold $\geq 0.95$), retaining one representative per cluster.
 
 \noindent\textbf{Stage 2: Risky Prompt Synthesis.}
-Llama-3-70B-Instruct~\citep{llama3herdofmodels} escalates each seed through four severity rungs by modulating risk dimensions (subject, action, context, intensity) per \red{human-authored} category-specific escalation rules.
+Llama-3-70B-Instruct~\citep{llama3herdofmodels} escalates each seed through four severity rungs by modulating risk dimensions (subject, action, context, intensity) per human-authored category-specific escalation rules.
 Qwen2.5-7B-Instruct~\citep{qwen2.5technicalreport} scores each ladder; any transition with inter-level gap $<0.4$ on a 0--3 scale triggers automatic regeneration of the full ladder.
 
 \noindent\textbf{Stage 3: Reference Image Generation.}
@@ -18,19 +18,19 @@ The same model and seed are used for all four rungs within a ladder, isolating s
 
 \noindent\textbf{Stage 4: Verification.}
 Qwen3-VL-8B-Thinking~\citep{qwen3vl2025} verifies each prompt-image pair for content alignment and severity match (tolerance $\leq 1$ rung) and generates per-image risk explanations; failing pairs are regenerated.
-\red{Verification checks per-rung content alignment against each prompt individually; a stricter cross-rung same-subject continuity audit is left for the extended analysis.}
-\red{Note that this verifier is not in tension with the filter failures of Insight 5: verification is a severity-conditioned, description-guided judgment, whereas deployed filters issue unguided binary decisions -- and Insight 6 shows that the guided variant is dramatically more reliable at the boundary.}
+Verification checks per-rung content alignment against each prompt individually; a stricter cross-rung same-subject continuity audit is left for the extended analysis.
+Note that this verifier is not in tension with the filter failures of Insight 5: verification is a severity-conditioned, description-guided judgment, whereas deployed filters issue unguided binary decisions -- and Insight 6 shows that the guided variant is dramatically more reliable at the boundary.
 Ladders without a complete valid set are excluded, yielding 1,026 validated ladders.
 The full pipeline requires approximately 32 GPU-hours on A100 GPUs.
 
 \subsection{Dataset Quality Analysis} \label{sec:quality}
 \Tab{\ref{tab:quality_full}} reports four quality dimensions across all 11 categories.
-\textbf{Severity monotonicity.} Spearman $\rho = 0.962$ between rung index and verifier risk scores \red{measures rubric-internal consistency of the construction pipeline; human grounding of the rung labels is established separately by the blinded validation study ($\kappa = 0.73$; Appendix~\ref{app:human})}.
+\textbf{Severity monotonicity.} Spearman $\rho = 0.962$ between rung index and verifier risk scores measures rubric-internal consistency of the construction pipeline; human grounding of the rung labels is established separately by the blinded validation study ($\kappa = 0.73$; Appendix~\ref{app:human}).
 \textbf{Adversarial stealthiness} (mean stealthy rate 72.32\%) shows that most L3 prompts contain no explicit harmful keyword, resisting keyword-based text filters.
 \textbf{Prompt fluency} (mean PPL@L3 $= 33.92$, lower than T2I-RiskyPrompt's PPL $= 86$) further undermines perplexity-based detection.
 \textbf{Semantic escalation magnitude} (mean $\Delta\theta = 40.23\degree$) quantifies the angular distance from L0 to L3; Hate Speech shows the largest shift ($50.13\degree$) and Copyright the smallest ($31.59\degree$).
 As an independent check, we re-label 100 ladders (400 pairs) with Claude-3.7-Sonnet; the automated evaluator agrees on 96\% of pairs (Cohen's $\kappa = 0.76$).
 
-\red{\noindent\textbf{Lexical diversity.} We audit surface-level lexical diversity over all 4,104 prompts via Self-BLEU ($n = 3,4$) and distinct-$n$ ($n = 1,2$). Cross-ladder text is highly varied (Self-BLEU-4 $= 0.05$, distinct-2 $= 0.89$), ruling out boilerplate or template replication; within ladders, where thematic overlap is expected, Self-BLEU-4 stays bounded at $0.14$ with distinct-2 $= 0.76$. Stage-1 FAISS deduplication thus leaves no residual redundancy.}
+\noindent\textbf{Lexical diversity.} We audit surface-level lexical diversity over all 4,104 prompts via Self-BLEU ($n = 3,4$) and distinct-$n$ ($n = 1,2$). Cross-ladder text is highly varied (Self-BLEU-4 $= 0.05$, distinct-2 $= 0.89$), ruling out boilerplate or template replication; within ladders, where thematic overlap is expected, Self-BLEU-4 stays bounded at $0.14$ with distinct-2 $= 0.76$. Stage-1 FAISS deduplication thus leaves no residual redundancy.
 
 \input{tables/data_quality_full}
