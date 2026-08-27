@@ -39,7 +39,7 @@ This pattern is not an artifact of the pipeline's auto-interpolated L1 anchors: 
 
 \textbf{Insight 2: Uneven safety baked into model weights.}
 \textit{With safety checkers disabled, HGR differences across models reflect safety embedded in their weights through training and RLHF, not external filtering.}
-PixArt-$\alpha$'s fine-tuning suppresses sexual HGR@L3 to 38.7\% vs.\ 59.4\% for violence, but no model's training provides equivalent suppression for hate speech or misinformation; societal harms have been underrepresented in safety fine-tuning data.
+PixArt-$\alpha$'s fine-tuning suppresses sexual HGR@L3 far below violence, but no model's training provides equivalent suppression for hate speech or misinformation; societal harms have been underrepresented in safety fine-tuning data.
 
 \textbf{Residual risk at L0.} All six models show non-zero HGR at the safe rung (0.5--3.3\%), so zero-risk deployment needs output monitoring even for entirely safe prompts.
 
@@ -83,9 +83,11 @@ Measured on the held-out test split with the same protocol, the tuned filter rea
 
 \textbf{Insight 6: The safety gap is trainable-away.}
 \textit{A filter fine-tuned on ladder data recovers the mid-severity band (FBR $0.880 \rightarrow 0.022$ benchmark-resident, $0.024$ on fresh generations; L1 detection 95.2\% resp.\ 94.7\%) while holding false alarms far below the strongest existing filter (FPR@L0 = 3.8\% vs.\ Q16's 55.3\%), converting \dataname from a diagnostic into a mitigation instrument.}
-On fresh generations from all six evaluated models, the tuned filter's FBR stays at 2.4\% versus 65.3\% for its zero-shot backbone (\SuppSec{\ref{app:remediation}}, \SuppTab{\ref{tab:filter_fresh}}), so the lower-bound caveat above excludes the tuned row.
-Transfer is uniform rather than backbone-specific: per-generator FBR ranges only 2.2--2.7\% and L1 detection 94.2--95.2\% across all six model families.
-Nor is it specific to the tuned architecture: Qwen2.5-VL-3B retrained under the identical protocol attains fresh-generation FBR of 0.8\%, and the tuned decision is threshold-robust (both error rates at or below 5\% across a wide operating band, \SuppSec{\ref{app:remediation}}).
+\textbf{Fresh-generation (deployment-regime) validation.} To test the tuned filter under realistic conditions, we regenerate every held-out test-split prompt with all six evaluated T2I models (\emph{not} construction models), using each model's default settings with checkers disabled and the ladder seeds (two images per prompt, 4,992 images in total).
+Degenerate all-black generations (numeric failures of the T2I stack, up to 41.8\% for HiDream and rung-uniform; \SuppSec{\ref{app:remediation}}) are excluded from scoring.
+On the remaining 4,626 images the tuned filter detects 94.7\%/99.0\%/99.0\% of fresh L1--L3 content at a 4.0\% L0 false-positive rate; pooled FBR is 2.4\%, statistically indistinguishable from the 2.2\% reference-regime estimate, versus 65.3\% for the zero-shot backbone (\SuppTab{\ref{tab:filter_fresh}}).
+Per-generator FBR varies only 2.2--2.7\% (L1 detection 94.2--95.2\%), and a Qwen2.5-VL-3B backbone retrained under the identical protocol attains pooled FBR 0.8\%; the tuned decision is also threshold-robust, with both error rates at or below 5\% across a wide operating band of the YES--NO margin threshold (\SuppSec{\ref{app:remediation}}).
+The lower-bound caveat above therefore excludes the tuned row in both regimes.
 
 \subsection{Adversarial Robustness: Attacks Exploit the Gap} \label{sec:attack}
 
