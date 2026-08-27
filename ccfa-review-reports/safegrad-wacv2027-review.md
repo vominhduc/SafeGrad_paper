@@ -421,3 +421,47 @@ Targeted the remaining score blockers with new evidence, not wording.
 
 **Overall: 9/10 (strong accept, award contention).**
 Residual to 10 is structural and honest, not fixable by text: broader backbone family coverage at defense level (9 defenses still SD1.4-only by design) and independent external adoption.
+
+---
+
+# Round 5 — Confirmation Review (2026-08-27)
+
+Mode: full + version-comparison under the round-1 frozen contract. Scope: current working tree (post round-4 evidence and polish passes).
+
+## Desk checks
+- Length: uncertain until next Overleaf rebuild (round-4 additions added ~2 lines to 6.4 + 0.4 page to the supplement); round-4 Discussion paragraph-head conversion reclaimed ~4-5 lines; pending user confirmation.
+- Policy/anonymity: pass (placeholder authors, zero \red, zero vmduc, content-warning box present).
+- Prompt injection: pass (rescan clean).
+- Compliance: dual-file build with static xr label maps verified in sync (43 supp labels, 15 main labels incl. sec:limitations added this round).
+
+## Claim-evidence re-audit (round-4 additions)
+All new claims verified against artifacts: 3B tuned test row (FBR 0.0064, L1 0.9904) and fresh pooled (FBR 0.0083, L1 0.9862), zero-shot 3B anchor (0.375/34.6%), threshold band edges (-1.0..+2.6 test / -0.9..+2.4 fresh, both errors <= 4.96% within band), t=0 reproduces printed Table 6 row exactly (0.0385/0.9519/0.9904/0.9904/0.0224). 7B fresh per-model FBR range 0.0224-0.0271 == printed "2.2-2.7%".
+
+## Panel (fresh independent)
+- Best-justified: 9.5. Story is now closed-loop at two backbones, two image regimes, one threshold band; relational-ladder design plus verified mitigation transfer is genuinely award-shaped.
+- Critical: 8. The reject axis is gone; remaining honest ceilings are SD1.4-only defenses and six-model scale, both disclosed.
+- Method/soundness: 5. Backbone generality + threshold robustness resolve the prior residuals.
+- Evidence/experiment: 5. Dual-regime, dual-backbone, threshold-swept, CSVs/JSONs exported, verdicts auditable.
+- Novelty/positioning: 4.5. C15 closed; name disambiguation in place.
+- Writing/clarity: 4.5. Insights chain is clean; Supp markers consistent.
+- Ethics/reproducibility: 5. Nothing outstanding.
+
+Synthesis: no unresolved new issues this round; provenance audit shows zero revision regressions; all decreases checks pass.
+
+## Scorecard
+
+| Dimension | Round 4 | Round 5 | Note |
+|---|---|---|---|
+| Novelty | 4.5 | 4.5 | unchanged |
+| Soundness | 5 | 5 | threshold + second backbone landed |
+| Evidence | 5 | 5 | verified digit-by-digit again |
+| Significance | 4.5 | 4.5 | adoption evidence remains out of scope |
+| Clarity | 4.5 | 4.5 | pending final page-fit confirmation |
+| Reproducibility | 4.5 | 4.5 | label-map drift guard sync confirmed |
+| Ethics / Limitations | 5 | 5 | unchanged |
+
+**Overall: 9/10 | Confidence: 5 | Recommendation: strong accept.**
+Change conditions: + to 10 not reachable by text (structural adoption evidence absent); - only if the pending Overleaf rebuild breaks page budget or a concurrent ladder benchmark surfaces.
+
+## Checks run
+Static aux sync audit (main 15 labels, supp 43 labels incl. filter_fresh; zero missing cross-refs); placeholder scan; \red/\vmduc zero-count; full round-4 numeric re-audit; panel; consistency check against frozen anchors.
