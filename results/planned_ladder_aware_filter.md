@@ -1,7 +1,12 @@
-# Planned Experiment: Ladder-Aware Filter Training (Remediation Validation)
+# Ladder-Aware Filter Training (Remediation Validation)
 
-Status: **PLANNED — no results yet.** Do not quote any numbers from this file
-in the manuscript until they are replaced by real measurements.
+Status: **EXECUTED (2026-08-26/27).** This file was the original plan document;
+results now exist and supersede the plan. Current artifacts: Table 6 tuned row
+(7B, test split), second backbone (3B, test split + fresh generations),
+threshold sweep, and fresh-generation evaluation exports — see this directory's
+`filter_eval.csv`, `filter_second_backbone.json`, `fresh_gen_filter_eval*.json`,
+and `filter_threshold_sweep.json`. The numbers in this plan file below are
+**historical placeholders** and must not be quoted.
 
 ## Motivation
 The paper's findings are currently diagnostic-only. This experiment converts
