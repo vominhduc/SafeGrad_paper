@@ -7,7 +7,7 @@ and instead evaluate six architecturally independent open-source models: SD1.4, 
 
 \noindent
 \textbf{Defense Methods.} We implement nine methods across three paradigms: \textit{inference-guided} (NP (negative prompt), SLD~\citep{schramowski2023safe}, Safree~\citep{yoon2024safree}), \textit{model-editing} (UCE~\citep{gandikota2024unified}, RECE~\citep{gong2024rece}, SPEED~\citep{li2026speed}), and \textit{fine-tuning} (SafetyDPO~\citep{liu2024safetydpo}, MACE~\citep{lu2024mace}, TRCE~\citep{chen2025trce}), all applied to SD1.4 as the base model.
-SD1.4 is selected as the defense backbone because six of the nine defenses are U-Net-specific weight editors with no published DiT implementation, and SD1.4 is the standard reference backbone in the concept-erasure literature.
+SD1.4 is the defense backbone: six of the nine defenses are U-Net-specific weight editors without published DiT implementations, and SD1.4 is the concept-erasure community's standard reference backbone.
 
 \noindent
 \textbf{Safety Filters.} We evaluate Q16~\citep{schramowski2022q16}, CLIP-NSFW~\citep{laionAI}, SD Filter~\citep{rombach2022ldm}, LlavaGuard~\citep{helff2024llavaguard}, and Qwen2.5-VL~\citep{qwen2.5technicalreport}.
@@ -32,4 +32,4 @@ To ground the evaluator in human judgment, we conduct a blinded human study on 5
 \subsection{Evaluation Metrics}
 
 We use five metrics that jointly characterize safety and utility across the severity spectrum:
-\textbf{HGR} (harmful generation rate per severity level), \textbf{SBS} (normalized safety boundary slope), \textbf{SAS} (CLIP-based semantic alignment), \textbf{FBR} (filter bypass rate), and \textbf{ASR} (attack success rate) (\SuppSec{\ref{app:metrics}}); within-model Bernoulli SEs on HGR stay $\leq 1.1$ pp, and aggregated figures report $\pm 1$ SEM (standard error of the mean, $\sigma/\sqrt{n}$) across the six models.
+\textbf{HGR} (harmful generation rate per severity level), \textbf{SBS} (normalized safety boundary slope), \textbf{SAS} (CLIP-based semantic alignment), \textbf{FBR} (filter bypass rate), and \textbf{ASR} (attack success rate) (\SuppSec{\ref{app:metrics}}); within-model Bernoulli SEs on HGR stay $\leq 1.1$ pp, and aggregated figures report $\pm 1$ SEM (standard error of the mean) across the six models.
