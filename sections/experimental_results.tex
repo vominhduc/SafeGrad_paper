@@ -35,7 +35,7 @@ This pattern is not an artifact of the pipeline's auto-interpolated L1 anchors: 
 
 \Tab{\ref{tab:t2i_models}} reports the per-category HGR matrix for the six models together with the SBS and $\Delta_B$ summaries.
 
-\textbf{Reading note on SBS.} SBS measures failure concentration, not safety: the highest-SBS models (HiDream 0.80, Janus-Pro 0.74) also produce the highest absolute HGR@L3 (all six models $\geq$ 47.5\%); read SBS jointly with absolute HGR, never standalone.
+\textbf{Reading note on SBS.} SBS captures how sharply failure concentrates at the boundary, not how safe a model is: the two highest-SBS models (HiDream 0.80, Janus-Pro 0.74) are also the two most harmful in absolute terms at L3, and all six models reach at least 47.5\% HGR@L3. Read SBS only alongside absolute HGR.
 
 \textbf{Insight 2: Uneven safety baked into model weights.}
 \textit{With safety checkers disabled, HGR differences across models reflect safety embedded in their weights through training and RLHF, not external filtering.}
@@ -53,17 +53,18 @@ Construction--evaluation backbone overlap is audited in \SuppSec{\ref{app:backbo
 
 \textbf{Insight 3: Defenses steepen the severity gradient.}
 \textit{All defenses achieve higher \emph{relative} suppression at L1 than at L3; yet absolute residual harm still peaks at L3, so the safety gap persists in absolute terms.}
-With relative reduction $\rho_\ell = (\mathrm{HGR}_{\mathrm{base}}(\ell) - \mathrm{HGR}_{\mathrm{def}}(\ell))/\mathrm{HGR}_{\mathrm{base}}(\ell)$, all three paradigms suppress L1 more than L3 on NSFW content: inference-guided (NP, SLD, Safree) reaches $\bar{\rho}_{\mathrm{L1}} = 57.9\%$ vs.\ $\bar{\rho}_{\mathrm{L3}} = 34.0\%$, model-editing (UCE, SPEED) $46.9\%$ vs.\ $27.4\%$, fine-tuning (SafetyDPO, MACE, TRCE) $70.1\%$ vs.\ $49.5\%$.
+Writing $\rho_\ell = (\mathrm{HGR}_{\mathrm{base}}(\ell) - \mathrm{HGR}_{\mathrm{def}}(\ell))/\mathrm{HGR}_{\mathrm{base}}(\ell)$ for a defense's relative HGR reduction at level $\ell$, all three paradigms suppress L1 more than L3 on NSFW content: inference-guided (NP, SLD, Safree) reaches $\bar{\rho}_{\mathrm{L1}} = 57.9\%$ vs.\ $\bar{\rho}_{\mathrm{L3}} = 34.0\%$, model-editing (UCE, SPEED) $46.9\%$ vs.\ $27.4\%$, fine-tuning (SafetyDPO, MACE, TRCE) $70.1\%$ vs.\ $49.5\%$.
 For example, MACE reduces NSFW L1 HGR from 25.4\% $\to$ 3.9\% ($\rho_{\mathrm{L1}} = 84.6\%$) and L3 from 73.8\% $\to$ 22.6\% ($\rho_{\mathrm{L3}} = 69.4\%$), raising the L3:L1 ratio from $2.9\times$ to $5.8\times$: the strongest defense nearly closes the L1 gap on NSFW while residual L3 harm dominates.
 For Legal and Social categories, inference-guided methods are near-inert at L3 ($\bar{\rho}_{\mathrm{L3}} = 4.8\%$ and $9.2\%$, respectively) while still reducing L1 by 15--30\%, leaving residual L3 HGR between 46.7\% and 55.3\%.
 Critically, this finding requires \dataname's graded structure: a binary benchmark would report MACE as a strong defense ($\rho_{\mathrm{L3}} = 69\%$ on NSFW) while missing this skew entirely.
 
 \textbf{Insight 4: The Utility--Safety Tradeoff Is Dominated by Two Methods.}
-\textit{Under our joint $\Delta$HGR/SAS criterion, TRCE Pareto-dominates six of the seven remaining methods ($\Delta\mathrm{HGR} = 0.307$ at an SAS cost of 0.008, vs.\ e.g.\ SLD's $0.241$ reduction at a cost of $0.018$); MACE occupies a distinct extreme point on the tradeoff curve.}
-TRCE ($\Delta\mathrm{HGR} = 0.307$, SAS drop $= -0.008$) outperforms NP, SLD, Safree, UCE, SPEED, and SafetyDPO on both metrics at once (without discounting SLD's or SafetyDPO's documented competitiveness elsewhere); RECE collapses on Legal and Social through concept diffuseness and semantic entanglement (\SuppSec{\ref{app:collapse}}; e.g., MACE's erasure of Public Figures degrades benign-portrait SAS by 40.1\%).
-The sole remaining tradeoff is between TRCE and MACE: MACE gains $+68\%$ relative HGR reduction ($\Delta\mathrm{HGR} = 0.518$) at the cost of $11\times$ the SAS penalty and $2.7\times$ the over-refusal rate (ORR 34.2\% vs.\ 12.8\%; \SuppSec{\ref{app:overrefusal}}).
-Excluding MACE, the correlation between defense strength and utility cost is $r = 0.04$; including it, $r = 0.923$: the apparent general tradeoff is an artifact of one method's aggressive concept erasure strategy.
-The TRCE--SLD margin ($6.6$ pp) far exceeds the worst-case Bernoulli SEM ($\lesssim 0.5$ pp); the dominance is not a sampling artifact.
+\textit{Under our joint $\Delta$HGR/SAS criterion, TRCE Pareto-dominates six of the seven remaining methods; MACE occupies a distinct extreme point on the tradeoff curve.}
+TRCE reduces HGR by $0.307$ at essentially no utility cost (SAS drop $-0.008$, beating NP, SLD, Safree, UCE, SPEED, and SafetyDPO on both metrics at once (without discounting SLD's or SafetyDPO's documented competitiveness elsewhere).
+RECE is excluded: it collapses on Legal and Social through concept diffuseness and semantic entanglement (\SuppSec{\ref{app:collapse}}; e.g., MACE's erasure of Public Figures degrades benign-portrait SAS by 40.1\%).
+The remaining tradeoff is between TRCE and MACE: MACE erases more harm ($\Delta\mathrm{HGR} = 0.518$, $+68\%$ relative reduction) but pays $11\times$ the SAS penalty and $2.7\times$ the over-refusal rate (ORR 34.2\% vs.\ 12.8\%; \SuppSec{\ref{app:overrefusal}}).
+Notably, without MACE there is almost no tradeoff at all: defense strength and utility cost are uncorrelated ($r = 0.04$); including MACE, $r$ jumps to $0.923$: the apparent general tradeoff is an artifact of MACE's aggressive erasure.
+The TRCE--SLD margin ($6.6$ pp) also far exceeds the worst-case Bernoulli SEM ($\lesssim 0.5$ pp), so the dominance is not a sampling artifact.
 
 \subsection{Safety Filter Evaluation: Blind to the Boundary} \label{sec:filter}
 
@@ -96,4 +97,5 @@ We further evaluate the recent perception-guided jailbreak (PGJ)~\citep{huang202
 
 \textbf{Insight 7: The safety gap is an active attack surface.}
 \textit{A 55\% ASR floor across all five methods against the best-defended configuration confirms that the safety gap is not a passive evaluation artifact but a structurally exploitable channel.}
-White-box gradient attacks trail (UnlearnDiffAtk 61.5\%, P4D 55.6\% vs.\ 63.4--68.7\% for the query-based and multimodal families) because token optimization transfers least well to defended configurations, while query-based and multimodal attacks probe the text-filter $\to$ visual-output interface identified in Insight 5: prompts that evade text-level detection still escalate visually, and neither TRCE nor LlavaGuard closes this channel.
+White-box gradient attacks trail the query-based and multimodal families (UnlearnDiffAtk 61.5\%, P4D 55.6\% vs.\ 63.4--68.7\%), because token optimization transfers least well to defended configurations.
+The stronger attack families instead probe the text-filter $\to$ visual-output interface identified in Insight 5: prompts that evade text-level detection still escalate visually, and neither TRCE nor LlavaGuard closes this channel.
