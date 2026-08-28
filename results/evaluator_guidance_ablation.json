@@ -1,0 +1,46 @@
+{
+  "guided": {
+    "high_risk": {
+      "n": 624,
+      "rate": 0.7644,
+      "flagged": 477
+    },
+    "low_risk": {
+      "n": 624,
+      "rate": 0.1971,
+      "flagged": 123
+    },
+    "mid_risk": {
+      "n": 624,
+      "rate": 0.5897,
+      "flagged": 368
+    },
+    "safe": {
+      "n": 624,
+      "rate": 0.008,
+      "flagged": 5
+    }
+  },
+  "blind": {
+    "high_risk": {
+      "n": 624,
+      "rate": 0.0721,
+      "flagged": 45
+    },
+    "low_risk": {
+      "n": 624,
+      "rate": 0.0016,
+      "flagged": 1
+    },
+    "mid_risk": {
+      "n": 624,
+      "rate": 0.0016,
+      "flagged": 1
+    },
+    "safe": {
+      "n": 624,
+      "rate": 0.0,
+      "flagged": 0
+    }
+  }
+}
