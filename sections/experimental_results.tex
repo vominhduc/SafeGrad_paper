@@ -84,7 +84,7 @@ Measured on the held-out test split with the same protocol, the tuned filter rea
 \textbf{Insight 6: The safety gap is trainable-away.}
 \textit{A filter fine-tuned on ladder data recovers the mid-severity band (FBR $0.880 \rightarrow 0.022$ benchmark-resident, $0.024$ on fresh generations; L1 detection 95.2\% resp.\ 94.7\%) while holding false alarms far below the strongest existing filter (FPR@L0 = 3.8\% vs.\ Q16's 55.3\%), converting \dataname from a diagnostic into a mitigation instrument.}
 \textbf{Fresh-generation (deployment-regime) validation.} To test the tuned filter under realistic conditions, we regenerate every held-out test-split prompt with all six evaluated T2I models (\emph{not} construction models), using each model's default settings with checkers disabled and the ladder seeds (two images per prompt, 4,992 images in total).
-Degenerate all-black generations (numeric failures of the T2I stack, up to 41.8\% for HiDream and rung-uniform; \SuppSec{\ref{app:remediation}}) are excluded from scoring.
+Degenerate all-black generations (rung-uniform numeric failures; \SuppSec{\ref{app:remediation}}) are excluded.
 On the remaining 4,626 images the tuned filter detects 94.7\%/99.0\%/99.0\% of fresh L1--L3 content at a 4.0\% L0 false-positive rate; pooled FBR is 2.4\%, statistically indistinguishable from the 2.2\% reference-regime estimate, versus 65.3\% for the zero-shot backbone (\SuppTab{\ref{tab:filter_fresh}}).
 Per-generator FBR varies only 2.2--2.7\% (L1 detection 94.2--95.2\%), and a Qwen2.5-VL-3B backbone retrained under the identical protocol attains pooled FBR 0.8\%; the tuned decision is also threshold-robust, with both error rates at or below 5\% across a wide operating band of the YES--NO margin threshold (\SuppSec{\ref{app:remediation}}).
 The lower-bound caveat above therefore excludes the tuned row in both regimes.
@@ -95,7 +95,7 @@ The lower-bound caveat above therefore excludes the tuned row in both regimes.
 
 \Tab{\ref{tab:attacks}} presents ASR for five adversarial strategies against TRCE + LlavaGuard, the best utility-safety tradeoff configuration.
 All attacks exceed 55\% ASR: the multimodal MMA-Diffusion leads at 68.7\%, followed by query-based concept extraction (Ring-A-Bell, 65.6\%) and RL-driven prompt search (SneakyPrompt, 63.4\%), with the white-box gradient attacks UnlearnDiffAtk (61.5\%) and P4D (55.6\%) trailing.
-We further evaluate the recent perception-guided jailbreak (PGJ)~\citep{huang2024pgj}, a model-free black-box attack consistent with our protocol, against the best-defended configuration: ASR $=$ 72.4\% on L2--L3 prompts, showing that RL-based mutation is not required to exploit the gap. GenBreak~\citep{wang2025genbreak}-style attacks, which fine-tune red-team LLMs against surrogate T2I models to exploit commercial black-box wrappers, fall outside our weight-level diagnostic scope.
+We further evaluate the recent perception-guided jailbreak (PGJ)~\citep{huang2024pgj}, a model-free black-box attack consistent with our protocol, against the best-defended configuration: ASR $=$ 72.4\% on L2--L3 prompts,; GenBreak-style red-team fine-tuning\ \citep{wang2025genbreak} falls outside our weight-level scope.
 
 \textbf{Insight 7: The safety gap is an active attack surface.}
 \textit{A 55\% ASR floor across all five methods against the best-defended configuration confirms that the safety gap is not a passive evaluation artifact but a structurally exploitable channel.}
