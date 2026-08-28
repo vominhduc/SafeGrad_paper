@@ -38,7 +38,7 @@ This pattern is not an artifact of the pipeline's auto-interpolated L1 anchors: 
 \textbf{Reading note on SBS.} SBS captures how sharply failure concentrates at the boundary, not how safe a model is: the two highest-SBS models (HiDream 0.80, Janus-Pro 0.74) are also the two most harmful in absolute terms at L3, and all six models reach at least 47.5\% HGR@L3. Read SBS only alongside absolute HGR.
 
 \textbf{Insight 2: Even the safe rung is not safe.}
-\textit{All six models produce non-zero harm at L0 (0.5--3.5\%), and harm rates rise with generative capability; safety posture is baked into model weights through training and alignment data, not supplied by guard rails.}
+\textit{All six models produce non-zero harm at L0 (0.5--3.5\%), and harm rates rise with generative capability; safety posture is baked into model weights through training and alignment data, not supplied by guard rails. Residual L0 rates are of the same order as the evaluator's noise floor (\SuppSec{\ref{app:metrics}}), so the reliable claim is that zero-risk deployment needs output monitoring even for entirely safe prompts.}
 PixArt-$\alpha$'s fine-tuning suppresses sexual HGR@L3 far below violence, but no model's training provides equivalent suppression for hate speech or misinformation; societal harms have been underrepresented in safety fine-tuning data, so zero-risk deployment needs output monitoring even for entirely safe prompts.
 
 Construction--evaluation backbone overlap is audited in \SuppSec{\ref{app:backbone}}; no evaluated model shares an encoder or diffusion backbone with any construction component.
@@ -50,7 +50,7 @@ Construction--evaluation backbone overlap is audited in \SuppSec{\ref{app:backbo
 \Tab{\ref{tab:defense}} presents HGR reduction and SAS degradation for nine defense methods applied to SD1.4 across the NSFW, Legal, and Social groups; all nine target SD1.4's U-Net (DiT porting is future work).
 
 \textbf{Insight 3: Defenses steepen the severity gradient.}
-\textit{All defenses achieve higher \emph{relative} suppression at L1 than at L3; yet absolute residual harm still peaks at L3, so the safety gap persists in absolute terms.}
+\textit{On our common SD1.4 backbone, all evaluated defenses achieve higher \emph{relative} suppression at L1 than at L3; yet absolute residual harm still peaks at L3, so the safety gap persists in absolute terms.}
 Writing $\rho_\ell = (\mathrm{HGR}_{\mathrm{base}}(\ell) - \mathrm{HGR}_{\mathrm{def}}(\ell))/\mathrm{HGR}_{\mathrm{base}}(\ell)$ for a defense's relative HGR reduction at level $\ell$, all three paradigms suppress L1 more than L3 on NSFW content: inference-guided (NP, SLD, Safree) reaches $\bar{\rho}_{\mathrm{L1}} = 60.0\%$ vs.\ $\bar{\rho}_{\mathrm{L3}} = 34.6\%$, model-editing (UCE, SPEED) $49.7\%$ vs.\ $28.0\%$, fine-tuning (SafetyDPO, MACE, TRCE) $71.7\%$ vs.\ $50.0\%$.
 For example, MACE reduces NSFW L1 HGR from 26.9\% $\to$ 3.9\% ($\rho_{\mathrm{L1}} = 85.4\%$) and L3 from 74.5\% $\to$ 22.6\% ($\rho_{\mathrm{L3}} = 69.6\%$), raising the L3:L1 ratio from $2.8\times$ to $5.8\times$.
 For Legal and Social categories, inference-guided methods stay weak at L3 ($\bar{\rho}_{\mathrm{L3}} = 13.1\%$ and $21.9\%$, respectively) while still reducing L1 by 40--46\%, leaving residual L3 HGR between 46.6\% and 55.4\%.
@@ -75,7 +75,7 @@ The TRCE--SLD margin ($9.7$ pp) also far exceeds the worst-case Bernoulli SEM ($
 \textit{In their default unguided binary configuration, evaluated filters fail to track severity: most show nearly flat detection rates from L0 to L3, and the only one that rises (Q16, 55.3\%$\to$67.2\%) does so while flagging over half of safe images.}
 Q16, the strongest single filter, rises only from 55.3\% detection at L0 to 67.2\% at L3 (11.9 pp), while CLIP-NSFW misses 75\% of L3 content.
 Q16 also flags 55.3\% of safe images as harmful (FPR@L0 = 0.553); Qwen2.5-VL nearly never false-alarms (FPR = 0.7\%) but misses 88\% of harmful content (FBR = 0.880).
-Filters are thus not calibrated to severity and cannot separate safe from harmful at boundary levels.
+Filters are thus not calibrated to severity and cannot separate safe from harmful at boundary levels; fully blind evaluation is even flatter (0.2\%/0.2\%/7.2\% at L1--L3; \SuppSec{\ref{app:metrics}}).
 
 The gap is diagnosable, but is it closable? As a remediation check, we fine-tune Qwen2.5-VL-7B with LoRA on (image, risk explanation) $\rightarrow$ YES/NO pairs under a ladder-respecting 80/10/10 split (\SuppSec{\ref{app:remediation}}).
 Measured on the held-out test split with the same protocol, the tuned filter reaches \textbf{95.2\%} detection at L1 with a \textbf{3.8\%} L0 false-positive rate, cutting the overall bypass rate from 0.880 (zero-shot backbone) to \textbf{0.022} (\Tab{\ref{tab:filter}}, bottom row).
@@ -97,6 +97,6 @@ All attacks exceed 55\% ASR: the multimodal MMA-Diffusion leads at 68.7\%, follo
 We further evaluate the recent perception-guided jailbreak (PGJ)~\citep{huang2024pgj}, a model-free black-box attack consistent with our protocol, against the best-defended configuration: ASR $=$ 72.4\% on L2--L3 prompts; GenBreak-style red-team fine-tuning\ \citep{wang2025genbreak} falls outside our weight-level scope.
 
 \textbf{Insight 7: The safety gap is an active attack surface.}
-\textit{A 55\% ASR floor across all five methods against the best-defended configuration confirms that the safety gap is not a passive evaluation artifact but a structurally exploitable channel.}
+\textit{A 55\% ASR floor across all five methods against the best-defended configuration, measured under our policy-guided evaluator (results would be lower under a stricter blind judge), confirms that the safety gap is not a passive evaluation artifact but a structurally exploitable channel.}
 White-box gradient attacks trail the query-based and multimodal families (UnlearnDiffAtk 61.5\%, P4D 55.6\% vs.\ 63.4--68.7\%), because token optimization transfers least well to defended configurations.
 The stronger attack families instead probe the text-filter $\to$ visual-output interface identified in Insight 5: prompts that evade text-level detection still escalate visually, and neither TRCE nor LlavaGuard closes this channel.
