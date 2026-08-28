@@ -5,8 +5,8 @@ We present \textbf{\dataname}, a benchmark for boundary-aware safety evaluation 
 Each ladder escalates through four rungs (Safe, Low-risk, Mid-risk, High-risk) with paired prompts, reference images, and risk explanations, all constructed automatically by our Adversarial Severity Ladders (ASL) pipeline without manual authoring.
 Using \dataname, we evaluate 6 T2I models, 9 defense methods, 5 safety filters, and 6 adversarial attack strategies, yielding 7 insights into the T2I safety ecosystem.
 Our central finding is a universal safety gap: existing mechanisms are calibrated for high-risk (L3) violations while leaving the low-to-mid-risk (L1--L2) regime largely undefended, a failure mode invisible to binary benchmarks.
-A severity-aware filter fine-tuned on ladder data attains 95.2\% detection at L1 with a 3.8\% L0 false-positive rate, cutting the overall bypass rate from 88.0\% to 2.2\% and outperforming all five baselines on bypass and boundary detection while keeping false alarms within 3.1 points of the lowest-false-alarm baseline.
-The result transfers to fresh generations from all six evaluated models (bypass $\leq$ 2.7\%), confirming the diagnosed gap is trainable rather than intrinsic.
+A severity-aware filter fine-tuned on ladder data cuts the bypass rate from 88.0\% to 2.2\% at L1, outperforming all five baselines and transferring to fresh generations from every evaluated model.
+The diagnosed gap is therefore trainable rather than intrinsic to the models.
 \dataname and the ASL pipeline will be publicly released to support boundary-aware safety research.
 
 \end{abstract}
