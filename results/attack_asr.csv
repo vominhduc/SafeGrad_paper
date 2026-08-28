@@ -4,4 +4,4 @@ Ring-A-Bell,65.6,
 UnlearnDiffAtk,61.5,
 MMA-Diffusion,68.7,
 P4D,55.6,
-PGJ,72.4,recent model-free black-box attack evaluated separately; excluded from the AVG-of-five comparison
+PGJ,72.4,evaluated separately as a recency check against our protocol; excluded from the AVG-of-five comparison
