@@ -612,42 +612,47 @@ generation capability at the cost of weaker safety coverage.
 \label{app:cultural}
 %-------------------------------------------------------
 
-To characterize the Western-centric limitation of SafeGrad concretely,
-we conduct a qualitative analysis of the Public Figures and Copyright
-categories using non-Western entities. We construct 50 additional
-prompt-image pairs per category using non-Western subjects: prominent
-political figures from East Asia, South Asia, and the Middle East for
-Public Figures; and Japanese manga characters, Bollywood film imagery,
-and Chinese animated properties for Copyright.
+To probe the Western-centric scope of \dataname concretely, we build a
+matched two-arm probe for the Public Figures and Copyright categories:
+50 L3-anchored prompt templates per arm (fake arrests and public scandals
+over named real-world figures for Public Figures; replication of specific
+characters, frames, and logos for Copyright), instantiated once with
+Western entities (US/UK/EU/AU) and once with non-Western entities (East
+Asian, South Asian, and Middle Eastern figures and IP), with identical
+scenario templates across arms. Each prompt is generated with all six
+evaluated models (one image per prompt; default settings, checkers
+disabled) and scored by the full evaluator ensemble with majority vote
+($n=300$ per arm; per-image verdicts released with the artifacts).
 
-\Tab{\ref{app:tab:cultural}} compares L3 HGR between Western and
-non-Western entities across both categories, averaged over all six
-evaluated models.
+\Tab{\ref{app:tab:cultural}} compares the pooled flagged-harmful rates.
 
 \begin{table}[h]
 \centering
-\caption{L3 HGR (\%) for Western vs.\ non-Western entities in
-Public Figures and Copyright categories, averaged over all 6 models.}
+\caption{Harmful-content rates (\%) for matched L3 probe prompts with
+Western vs.\ non-Western entities, pooled over all six evaluated models
+($n=300$ per arm).}
 \label{app:tab:cultural}
 \begin{tabular}{lcc}
 \toprule
 \textbf{Category} & \textbf{Western} & \textbf{Non-Western} \\
 \midrule
-Public Figures & 64.9 & 78.3 \\
-Copyright      & 72.9 & 84.1 \\
+Public Figures & 11.3 & 7.0 \\
+Copyright      & 31.3 & 25.7 \\
 \bottomrule
 \end{tabular}
 \end{table}
 
-Non-Western entities consistently achieve higher L3 HGR than Western
-equivalents, by 13.4 percentage points for Public Figures and 11.2
-points for Copyright. This gap likely reflects training data imbalance:
-non-Western public figures and IP are underrepresented in the safety
-fine-tuning datasets used by all evaluated models, resulting in weaker
-concept-specific suppression. These results motivate a future
-multilingual, multi-cultural extension of SafeGrad incorporating
-culturally diverse severity calibration and non-English prompt
-construction across a broader range of legal and ethical frameworks.
+Contrary to the stylized assumption that non-Western content escapes
+safety mechanisms, Western-entity prompts are flagged \emph{more} often
+in both categories ($-4.3$ and $-5.7$ pp, respectively): the evaluator
+ensemble is more familiar with Western-framed risk descriptions and
+Western-provenance content, while non-Western depictions pass detection
+more often. We read this not as evidence that non-Western content is
+safer, but as a scope warning: cross-cultural safety evaluation remains
+under-instrumented, and \dataname's severity calibration, which is
+Western-policy-grounded, should be re-derived for other jurisdictions
+before interpretation is exported. These findings motivate a future
+multilingual extension with culturally calibrated severity anchors.
 
 
 %-------------------------------------------------------
