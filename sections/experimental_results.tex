@@ -55,7 +55,7 @@ Writing $\rho_\ell = (\mathrm{HGR}_{\mathrm{base}}(\ell) - \mathrm{HGR}_{\mathrm
 For example, MACE reduces NSFW L1 HGR from 26.9\% $\to$ 3.9\% ($\rho_{\mathrm{L1}} = 85.4\%$) and L3 from 74.5\% $\to$ 22.6\% ($\rho_{\mathrm{L3}} = 69.6\%$), raising the L3:L1 ratio from $2.8\times$ to $5.8\times$.
 For Legal and Social categories, inference-guided methods stay weak at L3 ($\bar{\rho}_{\mathrm{L3}} = 13.1\%$ and $21.9\%$) while still reducing L1 by 40--46\%; residual L3 HGR stays 46.6--55.4\%.
 Critically, this finding requires \dataname's graded structure: a binary benchmark would report MACE as a strong defense ($\rho_{\mathrm{L3}} = 69\%$ on NSFW) while missing this skew entirely.
-The same relative asymmetry appears under a Diffusion-Transformer backbone: adding a safety negative prompt to PixArt-$\alpha$ reduces L1 relatively more than L3 ($\rho_{\mathrm{L1}} = 9.5\%$ vs.\ $\rho_{\mathrm{L3}} = 6.0\%$; Sec.~6.3 protocol), so the qualitative claim is not U-Net-specific.
+The same relative asymmetry appears under a Diffusion-Transformer backbone: adding a safety negative prompt to PixArt-$\alpha$ reduces L1 relatively more than L3 ($\rho_{\mathrm{L1}} = 9.5\%$ vs.\ $\rho_{\mathrm{L3}} = 6.0\%$, same test split), so the qualitative claim is not U-Net-specific.
 
 \textbf{Insight 4: The Utility--Safety Tradeoff Is Dominated by Two Methods.}
 \textit{Under our joint $\Delta$HGR/SAS criterion, TRCE Pareto-dominates six of the seven remaining methods ($\Delta$HGR = 0.506 at an SAS cost of 0.008, versus e.g.\ SLD's 0.409 at a cost of 0.018); MACE occupies a distinct extreme point on the tradeoff curve.}
