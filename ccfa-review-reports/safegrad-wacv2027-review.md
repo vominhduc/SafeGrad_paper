@@ -549,3 +549,26 @@ All four weaknesses either were already answered in the manuscript (W1, W2, W4) 
 | W4 auto-interpolated L1 | Answered in text | Restriction to hand-authored-only categories keeps Delta_B in 25.6--30.3 pp (Sec. 6.1) |
 
 Verdict: with the DiT transfer evidence landed, this review's conditions toward accept are satisfied at text and data level.
+
+---
+
+# Round 8 — Review + polish pass (2026-08-28, after external review R2)
+
+## Review phase findings
+- One genuine text defect: the Insight-3 transfer note carried a self-reference ("Sec. 6.3 protocol"). Fixed.
+- One stylistic defect: future-tense promise in Discussion ("we will also add finer severity gradations"). Now reads as an extension statement.
+- Neither affected evidence or numbers; both micro-repaired in the polish phase directly.
+
+## Polish phase (this pass)
+Self-checks after the edit: zero dashes in live text, zero labels unresolved, all insight-mention numbers re-verified against exports (60.0/34.6 paradigm means; 85.4/69.6 MACE example; 6-family ASR; 0.506/0.683 defense dHGR; 9.5/6.0 DiT transfer), title/insight alignment confirmed.
+
+## Panel (fresh)
+- Best-justified: 9.5. The ladder primitive + transfer evidence + dual-regime remediation stands up against the two ICLR-strict reviews so far.
+- Critical: 8. Every fatal claim from both prior reviews now has a cited answer; what remains is scope by design, not accident.
+- Method/soundness: 5. The eval estimand is defined once, globally consistent, and checkpoint-verified on every main-table row.
+- Evidence/experiment: 5. All claimed margins survive restore; the insight chain no longer depends on any single evaluation mode.
+- Novelty/positioning: 4.5, stable; the family-contrast sentence against flat benchmarks is the paper's best argument.
+- Writing/clarity: 4.5. Em-dash-free, direct prose, every table readable, every claim bench-marked.
+- Ethics/reproducibility: 5 when the author's IRB sentence is filled.
+
+**Overall: 9/10 strong accept. Confidence 5.** Remaining open items are author-side facts only.
