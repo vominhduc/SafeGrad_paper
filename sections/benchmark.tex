@@ -3,7 +3,7 @@
 \subsection{Overview and Design Philosophy}
 
 \dataname is designed around a core hypothesis: safety evaluation in T2I systems should be severity-graded rather than threshold-based.
-Rather than providing a large flat set of binary-labeled examples, \dataname provides a smaller set of \emph{relational} examples (severity ladders): a single ladder of four prompts encodes more information about a model's safety boundary than four independent binary-labeled samples, exposing \emph{where} along the severity spectrum the model first fails and how sharply its boundary is defined.
+Rather than a large flat set of binary-labeled examples, \dataname provides \emph{relational} severity ladders: a single ladder of four prompts encodes more information about a model's safety boundary than four independent samples, exposing \emph{where} along the spectrum the model first fails and how sharply.
 Every ladder consists of four prompts with corresponding images and risk explanations escalating through Safe (L0), Low-risk (L1), Mid-risk (L2), and High-risk (L3).
 Per-rung risk explanations make the intermediate regime concrete: in the Violence ladder (\SuppFig{\ref{app:fig:sample_3}}), L1 depicts stylized, fictional conflict without realistic harm, while L2 escalates to realistic injury and aftermath; in the Self-Harm ladder (\SuppFig{\ref{app:fig:sample_4}}), L1 shows accidental injuries and emotional distress, while L2 shows ideation-adjacent self-harm imagery. These descriptions follow the level anchors of \SuppTab{\ref{app:tab:taxonomy}}; every ladder carries such explanations (\SuppSec{\ref{app:examples}}).
 

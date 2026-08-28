@@ -63,7 +63,7 @@ Critically, this finding requires \dataname's graded structure: a binary benchma
 TRCE reduces HGR by $0.506$ at essentially no utility cost (SAS drop $-0.008$), beating NP, SLD, Safree, UCE, SPEED, and SafetyDPO on both metrics at once (without discounting SLD's or SafetyDPO's documented competitiveness elsewhere).
 RECE is excluded: it collapses on Legal and Social through concept diffuseness and semantic entanglement (\SuppSec{\ref{app:collapse}}; e.g., MACE's erasure of Public Figures degrades benign-portrait SAS by 40.1\%).
 The remaining tradeoff is between TRCE and MACE: MACE erases more harm ($\Delta\mathrm{HGR} = 0.683$, $+35\%$ relative reduction) but pays $11\times$ the SAS penalty and $2.7\times$ the over-refusal rate (ORR 34.2\% vs.\ 12.8\%; \SuppSec{\ref{app:overrefusal}}).
-Notably, without MACE there is almost no tradeoff at all: defense strength and utility cost are uncorrelated ($r = 0.009$); including MACE, $r$ jumps to $0.862$: the apparent general tradeoff is an artifact of MACE's aggressive erasure.
+Without MACE, defense strength and utility cost are uncorrelated ($r = 0.009$); including MACE, $r = 0.862$: the apparent general tradeoff is an artifact of its aggressive erasure.
 The TRCE--SLD margin ($9.7$ pp) also far exceeds the worst-case Bernoulli SEM ($\lesssim 0.5$ pp), so the dominance is not a sampling artifact.
 
 \subsection{Safety Filter Evaluation: Blind to the Boundary} \label{sec:filter}
@@ -84,7 +84,7 @@ Measured on the held-out test split with the same protocol, the tuned filter rea
 \textbf{Insight 6: The safety gap is trainable-away.}
 \textit{A filter fine-tuned on ladder data recovers the mid-severity band (FBR $0.880 \rightarrow 0.022$ benchmark-resident, $0.024$ on fresh generations; L1 detection 95.2\% resp.\ 94.7\%) while holding false alarms far below the strongest existing filter (FPR@L0 = 3.8\% vs.\ Q16's 55.3\%), converting \dataname from a diagnostic into a mitigation instrument.}
 \textbf{Fresh-generation (deployment-regime) validation.} To test the tuned filter under realistic conditions, we regenerate every held-out test-split prompt with all six evaluated T2I models (\emph{not} construction models), using each model's default settings with checkers disabled and the ladder seeds (two images per prompt, 4,992 images in total).
-Degenerate all-black generations (rung-uniform numeric failures; \SuppSec{\ref{app:remediation}}) are excluded.
+Degenerate all-black generations (rung-uniform numeric failures) are excluded.
 On the remaining 4,626 images the tuned filter detects 94.7\%/99.0\%/99.0\% of fresh L1--L3 content at a 4.0\% L0 false-positive rate; pooled FBR is 2.4\%, statistically indistinguishable from the 2.2\% reference-regime estimate, versus 65.3\% for the zero-shot backbone (\SuppTab{\ref{tab:filter_fresh}}).
 Per-generator FBR varies only 2.2--2.7\% (L1 detection 94.2--95.2\%), and a Qwen2.5-VL-3B backbone retrained under the identical protocol attains pooled FBR 0.8\%; the tuned decision is also threshold-robust, with both error rates at or below 5\% across a wide operating band of the YES--NO margin threshold (\SuppSec{\ref{app:remediation}}).
 The lower-bound caveat above therefore excludes the tuned row in both regimes.
