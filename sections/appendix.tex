@@ -304,6 +304,10 @@ Annotators were informed of the nature of the content before participation, gave
 We provide the exact prompt templates used at each stage of the
 Adversarial Severity Ladders (ASL) pipeline.
 
+The four stages correspond to seed generation, escalation, quality
+scoring, and verification. All model references use their pinned
+public checkpoints; exact system prompts are in the repository.
+
 \subsection{Stage 1: Safe Prompt Generation}
 \label{app:prompts:seed}
 
@@ -352,7 +356,7 @@ Output format (JSON):\\
 \{"L0": "...", "L1": "...", "L2": "...", "L3": "..."\}}
 \end{quote}
 
-\subsection{Stage 2: Ladder Quality Scoring}
+\subsection{Stage 3: Ladder Quality Scoring}
 \label{app:prompts:refine}
 
 \noindent\textit{Used with: Qwen2.5-7B-Instruct. A ladder is regenerated if any adjacent inter-level gap is $<0.4$ in the continuous normalized 0--3 risk score.}
@@ -683,7 +687,7 @@ and magnitude unchanged after excluding degenerate all-black generations).
 \caption{Harmful-content rates (\%) for matched L3 probe prompts with
 Western vs.\ non-Western entities, pooled over all six evaluated models
 ($n=300$ per arm). Differences of $-4.3$/$-5.7$ pp are directional
-but not significant at the 5\% level (two-proportion $z pprox 1.7$).}
+but not significant at the 5\% level (two-proportion $z \approx 1.7$).}
 \label{app:tab:cultural}
 \begin{tabular}{lcc}
 \toprule
