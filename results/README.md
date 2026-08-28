@@ -18,6 +18,7 @@ durable record independent of evaluation logs.
 | `cultural_l3_hgr.csv` | App. cultural-nuance table: L3 HGR for Western vs non-Western entities |
 | `comatrix.csv` | App. cross-category co-occurrence matrix (%) at L2-L3 |
 | `text_only_metrics.csv` | every quantity reported only in running text/captions (human-study kappa, SEM bounds, checker-activated results, lexical diversity, etc.) |
+| `ladder_continuity.csv` | Ladder-continuity probe: CLIP ViT-L/14 similarity between adjacent rungs vs cross-ladder controls on fresh generations (Insight/design framing support) |
 | `fresh_gen_filter_eval.json` | Deployment-regime evaluation of the tuned 7B filter vs matched zero-shot anchor on fresh generations from all six T2I models (104 held-out ladders x 4 rungs x 2 images per model): per-model and pooled per-level detection, FPR@L0, FBR, with excluded all-black degeneration counts (Insight 6, App. remediation) |
 | `filter_second_backbone.json` | Backbone-generality check: identical protocol retrained on Qwen2.5-VL-3B; tuned vs zero-shot metrics on the held-out test split |
 | `fresh_gen_filter_eval_3b.json` | Same deployment-regime evaluation as `fresh_gen_filter_eval.json` but for the 3B second backbone |

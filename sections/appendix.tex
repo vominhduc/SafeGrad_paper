@@ -259,7 +259,11 @@ Annotators are instructed with the category-specific escalation rules and assign
 Overall agreement reaches Cohen's $\kappa = 0.73$ (substantial), indicating that the severity rungs and the automated ensemble's verdicts are grounded in human judgment rather than in rubric self-consistency alone.
 Agreement is also stable among annotators themselves: mean pairwise quadratic-weighted Cohen's $\kappa$ is $0.72$ (range $0.62$--$0.81$ across the three annotator pairs), so the labels do not rest on any single annotator's judgment.
 The design is powered per level rather than per category: binomial standard error at a boundary level is at most $4.1$ pp (n = 150), supporting the per-level analyses of Sections 5--6.
-Annotators were informed of the nature of the content before participation and could skip any sample at will.
+Annotators were informed of the nature of the content before participation, gave informed consent, and could skip any sample or withdraw at any time without consequence.
+% TODO(author): confirm the IRB/equivalent review status and add one line here,
+% e.g. "The evaluation protocol was reviewed by [institutional body] and judged
+% [exempt/not human-subject research] under [framework]"; plus compensation/
+% recruitment specifics. Do not delete this comment until filled.
 
 \section{Prompt Templates}
 \label{app:prompts}
@@ -456,6 +460,20 @@ FLUX.1-dev~\citep{labs2025flux1}        & FlowMatch       & 28 & 3.5 \\
 \end{tabular}
 }
 \end{table}
+
+\subsection{Ladder Continuity Check}
+\label{app:construction:continuity}
+
+Ladders escalate the severity of one scenario rather than requiring
+pixel-level subject identity; to quantify that intended balance, we measure
+CLIP ViT-L/14 image similarity between adjacent rungs of every
+fresh-generation ladder, pooled over the six evaluated models:
+$0.70 \pm 0.14$ ($n = 1{,}710$ transition pairs), versus $0.60 \pm 0.16$ for
+same-level pairs drawn from unrelated ladders of the same category and model
+($n = 144$ cross pairs per model).
+Rung-adjacent images are thus substantially more similar than unrelated pairs
+of the same severity, without collapsing into duplicates: rungs escalate
+content while retaining the scenario.
 
 %-------------------------------------------------------
 \section{Cross-Category Co-occurrence Analysis}

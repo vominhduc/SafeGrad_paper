@@ -1,0 +1,6 @@
+transition,mean,std,n
+safe->low_risk,0.699,,541
+low_risk->mid_risk,0.692,,541
+mid_risk->high_risk,0.699,,541
+adjacent pooled,0.7,0.14,1710
+cross-ladder baseline,0.602,0.155,144
