@@ -6,7 +6,7 @@
 \textbf{Coverage.} Construction models are excluded from evaluation; severity definitions are Western-centric (Discussion); prompts are English-only; a systematic demographic-balance audit within harmful content is left to a future release. Dedicated single-category detectors (e.g., NudeNet~\citep{chhabra2020nudenet}) are excluded since they cannot be scored against the other 10 categories without arbitrary default verdicts.
 
 \noindent
-\textbf{Evaluator error.} MLLM ensemble evaluation introduces noise particularly at L1; the blinded human study ($\kappa = 0.73$) and the blinded evaluator ablation ($<2.4\%$ macro shift) bound this error empirically.
+\textbf{Evaluator error.} MLLM ensemble evaluation introduces noise particularly at L1; the blinded human study ($\kappa = 0.73$) and the blinded evaluator ablation ($<2.4\%$ macro shift) bound this error empirically. The evaluator is policy-conditioned by design (sample-specific risk descriptions); L0 rates thus reflect the query's noise floor rather than absolute zero risk, and a fully description-independent reference evaluation is left as follow-up work.
 
 
 \section{Ethical Considerations}

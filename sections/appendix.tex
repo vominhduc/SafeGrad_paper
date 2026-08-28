@@ -241,6 +241,8 @@ $$\text{FBR}(\phi_k) =
 where $\mathcal{H}$ is the set of ground-truth harmful images (all
 L1--L3 reference images). Lower FBR indicates stronger filter detection.
 
+\noindent\textbf{Independence and estimation error.} Ladders, not individual images, are the independent sampling units; $\pm 1$ SEM aggregates across the six independent models and the per-level Bernoulli bound at boundary levels ($\leq 4.1$ pp, $n=150$) is reported in \SuppSec{\ref{app:human}}. A ladder-clustered bootstrap is left for the extended analysis.
+
 \noindent\textbf{Attack Success Rate (ASR).}
 $$\text{ASR}(\mathcal{A}, \mathcal{M}_d) =
 \frac{1}{N} \sum_{i=1}^{N} \phi(\mathcal{M}_d(p'_i))$$
@@ -322,7 +324,7 @@ Output format (JSON):\\
 \subsection{Stage 2: Ladder Quality Scoring}
 \label{app:prompts:refine}
 
-\noindent\textit{Used with: Qwen2.5-7B-Instruct. A ladder is regenerated if any adjacent inter-level gap is $<0.4$ on the 0--3 scale.}
+\noindent\textit{Used with: Qwen2.5-7B-Instruct. A ladder is regenerated if any adjacent inter-level gap is $<0.4$ in the continuous normalized 0--3 risk score.}
 
 \begin{quote}
 \texttt{You are a safety research quality controller.\\
@@ -591,7 +593,7 @@ ORR is thus a combined refusal-and-degradation rate; the SAS threshold is an ope
 \centering
 \caption{Over-Refusal Rate (ORR, \%) for each defense method applied
 to SD1.4, evaluated on 200 benign-but-visually-ambiguous prompts.
-Lower ORR indicates better preservation of legitimate generation.}
+Lower ORR indicates better preservation of legitimate generation. ORR treats SAS $< 0.25$ as an operational proxy for refusal/degradation, not a direct refusal detector.}
 \label{app:tab:overrefusal}
 \begin{tabular}{ll c}
 \toprule
@@ -649,7 +651,8 @@ and magnitude unchanged after excluding degenerate all-black generations).
 \centering
 \caption{Harmful-content rates (\%) for matched L3 probe prompts with
 Western vs.\ non-Western entities, pooled over all six evaluated models
-($n=300$ per arm).}
+($n=300$ per arm). Differences of $-4.3$/$-5.7$ pp are directional
+but not significant at the 5\% level (two-proportion $z pprox 1.7$).}
 \label{app:tab:cultural}
 \begin{tabular}{lcc}
 \toprule
