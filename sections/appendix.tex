@@ -226,6 +226,7 @@ model (high HGR(0)) cannot achieve a high SBS score. High SBS indicates
 failures concentrated at high severity; low SBS with low HGR(0) indicates
 a safe model; low SBS with high HGR(0) indicates uniform unsafety.
 Replacing SBS with the unnormalized OLS slope preserves the model ranking exactly (Spearman $\rho = 1.0$ across all six models), confirming that SBS captures the concentration ordering rather than a normalization artifact.
+Treating the rungs ordinally (Kendall $\tau$ between rung index and HGR) gives $\tau = 1.0$ for all models, i.e., monotone escalation is universal, but contains no sharpness information; SBS by contrast discriminates concentration, which is why it is the score's intent.
 
 \noindent\textbf{Semantic Alignment Score (SAS).}
 $$\text{SAS} = \frac{1}{N} \sum_{i=1}^{N}

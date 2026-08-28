@@ -51,13 +51,13 @@ Construction--evaluation backbone overlap is audited in \SuppSec{\ref{app:backbo
 
 \textbf{Insight 3: Defenses steepen the severity gradient.}
 \textit{On our common SD1.4 backbone, all evaluated defenses achieve higher \emph{relative} suppression at L1 than at L3; yet absolute residual harm still peaks at L3, so the safety gap persists in absolute terms.}
-Writing $\rho_\ell = (\mathrm{HGR}_{\mathrm{base}}(\ell) - \mathrm{HGR}_{\mathrm{def}}(\ell))/\mathrm{HGR}_{\mathrm{base}}(\ell)$ for a defense's relative HGR reduction at level $\ell$, all three paradigms suppress L1 more than L3 on NSFW content: inference-guided (NP, SLD, Safree) reaches $\bar{\rho}_{\mathrm{L1}} = 60.0\%$ vs.\ $\bar{\rho}_{\mathrm{L3}} = 34.6\%$, model-editing (UCE, SPEED) $49.7\%$ vs.\ $28.0\%$, fine-tuning (SafetyDPO, MACE, TRCE) $71.7\%$ vs.\ $50.0\%$.
+Writing $\rho_\ell = (\mathrm{HGR}_{\mathrm{base}}(\ell) - \mathrm{HGR}_{\mathrm{def}}(\ell))/\mathrm{HGR}_{\mathrm{base}}(\ell)$ for a defense's relative HGR reduction at level $\ell$, all three paradigms suppress L1 more than L3 on NSFW content: inference-guided (NP, SLD, Safree) reaches $\bar{\rho}_{\mathrm{L1}} = 60.0\%$ vs.\ $\bar{\rho}_{\mathrm{L3}} = 34.6\%$, model-editing (UCE, SPEED) $49.7\%$ vs.\ $28.0\%$, fine-tuning (SafetyDPO, MACE, TRCE) $71.7\%$ vs.\ $50.0\%$: the strongest defenses nearly close the L1 gap on NSFW while L3 harm largely survives.
 For example, MACE reduces NSFW L1 HGR from 26.9\% $\to$ 3.9\% ($\rho_{\mathrm{L1}} = 85.4\%$) and L3 from 74.5\% $\to$ 22.6\% ($\rho_{\mathrm{L3}} = 69.6\%$), raising the L3:L1 ratio from $2.8\times$ to $5.8\times$.
 For Legal and Social categories, inference-guided methods stay weak at L3 ($\bar{\rho}_{\mathrm{L3}} = 13.1\%$ and $21.9\%$) while still reducing L1 by 40--46\%; residual L3 HGR stays 46.6--55.4\%.
 Critically, this finding requires \dataname's graded structure: a binary benchmark would report MACE as a strong defense ($\rho_{\mathrm{L3}} = 69\%$ on NSFW) while missing this skew entirely.
 
 \textbf{Insight 4: The Utility--Safety Tradeoff Is Dominated by Two Methods.}
-\textit{Under our joint $\Delta$HGR/SAS criterion, TRCE Pareto-dominates six of the seven remaining methods; MACE occupies a distinct extreme point on the tradeoff curve.}
+\textit{Under our joint $\Delta$HGR/SAS criterion, TRCE Pareto-dominates six of the seven remaining methods ($\Delta$HGR = 0.506 at an SAS cost of 0.008, versus e.g.\ SLD's 0.409 at a cost of 0.018); MACE occupies a distinct extreme point on the tradeoff curve.}
 This audits the defense ecosystem behind Insights 1--3.
 TRCE reduces HGR by $0.506$ at essentially no utility cost (SAS drop $-0.008$, below the next-cheapest defense's $0.014$), beating NP, SLD, Safree, UCE, SPEED, and SafetyDPO on both metrics at once (without discounting SLD's or SafetyDPO's documented competitiveness elsewhere).
 RECE is excluded: it collapses on Legal and Social through concept diffuseness and semantic entanglement (\SuppSec{\ref{app:collapse}}; e.g., MACE's erasure of Public Figures degrades benign-portrait SAS by 40.1\%).
