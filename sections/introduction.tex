@@ -18,7 +18,7 @@ Using \dataname, we conduct a comprehensive evaluation of the current T2I safety
 \textbf{(1) T2I models:} we evaluate 6 open-source T2I models, revealing residual harm even at the safe rung and harm rates ordered by generative capability.
 \textbf{(2) Defense methods:} we benchmark 9 representative mechanisms spanning inference-guided, model-editing, and fine-tuning paradigms, finding that all defenses suppress failures proportionally more at L1 than at L3, steepening the severity gradient rather than closing the safety gap.
 \textbf{(3) Safety filters:} we evaluate 5 filters and uncover a systemic insensitivity to severity: no filter reliably detects L1--L2 content, confirming the safety gap is not addressable by existing filtering alone.
-\textbf{(4) Adversarial attacks:} we test 5 jailbreak strategies, showing that query-based and multimodal attacks (ASR $\geq$ 63.4\%) outperform white-box gradient methods against the best-defended configurations.
+\textbf{(4) Adversarial attacks:} we test 6 jailbreak strategies, showing that query-based and multimodal attacks (ASR $\geq$ 63.4\%) outperform white-box gradient methods against the best-defended configurations.
 \textbf{(5) Remediation:} a severity-aware filter fine-tuned on ladder data recovers the boundary band that zero-shot filters miss, outperforming all five baselines on bypass and boundary detection while holding the L0 false-alarm rate below 4\% (Insight~6, \Sec{\ref{sec:filter}}).
 The 7 insights trace one arc: the gap is universal (Insight 1), even the safe rung leaks (Insight 2), defenses and filters cannot close it (Insights 3--5), attacks exploit it (Insight 7), and ladder data can close it (Insight 6).
 Our contributions:
