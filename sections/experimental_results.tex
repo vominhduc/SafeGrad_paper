@@ -2,7 +2,7 @@
 
 \begin{figure}[tb]
     \centering
-    \includegraphics[width=00.72\linewidth]{figures/safety_gap.pdf}
+    \includegraphics[width=0.68\linewidth]{figures/safety_gap.pdf}
     \caption{The Safety Gap. Pooled harm rate (\emph{harmful generation rate}, HGR) by severity rung across six T2I models; the steepest transition is L1$\to$L2 (mean $+28.0$ pp), exposing the L1--L2 safety gap that binary benchmarks miss. Error bars: $\pm 1$ SEM over the six models.}
     \label{fig:safety_gap}
 \end{figure}
@@ -84,7 +84,7 @@ Measured on the held-out test split with the same protocol, the tuned filter rea
 \textbf{Insight 6: The safety gap is trainable-away.}
 \textit{A filter fine-tuned on ladder data recovers the mid-severity band (FBR $0.880 \rightarrow 0.022$ benchmark-resident, $0.024$ fresh) while holding false alarms far below the strongest existing filter (FPR@L0 = 3.8\% vs.\ Q16's 55.3\%), converting \dataname from a diagnostic into a mitigation instrument.}
 \textbf{Fresh-generation (deployment-regime) validation.} To test the tuned filter under realistic conditions, we regenerate every held-out test-split prompt with all six evaluated T2I models (\emph{not} construction models), using each model's default settings with checkers disabled and the ladder seeds (two images per prompt, 4,992 images in total).
-Degenerate all-black generations (rung-uniform numeric failures) are excluded.
+Degenerate all-black generations are excluded from scoring.
 On the remaining 4,626 images the tuned filter detects 94.7--99.0\% of fresh L1--L3 content at a 4.0\% L0 false-positive rate; pooled FBR is 2.4\%, statistically indistinguishable from the 2.2\% reference-regime estimate, versus 65.3\% for the zero-shot backbone (\SuppTab{\ref{tab:filter_fresh}}).
 Per-generator FBR varies only 2.2--2.7\% (L1 detection 94.2--95.2\%), and a Qwen2.5-VL-3B backbone retrained under the identical protocol attains pooled FBR 0.8\%; the tuned decision is also threshold-robust, with both error rates at or below 5\% across a wide operating band of the YES--NO margin threshold (\SuppSec{\ref{app:remediation}}).
 The lower-bound caveat above therefore excludes the tuned row in both regimes.

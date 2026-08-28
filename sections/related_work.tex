@@ -4,9 +4,7 @@ Early benchmarks like I2P~\citep{schramowski2023safe} (4,703 prompts, 7 categori
 Recent efforts~\citep{dai2024safesora,miao2024t2vsafetybench,li2025t2isafety,zhang2025t2iriskyprompt} expanded coverage to more risk dimensions.
 Most related to our work, T2ISafety~\citep{li2025t2isafety} established a broad framework assessing fairness, toxicity, and privacy across $\sim$70K prompts, and T2I-RiskyPrompt~\citep{zhang2025t2iriskyprompt} introduced a hierarchical taxonomy of 6 primary and 14 fine-grained categories with reasoning-based annotation.
 Complementary image-safety benchmarks such as UnsafeBench~\citep{yiting2025unsafebench} evaluate classifiers over real-world and AI-generated images but retain binary labels, leaving severity-graded generation risk unmeasured.
-Both, however, still assign each prompt a single, independently sampled binary verdict: neither pairs multiple severity instances of the same scenario under matched generation conditions, so neither can compute how a defense's suppression at one severity relates to its suppression at another for a fixed scenario.
-This distinction is not cosmetic: it is precisely the quantity Insight~3 requires.
-\dataname's paired ladders hold the scenario fixed (same T2I model and seed across all four rungs); a flat prompt set cannot, making the relative-suppression asymmetry structurally invisible to it.
+Both still assign each prompt a single, independently sampled binary verdict; \dataname's paired ladders hold the scenario fixed (same model and seed across all four rungs), letting us measure how a defense's suppression at one severity relates to another for a fixed scenario — the quantity Insight~3 requires and a structurally invisible quantity for any flat prompt set.
 
 \noindent
 \textbf{Defenses and filters.}

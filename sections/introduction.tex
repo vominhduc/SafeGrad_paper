@@ -2,8 +2,7 @@
 
 \noindent\fcolorbox{red!55!black}{red!4}{\parbox{\dimexpr\linewidth-2\fboxsep-2\fboxrule\relax}{\small\textbf{\textcolor{red!55!black}{Content warning:}} This paper includes potentially offensive examples.}}
 
-The rapid proliferation of Text-to-Image (T2I) generative models, such as Stable Diffusion 3~\citep{SD3}, DALL-E 3~\citep{dalle3}, and Midjourney~\citep{midjourney}, has transformed digital content creation.
-Yet, as these models gain capability, their susceptibility to generating harmful, violative, or graphic content has become a primary bottleneck for safe deployment~\citep{bird2023typology,yang2023sneakyprompt}.
+Text-to-Image (T2I) generative models such as Stable Diffusion 3~\citep{SD3}, DALL-E 3~\citep{dalle3}, and Midjourney~\citep{midjourney} have transformed content creation, yet their susceptibility to harmful or graphic content has become the primary bottleneck for safe deployment~\citep{bird2023typology,yang2023sneakyprompt}.
 To mitigate these risks, developers have implemented sophisticated safety guardrails, typically consisting of prompt-level filters and post-generation visual checkers.
 While these defenses are effective against ``high-risk'' explicit violations such as direct requests for nudity or graphic violence, they remain fragile when confronted with nuanced, adversarial, or metaphor-based inputs~\citep{zhang2025adversarial}.
 Consequently, what is missing is an evaluation framework that pinpoints not whether these systems fail, but where along the harm spectrum their safety boundary breaks.
