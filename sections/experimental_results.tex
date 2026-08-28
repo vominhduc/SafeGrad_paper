@@ -38,7 +38,7 @@ This pattern is not an artifact of the pipeline's auto-interpolated L1 anchors: 
 \textbf{Reading note on SBS.} SBS captures how sharply failure concentrates at the boundary, not how safe a model is: the two highest-SBS models (HiDream 0.80, Janus-Pro 0.74) are also the two most harmful in absolute terms at L3, and all six models reach at least 47.5\% HGR@L3. Read SBS only alongside absolute HGR.
 
 \textbf{Insight 2: Even the safe rung is not safe.}
-\textit{All six models produce non-zero harm at L0 (0.5--3.5\%), and harm rates rise with generative capability; safety posture is baked into model weights through training and alignment data, not supplied by guard rails. Residual L0 rates are of the same order as the evaluator's noise floor (\SuppSec{\ref{app:metrics}}), so the reliable claim is that zero-risk deployment needs output monitoring even for entirely safe prompts.}
+\textit{All six models produce non-zero harm at L0 (0.5--3.5\%, of the same order as the evaluator's noise floor), and harm rates rise with generative capability; safety posture is baked into model weights through training and alignment data, not supplied by guard rails.}
 PixArt-$\alpha$'s fine-tuning suppresses sexual HGR@L3 far below violence, but no model's training provides equivalent suppression for hate speech or misinformation; societal harms have been underrepresented in safety fine-tuning data, so zero-risk deployment needs output monitoring even for entirely safe prompts.
 
 Construction--evaluation backbone overlap is audited in \SuppSec{\ref{app:backbone}}; no evaluated model shares an encoder or diffusion backbone with any construction component.
