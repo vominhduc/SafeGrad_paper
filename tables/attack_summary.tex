@@ -2,7 +2,7 @@
 \centering
 \small
 \setlength{\tabcolsep}{5pt}
-\caption{ASR (\%) of six attack families against the best-defended configuration (TRCE + LlavaGuard), pooled over the same 2,052 L2--L3 prompts for every row. \textbf{Bold} highest, \underline{underline} second. $^*$PGJ~\cite{huang2024pgj} is the most recent protocol-compatible attack and is excluded from the canonical five (\Sec{\ref{sec:attack}}).
+\caption{ASR (\%) of six attack families against the best-defended configuration (TRCE + LlavaGuard), pooled over the same 2,052 L2--L3 prompts for every row. \textbf{Bold} highest, \underline{underline} second. PGJ~\cite{huang2024pgj} is the most recent protocol-compatible attack.}
 \label{tab:attacks}
 \begin{tabular}{l c}
 \toprule
@@ -12,16 +12,15 @@
 SneakyPrompt~\cite{yang2023sneakyprompt}
 & 63.4 \\
 Ring-A-Bell~\cite{tsai2024ringabell}
-& \underline{65.6} \\
+& 65.6 \\
 UnlearnDiffAtk~\cite{zhang2024unlearndiffattk}
 & 61.5 \\
 MMA-Diffusion~\cite{yang2024mma}
-& \textbf{68.7} \\
+& \underline{68.7} \\
 P4D~\cite{chin2024p4d}
 & 55.6 \\
-\midrule
-PGJ$^*$
-& 72.4 \\
+PGJ~\cite{huang2024pgj}
+& \textbf{72.4} \\
 \bottomrule
 \end{tabular}
 \end{table}
