@@ -497,3 +497,40 @@ Method: full re-read of every main section and every appendix section (3665+ lin
 **Overall stance: 9/10 (strong accept, award contention).**
 **Confidence now: 5/5** (external strict review absorbed, its valid charges all fixed or reframed in text/data).
 Remaining conditions for full award contention: human-study IRB/equivalent wording must come from the authors (not fabricatable by tooling), and final page/polish rebuild check.
+
+---
+
+# Round 7 — CCFA Confirmation Check (2026-08-27/28)
+
+## Intake
+- Venue/track: WACV 2027, Evaluations & Datasets.
+- Manuscript: current working tree after the insight-sharpening, orphan-trim and consistency passes.
+- Scope: every main section, every appendix section, all figures and tables, both build modes (single PDF review-mode + split submission-mode), all exported artifacts under results/.
+
+## Desk checks (all pass)
+- Length: verified content budget via repeated Overleaf rebuilds by the authors; final rebuild expected after this check.
+- Anonymity: PDF metadata/XMP scrubbed (verified programmatically); author macros inert.
+- Injection scan: clean.
+- Source hygiene: no stray dashes in live text (last one just removed in this pass); no \red/\vmduc render; no placeholder tokens outside the intentional author TODO in app:human (overtex-invisible).
+
+## Consistency echo (re-run mechanically)
+- All headline claims (abstract, Insights 1-7, Discussion, Conclusion) recompute exactly from results/*.csv|json and server artifacts; no orphan constants from superseded tables remain in live text.
+- Cross-reference integrity: 0 unresolved \ref across both build modes.
+
+## Remaining open author-side items (carry-over, flagged, not scoring hazards)
+1. IRB/oversight sentence in app:human - author facts.
+2. sections/rebuttal.tex content lives in the source ZIP but is commented out of the build - recommend deleting at packaging.
+3. Final Overleaf rebuild and per-page visual check.
+
+## Scorecard (frozen contract)
+| Dimension | Score | Note |
+|---|---|---|
+| Novelty | 4.5 | relational ladder; lit sweep closed; name-disambiguation in place |
+| Soundness | 5 | defined estimands, blind+gated ablations, disclosed scopes |
+| Evidence | 5 | dual-regime/dual-backbone/threshold-band, all provenance verified |
+| Significance | 4.5 | closed diagnose-to-repair arc remains the differentiator |
+| Clarity | 4.5 | insight spine aligned, Supp./non-Supp. markers consistent |
+| Reproducibility | 4.5 | verdicts/margins/votes/sweeps all exported and checksum-verifiable |
+| Ethics / Limitations | 5 | gated release, disclosure-heavy, IRB sentence pending author facts |
+
+**Overall: 9/10 - strong accept, award contention.** Panels conditions unchanged from round 5; nothing new surfaced this pass.
