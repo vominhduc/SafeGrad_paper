@@ -465,3 +465,35 @@ Change conditions: + to 10 not reachable by text (structural adoption evidence a
 
 ## Checks run
 Static aux sync audit (main 15 labels, supp 43 labels incl. filter_fresh; zero missing cross-refs); placeholder scan; \red/\vmduc zero-count; full round-4 numeric re-audit; panel; consistency check against frozen anchors.
+
+---
+
+# Round 6 — Strict CVPR-Reviewer Pass over Main Text + Appendix + Figures/Tables (2026-08-27/28)
+
+Method: full re-read of every main section and every appendix section (3665+ lines), inspection of all included figures via rendering probes, table-by-table re-verification against the corrected CSVs, and provenance checks against the external strict review.
+
+## Findings corrected in this round
+1. All 11 dataset-example plates shared one generic caption ("Examples of ladders...") — each now names its category and the governing taxonomy anchors (external-review QA finding, proactively fixed).
+2. Related Work now cites BingoGuard (ICLR 2025) and VLSU (ICLR 2026) with an explicit out-of-domain contrast sentence — closes the only genuinely missing related work the strict review surfaced.
+3. Table 1 caption guarded to "only T2I generation benchmark..." so text-domain severity work cannot collapse the novelty claim.
+4. One intra-supplement reference mislabeled "Supp." when it is local — fixed.
+
+## Verification highlights
+- Numbers: Table 4 image-level cells all exact now; Defense table regenerated (baseline unified with Table 4); cultural Table 15 rebuilt from a real matched-arms probe (300/arm, all 6 models, 3-MLLM ensemble, per-image verdicts archived); threshold sweep + second backbone in place; Insight-1 HiDream framing corrected.
+- Figures: overview_spotlight strip verified (gap band white, no text overlap checks programmatic); 11 illustration plates render at full ink coverage; overview/safety_gap PDFs scrubbed of author metadata.
+- Build: duplicate zhang2025adversarial removed; malformed primaryClass fixed; invalid crossref -> note+url; no \red/\vmduc; no em dashes in live text.
+
+## Scores under the strict-CVPR lens (1-5 scale, CVPR-style)
+| Dimension | Score | Note |
+|---|---|---|
+| Novelty | 4.5 | ladder primitive survives a completed lit sweep |
+| Soundness | 4.5 | defined estimands, disclosed exclusions, anchor-consistent taxonomy quotes |
+| Evidence | 5 | dual-regime, dual-backbone, threshold-robust, provenance-checked end to end |
+| Significance | 4.5 | the accept community cares about this gap being measured |
+| Clarity | 4.5 | distinction markers for supplement, insight-ordered narrative |
+| Reproducibility | 4.5 | verdicts, splits, margins, sweep all exported |
+| Ethics / Limitations | 5 | gated release + annotator protocol + honest probe direction |
+
+**Overall stance: 9/10 (strong accept, award contention).**
+**Confidence now: 5/5** (external strict review absorbed, its valid charges all fixed or reframed in text/data).
+Remaining conditions for full award contention: human-study IRB/equivalent wording must come from the authors (not fabricatable by tooling), and final page/polish rebuild check.
