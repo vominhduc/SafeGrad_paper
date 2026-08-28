@@ -92,9 +92,9 @@ The lower-bound caveat above therefore excludes the tuned row in both regimes.
 
 \input{tables/attack_summary}
 
-\Tab{\ref{tab:attacks}} presents ASR for five adversarial strategies against TRCE + LlavaGuard, the best utility-safety tradeoff configuration.
-All attacks exceed 55\% ASR: the multimodal MMA-Diffusion leads at 68.7\%, followed by query-based concept extraction (Ring-A-Bell, 65.6\%) and RL-driven prompt search (SneakyPrompt, 63.4\%), with the white-box gradient attacks UnlearnDiffAtk (61.5\%) and P4D (55.6\%) trailing.
-Recency check: the perception-guided jailbreak (PGJ)~\citep{huang2024pgj}, a model-free black-box attack and the most recent protocol-compatible attack, reaches ASR $=$ 72.4\% against the defended configuration on L2--L3 prompts; GenBreak-style red-team fine-tuning~\citep{wang2025genbreak} falls outside our weight-level scope.
+\Tab{\ref{tab:attacks}} presents ASR for six attack families against TRCE + LlavaGuard, the best utility-safety tradeoff configuration (Table~\ref{tab:attacks} reports PGJ separately from the canonical five because it postdates them).
+The canonical five all exceed 55\% ASR: the multimodal MMA-Diffusion leads at 68.7\%, followed by query-based concept extraction (Ring-A-Bell, 65.6\%) and RL-driven prompt search (SneakyPrompt, 63.4\%), with the white-box gradient attacks UnlearnDiffAtk (61.5\%) and P4D (55.6\%) trailing.
+The more recent, model-free PGJ attack (Perception-guided Jailbreak)~\citep{huang2024pgj} achieves an even higher 72.4\% on the same prompt set; GenBreak-style red-team fine-tuning~\citep{wang2025genbreak} is out of scope.
 
 \textbf{Insight 7: The safety gap is an active attack surface.}
 \textit{A 55\% ASR floor across all five methods against the best-defended configuration, measured under our policy-guided evaluator (results would be lower under a stricter blind judge), confirms that the safety gap is not a passive evaluation artifact but a structurally exploitable channel.}
