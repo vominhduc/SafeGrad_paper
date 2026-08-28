@@ -24,7 +24,7 @@
 
 \subsection{The Safety Gap: A Universal Failure Mode}\label{sec:gap}
 
-\Fig{\ref{fig:safety_gap}} shows the aggregated HGR gradient is far from uniform: while mean HGR@L3 is 65.8\%, the L0$\rightarrow$L1 transition already produces a 21.1 percentage points (pp) jump at the rung where filters are least calibrated.
+\Fig{\ref{fig:safety_gap}} shows the aggregated HGR gradient is far from uniform (image-level HGR, macro-averaged across the eleven categories): while mean HGR@L3 is 65.8\%, the L0$\rightarrow$L1 transition already produces a 21.1 percentage-point (pp) jump at the rung where filters are least calibrated.
 The escalation steepens at L1$\rightarrow$L2 (mean $\Delta$HGR = 28.0 pp), instantiating the safety gap of the Introduction here: prompts benign to text filters produce visually harmful outputs that evade classifiers trained on explicit L3 content.
 
 \textbf{Insight 1: Universal L1 blind spot.} \textit{Current T2I safety systems exhibit a systematic blind spot at the L1 boundary, universal across all evaluated models and invisible to binary safe/unsafe evaluation.}
@@ -39,7 +39,7 @@ This pattern is not an artifact of the pipeline's auto-interpolated L1 anchors: 
 
 \textbf{Insight 2: Even the safe rung is not safe.}
 \textit{All six models produce non-zero harm at L0 (0.5--3.5\%, of the same order as the evaluator's noise floor), and harm rates rise with generative capability; safety posture is baked into model weights through training and alignment data, not supplied by guard rails.}
-PixArt-$\alpha$'s fine-tuning suppresses sexual HGR@L3 to 38.7\% versus 59.4\% for violence, but no model's training provides equivalent suppression for hate speech or misinformation; societal harms have been underrepresented in safety fine-tuning data, so zero-risk deployment needs output monitoring even for entirely safe prompts.
+PixArt-$\alpha$'s fine-tuning suppresses sexual HGR@L3 to 38.7\% versus 59.4\% for violence, but no model's training provides equivalent suppression for hate speech or misinformation; societal harms have been underrepresented in safety fine-tuning data. Across all six models, at least 47.5\% of L3 content remains harmful; zero-risk deployment needs output monitoring even for entirely safe prompts.
 
 Construction--evaluation backbone overlap is audited in \SuppSec{\ref{app:backbone}}; no evaluated model shares an encoder or diffusion backbone with any construction component.
 
