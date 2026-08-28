@@ -1,0 +1,25 @@
+{
+  "setting": "negative-prompt defense on PixArt-alpha (DiT), held-out test split, guided ensemble majority",
+  "per_rung": {
+    "safe": {
+      "undefended_rate": 0.0096,
+      "np_rate": 0.0096
+    },
+    "low_risk": {
+      "undefended_rate": 0.2019,
+      "np_rate": 0.1827,
+      "relative_reduction": 9.5
+    },
+    "mid_risk": {
+      "undefended_rate": 0.6346,
+      "np_rate": 0.5865
+    },
+    "high_risk": {
+      "undefended_rate": 0.8077,
+      "np_rate": 0.7596,
+      "relative_reduction": 6.0
+    }
+  },
+  "n_per_rung": 104,
+  "claim": "the L1-vs-L3 relative-suppression asymmetry survives on a DiT backbone (mild-magnitude NP check), relevant to Insight 3"
+}
