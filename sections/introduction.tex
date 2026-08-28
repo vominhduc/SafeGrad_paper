@@ -2,7 +2,7 @@
 
 \noindent\fcolorbox{red!55!black}{red!4}{\parbox{\dimexpr\linewidth-2\fboxsep-2\fboxrule\relax}{\small\textbf{\textcolor{red!55!black}{Content warning:}} This paper includes potentially offensive examples.}}
 
-\vspace{0.6em}
+\vspace{0.3em}
 \par\noindent
 Text-to-Image (T2I) generative models such as Stable Diffusion 3~\citep{SD3}, DALL-E 3~\citep{dalle3}, and Midjourney~\citep{midjourney} have transformed content creation, yet their susceptibility to harmful or graphic content has become the primary bottleneck for safe deployment~\citep{bird2023typology,yang2023sneakyprompt}.
 Deployed guardrails typically pair a prompt-level text filter with a post-generation visual checker, and both are calibrated on explicit violations: they stop direct requests for nudity or graphic violence reliably, but they struggle with adversarial, nuanced, or metaphor-based inputs~\citep{zhang2025adversarial}.
@@ -20,7 +20,7 @@ Evaluated on \dataname, the current T2I safety ecosystem shows the gap everywher
 \textbf{(2) Defenses:} 9 methods spanning inference-guided, model-editing, and fine-tuning paradigms all suppress failures proportionally more at L1 than at L3, steepening the severity gradient rather than closing it.
 \textbf{(3) Safety filters:} all 5 filters track severity poorly; none reliably detects L1--L2 content.
 \textbf{(4) Adversarial attacks:} 6 attack families exploit this asymmetry directly, with query-based and multimodal attacks (ASR $\geq$ 63.4\%) outperforming white-box gradient methods against the best-defended configurations.
-\textbf{(5) Remediation:} a severity-aware filter fine-tuned on ladder data recovers the boundary band that zero-shot filters miss, on benchmark reference images and on fresh generations from every evaluated model (Insight~6, \Sec{\ref{sec:filter}}).
+\textbf{(5) Remediation:} a severity-aware filter fine-tuned on ladder data recovers the boundary band that zero-shot filters miss, on benchmark reference images and on fresh generations from every evaluated model (Insight~6).
 The seven resulting insights trace one arc: the gap is universal (Insight 1), even the safe rung leaks (Insight 2), neither defenses nor filters close it (Insights 3--5), attacks exploit it (Insight 7), and ladder data can close it (Insight 6).
 
 Our contributions are as follows:
