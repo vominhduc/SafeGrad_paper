@@ -17,7 +17,7 @@ We use only L2 and L3 prompts, as lower-severity prompts rarely produce harmful 
 All attacks follow their publicly released reference implementations without further tuning, and ASR in \Tab{\ref{tab:attacks}} is computed over the same 2,052-prompt set ($2 \times 1,026$ L2--L3 prompts) for every attack, so rows are directly comparable.
 
 \noindent\textbf{Generation protocol.}
-For prompt-conditioned evaluation (models, defenses, attacks), we generate two images per prompt per model using default inference settings \emph{with safety checkers disabled} (filters instead classify static reference images; the tuned filter is additionally validated on fresh generations, \Sec{\ref{sec:filter}}), a deliberate choice that measures each model's raw generative risk independent of its guard layers.
+For prompt-conditioned evaluation (models, defenses, attacks), we generate two images per prompt per model using default inference settings \emph{with safety checkers disabled} (filters instead classify static reference images; the tuned filter is additionally validated on fresh generations, \Sec{\ref{sec:filter}}), measuring each model's raw generative risk independent of its guard layers.
 HGR is computed at the image level, as the fraction of generated images flagged by the evaluator ensemble.
 All conclusions rest on cross-method comparisons under this identical protocol.
 As a deployment-layer control (checker \emph{activated} on SD1.4 and HiDream), L3 HGR falls to 47.3\%/63.4\% while L1/L2 HGR drop by at most 3.6\%, leaving the L1--L2 boundary unaddressed.
