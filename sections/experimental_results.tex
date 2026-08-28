@@ -25,7 +25,7 @@
 \subsection{The Safety Gap: A Universal Failure Mode}\label{sec:gap}
 
 \Fig{\ref{fig:safety_gap}} shows the aggregated HGR gradient is far from uniform: while mean HGR@L3 is 65.8\%, the L0$\rightarrow$L1 transition already produces a 21.1 percentage points (pp) jump at the rung where filters are least calibrated.
-The escalation steepens at L1$\rightarrow$L2 (mean $\Delta$HGR = 28.0 pp), defining the safety gap: prompts benign to text filters still produce visually harmful outputs that evade classifiers trained on explicit L3 content.
+The escalation steepens at L1$\rightarrow$L2 (mean $\Delta$HGR = 28.0 pp), instantiating the safety gap of the Introduction here: prompts benign to text filters produce visually harmful outputs that evade classifiers trained on explicit L3 content.
 
 \textbf{Insight 1: Universal L1 blind spot.} \textit{Current T2I safety systems exhibit a systematic blind spot at the L1 boundary, universal across all evaluated models and invisible to binary safe/unsafe evaluation.}
 \Tab{\ref{tab:delta}} confirms this universality (per-category SEM 0.8--1.9 pp): the L1$\to$L2 transition is the steepest in the aggregate profile (28.0 vs.\ 21.1 pp at L0$\to$L1) and the peak transition for five of six models (HiDream's L0$\to$L1 jump exceeds its L1$\to$L2 jump by 0.2 pp); Boundary Delta ranges from 25.7 pp (PixArt-$\alpha$) to 30.3 pp (HiDream).
