@@ -28,7 +28,7 @@
 The escalation steepens at L1$\rightarrow$L2 (mean $\Delta$HGR = 28.0 pp), instantiating the safety gap of the Introduction here: prompts benign to text filters produce visually harmful outputs that evade classifiers trained on explicit L3 content.
 
 \textbf{Insight 1: Universal L1 blind spot.} \textit{Current T2I safety systems exhibit a systematic blind spot at the L1 boundary, universal across all evaluated models and invisible to binary safe/unsafe evaluation.}
-\Tab{\ref{tab:delta}} confirms this universality (per-category SEM 0.8--1.9 pp): the L1$\to$L2 transition is the steepest in the aggregate profile (28.0 vs.\ 21.1 pp at L0$\to$L1) and the peak transition for five of six models (HiDream's L0$\to$L1 jump exceeds its L1$\to$L2 jump by 0.2 pp); Boundary Delta ranges from 25.7 pp (PixArt-$\alpha$) to 30.3 pp (HiDream).
+\Tab{\ref{tab:delta}} confirms this universality (per-category SEM 0.8--1.9 pp across the eleven categories): the L1$\to$L2 transition is the steepest in the aggregate profile (28.0 vs.\ 21.1 pp at L0$\to$L1) and the peak transition for five of six models (HiDream's L0$\to$L1 jump exceeds its L1$\to$L2 jump by 0.2 pp); Boundary Delta ranges from 25.7 pp (PixArt-$\alpha$) to 30.3 pp (HiDream).
 This pattern is not an artifact of the pipeline's auto-interpolated L1 anchors: computed on only the 7 categories whose L1 anchors were hand-authored (\SuppSec{\ref{app:taxonomy}}): $\Delta_B$ stays within 25.6--30.3 pp.
 
 \subsection{Generative Model Analysis: Even the Safe Rung Is Not Safe}
@@ -74,7 +74,7 @@ The TRCE--SLD margin ($9.7$ pp) also far exceeds the worst-case Bernoulli SEM ($
 \textbf{Insight 5: Filter insensitivity to severity.}
 \textit{In their default unguided binary configuration, evaluated filters fail to track severity: most show nearly flat detection rates from L0 to L3, and the only one that rises (Q16, 55.3\%$\to$67.2\%) does so while flagging over half of safe images.}
 Q16, the strongest single filter, rises only from 55.3\% detection at L0 to 67.2\% at L3 (11.9 pp), while CLIP-NSFW misses 75\% of L3 content.
-Q16 also flags 55.3\% of safe images as harmful (FPR@L0 = 0.553); Qwen2.5-VL nearly never false-alarms (FPR = 0.7\%) but misses 88\% of harmful content (FBR = 0.880).
+Q16 also flags 55.3\% of safe images as harmful (FPR@L0 = 0.553); Qwen2.5-VL nearly never false-alarms (FPR = 0.7\%) but misses 88\% of harmful content (FBR = 0.880); the purpose-built SD Filter rises only from 2.3\% to 7.8\% across rungs.
 Filters are thus unable to separate safe from harmful at boundary levels; fully blind evaluation is even flatter (0.2\%/0.2\%/7.2\% at L1--L3; \SuppSec{\ref{app:metrics}}).
 
 The gap is diagnosable, but is it closable? As a remediation check, we fine-tune Qwen2.5-VL-7B with LoRA on (image, risk explanation) $\rightarrow$ YES/NO pairs under a ladder-respecting 80/10/10 split (\SuppSec{\ref{app:remediation}}).
@@ -85,7 +85,7 @@ Measured on the held-out test split with the same protocol, the tuned filter rea
 \textbf{Fresh-generation (deployment-regime) validation.} To test the tuned filter under realistic conditions, we regenerate every held-out test-split prompt with all six evaluated T2I models (\emph{not} construction models), using each model's default settings with checkers disabled and the ladder seeds (two images per prompt, 4,992 images in total).
 Degenerate all-black generations are excluded from scoring.
 On the remaining 4,626 images the tuned filter reaches 94.7\% L1, 99.0\% L2, and 99.0\% L3 detection (per-generator FBR 2.2--2.7\%) at a 4.0\% L0 false-positive rate; pooled FBR is 2.4\%, statistically indistinguishable from the 2.2\% reference-regime estimate, versus 65.3\% for the zero-shot backbone (\SuppTab{\ref{tab:filter_fresh}}).
-Per-generator FBR varies only 2.2--2.7\% (L1 detection 94.2--95.2\%), and a Qwen2.5-VL-3B backbone retrained under the identical protocol attains pooled FBR 0.8\%; the tuned decision is also threshold-robust, with both error rates at or below 5\% across a wide operating band of the YES--NO margin threshold (\SuppSec{\ref{app:remediation}}).
+Per-generator FBR varies only 2.2--2.7\% (L1 detection 94.2--95.2\%), and a Qwen2.5-VL-3B backbone retrained under the identical protocol reaches test-split FBR of 0.6\% with 99.0\% L1 detection (pooled fresh-generation FBR 0.8\%); the tuned decision is also threshold-robust, with both error rates at or below 5\% across a wide operating band of the YES--NO margin threshold (\SuppSec{\ref{app:remediation}}).
 The lower-bound caveat above therefore excludes the tuned row in both regimes.
 
 \subsection{Adversarial Robustness: Attacks Exploit the Gap} \label{sec:attack}
