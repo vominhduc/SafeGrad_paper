@@ -6,12 +6,11 @@
 \textbf{Coverage.} Construction models are excluded from evaluation; severity definitions are Western-centric (Discussion); prompts are English-only; a systematic demographic-balance audit within harmful content is left to a future release. Dedicated single-category detectors (e.g., NudeNet~\citep{chhabra2020nudenet}) are excluded since they cannot be scored against the other 10 categories without arbitrary default verdicts.
 
 \noindent
-\textbf{Evaluator error.} MLLM ensemble evaluation introduces noise particularly at L1; the blinded human study ($\kappa = 0.73$) and the blinded evaluator ablation ($<2.4\%$ macro shift) bound this error empirically. The evaluator is policy-conditioned by design (sample-specific risk descriptions); L0 rates thus reflect the query's noise floor rather than absolute zero risk, and a fully description-independent reference evaluation is left as follow-up work.
+\textbf{Evaluator error.} MLLM ensemble evaluation introduces noise particularly at L1; the blinded human study ($\kappa = 0.73$) and evaluator ablation ($<2.4\%$ macro shift) bound this empirically. The evaluator is policy-conditioned by design (sample-specific risk descriptions), so L0 rates reflect the query's noise floor rather than absolute zero risk; a description-independent reference evaluation is future work.
 
 
 \section{Ethical Considerations}
 \dataname necessarily involves generating and handling harmful content; it is entirely synthetic and was spot-checked for personal information.
 Human participation (rule authoring; \SuppSec{\ref{app:human}}) involves informed annotators who could skip any sample.
-At publication we release: (i) all 1,026 validated ladders (prompts and per-rung risk explanations) and per-image evaluation verdicts under a research-only CC BY-NC 4.0 license; (ii) the ASL pipeline and evaluation scripts; (iii) L0--L1 reference images openly and L2--L3 images only to verified safety researchers under a restricted-access agreement (extra restrictions for the Minors category); and (iv) the datasheet and annotation protocols.
-Safety checkers are disabled solely as a controlled evaluation condition.
-We will share results with affected developers before release (60-day window) and release a datasheet.
+At publication we release: (i) all 1,026 validated ladders, prompts--explanation pairs, and per-image verdicts (CC BY-NC 4.0, research-only); (ii) the ASL pipeline and evaluation scripts; (iii) L0--L1 reference images openly, L2--L3 gated to verified researchers (extra restrictions for Minors); (iv) the datasheet.
+We notify affected developers 60 days ahead of release.
