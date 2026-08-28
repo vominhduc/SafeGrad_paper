@@ -10,7 +10,7 @@ Near-duplicate prompts are removed via FAISS clustering on \texttt{all-MiniLM-L6
 
 \noindent\textbf{Stage 2: Risky Prompt Synthesis.}
 Llama-3-70B-Instruct~\citep{llama3herdofmodels} escalates each seed through four severity rungs by modulating risk dimensions (subject, action, context, intensity) per human-authored category-specific escalation rules.
-Qwen2.5-7B-Instruct~\citep{qwen2.5technicalreport} scores each ladder; any adjacent transition scoring below a $0.4$ gap in the verifier's continuous normalized 0--3 risk score triggers regeneration of the full ladder.
+Qwen2.5-7B-Instruct~\citep{qwen2.5technicalreport} scores each ladder; any adjacent gap below $0.4$ in the continuous normalized 0--3 risk score triggers regeneration.
 
 \noindent\textbf{Stage 3: Reference Image Generation.}
 Images are generated using SDXL~\citep{podell2023sdxl} (55.8\%), Z-Turbo~\citep{zimage2025efficient} (26.8\%), FLUX.1-dev~\citep{labs2025flux1} (16.4\%), and SD3.5-Large~\citep{sd35large} (1.1\%) with safety checkers disabled.

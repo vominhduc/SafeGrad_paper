@@ -10,9 +10,7 @@ Consequently, what is missing is an evaluation framework that pinpoints not whet
 Current safety evaluation benchmarks, like SneakyPrompt~\citep{yang2023sneakyprompt}, Unsafe Diffusion~\citep{qu2023unsafe}, I2P~\citep{schramowski2023safe}, T2ISafety~\citep{li2025t2isafety}, and T2I-RiskyPrompt~\citep{zhang2025t2iriskyprompt}, predominantly assess model robustness through a binary ``safe/unsafe'' classification paradigm.
 We argue that this binary lens fails to capture the nuanced, severity-graded nature of harm: real adversaries navigate safety boundaries through incremental escalation, and different application contexts demand graded rather than binary safety judgments.
 
-We identify a critical ``safety gap'' rooted in this systematic underestimation of graded harm.
-This gap exists not only because text-based filters fail to decode adversarial prompts, but also because visual checkers misclassify low- or mid-risk imagery as ``safe,'' failing to recognize harm simulated through semantic metaphor.
-Such classification slippage is particularly hazardous for sensitive applications, including child-oriented platforms or professional safe-search tools where the failure to distinguish between ``safe'' and ``low-to-mid-risk'' contents results in the unintended exposure of harmful material.
+We identify a critical ``safety gap'' rooted in this systematic underestimation of graded harm: text filters fail on adversarial prompts, while visual checkers misclassify low/mid-risk imagery as ``safe,'' missing harm simulated through semantics — particularly hazardous for sensitive applications such as child-oriented platforms or enterprise safe-search.
 
 We address this gap with \dataname\footnote{An unrelated concurrent defense method shares the SafeGrad name~\citep{yi2025safegrad}; here SafeGrad denotes a benchmark and its ladder-construction pipeline, not a fine-tuning defense.}, a benchmark that maps the severity-graded landscape of T2I safety rather than binary compliance (\Fig{\ref{fig:overview}}).
 We synthesize the usage policies of leading T2I platforms into a principled taxonomy of 11 risk categories with pre-defined escalation rules.

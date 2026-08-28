@@ -8,7 +8,7 @@ Both still assign each prompt a single, independently sampled binary verdict; \d
 
 \noindent
 \textbf{Defenses and filters.}
-Internal defenses modify model weights~\citep{gandikota2023concept,gandikota2024unified} or retrain safety objectives~\citep{liu2024safetydpo,lu2024mace,chen2025trce}; external ones apply keyword lists~\citep{george}, text classifiers~\citep{li_NSFW_text_classifier,Detoxify,khader2024diffguard}, image-level detectors~\citep{laionAI,Chhabra,schramowski2023safe,Giphy}.
+Internal defenses modify model weights~\citep{gandikota2023concept,gandikota2024unified} or retrain safety objectives~\citep{liu2024safetydpo,lu2024mace,chen2025trce}; external ones apply keyword lists~\citep{george}, text classifiers~\citep{li_NSFW_text_classifier,Detoxify,khader2024diffguard}, or image-level detectors~\citep{laionAI,Chhabra,schramowski2023safe,Giphy}.
 They all target L3-equivalent explicit content under a binary safe/unsafe protocol.
 Severity-graded ideas have also appeared outside T2I generation: BingoGuard~\citep{yin2025bingoguard} assigns five risk levels to LLM text responses, and VLSU~\citep{palaskar2026vlsu} labels multimodal inputs safe/borderline/unsafe; neither examines generative severity in T2I synthesis. Concurrent guardrail work on policy-graded image moderation (Piao et al.~\citep{piao2026policy}) targets the input-filtering setting; our focus is generation-side graded risk of the models themselves.
 \dataname provides the first graded diagnostic across all four severity rungs.
