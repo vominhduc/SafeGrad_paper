@@ -6,7 +6,7 @@
 and instead evaluate six architecturally independent open-source models: SD1.4, SD2.1~\citep{rombach2022ldm}, PixArt-$\alpha$~\citep{chen2023pixart}, CogView4~\citep{thudm2025cogview4}, Janus-Pro~\citep{chen2025janusPro}, and HiDream~\citep{cai2025hidream}.
 
 \noindent
-\textbf{Defense Methods.} We implement nine methods across three paradigms: \textit{inference-guided} (NP, SLD~\citep{schramowski2023safe}, Safree~\citep{yoon2024safree}), \textit{model-editing} (UCE~\citep{gandikota2024unified}, RECE~\citep{gong2024rece}, SPEED~\citep{li2026speed}), and \textit{fine-tuning} (SafetyDPO~\citep{liu2024safetydpo}, MACE~\citep{lu2024mace}, TRCE~\citep{chen2025trce}), all applied to SD1.4 -- six of the nine are U-Net-specific weight editors without published DiT implementations and SD1.4 is the concept-erasure literature's standard backbone.
+\textbf{Defense Methods.} We implement nine methods across three paradigms: \textit{inference-guided} (NP, SLD~\citep{schramowski2023safe}, Safree~\citep{yoon2024safree}), \textit{model-editing} (UCE~\citep{gandikota2024unified}, RECE~\citep{gong2024rece}, SPEED~\citep{li2026speed}), and \textit{fine-tuning} (SafetyDPO~\citep{liu2024safetydpo}, MACE~\citep{lu2024mace}, TRCE~\citep{chen2025trce}), all applied to SD1.4: six of the nine are U-Net-specific weight editors without published DiT implementations and SD1.4 is the concept-erasure literature's standard backbone.
 
 \noindent
 \textbf{Safety Filters.} We evaluate Q16~\citep{schramowski2022q16}, CLIP-NSFW~\citep{laionAI}, SD Filter~\citep{rombach2022ldm}, LlavaGuard~\citep{helff2024llavaguard}, and Qwen2.5-VL~\citep{qwen2.5technicalreport}.
