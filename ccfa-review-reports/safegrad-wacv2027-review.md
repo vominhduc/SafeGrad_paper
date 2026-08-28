@@ -534,3 +534,18 @@ Remaining conditions for full award contention: human-study IRB/equivalent wordi
 | Ethics / Limitations | 5 | gated release, disclosure-heavy, IRB sentence pending author facts |
 
 **Overall: 9/10 - strong accept, award contention.** Panels conditions unchanged from round 5; nothing new surfaced this pass.
+
+---
+
+# External Review R2 (borderline 5, 2026-08-28) — Charge Disposition
+
+All four weaknesses either were already answered in the manuscript (W1, W2, W4) or are now answered experimentally (W3).
+
+| Weakness | Status | Evidence |
+|---|---|---|
+| W1 evaluator leakage / policy conditioning | Answered in text | Blind-vs-guided ablation integrated in Sec. 5.1 + appendix table (blind ensemble: 0.2/0.2/7.2% L1--L3) |
+| W2 OLS-on-ordinal SBS critique | Answered in text | Kendall-tau = 1.0 for all six models (uninformative); slope-based SBS is the discriminating measure (App. metrics) |
+| W3 SD1.4-only defenses | Answered experimentally this round | NP defense on PixArt-alpha test split: L1 relative reduction 9.5% > L3 6.0%; Insight-3 claim noted to survive on DiT |
+| W4 auto-interpolated L1 | Answered in text | Restriction to hand-authored-only categories keeps Delta_B in 25.6--30.3 pp (Sec. 6.1) |
+
+Verdict: with the DiT transfer evidence landed, this review's conditions toward accept are satisfied at text and data level.
