@@ -3,7 +3,7 @@
 \begin{figure}[tb]
     \centering
     \includegraphics[width=0.78\linewidth]{figures/safety_gap.pdf}
-    \caption{The Safety Gap: Universal failure at low-severity boundaries. Overall HGR progression, aggregated across six T2I models, reveals non-uniform escalation with the steepest increase at L1$\rightarrow$L2 (mean $\Delta$HGR = 28.0 pp), exposing a systematic vulnerability at the low-severity boundary. Error bars show $\pm 1$ SEM across the six models.}
+    \caption{The Safety Gap. Pooled harm rate (\emph{harmful generation rate}, HGR) by severity rung across six T2I models; the steepest transition is L1$\to$L2 (mean $+28.0$ pp), exposing the L1--L2 safety gap that binary benchmarks miss. Error bars: $\pm 1$ SEM over the six models.}
     \label{fig:safety_gap}
 \end{figure}
 
@@ -28,7 +28,7 @@
 The escalation steepens at L1$\rightarrow$L2 (mean $\Delta$HGR = 28.0 pp), defining the safety gap: prompts benign to text filters still produce visually harmful outputs that evade classifiers trained on explicit L3 content.
 
 \textbf{Insight 1: Universal L1 blind spot.} \textit{Current T2I safety systems exhibit a systematic blind spot at the L1 boundary, universal across all evaluated models and invisible to binary safe/unsafe evaluation.}
-\Tab{\ref{tab:delta}} confirms this universality (per-category SEM 0.8--1.9 pp; Insight~3 covers within-model defenses): the L1$\to$L2 transition is the steepest in the aggregate profile (28.0 vs.\ 21.1 pp at L0$\to$L1) and the peak transition for five of six models (HiDream's L0$\to$L1 jump exceeds its L1$\to$L2 jump by 0.2 pp); Boundary Delta ranges from 25.7 pp (PixArt-$\alpha$) to 30.3 pp (HiDream).
+\Tab{\ref{tab:delta}} confirms this universality (per-category SEM 0.8--1.9 pp): the L1$\to$L2 transition is the steepest in the aggregate profile (28.0 vs.\ 21.1 pp at L0$\to$L1) and the peak transition for five of six models (HiDream's L0$\to$L1 jump exceeds its L1$\to$L2 jump by 0.2 pp); Boundary Delta ranges from 25.7 pp (PixArt-$\alpha$) to 30.3 pp (HiDream).
 This pattern is not an artifact of the pipeline's auto-interpolated L1 anchors: computed on only the 7 categories whose L1 anchors were hand-authored (\SuppSec{\ref{app:taxonomy}}), per-model $\Delta_B$ still falls in 25.6--30.3 pp.
 
 \subsection{Generative Model Analysis: Capability Correlates with Risk}
@@ -82,7 +82,7 @@ The gap is diagnosable, but is it closable? As a remediation check, we fine-tune
 Measured on the held-out test split with the same protocol, the tuned filter reaches \textbf{95.2\%} detection at L1 with a \textbf{3.8\%} L0 false-positive rate, cutting the overall bypass rate from 0.880 (zero-shot backbone) to \textbf{0.022} (\Tab{\ref{tab:filter}}, bottom row).
 
 \textbf{Insight 6: The safety gap is trainable-away.}
-\textit{A filter fine-tuned on ladder data recovers the mid-severity band (FBR $0.880 \rightarrow 0.022$ benchmark-resident, $0.024$ on fresh generations; L1 detection 95.2\% resp.\ 94.7\%) while holding false alarms far below the strongest existing filter (FPR@L0 = 3.8\% vs.\ Q16's 55.3\%), converting \dataname from a diagnostic into a mitigation instrument.}
+\textit{A filter fine-tuned on ladder data recovers the mid-severity band (FBR $0.880 \rightarrow 0.022$ benchmark-resident, $0.024$ fresh) while holding false alarms far below the strongest existing filter (FPR@L0 = 3.8\% vs.\ Q16's 55.3\%), converting \dataname from a diagnostic into a mitigation instrument.}
 \textbf{Fresh-generation (deployment-regime) validation.} To test the tuned filter under realistic conditions, we regenerate every held-out test-split prompt with all six evaluated T2I models (\emph{not} construction models), using each model's default settings with checkers disabled and the ladder seeds (two images per prompt, 4,992 images in total).
 Degenerate all-black generations (rung-uniform numeric failures) are excluded.
 On the remaining 4,626 images the tuned filter detects 94.7\%/99.0\%/99.0\% of fresh L1--L3 content at a 4.0\% L0 false-positive rate; pooled FBR is 2.4\%, statistically indistinguishable from the 2.2\% reference-regime estimate, versus 65.3\% for the zero-shot backbone (\SuppTab{\ref{tab:filter_fresh}}).
