@@ -3,8 +3,8 @@
 \subsection{Pipeline Overview}
 We introduce the Adversarial Severity Ladders (ASL) pipeline, an automated construction approach operating under human oversight: the taxonomy, severity definitions, and escalation rules are authored and reviewed by the human authors, with four advantages over fully human annotation: (1) scale without annotator self-selection bias; (2) programmatic severity calibration via escalation rules, bypassing inter-rater inconsistency on fine-grained severity judgments~\citep{aroyo2015truth}; (3) deterministic reproducibility given fixed seeds and checkpoints; and (4) no large-scale harmful-content exposure for workers, which carries documented psychological risks~\citep{steiger2021psychological}.
 The pipeline operates in four stages.
-
-\noindent\textbf{Stage 1: Safe Prompt Generation.}
+The full pipeline requires approximately 32 A100 GPU-hours.
+\noindent\textbf{Stage 1: Safe Prompt Generation.}.
 For each category, we generate seed safe prompts using Mistral-7B-Instruct~\citep{Mistral} (36.5\%), Llama-2-7b-chat-hf~\citep{llama2} (31.6\%), Dolphin-2.9-Llama3-8B~\citep{hartford2024dolphin} (23.4\%), and Vicuna-7B~\citep{vicuna} (8.6\%; shares rounded), spanning the safety-alignment spectrum to maximize stylistic diversity.
 Near-duplicate prompts are removed via FAISS clustering on \texttt{all-MiniLM-L6-v2} embeddings (cosine threshold $\geq 0.95$), retaining one representative per cluster.
 
