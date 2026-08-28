@@ -10,8 +10,8 @@ Consequently, what is missing is an evaluation framework that pinpoints not whet
 Current safety evaluation benchmarks, like SneakyPrompt~\citep{yang2023sneakyprompt}, Unsafe Diffusion~\citep{qu2023unsafe}, I2P~\citep{schramowski2023safe}, T2ISafety~\citep{li2025t2isafety}, and T2I-RiskyPrompt~\citep{zhang2025t2iriskyprompt}, predominantly assess model robustness through a binary ``safe/unsafe'' classification paradigm.
 We argue that this binary lens fails to capture the nuanced, severity-graded nature of harm: real adversaries navigate safety boundaries through incremental escalation, and different application contexts demand graded rather than binary safety judgments.
 
-We identify a critical ``safety gap'' rooted in this systematic underestimation of graded harm: text filters fail on adversarial prompts, while visual checkers misclassify low/mid-risk imagery as ``safe,'' missing harm simulated through semantics; particularly hazardous for sensitive applications such as child-oriented platforms or enterprise safe-search.
 Formally, the \emph{safety gap} is the regime where the text filter passes the prompt and the visual checker passes the image, yet the image already falls in a nontrivial severity band: threshold-based defenses are calibrated at the explicit extreme, so they are weakest precisely at this low-to-mid-risk boundary.
+Such slip is particularly hazardous for sensitive applications such as child-oriented platforms or enterprise safe-search, where the failure to distinguish ``safe'' from ``low-to-mid-risk'' content directly exposes users to harmful material.
 
 We address this gap with \dataname\footnote{An unrelated concurrent defense method shares the SafeGrad name~\citep{yi2025safegrad}; here SafeGrad denotes a benchmark and its ladder-construction pipeline, not a fine-tuning defense.}, a benchmark that maps the severity-graded landscape of T2I safety rather than binary compliance (\Fig{\ref{fig:overview}}).
 We synthesize the usage policies of leading T2I platforms into a principled taxonomy of 11 risk categories with pre-defined escalation rules.
@@ -22,8 +22,8 @@ Using \dataname, we conduct a comprehensive evaluation of the current T2I safety
 \textbf{(2) Defense methods:} we benchmark 9 representative mechanisms spanning inference-guided, model-editing, and fine-tuning paradigms, finding that all defenses suppress failures proportionally more at L1 than at L3, steepening the severity gradient rather than closing the safety gap.
 \textbf{(3) Safety filters:} we evaluate 5 filters and uncover a systemic insensitivity to severity: no filter reliably detects L1--L2 content, confirming the safety gap is not addressable by existing filtering alone.
 \textbf{(4) Adversarial attacks:} we test 5 jailbreak strategies, showing that query-based and multimodal attacks (ASR $\geq$ 63.4\%) outperform white-box gradient methods against the best-defended configurations.
-\textbf{(5) Remediation:} a severity-aware filter fine-tuned on ladder data recovers the boundary band that zero-shot filters miss, dominating all five baselines on every evaluated detection metric while holding the L0 false-alarm rate below 4\% (Insight~6, \Sec{\ref{sec:filter}}).
-Collectively, these evaluations yield 7 insights showing that current binary safety strategies are fundamentally ill-equipped to address the severity-graded nature of T2I risk.
+\textbf{(5) Remediation:} a severity-aware filter fine-tuned on ladder data recovers the boundary band that zero-shot filters miss, outperforming all five baselines on bypass and boundary detection while holding the L0 false-alarm rate below 4\% (Insight~6, \Sec{\ref{sec:filter}}).
+The 7 insights trace one arc: the gap is universal (Insight 1), even the safe rung leaks (Insight 2), defenses and filters cannot close it (Insights 3--5), attacks exploit it (Insight 7), and ladder data can close it (Insight 6).
 Our contributions:
 
 \begin{itemize}[leftmargin=*]
