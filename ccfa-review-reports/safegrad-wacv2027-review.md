@@ -572,3 +572,9 @@ Self-checks after the edit: zero dashes in live text, zero labels unresolved, al
 - Ethics/reproducibility: 5 when the author's IRB sentence is filled.
 
 **Overall: 9/10 strong accept. Confidence 5.** Remaining open items are author-side facts only.
+
+---
+
+# External Review R3 (2026-08-28) — Duplicate of R2 charges
+All four weaknesses match R2 verbatim and were already answered in the manuscript at the time of this review's writing:
+W1 -> Sec. 5.1(ii) + appendix metrics table (blind/guided ensemble); W2 -> app:metrics Kendall-tau sentence; W3 -> DiT transfer note (NP on PixArt, L1 9.5% > L3 6.0% relative suppression); W4 -> Sec. 6.1 hand-anchored restriction control. No manuscript change required.
