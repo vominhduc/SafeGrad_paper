@@ -17,7 +17,7 @@ We synthesize the usage policies of leading T2I platforms into a principled taxo
 Using our Adversarial Severity Ladders (ASL) pipeline, we generate 1,026 ladders escalated through four rungs, from Safe (L0) to High-risk (L3), each carrying prompts, reference images, and risk explanations.
 
 Using \dataname, we conduct a comprehensive evaluation of the current T2I safety ecosystem.
-\textbf{(1) T2I models:} we evaluate 6 open-source T2I models, revealing that harm rates are ordered by generative capability.
+\textbf{(1) T2I models:} we evaluate 6 open-source T2I models, revealing residual harm even at the safe rung and harm rates ordered by generative capability.
 \textbf{(2) Defense methods:} we benchmark 9 representative mechanisms spanning inference-guided, model-editing, and fine-tuning paradigms, finding that all defenses suppress failures proportionally more at L1 than at L3, steepening the severity gradient rather than closing the safety gap.
 \textbf{(3) Safety filters:} we evaluate 5 filters and uncover a systemic insensitivity to severity: no filter reliably detects L1--L2 content, confirming the safety gap is not addressable by existing filtering alone.
 \textbf{(4) Adversarial attacks:} we test 5 jailbreak strategies, showing that query-based and multimodal attacks (ASR $\geq$ 63.4\%) outperform white-box gradient methods against the best-defended configurations.

@@ -37,11 +37,9 @@ This pattern is not an artifact of the pipeline's auto-interpolated L1 anchors: 
 
 \textbf{Reading note on SBS.} SBS captures how sharply failure concentrates at the boundary, not how safe a model is: the two highest-SBS models (HiDream 0.80, Janus-Pro 0.74) are also the two most harmful in absolute terms at L3, and all six models reach at least 47.5\% HGR@L3. Read SBS only alongside absolute HGR.
 
-\textbf{Insight 2: Uneven safety baked into model weights.}
-\textit{With safety checkers disabled, HGR differences across models reflect safety embedded in their weights through training and RLHF, not external filtering.}
-PixArt-$\alpha$'s fine-tuning suppresses sexual HGR@L3 far below violence, but no model's training provides equivalent suppression for hate speech or misinformation; societal harms have been underrepresented in safety fine-tuning data.
-
-\textbf{Residual risk at L0.} All six models show non-zero HGR at the safe rung (0.5--3.5\%), so zero-risk deployment needs output monitoring even for entirely safe prompts.
+\textbf{Insight 2: Even the safe rung is not safe.}
+\textit{All six models produce non-zero harm at L0 (0.5--3.5\%), and harm rates rise with generative capability; safety posture is baked into model weights through training and alignment data, not supplied by guard rails.}
+PixArt-$\alpha$'s fine-tuning suppresses sexual HGR@L3 far below violence, but no model's training provides equivalent suppression for hate speech or misinformation; societal harms have been underrepresented in safety fine-tuning data, so zero-risk deployment needs output monitoring even for entirely safe prompts.
 
 Construction--evaluation backbone overlap is audited in \SuppSec{\ref{app:backbone}}; no evaluated model shares an encoder or diffusion backbone with any construction component.
 
@@ -60,6 +58,7 @@ Critically, this finding requires \dataname's graded structure: a binary benchma
 
 \textbf{Insight 4: The Utility--Safety Tradeoff Is Dominated by Two Methods.}
 \textit{Under our joint $\Delta$HGR/SAS criterion, TRCE Pareto-dominates six of the seven remaining methods; MACE occupies a distinct extreme point on the tradeoff curve.}
+This observation is not ladder-specific: it audits the defense ecosystem that must act on the gap Insights 1 and 3 expose.
 TRCE reduces HGR by $0.506$ at essentially no utility cost (SAS drop $-0.008$), beating NP, SLD, Safree, UCE, SPEED, and SafetyDPO on both metrics at once (without discounting SLD's or SafetyDPO's documented competitiveness elsewhere).
 RECE is excluded: it collapses on Legal and Social through concept diffuseness and semantic entanglement (\SuppSec{\ref{app:collapse}}; e.g., MACE's erasure of Public Figures degrades benign-portrait SAS by 40.1\%).
 The remaining tradeoff is between TRCE and MACE: MACE erases more harm ($\Delta\mathrm{HGR} = 0.683$, $+35\%$ relative reduction) but pays $11\times$ the SAS penalty and $2.7\times$ the over-refusal rate (ORR 34.2\% vs.\ 12.8\%; \SuppSec{\ref{app:overrefusal}}).
