@@ -1,16 +1,16 @@
 \section{Limitations}\label{sec:limitations}
 
-\textbf{Evaluation scope.} T2I models are evaluated with safety checkers disabled (raw generative risk); defenses are tested only on SD1.4 because weight-editing needs architecture-specific ports for DiT backbones.
+\textbf{Evaluation scope.} T2I models are evaluated with checkers disabled (raw generative risk); defenses are tested only on SD1.4, since weight-editing needs architecture-specific DiT ports.
 
 \noindent
-\textbf{Coverage.} Construction models and closed commercial systems are excluded (weight access, reproducibility); severity definitions are Western-centric (Discussion); prompts are English-only. NSFW-targeted filters (Q16, CLIP-NSFW, SD Filter) and single-category detectors (e.g., NudeNet~\citep{chhabra2020nudenet}) are out-of-domain on Legal/Social content, so Insight~5's universal reading rests on the two generalist judges. The human study uses three annotators; a larger panel and a fully blind harm rating are planned.
+\textbf{Coverage.} Construction models and closed commercial systems are excluded (weight access, reproducibility); severity definitions are Western-centric; prompts are English-only. Insight~5's universal-filter reading rests on the two generalist judges, since NSFW-targeted filters and single-category detectors (e.g., NudeNet~\citep{chhabra2020nudenet}) are out-of-domain on Legal/Social content. The human study uses three annotators; a larger panel and a fully blind harm rating are planned.
 
 \noindent
-\textbf{Evaluator error.} MLLM ensemble evaluation introduces noise particularly at L1; the human study ($\kappa = 0.73$) and guidance ablation ($<2.4\%$ macro shift) bound this empirically. Because the evaluator sees sample-specific risk descriptions, absolute HGR figures are protocol-relative (blind ensemble: 7.2\% vs.\ 76.4\% guided at L3), so all headline conclusions are cross-method comparisons under one identical protocol; L0 rates are the query's noise floor, not absolute zero risk. The ladder scorer, verifier, and tuned filter are also all Qwen-family, so tuned-filter transfer may partly reflect same-family teacher agreement; cross-family remediation is future work.
+\textbf{Evaluator error.} The MLLM evaluator is noisiest at L1 (human $\kappa = 0.73$; guidance-ablation shift $<2.4\%$). Since it sees sample-specific risk descriptions, absolute HGR figures are protocol-relative (blind ensemble: 7.2\% vs.\ 76.4\% guided at L3) and L0 rates are the query's noise floor. The ladder scorer, verifier, and tuned filter are all Qwen-family, so tuned-filter transfer may partly reflect same-family teacher agreement; cross-family remediation is future work.
 
 
-\section{Ethical Considerations}
+\noindent\textbf{Ethical Considerations.}
 \dataname involves generating and handling harmful content; it is entirely synthetic, spot-checked for personal information, and human participants (\SuppSec{\ref{app:human}}) were informed and could skip any sample.
-At publication we release: (i) all 1,026 validated ladders, prompts--explanation pairs, and per-image verdicts (CC BY-NC 4.0, research-only); (ii) the ASL pipeline and evaluation scripts; (iii) L0--L1 reference images openly, L2--L3 gated to verified researchers (extra restrictions for Minors); (iv) the datasheet.
-The Minors category requires special care: synthetic imagery of minors is jurisdiction-dependent even for research, so before release we will obtain legal review, replace photorealistic L3 renders with stylized depictions where required, and gate access under an explicit use agreement; the per-image verdicts and prompts alone suffice to reproduce the analysis.
+We release: (i) all 1,026 validated ladders, prompt--explanation pairs, and per-image verdicts (CC BY-NC 4.0, research-only); (ii) the ASL pipeline and evaluation scripts; (iii) L0--L1 reference images openly, L2--L3 gated to verified researchers; (iv) the datasheet.
+The Minors subset is further gated: synthetic imagery of minors is jurisdiction-dependent even for research, so before release we will obtain legal review, replace photorealistic L3 renders with stylized depictions where required, and require an explicit use agreement; the per-image verdicts and prompts alone suffice to reproduce the analysis.
 We notify affected developers 60 days ahead of release.

@@ -1,6 +1,6 @@
 \begin{table}[tb]
 \centering
-\caption{Safety filter evaluation on SafeGrad reference images. Detection rate shown per severity level (L0--L3) alongside overall metrics. TPR@L3 is detection rate on high-risk images; FPR@L0 is false alarm rate on safe images; FBR is filter bypass rate; L3$-$L0 is severity sensitivity. \textbf{Bold} indicates the best per column; \underline{underline} indicates the second best. \colorbox{gray!20}{Shaded} row means best overall filter. ``---'' indicates the filter produces only a binary Safe/Unsafe verdict. $^*$The \dataname-tuned row is evaluated on the held-out 10\% ladder-respecting test split (416 image--label pairs); baseline rows use the full reference set, a superset of the test split. All rows use identical rate computations, and every detection-metric margin (per-level detection, FBR, severity sensitivity) exceeds the test-split binomial standard error.}
+\caption{Safety filter evaluation on SafeGrad reference images: detection rate per severity level plus FPR@L0 (false-alarm rate on safe images), FBR (bypass rate), and L3$-$L0 (severity sensitivity). \textbf{Bold} best per column, \underline{underline} second; \colorbox{gray!20}{shaded} row best overall. ``---'' indicates a binary-only verdict. $^*$The tuned row is evaluated on the held-out 10\% ladder-respecting test split (416 pairs); baselines use the full reference set (a superset). All margins exceed the test-split binomial standard error.}
 \label{tab:filter}
 \resizebox{0.94\columnwidth}{!}{%
 \begin{tabular}{lccccccc}

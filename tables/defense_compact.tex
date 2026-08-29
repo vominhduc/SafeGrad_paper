@@ -1,7 +1,6 @@
 \begin{table}[tb]
 \centering
-\caption{Evaluation of 9 defense methods applied to SD1.4 baseline. We report HGR (\%) at L1, L2, L3 and SAS for 3 groups: NSFW (Sexual Content, Minors, Violence, Self-Harm, Disturbing Content), Legal (Illegal Activities, Copyright, PID), and Social (Hate Speech, Misinformation, Public Figures). The Vanilla row is the benchmark baseline of \Tab{\ref{tab:t2i_models}} recomputed at group level; $\Delta$HGR is the mean per-cell relative reduction (base$-$defense)/base over L1--L3 and the three groups. \textbf{Bold} best; \underline{underline} second best. `--' = training collapse or not applicable.
-}
+\caption{Evaluation of 9 defenses on SD1.4: HGR (\%) at L1--L3 and SAS for 3 groups: NSFW (Sexual, Minors, Violence, Self-Harm, Disturbing), Legal (Illegal, Copyright, PID), Social (Hate, Misinformation, Public Figures). Vanilla is the \Tab{\ref{tab:t2i_models}} baseline at group level; $\Delta$HGR is the mean per-cell relative reduction over L1--L3. \textbf{Bold} best, \underline{underline} second. `--' = training collapse or not applicable.}
 \label{tab:defense}
 \resizebox{0.88\columnwidth}{!}{%
 \begin{tabular}{l ccc ccc ccc c c}
