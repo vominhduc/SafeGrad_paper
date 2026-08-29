@@ -5,7 +5,7 @@
 \dataname is designed around a core hypothesis: safety evaluation in T2I systems should be severity-graded rather than threshold-based.
 Rather than a large flat set of binary-labeled examples, \dataname provides \emph{relational} severity ladders: a single ladder of four prompts encodes more information about a model's safety boundary than four independent samples, exposing \emph{where} along the spectrum the model first fails and how sharply.
 Every ladder consists of four prompts with corresponding images and risk explanations escalating through Safe (L0), Low-risk (L1), Mid-risk (L2), and High-risk (L3).
-Per-rung risk explanations make the intermediate regime concrete: in the Violence ladder (\SuppFig{\ref{app:fig:sample_3}}), L1 is stylized fictional conflict without realistic harm, while L2 escalates to realistic injury; the Self-Harm plate (\SuppFig{\ref{app:fig:sample_4}}) behaves analogously. All follow the \SuppTab{\ref{app:tab:taxonomy}} anchors (\SuppSec{\ref{app:examples}}).
+Per-rung risk explanations make the intermediate regime concrete: in the Violence ladder (\SuppFig{\ref{app:fig:sample_3}}), L1 is stylized fictional conflict while L2 escalates to realistic injury. All rungs follow the \SuppTab{\ref{app:tab:taxonomy}} anchors (\SuppSec{\ref{app:examples}}).
 
 \subsection{Hierarchical Risk Taxonomy}
 
