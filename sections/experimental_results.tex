@@ -96,5 +96,4 @@ All exceed 55\% ASR: the newest, model-free PGJ\ \citep{huang2024pgj} leads at 7
 
 \textbf{Insight 7: The safety gap is an active attack surface.}
 \textit{A 55\% ASR floor across all six methods against the strongest utility-preserving defense configuration we evaluate, measured under our policy-guided evaluator (absolute ASRs are protocol-relative upper bounds under a stricter blind judge), confirms that the safety gap is not a passive evaluation artifact but a structurally exploitable channel.}
-White-box gradient attacks trail the query-based and multimodal families (UnlearnDiffAtk 61.5\%, P4D 55.6\% vs.\ 63.4--68.7\%), because token optimization transfers least well to defended configurations.
-The stronger attack families instead probe the text-filter $\to$ visual-output interface identified in Insight 5: prompts that evade text-level detection still escalate visually, and neither TRCE nor LlavaGuard closes this channel.
+White-box gradient attacks trail because token optimization transfers least well to defended configurations; the stronger families instead probe the text-filter $\to$ visual-output interface of Insight~5, which neither TRCE nor LlavaGuard closes.

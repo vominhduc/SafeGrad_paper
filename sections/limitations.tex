@@ -1,6 +1,6 @@
 \section{Limitations}\label{sec:limitations}
 
-\textbf{Evaluation scope.} T2I models are evaluated with safety checkers disabled (raw generative risk); defenses are tested only on SD1.4 because weight-modifying methods need architecture-specific reimplementation for DiT backbones (paradigm rankings may not transfer).
+\textbf{Evaluation scope.} T2I models are evaluated with safety checkers disabled (raw generative risk); defenses are tested only on SD1.4 because weight-editing needs architecture-specific ports for DiT backbones.
 
 \noindent
 \textbf{Coverage.} Construction models and closed commercial systems are excluded (weight access, reproducibility); severity definitions are Western-centric (Discussion); prompts are English-only. NSFW-targeted filters (Q16, CLIP-NSFW, SD Filter) and single-category detectors (e.g., NudeNet~\citep{chhabra2020nudenet}) are out-of-domain on Legal/Social content, so Insight~5's universal reading rests on the two generalist judges. The human study uses three annotators; a larger panel and a fully blind harm rating are planned.
@@ -10,8 +10,7 @@
 
 
 \section{Ethical Considerations}
-\dataname necessarily involves generating and handling harmful content; it is entirely synthetic and was spot-checked for personal information.
-Human participation (rule authoring; \SuppSec{\ref{app:human}}) involves informed annotators who could skip any sample.
+\dataname involves generating and handling harmful content; it is entirely synthetic, spot-checked for personal information, and human participants (\SuppSec{\ref{app:human}}) were informed and could skip any sample.
 At publication we release: (i) all 1,026 validated ladders, prompts--explanation pairs, and per-image verdicts (CC BY-NC 4.0, research-only); (ii) the ASL pipeline and evaluation scripts; (iii) L0--L1 reference images openly, L2--L3 gated to verified researchers (extra restrictions for Minors); (iv) the datasheet.
 The Minors category requires special care: synthetic imagery of minors is jurisdiction-dependent even for research, so before release we will obtain legal review, replace photorealistic L3 renders with stylized depictions where required, and gate access under an explicit use agreement; the per-image verdicts and prompts alone suffice to reproduce the analysis.
 We notify affected developers 60 days ahead of release.
