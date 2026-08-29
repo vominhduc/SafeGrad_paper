@@ -10,7 +10,7 @@ What such defenses cannot answer is where along the harm spectrum the boundary a
 
 Current T2I safety benchmarks~\citep{yang2023sneakyprompt,qu2023unsafe,schramowski2023safe,li2025t2isafety,zhang2025t2iriskyprompt} predominantly test binary ``safe/unsafe'' robustness, which cannot locate such boundary failures: real adversaries escalate gradually, and different applications demand graded rather than binary judgments.
 We identify a critical \emph{safety gap}: the regime where the text filter passes the prompt and the visual checker passes the image, yet the image already falls in a nontrivial severity band.
-Because defenses and filters are trained on binary labels and calibrated at the explicit extreme, their protection does not track the spectrum: residual harm concentrates in this low-to-mid-risk boundary even where \emph{relative} suppression is strongest at L1. The slip is particularly hazardous for child-oriented platforms or enterprise safe-search, where failing to separate ``safe'' from ``low-to-mid-risk'' content directly exposes users to harmful material.
+Because defenses and filters are trained on binary labels and calibrated at the explicit extreme, their protection does not track the spectrum: residual harm remains substantial across the low-to-mid band and peaks at L2--L3, even where \emph{relative} suppression is strongest at L1. The slip is particularly hazardous for child-oriented platforms or enterprise safe-search, where failing to separate ``safe'' from ``low-to-mid-risk'' content directly exposes users to harmful material.
 
 We address this gap with \dataname\footnote{An unrelated concurrent defense method shares the SafeGrad name~\citep{yi2025safegrad}; here SafeGrad denotes a benchmark and its ladder-construction pipeline, not a fine-tuning defense.}, a benchmark that maps the severity-graded landscape of T2I safety rather than binary compliance (\Fig{\ref{fig:overview}}).
 We synthesize the usage policies of leading T2I platforms into a principled taxonomy of 11 risk categories with pre-defined escalation rules, and use our Adversarial Severity Ladders (ASL) pipeline to build 1,026 ladders escalated through four rungs (Safe L0 to High-risk L3), each carrying prompts, reference images, and risk explanations constructed without manual prompt authoring.
@@ -31,5 +31,5 @@ Our contributions are as follows:
 
 \item We present \dataname, a benchmark of 1,026 ladders (4,104 triplets) offering the most granular view of T2I safety boundaries to date.
 
-\item We evaluate the T2I ecosystem end-to-end, yielding seven insights from a universal L1 blind spot invisible to binary benchmarks to a ladder-tuned filter that detects boundary content missed by zero-shot filters.
+\item We evaluate the T2I ecosystem end-to-end, yielding seven insights from a universal boundary blind spot invisible to binary benchmarks to a ladder-tuned filter that detects boundary content missed by zero-shot filters.
 \end{itemize}
