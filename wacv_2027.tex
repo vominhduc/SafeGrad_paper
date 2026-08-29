@@ -52,14 +52,13 @@ First line of institution2 address\\
 % Title + teaser figure spanning both columns on page 1 (CVPR teaser pattern)
 \twocolumn[{%
 \maketitle
-\vspace{0.4em}
+\vspace{0.2em}
 \begin{center}
 \includegraphics[width=1\linewidth]{figures/overview_spotlight.pdf}
-\captionof{figure}{Overview of \dataname. (Left) The escalation rules illustrated with a Copyright Infringement example; (middle) the 11-category risk taxonomy organized into three risk families:
-NSFW (Sexual Content, Minors, Violence, Self-Harm, Disturbing Content), Legal (Illegal Activities, Copyright, PID), and Social (Hate Speech, Misinformation, Public Figures); (right) the four-level escalation structure illustrated with Sexual and Violence examples, showing how prompt, reference image, and risk explanation co-escalate from Safe (L0) through Low-risk (L1) and Mid-risk (L2) to High-risk (L3). (Bottom strip) headline results: pooled HGR climbs from 1.7\% (L0) to 65.8\% (L3) with the steepest jump ($+28.0$ pp) at L1$\to$L2 (Sec.~\ref{sec:gap}); zero-shot filters stay flat across rungs while the ladder-tuned filter tracks severity; and the bypass rate of the protocol-matched zero-shot backbone falls from 52.2\%/65.3\% (reference/fresh) to 2.2\%/2.4\% after ladder tuning (88.0\% fully unguided; Sec.~\ref{sec:filter}).}
+\captionof{figure}{Overview of \dataname. (Left) The escalation rules illustrated with a Copyright Infringement example; (middle) the 11-category risk taxonomy organized into three risk families (NSFW, Legal, Social); (right) the four-level escalation structure illustrated with Sexual and Violence examples, showing how prompt, reference image, and risk explanation co-escalate from Safe (L0) through Low-risk (L1) and Mid-risk (L2) to High-risk (L3). (Bottom strip) headline results: pooled HGR climbs from 1.7\% (L0) to 65.8\% (L3) with the steepest jump ($+28.0$ pp) at L1$\to$L2 (Sec.~\ref{sec:gap}); zero-shot filters stay flat across rungs while the ladder-tuned filter tracks severity; and the bypass rate of the protocol-matched zero-shot backbone falls from 52.2\%/65.3\% (reference/fresh) to 2.2\%/2.4\% after ladder tuning (88.0\% fully unguided; Sec.~\ref{sec:filter}).}
 \label{fig:overview}
 \end{center}
-\vspace{0.4em}
+\vspace{0.2em}
 }]
 
 \input{sections/abstract}

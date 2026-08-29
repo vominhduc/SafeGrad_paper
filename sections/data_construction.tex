@@ -29,6 +29,6 @@ The full pipeline requires approximately 32 GPU-hours on A100 GPUs.
 \textbf{Semantic escalation magnitude} (mean $\Delta\theta = 40.23\degree$) quantifies the angular distance from L0 to L3; Hate Speech shows the largest shift ($50.13\degree$) and Copyright the smallest ($31.59\degree$).
 As an independent check, we re-label 100 ladders (400 pairs) with Claude-3.7-Sonnet; the automated evaluator agrees on 96\% of pairs (Cohen's $\kappa = 0.76$).
 
-\noindent\textbf{Lexical diversity.} We audit surface-level lexical diversity over all 4,104 prompts via Self-BLEU ($n = 3,4$) and distinct-$n$ ($n = 1,2$). Cross-ladder text is highly varied (Self-BLEU-4 $= 0.05$, distinct-2 $= 0.89$), ruling out boilerplate or template replication; within ladders, where thematic overlap is expected, Self-BLEU-4 stays bounded at $0.14$ with distinct-2 $= 0.76$. Stage-1 FAISS deduplication thus leaves no residual redundancy.
+\noindent\textbf{Lexical diversity.} Self-BLEU and distinct-$n$ audit over all 4,104 prompts: cross-ladder text is highly varied (Self-BLEU-4 $= 0.05$, distinct-2 $= 0.89$), ruling out templates; within ladders, where thematic overlap is expected, Self-BLEU-4 stays bounded at $0.14$ (distinct-2 $= 0.76$). Stage-1 FAISS deduplication thus leaves no residual redundancy.
 
 \input{tables/data_quality_full}

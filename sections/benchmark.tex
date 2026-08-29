@@ -5,7 +5,7 @@
 \dataname is designed around a core hypothesis: safety evaluation in T2I systems should be severity-graded rather than threshold-based.
 Rather than a large flat set of binary-labeled examples, \dataname provides \emph{relational} severity ladders: a single ladder of four prompts encodes more information about a model's safety boundary than four independent samples, exposing \emph{where} along the spectrum the model first fails and how sharply.
 Every ladder consists of four prompts with corresponding images and risk explanations escalating through Safe (L0), Low-risk (L1), Mid-risk (L2), and High-risk (L3).
-Per-rung risk explanations make the intermediate regime concrete: in the Violence ladder (\SuppFig{\ref{app:fig:sample_3}}), L1 depicts stylized, fictional conflict without realistic harm, while L2 escalates to realistic injury and aftermath; the Self-Harm plate (\SuppFig{\ref{app:fig:sample_4}}) behaves analogously. All follow the \SuppTab{\ref{app:tab:taxonomy}} anchors; every ladder carries such explanations (\SuppSec{\ref{app:examples}}).
+Per-rung risk explanations make the intermediate regime concrete: in the Violence ladder (\SuppFig{\ref{app:fig:sample_3}}), L1 is stylized fictional conflict without realistic harm, while L2 escalates to realistic injury; the Self-Harm plate (\SuppFig{\ref{app:fig:sample_4}}) behaves analogously. All follow the \SuppTab{\ref{app:tab:taxonomy}} anchors (\SuppSec{\ref{app:examples}}).
 
 \subsection{Hierarchical Risk Taxonomy}
 
@@ -14,10 +14,9 @@ Each category defines four severity levels with escalation rules (\SuppSec{\ref{
 The categories, severity definitions, and escalation rules are human-authored and reviewed against these sources, with boundary cases adjudicated manually; the automated pipeline instantiates these human-written rules rather than defining severity levels itself.
 
 \subsection{Dataset Statistics}
-\dataname contains 1,026 ladders (4,104 prompts) spanning 11 categories; each rung holds a prompt, reference image, and risk explanation, and all ladders pass the monotonic quality filter (82--99 ladders per category; \SuppTab{\ref{app:tab:stats}}).
-Categories are not mutually exclusive at high severity: co-occurrence analysis (\SuppSec{\ref{app:comatrix}}) shows the largest overlap for Violence--Disturbing (18.9\%/21.4\%) and moderate overlap for Hate Speech--Misinformation (11.8\%/12.6\%).
-\Tab{\ref{tab:comparison}} compares \dataname against existing benchmarks.
-The 1,026 ladders are the strict post-filtering yield of the pipeline; \dataname targets continuous failure slopes at the L1/L2 boundary rather than flat coverage.
+\dataname is the strict post-filtering yield of the ASL pipeline: 1,026 ladders (4,104 prompts) spanning 11 categories, each rung holding a prompt, reference image, and risk explanation (82--99 ladders per category; \SuppTab{\ref{app:tab:stats}}).
+Categories are not mutually exclusive at high severity: co-occurrence analysis (\SuppSec{\ref{app:comatrix}}) shows the largest overlap for Violence--Disturbing (18.9\%/21.4\%).
+\Tab{\ref{tab:comparison}} compares \dataname against existing benchmarks; \dataname targets continuous failure slopes at the L1/L2 boundary rather than flat coverage.
 
 \begin{table}[tb]
 \centering

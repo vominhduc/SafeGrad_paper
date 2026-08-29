@@ -5,7 +5,7 @@
 \vspace{0.2em}
 \par\noindent
 Text-to-Image (T2I) generative models such as Stable Diffusion 3~\citep{SD3}, DALL-E 3~\citep{dalle3}, and Midjourney~\citep{midjourney} have transformed content creation, yet their susceptibility to harmful or graphic content has become the primary bottleneck for safe deployment~\citep{bird2023typology,yang2023sneakyprompt}.
-Deployed guardrails typically pair a prompt-level text filter with a post-generation visual checker, and both are calibrated on explicit violations: they stop direct requests for nudity or graphic violence reliably, but they struggle with adversarial, nuanced, or metaphor-based inputs~\citep{zhang2025adversarial}.
+Deployed guardrails pair a prompt-level text filter with a post-generation visual checker, both calibrated on explicit violations: they stop direct requests for nudity or graphic violence reliably, but they struggle with adversarial or metaphor-based inputs~\citep{zhang2025adversarial}.
 What such defenses cannot answer is where along the harm spectrum the boundary actually breaks.
 
 Current T2I safety benchmarks~\citep{yang2023sneakyprompt,qu2023unsafe,schramowski2023safe,li2025t2isafety,zhang2025t2iriskyprompt} predominantly test binary ``safe/unsafe'' robustness, which cannot locate such boundary failures: real adversaries escalate gradually, and different applications demand graded rather than binary judgments.
@@ -17,11 +17,11 @@ We synthesize the usage policies of leading T2I platforms into a principled taxo
 
 Evaluated on \dataname, the current T2I safety ecosystem shows the gap everywhere we look.
 \textbf{(1) T2I models:} 6 open-source models leak harmful content even at the safe rung, with harm rates ordered by generative capability.
-\textbf{(2) Defenses:} 9 methods spanning inference-guided, model-editing, and fine-tuning paradigms all suppress failures proportionally more at L1 than at L3, steepening the severity gradient rather than closing it.
+\textbf{(2) Defenses:} 9 methods across three paradigms all suppress failures proportionally more at L1 than at L3, steepening the severity gradient rather than closing it.
 \textbf{(3) Safety filters:} all 5 filters track severity poorly; none reliably detects L1--L2 content.
-\textbf{(4) Adversarial attacks:} 6 attack families exploit this asymmetry directly, with query-based and multimodal attacks (ASR $\geq$ 63.4\%) outperforming white-box gradient methods against the strongest defended configuration we evaluate.
-\textbf{(5) Remediation:} a severity-aware filter fine-tuned on ladder data recovers the boundary band that zero-shot filters miss, on benchmark reference images and on fresh generations from every evaluated model (Insight~6).
-The seven resulting insights trace one arc: the gap is universal (Insight 1), even the safe rung leaks (Insight 2), neither defenses nor filters close it (Insights 3--5), ladder data can close it (Insight 6), and attacks exploit what remains (Insight 7).
+\textbf{(4) Adversarial attacks:} 6 attack families exploit this asymmetry, with query-based and multimodal attacks (ASR $\geq$ 63.4\%) outperforming white-box gradient methods against the strongest defended configuration we evaluate.
+\textbf{(5) Remediation:} a severity-aware filter fine-tuned on ladder data recovers the boundary band that zero-shot filters miss, on reference images and on fresh generations from every evaluated model (Insight~6).
+These insights trace one arc: the gap is universal (Insight 1), even the safe rung leaks (Insight 2), neither defenses nor filters close it (Insights 3--5), ladder data can close it (Insight 6), and attacks exploit what remains (Insight 7).
 
 Our contributions are as follows:
 \begin{itemize}[leftmargin=*]

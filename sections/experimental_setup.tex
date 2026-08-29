@@ -14,7 +14,7 @@ and instead evaluate six architecturally independent open-source models: SD1.4, 
 \noindent
 \textbf{Attack Strategies.} We evaluate six attack families: SneakyPrompt~\citep{yang2023sneakyprompt}, Ring-A-Bell~\citep{tsai2024ringabell}, UnlearnDiffAtk~\citep{zhang2024unlearndiffattk}, MMA-Diffusion~\citep{yang2024mma}, and P4D~\citep{chin2024p4d}, against the strongest utility-preserving defended configuration we evaluate (Sec.~\ref{sec:attack}), plus the recent perception-guided jailbreak (PGJ)~\citep{huang2024pgj}, the most recent protocol-compatible attack.
 We use only L2 and L3 prompts, as lower-severity prompts rarely produce harmful outputs even under attack.
-All attacks follow their publicly released reference implementations without further tuning, and ASR in \Tab{\ref{tab:attacks}} is computed over the same 2,052-prompt set ($2 \times 1,026$ L2--L3 prompts) for every attack, so rows are directly comparable.
+All attacks use their public reference implementations without tuning; ASR (\Tab{\ref{tab:attacks}}) is computed over the same 2,052 L2--L3 prompts for every attack, so rows are directly comparable.
 
 \noindent\textbf{Generation protocol.}
 For prompt-conditioned evaluation (models, defenses, attacks), we generate two images per prompt per model using default inference settings \emph{with safety checkers disabled} (filters instead classify static reference images; the tuned filter is additionally validated on fresh generations, \Sec{\ref{sec:filter}}), measuring each model's raw generative risk independent of its guard layers.
@@ -27,9 +27,9 @@ Since no existing safety filter covers all 11 risk categories, we employ an ense
 Each model receives the sample-specific risk description derived from the escalation rules, matching the information budget of a deployed severity-aware filter with policy access; $\phi(I) = 1$ if at least two of the three models flag the image.
 We validate the ensemble at three levels.
 (i) an independent Claude-3.7-Sonnet relabeling of 200 held-out stratified pairs agrees on 91\% (vs.\ 59.8\% for Q16);
-(ii) stripping the intended-level label shifts HGR by under 2.4\% on macro average, and a fully-blind ensemble variant detects only 0.2\%/0.2\%/7.2\% at L1--L3 where the guided one recovers 19.7\%/59.0\%/76.4\% (\SuppSec{\ref{app:metrics}}), so guidance raises sensitivity but does not create the gap;
+(ii) stripping the intended-level label shifts HGR by under 2.4\% on macro average, and a fully blind ensemble detects almost nothing below L3 (\SuppSec{\ref{app:metrics}}), so guidance raises sensitivity but does not create the gap;
 (iii) a blinded human study on 500 stratified pairs (three independent annotators, 60\% of the budget at the L1--L2 boundary) agrees with the pipeline's labels at $\kappa = 0.73$ (\SuppSec{\ref{app:human}}).
-Two caveats bound interpretation: humans were instructed with the same escalation rules, so (iii) grounds the rubric rather than blind perception, and a fully blind human harm rating remains future work; and all absolute rates in Secs.~\ref{sec:gap}--\ref{sec:attack} are protocol-relative, interpretable as cross-method comparisons under this identical protocol rather than as absolute harm prevalence.
+All absolute rates in Secs.~\ref{sec:gap}--\ref{sec:attack} are protocol-relative (cross-method comparisons under one identical protocol); since (iii) is rule-instructed, a fully blind human harm rating remains future work.
 
 \subsection{Evaluation Metrics}
 
