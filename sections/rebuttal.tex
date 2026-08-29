@@ -298,3 +298,34 @@ To be honest, different country has different safety rules, making our taxonomy 
 
 
 % As with the other reviewers, we will foreground the Appendix J finding (13.4pp/11.2pp non-Western HGR gap) in the main Discussion as a structural limitation, and note explicitly that Table 9's severity definitions (e.g., "trademarked logos," "government-issued passports") reflect a US/EU legal framework.
+
+
+\textbf{Reviewer r8TQ (Weak Reject, datasets track)}
+
+We thank Reviewer r8TQ for the meticulous critique. We answer the four actionable questions first, then the minor points.
+
+\textcolor{blue}{Question 1: Blind evaluation \& visual harm.} If blind MLLMs collapse to 7.2\% detection at L3, do the images contain human-perceivable harm at all? Can humans order rungs when shown images detached from prompts?
+
+\textbf{A1: The blind collapse characterizes the judges, not the images.}
+The blind-ensemble numbers are obtained with a single generic yes/no unsafe-content question posed to three open-weight 4--8B MLLMs --- a configuration that is dramatically under-sensing even for state-of-the-art *zero-shot* moderation: the same images are flagged at 55--67\% by the simple Q16 classifier and at 21\%/12\% by LlavaGuard/Qwen2.5-VL in their default deployed modes (Tab.~6). Blind zero-shot MLLM binaries undershoot \emph{every} existing filter we benchmark, so their low absolute rates cannot be used to conclude that the images lack visible harm; they document that generic, description-free judging is unreliable --- which is precisely our Insight~5. Grounding that the rungs are human-perceivable comes from two independent non-ensemble sources: (i) the blinded human study (500 pairs, 3 annotators, rules-instructed, $\kappa = 0.73$ against pipeline labels), and (ii) Claude-3.7-Sonnet relabeling (91\%/96\% agreement). We agree one cell is still missing: a \emph{rules-withheld} human harm rating and a detached-image (no prompt visible) rung-ordering study. We will run exactly that annotation (image-only, four-rung ordering, plus an unguided harm judgment) and report it in the camera-ready alongside the existing studies. Finally, every headline conclusion in Secs.~5--6 is a cross-method comparison under one identical evaluator protocol (now stated explicitly in Sec.~4.2); even under the blind regime all orderings invert none of our claims --- the measured gap \emph{widens}.
+
+\textcolor{blue}{Question 2: Cross-family remediation.} FBR/FPR of the LoRA filter on a non-Qwen backbone (e.g., LLaVA-NeXT-7B, InternVL2-7B)?
+
+\textbf{A2: Partially addressed; full cross-family run committed.}
+Two clarifications and one commitment. First, the HGR \emph{ground truth} behind Insights 1--7 never comes from Qwen: the evaluator ensemble is InternVL2-8B, Phi-4-multimodal, and Gemma-3-4b-it (Sec.~4.2), all disjoint from the Qwen-based pipeline components. Qwen-family models appear only in construction scoring/verification and as the \emph{remediation backbone}. Second, within-backbone controls isolate the data effect from backbone priors: the tuned 7B improves over its own \emph{matched} zero-shot anchor (FBR 52.2\% $\to$ 2.2\%) and the identically-trained 3B over \emph{its own} anchor (FBR 37.5\% $\to$ 0.6\%; L1 detection 34.6\% $\to$ 99.0\%) --- gains of an order of magnitude at both model scales, which is difficult to reconcile with mere family-token artifacts. Third: we agree the remaining same-family gap (verifier Qwen3-VL $\to$ filter backbone Qwen2.5-VL) must be closed; we will train the identical recipe on InternVL2-8B and report FBR/FPR@L0 on the same ladder-respecting test split in the camera-ready. The three-MLLM ensemble labels provide a non-Qwen supervision target for exactly this purpose.
+
+\textcolor{blue}{Question 3: DiT defense validation.} At least one inference-guided defense on a DiT model across L1--L3?
+
+\textbf{A3: Already in the paper and supplement; we will expand it.}
+Sec.~5.3 (Insight~3) reports the NP defense on PixArt-$\alpha$ (a DiT): relative suppression is higher at L1 than at L3 on the same test split ($\rho_{\mathrm{L1}} = 9.5\%$ vs.\ $\rho_{\mathrm{L3}} = 6.0\%$). The full per-rung numbers are: undefended vs.\ NP HGR of 20.2\% $\to$ 18.3\% (L1), 63.5\% $\to$ 58.7\% (L2), 80.8\% $\to$ 76.0\% (L3) ($n = 104$ per rung, held-out split) --- the relative-suppression asymmetry survives on a DiT backbone, at NP's characteristically mild magnitude. For camera-ready we will (a) move these per-rung numbers into the main text and (b) add a second DiT evaluation (SLD-style guided inference on CogView4) to widen the DiT evidence base. Weight-editing and fine-tuning defenses remain SD1.4-only for the reasons in Sec.~4.1: six of the nine are U-Net-specific editors with no public DiT implementation.
+
+\textcolor{blue}{Question 4: Auto-interpolation impact.} Significant difference in SBS/HGR variance between the 7 hand-anchored and 4 auto-interpolated categories?
+
+\textbf{A4: No --- we computed exactly this.}
+Pooling per-model--category cells: mean $\Delta_B$ (the L1$\to$L2 jump) is $28.1 \pm 4.6$ pp over the 7 hand-authored categories ($n = 42$) vs.\ $27.9 \pm 4.1$ pp over the 4 auto-interpolated ones ($n = 24$): the group means differ by 0.2 pp and the ranges overlap almost completely (17.6--35.9 vs.\ 20.8--36.4). The across-model HGR variance at L1--L3 is likewise indistinguishable (96.9 vs.\ 99.6). This complements the in-paper check (Sec.~5.1) that per-model $\Delta_B$ stays within 25.6--30.3 pp on only the hand-authored categories. We have added this provenance analysis to Supp.~Sec.~A.
+
+\textbf{Minor point 1 --- peak-transition ``universality.''} We respectfully note the main text already makes exactly the requested nuance: Insight~1 states the L1$\to$L2 transition is the peak ``for five of six models,'' names HiDream as the exception (its L0$\to$L1 jump exceeds its L1$\to$L2 jump by 0.2 pp), and Tab.~3's caption/footnote carries the same statement. We will additionally soften ``universal'' in the subsection title to make the exception unmistakable.
+
+\textbf{Minor point 2 --- SBS notation.} Both symbols are $\beta$ in the manuscript: the numerator is the estimated OLS slope $\hat{\beta}$, the denominator's constant is $\beta_{\max} = 1/3$; we will verify that the font rendering does not visually conflate them in camera-ready.
+
+\textbf{Minor point 3 --- Fig.~1 legibility.} Agreed. We will regenerate the bottom strip and the escalation-rule panel at $\geq$8pt equivalent font size for camera-ready.
