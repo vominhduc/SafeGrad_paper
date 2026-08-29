@@ -47,7 +47,7 @@ Construction--evaluation backbone overlap is audited in \SuppSec{\ref{app:backbo
 \Tab{\ref{tab:defense}} presents HGR reduction and SAS degradation for nine defense methods applied to SD1.4 across the NSFW, Legal, and Social groups; all nine target SD1.4's U-Net (DiT porting is future work).
 
 \textbf{Insight 3: Defenses steepen the severity gradient.}
-\textit{On our common SD1.4 backbone, all evaluated defenses achieve higher \emph{relative} suppression at L1 than at L3; yet absolute residual harm still peaks at L3, so the safety gap persists in absolute terms.}
+\textit{All evaluated defenses achieve higher \emph{relative} suppression at L1 than at L3---on our common SD1.4 backbone and, at smaller magnitude, on DiT backbones---yet absolute residual harm still peaks at L3, so the safety gap persists in absolute terms.}
 With $\rho_\ell = (\mathrm{HGR}_{\mathrm{base}}(\ell) - \mathrm{HGR}_{\mathrm{def}}(\ell))/\mathrm{HGR}_{\mathrm{base}}(\ell)$ the relative HGR reduction at level $\ell$, all three paradigms suppress L1 more than L3 on NSFW content: inference-guided (NP, SLD, Safree) $\bar{\rho}_{\mathrm{L1}} = 60.0\%$ vs.\ $\bar{\rho}_{\mathrm{L3}} = 34.6\%$, model-editing (UCE, SPEED) $49.7\%$ vs.\ $28.0\%$, fine-tuning (SafetyDPO, MACE, TRCE) $71.7\%$ vs.\ $50.0\%$: the strongest defenses nearly close the L1 gap on NSFW while L3 harm largely survives.
 MACE, e.g., cuts NSFW HGR 26.9\%$\to$3.9\% at L1 but only 74.5\%$\to$22.6\% at L3, raising the L3:L1 ratio from $2.8\times$ to $5.8\times$.
 For Legal and Social categories, inference-guided methods stay weak at L3 ($\bar{\rho}_{\mathrm{L3}} = 13.1\%$/$21.9\%$) while still reducing L1 by 40--46\%; residual L3 HGR stays 46.6--55.4\%.
