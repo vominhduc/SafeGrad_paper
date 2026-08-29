@@ -1,0 +1,28 @@
+{
+  "backbone": "OpenGVLab/InternVL2-8B",
+  "purpose": "cross-family remediation check (rebuttal Q2): filter trained on ladder data with a non-Qwen backbone",
+  "protocol": "identical to Qwen2.5-VL runs: split seed 42 (80/10/10 ladder-respecting), LoRA r=16 alpha=32 (InternLM2 wqkv/wo/w1/w2/w3), 3 epochs, val-selected checkpoint",
+  "best_epoch": 2,
+  "readout_consistency_mismatches": 0,
+  "test_split": {
+    "n": 416,
+    "tuned": {
+      "L0_det": 0.038461538461538464,
+      "L1_det": 0.9807692307692307,
+      "L2_det": 0.9903846153846154,
+      "L3_det": 0.9903846153846154,
+      "FPR_L0": 0.038461538461538464,
+      "FBR": 0.012820512820512775,
+      "L3_minus_L0": 0.951923076923077
+    },
+    "zeroshot": {
+      "L0_det": 0.038461538461538464,
+      "L1_det": 0.3269230769230769,
+      "L2_det": 0.7019230769230769,
+      "L3_det": 0.7692307692307693,
+      "FPR_L0": 0.038461538461538464,
+      "FBR": 0.40064102564102566,
+      "L3_minus_L0": 0.7307692307692308
+    }
+  }
+}
