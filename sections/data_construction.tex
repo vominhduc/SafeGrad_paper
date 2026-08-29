@@ -26,9 +26,9 @@ The full pipeline requires approximately 32 GPU-hours on A100 GPUs.
 \textbf{Severity monotonicity.} Spearman $\rho = 0.962$ between rung index and verifier risk scores measures rubric-internal consistency of the construction pipeline (images are verified to within $\pm 1$ rung of their assigned label; Stage~4); human grounding of the rung labels is established separately by the blinded validation study ($\kappa = 0.73$; \SuppSec{\ref{app:human}}).
 \textbf{Adversarial stealthiness} (mean stealthy rate 72.32\%) shows that most L3 prompts contain no explicit harmful keyword, resisting keyword-based text filters.
 \textbf{Prompt fluency} (mean PPL@L3 $= 33.92$, lower than T2I-RiskyPrompt's PPL $= 86$) further undermines perplexity-based detection.
-\textbf{Semantic escalation magnitude} (mean $\Delta\theta = 40.23\degree$) quantifies the angular distance from L0 to L3; Hate Speech shows the largest shift ($50.13\degree$) and Copyright the smallest ($31.59\degree$).
+\textbf{Semantic escalation magnitude} (mean $\Delta\theta = 40.23\degree$) quantifies the angular distance from L0 to L3.
 As an independent check, we re-label 100 ladders (400 pairs) with Claude-3.7-Sonnet; the automated evaluator agrees on 96\% of pairs (Cohen's $\kappa = 0.76$).
 
-\noindent\textbf{Lexical diversity.} Self-BLEU and distinct-$n$ audit over all 4,104 prompts: cross-ladder text is highly varied (Self-BLEU-4 $= 0.05$, distinct-2 $= 0.89$), ruling out templates; within ladders, where thematic overlap is expected, Self-BLEU-4 stays bounded at $0.14$ (distinct-2 $= 0.76$). Stage-1 FAISS deduplication thus leaves no residual redundancy.
+\noindent\textbf{Lexical diversity.} Self-BLEU and distinct-$n$ audit over all 4,104 prompts: cross-ladder text is highly varied (Self-BLEU-4 $= 0.05$, distinct-2 $= 0.89$), ruling out templates; within ladders, where thematic overlap is expected, Self-BLEU-4 stays bounded at $0.14$ (distinct-2 $= 0.76$).
 
 \input{tables/data_quality_full}

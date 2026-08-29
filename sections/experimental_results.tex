@@ -24,7 +24,7 @@
 
 \subsection{The Safety Gap: A Failure Mode Shared by All Evaluated Models}\label{sec:gap}
 
-\Fig{\ref{fig:safety_gap}} shows the aggregated HGR gradient is far from uniform: while mean HGR@L3 is 65.8\%, the L0$\rightarrow$L1 transition already produces a 21.1 percentage-point (pp) jump at the rung where filters are least calibrated.
+\Fig{\ref{fig:safety_gap}} shows the aggregated HGR gradient is far from uniform: while mean HGR@L3 is 65.8\%, the L0$\rightarrow$L1 transition already produces a 21.1 percentage-point (pp) jump.
 Escalation steepens at L1$\rightarrow$L2 (mean $\Delta$HGR = 28.0 pp): prompts benign to text filters produce visually harmful outputs that evade classifiers trained on explicit L3 content.
 
 \textbf{Insight 1: Universal boundary blind spot.} \textit{Current T2I safety systems exhibit a systematic blind spot at the low-to-mid boundary (the L0$\to$L1 and L1$\to$L2 transitions, where escalation is steepest), universal across all evaluated models and invisible to binary safe/unsafe evaluation.}
@@ -38,7 +38,7 @@ Escalation steepens at L1$\rightarrow$L2 (mean $\Delta$HGR = 28.0 pp): prompts b
 
 \textbf{Insight 2: Even the safe rung is not safe.}
 \textit{All six models produce non-zero harm at L0 (0.5--3.5\%, of the same order as the evaluator's noise floor), and harm rates rise with generative capability; safety posture is baked into model weights through training and alignment data, not supplied by guard rails.}
-PixArt-$\alpha$'s fine-tuning suppresses sexual HGR@L3 to 38.7\% versus 59.4\% for violence, but no model's training provides equivalent suppression for hate speech or misinformation; societal harms have been underrepresented in safety fine-tuning data. At least 47.6\% of L3 content remains harmful in every model; zero-risk deployment needs output monitoring even for entirely safe prompts.
+PixArt-$\alpha$'s fine-tuning suppresses sexual HGR@L3 to 38.7\% versus 59.4\% for violence, but no model suppresses hate speech or misinformation equivalently---societal harms have been underrepresented in safety fine-tuning data. At least 47.6\% of L3 content remains harmful in every model; zero-risk deployment needs output monitoring even for entirely safe prompts.
 
 Construction--evaluation backbone overlap is audited in \SuppSec{\ref{app:backbone}}; no evaluated model shares an encoder or diffusion backbone with any construction component.
 
@@ -57,8 +57,7 @@ This finding requires \dataname's graded structure: a binary benchmark would rep
 
 \textbf{Insight 4: The Utility--Safety Tradeoff Is Dominated by Two Methods.}
 \textit{Under our joint $\Delta$HGR/SAS criterion, TRCE Pareto-dominates six of the seven remaining methods ($\Delta$HGR = 0.506 at an SAS cost of 0.008, versus e.g.\ SLD's 0.409 at a cost of 0.018); MACE occupies a distinct extreme point on the tradeoff curve.}
-This audits the defense ecosystem behind Insights 1--3.
-TRCE reduces HGR by $0.506$ at essentially no utility cost (SAS drop $-0.008$, below the next-cheapest defense's $0.014$), beating NP, SLD, Safree, UCE, SPEED, and SafetyDPO on both metrics at once; the TRCE--SLD margin ($9.7$ pp) far exceeds the worst-case Bernoulli SEM ($\lesssim 0.5$ pp).
+Concretely, TRCE beats NP, SLD, Safree, UCE, SPEED, and SafetyDPO on both metrics at once; the TRCE--SLD margin ($9.7$ pp) far exceeds the worst-case Bernoulli SEM ($\lesssim 0.5$ pp).
 RECE is excluded: it collapses on Legal and Social through concept diffuseness and semantic entanglement (\SuppSec{\ref{app:collapse}}).
 The remaining tradeoff is between TRCE and MACE: MACE erases more harm ($\Delta\mathrm{HGR} = 0.683$, $+35\%$ relative) but pays $11\times$ the SAS penalty and $2.7\times$ the over-refusal rate (ORR 34.2\% vs.\ 12.8\%; \SuppSec{\ref{app:overrefusal}}), degrading benign-portrait SAS by 40.1\%.
 Without MACE, defense strength and utility cost are uncorrelated ($r = 0.009$); including MACE, $r = 0.862$: the apparent tradeoff is an artifact of its aggressive erasure.
@@ -71,7 +70,7 @@ Without MACE, defense strength and utility cost are uncorrelated ($r = 0.009$); 
 
 \textbf{Insight 5: Filter insensitivity to severity.}
 \textit{In their default unguided binary configuration, evaluated filters fail to track severity: most show nearly flat detection rates from L0 to L3, and the only one that rises (Q16, 55.3\%$\to$67.2\%) does so while flagging over half of safe images.}
-Q16, the strongest single filter, rises only from 55.3\% detection at L0 to 67.2\% at L3 (11.9 pp) while flagging over half of safe images as harmful; CLIP-NSFW misses 75\% of L3 content; Qwen2.5-VL nearly never false-alarms (FPR = 0.7\%) but misses 88\% of harmful content (FBR = 0.880); the purpose-built SD Filter rises only from 2.3\% to 7.8\% across rungs.
+CLIP-NSFW misses 75\% of L3 content; Qwen2.5-VL nearly never false-alarms (FPR = 0.7\%) but misses 88\% of harmful content (FBR = 0.880); the purpose-built SD Filter rises only from 2.3\% to 7.8\% across rungs.
 Filters are thus unable to separate safe from harmful at boundary levels; fully blind evaluation is even flatter (0.2\%/0.2\%/7.2\% at L1--L3; \SuppSec{\ref{app:metrics}}). LlavaGuard and Qwen2.5-VL return only binary verdicts, so their per-level curves are dashed in \Tab{\ref{tab:filter}}.
 One scope caveat: three of the five filters (Q16, CLIP-NSFW, SD Filter) are NSFW-targeted by design, so part of their flatness on Legal and Social content reflects out-of-domain operation; the claim that \emph{general-purpose} moderation fails to track severity is anchored by the two generalist judges (LlavaGuard, Qwen2.5-VL), which also stay flat.
 

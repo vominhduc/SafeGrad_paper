@@ -10,8 +10,7 @@ Per-rung risk explanations make the intermediate regime concrete: in the Violenc
 \subsection{Hierarchical Risk Taxonomy}
 
 We define a hierarchical taxonomy covering 11 top-level risk categories (\Fig{\ref{fig:overview}}), each a distinct dimension of potential harm in T2I generation, synthesized from platform policies and existing literature~\citep{dalle3,midjourney_guideline,helff2024llavaguard,li2025t2isafety,zhang2025t2iriskyprompt,google,microsoft,metaAI}.
-Each category defines four severity levels with escalation rules (\SuppSec{\ref{app:taxonomy}}, \SuppTab{\ref{app:tab:severity}}, \SuppTab{\ref{app:tab:taxonomy}}).
-The categories, severity definitions, and escalation rules are human-authored and reviewed against these sources, with boundary cases adjudicated manually; the automated pipeline instantiates these human-written rules rather than defining severity levels itself.
+Each category defines four severity levels with human-authored escalation rules, reviewed against these sources with boundary cases adjudicated manually (\SuppSec{\ref{app:taxonomy}}, \SuppTab{\ref{app:tab:severity}}, \SuppTab{\ref{app:tab:taxonomy}}); the pipeline instantiates these rules rather than defining severity itself.
 
 \subsection{Dataset Statistics}
 \dataname is the strict post-filtering yield of the ASL pipeline: 1,026 ladders (4,104 prompts) spanning 11 categories, each rung holding a prompt, reference image, and risk explanation (82--99 ladders per category; \SuppTab{\ref{app:tab:stats}}).

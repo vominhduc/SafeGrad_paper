@@ -4,7 +4,7 @@
 All evaluated mechanisms are calibrated on binary distinctions and steepen the severity gradient; sensitive deployments must evaluate L1--L2 explicitly rather than trust L3-derived claims.
 
 \noindent\textbf{The cross-modal gap.}
-Text filters cannot decode visually adversarial prompts, and image classifiers trained on explicit L3 content fail at L1--L2 violations (72.32\% of L3 prompts carry no explicit harmful keyword).
+Text filters cannot decode visually adversarial prompts (\Sec{\ref{sec:quality}} stealthiness), and image classifiers trained on explicit L3 content fail at L1--L2 violations.
 
 \noindent\textbf{From diagnosis to mitigation.}
 Insight 6 turns the benchmark from a measurement tool into an instrument: LoRA-tuning Qwen2.5-VL-7B on \dataname's ladders (\SuppSec{\ref{app:remediation}}) recovers the L1--L2 band zero-shot filters miss, transfers to fresh generations from all six models (pooled FBR 2.4\%, prompt-aware), and is taxonomy-agnostic (regenerate ladders under one's own policy, retrain).
