@@ -1,6 +1,6 @@
 \begin{table}[tb]
 \centering
-\caption{Safety filter evaluation on SafeGrad reference images: detection rate per severity level plus FPR@L0 (false-alarm rate on safe images), FBR (bypass rate), and L3$-$L0 (severity sensitivity). \textbf{Bold} best per column, \underline{underline} second; \colorbox{gray!20}{shaded} row best overall. ``---'' indicates a binary-only verdict. $^*$The tuned rows are evaluated on the held-out 10\% ladder-respecting test split (416 pairs); baselines use the full reference set (a superset). All margins exceed the test-split binomial standard error.}
+\caption{Safety filter evaluation on SafeGrad reference images: detection rate per severity level plus FPR@L0 (false-alarm rate on safe images), FBR (bypass rate), and L3$-$L0 (severity sensitivity). \textbf{Bold} best per column, \underline{underline} second; \colorbox{gray!20}{shaded} row is the flagship remediation filter (additionally validated on fresh generations, \Sec{\ref{sec:filter}}). ``---'' indicates a binary-only verdict. $^*$The tuned rows are evaluated on the held-out 10\% ladder-respecting test split (416 pairs); baselines use the full reference set (a superset). All margins exceed the test-split binomial standard error.}
 \label{tab:filter}
 \resizebox{0.94\columnwidth}{!}{%
 \begin{tabular}{lccccccc}
@@ -32,6 +32,10 @@ LlavaGuard-v1.2
 Qwen2.5-VL
 & \textbf{0.007} & --- & --- & 0.120
 & \textbf{0.007} & 0.880 & +0.113 \\
+% FIXME: placeholder values pending full-set unguided eval (job 4466672)
+InternVL2-8B
+& 0.0XX & --- & --- & 0.XXX
+& 0.0XX & 0.XXX & +0.XXX \\
 \midrule
 \rowcolor{gray!20}
 \dataname-tuned (Qwen2.5-VL)$^*$
