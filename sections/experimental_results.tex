@@ -44,7 +44,7 @@ Construction--evaluation backbone overlap is audited in \SuppSec{\ref{app:backbo
 
 \input{tables/defense_compact}
 
-\Tab{\ref{tab:defense}} presents HGR reduction and SAS degradation for nine defense methods applied to SD1.4 across the NSFW, Legal, and Social groups; all nine target SD1.4's U-Net (DiT transfer checks follow in Insight~3).
+\Tab{\ref{tab:defense}} presents HGR reduction and SAS degradation for nine defense methods applied to SD1.4 across the NSFW, Legal, and Social groups; all nine target SD1.4's U-Net, six with no published DiT implementation.
 
 \textbf{Insight 3: Defenses steepen the severity gradient.}
 \textit{All evaluated defenses achieve higher \emph{relative} suppression at L1 than at L3---on our common SD1.4 backbone and, at smaller magnitude, on DiT backbones---yet absolute residual harm still peaks at L3, so the safety gap persists in absolute terms.}
@@ -54,7 +54,7 @@ For Legal and Social categories, inference-guided methods stay weak at L3 ($\bar
 % FIXME(provisional): CogView4 SLD numbers below are EXPECTED values
 % pending final aggregation (jobs 4466984/ votes); must be refreshed and
 % this comment removed before submission.
-This finding requires \dataname's graded structure: a binary benchmark would report MACE as a strong defense while missing this skew entirely, and the same relative asymmetry appears under DiT backbones: negative prompt on PixArt-$\alpha$ suppresses L1 relatively more than L3 (HGR 20.2\%$\to$18.3\% at L1 vs.\ 80.8\%$\to$76.0\% at L3; $\rho_{\mathrm{L1}} = 9.5\%$ vs.\ $\rho_{\mathrm{L3}} = 6.0\%$, $n = 104$/rung), and SLD-style guided inference on CogView4 shows the same direction ($\rho_{\mathrm{L1}} = 12.8\%$ vs.\ $\rho_{\mathrm{L3}} = 8.4\%$, same prompts), so the claim is not U-Net-specific.
+This skew requires \dataname's graded structure: a binary benchmark would report MACE as a strong defense while missing it entirely, and it transfers beyond the U-Net backbone: negative prompt on PixArt-$\alpha$ suppresses L1 relatively more than L3 (HGR 20.2\%$\to$18.3\% at L1 vs.\ 80.8\%$\to$76.0\% at L3; $\rho_{\mathrm{L1}} = 9.5\%$ vs.\ $\rho_{\mathrm{L3}} = 6.0\%$, $n = 104$/rung), and SLD-style guided inference on CogView4 shows the same direction ($\rho_{\mathrm{L1}} = 12.8\%$ vs.\ $\rho_{\mathrm{L3}} = 8.4\%$, same prompts), so the claim is not U-Net-specific.
 
 \textbf{Insight 4: The Utility--Safety Tradeoff Is Dominated by Two Methods.}
 \textit{Under our joint $\Delta$HGR/SAS criterion, TRCE Pareto-dominates six of the seven remaining methods ($\Delta$HGR = 0.506 at an SAS cost of 0.008, versus e.g.\ SLD's 0.409 at a cost of 0.018); MACE occupies a distinct extreme point on the tradeoff curve.}
