@@ -16,9 +16,10 @@
 % Import additional packages in the preamble file, before hyperref
 \input{latex/preamble}
 
-% The appendix is included inline below (single review PDF).
-% For the standalone supplementary build (wacv_2027_supplementary.tex),
-% cross-references there resolve via \externaldocument{wacv_2027}.
+% Resolve appendix labels (app:*, Supp.Tab./Fig./Sec.) in the main paper
+% via the static committed label map wacv_2027_supplementary.aux
+% (build-order independent; regenerate if the appendix structure changes).
+\externaldocument{wacv_2027_supplementary}
 
 %%%%%%%%% PAPER ID  - PLEASE UPDATE
 \def\wacvPaperID{2453} % *** Enter the WACV Paper ID here
@@ -79,13 +80,7 @@ First line of institution2 address\\
     \bibliography{latex/egbib,latex/custom}
 }
 
-% Supplementary material included in the same PDF for review.
-% (wacv_2027_supplementary.tex remains buildable as a standalone document.)
-\clearpage
-\appendix
-% Continue main-text float numbering: main paper ends at Table 7 / Figure 2.
-\setcounter{table}{7}
-\setcounter{figure}{2}
-\input{sections/appendix}
+% Supplementary material is a separate document: wacv_2027_supplementary.tex
+% (build both; static cross-reference label maps are committed to the repo)
 
 \end{document}
