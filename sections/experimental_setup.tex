@@ -12,7 +12,7 @@ and instead evaluate six architecturally independent open-source models: SD1.4, 
 \textbf{Safety Filters.} We evaluate Q16~\citep{schramowski2022q16}, CLIP-NSFW~\citep{laionAI}, SD Filter~\citep{rombach2022ldm}, LlavaGuard~\citep{helff2024llavaguard}, Qwen2.5-VL~\citep{qwen2.5technicalreport}, and InternVL2-8B~\citep{chen2024internvl}.
 
 \noindent
-\textbf{Attack Strategies.} We evaluate six attack families: SneakyPrompt~\citep{yang2023sneakyprompt}, Ring-A-Bell~\citep{tsai2024ringabell}, UnlearnDiffAtk~\citep{zhang2024unlearndiffattk}, MMA-Diffusion~\citep{yang2024mma}, and P4D~\citep{chin2024p4d}, against the strongest utility-preserving defended configuration we evaluate (Sec.~\ref{sec:attack}), plus the recent perception-guided jailbreak (PGJ)~\citep{huang2024pgj}, the most recent protocol-compatible attack.
+\textbf{Attack Strategies.} We evaluate six attack families---SneakyPrompt~\citep{yang2023sneakyprompt}, Ring-A-Bell~\citep{tsai2024ringabell}, UnlearnDiffAtk~\citep{zhang2024unlearndiffattk}, MMA-Diffusion~\citep{yang2024mma}, P4D~\citep{chin2024p4d}, and the recent perception-guided jailbreak (PGJ)~\citep{huang2024pgj}, the most recent protocol-compatible attack---against the strongest utility-preserving defended configuration we evaluate (Sec.~\ref{sec:attack}).
 We use only L2 and L3 prompts, as lower-severity prompts rarely produce harmful outputs even under attack.
 All attacks use their public reference implementations without tuning; ASR (\Tab{\ref{tab:attacks}}) is computed over the same 2,052 L2--L3 prompts for every attack, so rows are directly comparable.
 
