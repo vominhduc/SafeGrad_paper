@@ -32,9 +32,7 @@ Escalation steepens at L1$\rightarrow$L2 (mean $\Delta$HGR = 28.0 pp): prompts b
 
 \subsection{Generative Model Analysis: Even the Safe Rung Is Not Safe}
 
-\Tab{\ref{tab:t2i_models}} reports the per-category HGR matrix for the six models together with the SBS and $\Delta_B$ summaries.
-
-\textbf{Reading note on SBS.} SBS captures how sharply failure concentrates at the boundary, not how safe a model is: the two highest-SBS models (HiDream 0.80, Janus-Pro 0.74) are also the two most harmful at L3. Read SBS only alongside absolute HGR.
+\Tab{\ref{tab:t2i_models}} reports the per-category HGR matrix for the six models together with the SBS and $\Delta_B$ summaries. SBS reads only alongside absolute HGR: it marks concentration sharpness, not safety (the two highest-SBS models, HiDream 0.80 and Janus-Pro 0.74, are also the two most harmful at L3).
 
 \textbf{Insight 2: Even the safe rung is not safe.}
 \textit{All six models produce non-zero harm at L0 (0.5--3.5\%, of the same order as the evaluator's noise floor), and harm rates rise with generative capability; safety posture is baked into model weights through training and alignment data, not supplied by guard rails.}
@@ -82,10 +80,9 @@ The primary baseline is the protocol-matched zero-shot backbone (same split, sam
 
 \textbf{Insight 6: The safety gap is trainable-away.}
 \textit{A filter fine-tuned on ladder data recovers the mid-severity band (FBR $0.522 \rightarrow 0.022$ benchmark-resident and $0.653 \rightarrow 0.024$ fresh, both against protocol-matched zero-shot anchors; $0.880$ fully unguided) while holding false alarms far below the strongest existing filter (FPR@L0 = 3.8\% vs.\ Q16's 55.3\%), converting \dataname from a diagnostic into a mitigation instrument.}
-\textbf{Fresh-generation (prompt-aware transfer) validation.} To test the tuned filter under realistic conditions, we regenerate every held-out test-split prompt with all six evaluated T2I models (\emph{not} construction models), using each model's default settings with checkers disabled and the ladder seeds (two images per prompt, 4,992 images in total).
-Degenerate all-black generations are excluded from scoring.
-On the remaining 4,626 images the tuned filter reaches 94.7\% L1, 99.0\% L2, and 99.0\% L3 detection (per-generator FBR 2.2--2.7\%) at a 4.0\% L0 false-positive rate; pooled FBR is 2.4\%, statistically indistinguishable from the 2.2\% reference-regime estimate, versus 65.3\% for the zero-shot backbone (\SuppTab{\ref{tab:filter_fresh}}).
-Per-generator FBR varies only 2.2--2.7\% (L1 detection 94.2--95.2\%), and a Qwen2.5-VL-3B backbone retrained under the identical protocol reaches test-split FBR of 0.6\% with 99.0\% L1 detection (pooled fresh-generation FBR 0.8\%); the recipe also transfers across model families---an InternVL2-8B backbone trained identically attains test-split FBR 1.3\% (matched zero-shot anchor 40.1\%) with 98.1\% L1 detection---and the tuned decision is threshold-robust, with both error rates at or below 5\% across a wide operating band of the YES--NO margin threshold (\SuppSec{\ref{app:remediation}}).
+\textbf{Fresh-generation (prompt-aware transfer) validation.} We regenerate every held-out test-split prompt with all six evaluated T2I models (\emph{not} construction models), default settings, checkers disabled, ladder seeds (two images per prompt, 4,992 images).
+On the remaining 4,626 images (all-black degenerates excluded) the tuned filter reaches 94.7\% L1, 99.0\% L2, and 99.0\% L3 detection (per-generator FBR 2.2--2.7\%) at a 4.0\% L0 false-positive rate; pooled FBR is 2.4\%, statistically indistinguishable from the 2.2\% reference-regime estimate, versus 65.3\% for the zero-shot backbone (\SuppTab{\ref{tab:filter_fresh}}).
+Per-generator FBR varies only 2.2--2.7\% (L1 detection 94.2--95.2\%), and a Qwen2.5-VL-3B backbone retrained under the identical protocol reaches test-split FBR of 0.6\% with 99.0\% L1 detection (pooled fresh-generation FBR 0.8\%); the recipe also transfers across model families---an InternVL2-8B backbone trained identically attains test-split FBR 1.3\% (matched zero-shot anchor 40.1\%) with 98.1\% L1 detection---and the tuned decision is threshold-robust over a wide operating band (\SuppSec{\ref{app:remediation}}).
 The favorable-setting caveat cuts both ways: baseline FBRs are lower bounds (reference images manifest severity clearly), while the tuned rows are optimistic because inference supplies the sample's risk description; their figures measure prompt-aware filtering, not turnkey deployment (\Sec{\ref{sec:limitations}}).
 
 \subsection{Adversarial Robustness: Attacks Exploit the Gap} \label{sec:attack}
@@ -93,7 +90,7 @@ The favorable-setting caveat cuts both ways: baseline FBRs are lower bounds (ref
 \input{tables/attack_summary}
 
 \Tab{\ref{tab:attacks}} presents ASR for six attack families against TRCE + LlavaGuard, the best utility-safety tradeoff configuration (Insight~4); the MACE + LlavaGuard configuration, which suppresses more harm at a large utility and over-refusal cost, is not attacked here and is left to the extended analysis.
-All exceed 55\% ASR: the newest, model-free PGJ\ \citep{huang2024pgj} leads at 72.4\%, followed by the multimodal MMA-Diffusion (68.7\%), query-based concept extraction (Ring-A-Bell, 65.6\%), and RL-driven prompt search (SneakyPrompt, 63.4\%), with the white-box gradient attacks UnlearnDiffAtk (61.5\%) and P4D (55.6\%) trailing; GenBreak-style red-team fine-tuning~\citep{wang2025genbreak} is out of scope.
+All exceed 55\% ASR: the newest, model-free PGJ\ \citep{huang2024pgj} leads at 72.4\%, followed by the multimodal MMA-Diffusion (68.7\%), query-based concept extraction (Ring-A-Bell, 65.6\%), and RL-driven prompt search (SneakyPrompt, 63.4\%), with the white-box gradient attacks UnlearnDiffAtk (61.5\%) and P4D (55.6\%) trailing (GenBreak~\citep{wang2025genbreak}: commercial-wrapper scope, omitted).
 
 \textbf{Insight 7: The safety gap is an active attack surface.}
 \textit{A 55\% ASR floor across all six methods against the strongest utility-preserving defense configuration we evaluate, measured under our policy-guided evaluator (absolute ASRs are protocol-relative upper bounds under a stricter blind judge), confirms that the safety gap is not a passive evaluation artifact but a structurally exploitable channel.}
