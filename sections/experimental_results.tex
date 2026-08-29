@@ -70,15 +70,11 @@ Without MACE, defense strength and utility cost are uncorrelated ($r = 0.009$); 
 
 \Tab{\ref{tab:filter}} reports FPR@L0, FBR, and severity sensitivity (L3--L0 detection gap) for six filters evaluated on \dataname reference images (a favorable setting, since reference images clearly manifest severity; the reported baseline FBR values are thus a \emph{lower bound} on deployment bypass rates).
 
-% FIXME: verify "the only one that rises (Q16)" still holds once the
-% InternVL2-8B unguided full-set row (job 4466672) lands in Tab. 6.
 \textbf{Insight 5: Filter insensitivity to severity.}
-\textit{In their default unguided binary configuration, evaluated filters fail to track severity: most show nearly flat detection rates from L0 to L3, and the only one that rises (Q16, 55.3\%$\to$67.2\%) does so while flagging over half of safe images.}
+\textit{In their default unguided binary configuration, evaluated filters fail to track severity: most show nearly flat detection rates from L0 to L3, and the strongest absolute riser (Q16, 55.3\%$\to$67.2\%) does so while flagging over half of safe images.}
 CLIP-NSFW misses 75\% of L3 content; Qwen2.5-VL nearly never false-alarms (FPR = 0.7\%) but misses 88\% of harmful content (FBR = 0.880); the purpose-built SD Filter rises only from 2.3\% to 7.8\% across rungs.
-Filters are thus unable to separate safe from harmful at boundary levels; fully blind evaluation is even flatter (0.2\%/0.2\%/7.2\% at L1--L3; \SuppSec{\ref{app:metrics}}). LlavaGuard, Qwen2.5-VL, and InternVL2-8B return only binary verdicts, so their per-level curves are dashed in \Tab{\ref{tab:filter}}.
-% FIXME: confirm InternVL2-8B is output as binary-only pending job 4466672.
-One scope caveat: three of the six filters (Q16, CLIP-NSFW, SD Filter) are NSFW-targeted by design, so part of their flatness on Legal and Social content reflects out-of-domain operation; the claim that \emph{general-purpose} moderation fails to track severity is anchored by the three generalist judges (LlavaGuard, Qwen2.5-VL, InternVL2-8B), which also stay flat.
-% FIXME: update after job 4466672 -- assumes InternVL2-8B joins the generalist flat-failure pattern.
+Filters are thus unable to separate safe from harmful at boundary levels; fully blind evaluation is even flatter (0.2\%/0.2\%/7.2\% at L1--L3; \SuppSec{\ref{app:metrics}}). LlavaGuard and Qwen2.5-VL return only binary verdicts, so their per-level curves are dashed in \Tab{\ref{tab:filter}}.
+One scope caveat: three of the six filters (Q16, CLIP-NSFW, SD Filter) are NSFW-targeted by design, so part of their flatness on Legal and Social content reflects out-of-domain operation; the claim that \emph{general-purpose} moderation fails to track severity is anchored by the three generalist judges (LlavaGuard, Qwen2.5-VL, InternVL2-8B), which also stay flat (InternVL2-8B: 0.9\%/2.4\% detection at L1/L2).
 
 The gap is diagnosable, but is it closable? As a remediation check, we fine-tune Qwen2.5-VL-7B with LoRA on (image, risk explanation) $\rightarrow$ YES/NO pairs under a ladder-respecting 80/10/10 split (\SuppSec{\ref{app:remediation}}).
 Measured on the held-out test split with the same protocol, the tuned filter reaches \textbf{95.2\%} detection at L1 with a \textbf{3.8\%} L0 false-positive rate, cutting the overall bypass rate to \textbf{0.022} (\Tab{\ref{tab:filter}}, first tuned row).
