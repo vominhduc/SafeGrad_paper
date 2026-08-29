@@ -10,11 +10,11 @@ More fundamentally, a threshold cannot say \emph{where} along the harm spectrum 
 
 Knowing where the boundary breaks matters: real adversaries escalate gradually, and different deployments must cut at different points---a child-facing platform must block borderline content that an adults-only service can tolerate.
 Yet current T2I safety benchmarks~\citep{yang2023sneakyprompt,qu2023unsafe,schramowski2023safe,li2025t2isafety,zhang2025t2iriskyprompt} predominantly test binary ``safe/unsafe'' robustness, which cannot locate such boundary failures.
-We identify a critical \emph{safety gap}: the regime where the text filter passes the prompt and the visual checker passes the image, yet the image already falls in a nontrivial severity band.
+We grade harm on four rungs, from Safe (L0) through Low- and Mid-risk (L1, L2) to High-risk (L3), and identify a critical \emph{safety gap}: the regime where the text filter passes the prompt and the visual checker passes the image, yet the image already falls in a nontrivial severity band.
 Because defenses and filters are trained on binary labels and calibrated at the explicit extreme, their protection does not track the spectrum: residual harm remains substantial across the low-to-mid band and peaks at L2--L3, even where \emph{relative} suppression is strongest at L1.
 
 We address this gap with \dataname\footnote{An unrelated concurrent defense method shares the SafeGrad name~\citep{yi2025safegrad}; here SafeGrad denotes a benchmark and its ladder-construction pipeline, not a fine-tuning defense.}, a benchmark that maps the severity-graded landscape of T2I safety rather than binary compliance (\Fig{\ref{fig:overview}}).
-We synthesize the usage policies of leading T2I platforms into a principled taxonomy of 11 risk categories with pre-defined escalation rules, and use our Adversarial Severity Ladders (ASL) pipeline to build 1,026 ladders escalated through four rungs (Safe L0 to High-risk L3), each carrying prompts, reference images, and risk explanations constructed without manual prompt authoring.
+We synthesize the usage policies of leading T2I platforms into a principled taxonomy of 11 risk categories with pre-defined escalation rules, and use our Adversarial Severity Ladders (ASL) pipeline to build 1,026 ladders escalated through these four rungs, each carrying prompts, reference images, and risk explanations constructed without manual prompt authoring.
 
 Evaluated on \dataname, the current T2I safety ecosystem shows the gap everywhere we look.
 \textbf{(1) T2I models:} 6 open-source models leak harmful content even at the safe rung, with harm rates ordered by generative capability.
