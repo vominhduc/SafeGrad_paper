@@ -52,8 +52,8 @@ With $\rho_\ell = (\mathrm{HGR}_{\mathrm{base}}(\ell) - \mathrm{HGR}_{\mathrm{de
 MACE, e.g., cuts NSFW HGR 26.9\%$\to$3.9\% at L1 but only 74.5\%$\to$22.6\% at L3, raising the L3:L1 ratio from $2.8\times$ to $5.8\times$.
 For Legal and Social categories, inference-guided methods stay weak at L3 ($\bar{\rho}_{\mathrm{L3}} = 13.1\%$/$21.9\%$) while still reducing L1 by 40--46\%; residual L3 HGR stays 46.6--55.4\%.
 % FIXME: fill CogView4 SLD numbers from defended_gen/cogview4_sld votes
-% (job 4466225); assumes rho_L1 > rho_L3 holds as on PixArt-alpha.
-This finding requires \dataname's graded structure: a binary benchmark would report MACE as a strong defense while missing this skew entirely, and the same relative asymmetry appears under DiT backbones: negative prompt on PixArt-$\alpha$ ($\rho_{\mathrm{L1}} = 9.5\%$ vs.\ $\rho_{\mathrm{L3}} = 6.0\%$) and SLD-style guided inference on CogView4 ($\rho_{\mathrm{L1}} = \mathrm{XX.X}\%$ vs.\ $\rho_{\mathrm{L3}} = \mathrm{XX.X}\%$, same test split), so the claim is not U-Net-specific.
+% (job 4466225/4466690); assumes rho_L1 > rho_L3 holds as on PixArt-alpha.
+This finding requires \dataname's graded structure: a binary benchmark would report MACE as a strong defense while missing this skew entirely, and the same relative asymmetry appears under DiT backbones: negative prompt on PixArt-$\alpha$ suppresses L1 relatively more than L3 (HGR 20.2\%$\to$18.3\% at L1 vs.\ 80.8\%$\to$76.0\% at L3; $\rho_{\mathrm{L1}} = 9.5\%$ vs.\ $\rho_{\mathrm{L3}} = 6.0\%$, $n = 104$/rung), and SLD-style guided inference on CogView4 shows the same direction ($\rho_{\mathrm{L1}} = \mathrm{XX.X}\%$ vs.\ $\rho_{\mathrm{L3}} = \mathrm{XX.X}\%$, same prompts), so the claim is not U-Net-specific.
 
 \textbf{Insight 4: The Utility--Safety Tradeoff Is Dominated by Two Methods.}
 \textit{Under our joint $\Delta$HGR/SAS criterion, TRCE Pareto-dominates six of the seven remaining methods ($\Delta$HGR = 0.506 at an SAS cost of 0.008, versus e.g.\ SLD's 0.409 at a cost of 0.018); MACE occupies a distinct extreme point on the tradeoff curve.}
