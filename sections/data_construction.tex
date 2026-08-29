@@ -3,6 +3,8 @@
 \subsection{Pipeline Overview}
 We introduce the Adversarial Severity Ladders (ASL) pipeline, an automated construction approach operating under human oversight: the taxonomy, severity definitions, and escalation rules are authored and reviewed by the human authors, with four advantages over fully human annotation: (1) scale without annotator self-selection bias; (2) programmatic severity calibration via escalation rules, bypassing inter-rater inconsistency on fine-grained severity judgments~\citep{aroyo2015truth}; (3) deterministic reproducibility given fixed seeds and checkpoints; and (4) no large-scale harmful-content exposure for workers, which carries documented psychological risks~\citep{steiger2021psychological}.
 The pipeline operates in four stages.
+
+
 \noindent\textbf{Stage 1: Safe Prompt Generation.}
 For each category, we generate seed safe prompts using Mistral-7B-Instruct~\citep{Mistral} (36.5\%), Llama-2-7b-chat-hf~\citep{llama2} (31.6\%), Dolphin-2.9-Llama3-8B~\citep{hartford2024dolphin} (23.4\%), and Vicuna-7B~\citep{vicuna} (8.6\%; shares rounded), spanning the safety-alignment spectrum to maximize stylistic diversity.
 Near-duplicate prompts are removed via FAISS clustering on \texttt{all-MiniLM-L6-v2} embeddings (cosine threshold $\geq 0.95$), retaining one representative per cluster.
@@ -19,7 +21,7 @@ The same model and seed are used for all four rungs within a ladder, isolating s
 Qwen3-VL-8B-Thinking~\citep{qwen3vl2025} verifies each prompt-image pair for content alignment and severity match (tolerance $\leq 1$ rung) and generates per-image risk explanations; failing pairs are regenerated.
 Verification is per-rung and description-guided (unlike the unguided deployed filters of Insight~5); cross-rung continuity is audited separately (\SuppSec{\ref{app:construction:continuity}}).
 Ladders without a complete valid set are excluded, yielding 1,026 validated ladders.
-The full pipeline requires approximately 32 GPU-hours on A100 GPUs.
+The full pipeline requires approximately 32 A100 GPU-hours.
 
 \subsection{Dataset Quality Analysis} \label{sec:quality}
 \Tab{\ref{tab:quality_full}} reports four quality dimensions across all 11 categories.
@@ -28,7 +30,6 @@ The full pipeline requires approximately 32 GPU-hours on A100 GPUs.
 \textbf{Prompt fluency} (mean PPL@L3 $= 33.92$, lower than T2I-RiskyPrompt's PPL $= 86$) further undermines perplexity-based detection.
 \textbf{Semantic escalation magnitude} (mean $\Delta\theta = 40.23\degree$) quantifies the angular distance from L0 to L3.
 As an independent check, we re-label 100 ladders (400 pairs) with Claude-3.7-Sonnet; the automated evaluator agrees on 96\% of pairs (Cohen's $\kappa = 0.76$).
-
-\noindent\textbf{Lexical diversity.} Self-BLEU and distinct-$n$ audit over all 4,104 prompts: cross-ladder text is highly varied (Self-BLEU-4 $= 0.05$, distinct-2 $= 0.89$), ruling out templates; within ladders, where thematic overlap is expected, Self-BLEU-4 stays bounded at $0.14$ (distinct-2 $= 0.76$).
+\textbf{Lexical diversity.} Self-BLEU and distinct-$n$ audit over all 4,104 prompts: cross-ladder text is highly varied (Self-BLEU-4 $= 0.05$, distinct-2 $= 0.89$), ruling out templates; within ladders, where thematic overlap is expected, Self-BLEU-4 stays bounded at $0.14$ (distinct-2 $= 0.76$).
 
 \input{tables/data_quality_full}
