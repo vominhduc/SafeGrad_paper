@@ -15,6 +15,8 @@
 
 % Import additional packages in the preamble file, before hyperref
 \input{latex/preamble}
+% Clean builds (e.g., wacv_2027_clean.tex wrapper) render \red edits as normal text
+\ifdefined\cleanred\renewcommand{\red}[1]{#1}\fi
 
 % Resolve appendix labels (app:*, Supp.Tab./Fig./Sec.) in the main paper
 % via the static committed label map wacv_2027_supplementary.aux
