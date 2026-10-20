@@ -1,31 +1,15 @@
 \section{Results and Analysis}
 
-\begin{figure}[tb]
-    \centering
-    \red{%
-    \begin{minipage}[t]{0.50\linewidth}
-        \centering
-        \includegraphics[width=\linewidth]{figures/safety_gap.pdf}
-        \captionof{figure}{The Safety Gap. HGR by severity rung (macro-averaged over categories and models); steepest transition L1$\to$L2 (mean $+28.0$ pp). Error bars: $\pm 1$ SEM.}
-        \label{fig:safety_gap}
-    \end{minipage}\hfill
-    \begin{minipage}[t]{0.46\linewidth}
-        \centering
-        \input{tables/boundary_delta}
-        \captionof{table}{Boundary Delta ($\Delta_B$, \%, the L1$\to$L2 HGR jump) and peak transition per model (11-category average). Steepest: L1$\to$L2 for five of six models ($^{*}$HiDream: L0$\to$L1).}
-        \label{tab:delta}
-    \end{minipage}}
-\end{figure}
 
 \begin{table*}[tb]
       \centering
       \caption{HGR (\%) per severity level plus SBS and Boundary Delta ($\Delta_B$, \%) for six T2I models across 11 risk categories. \textbf{Bold} highest HGR per column; \colorbox{gray!20}{shaded} lowest; \red{models ordered by generative capability.}}
     \label{tab:t2i_models}
-      \resizebox{0.93\linewidth}{!}{%
+      \resizebox{0.88\linewidth}{!}{%
         \input{tables/T2I_full_1}%
       }
       \vspace{2pt}
-      \resizebox{0.93\textwidth}{!}{%
+      \resizebox{0.88\textwidth}{!}{%
         \input{tables/T2I_full_2}%
       }
 \end{table*}
@@ -52,7 +36,7 @@ PixArt-$\alpha$'s fine-tuning suppresses sexual HGR@L3 to 38.7\% versus 59.4\% f
 
 \input{tables/defense_compact}
 
-\Tab{\ref{tab:defense}} presents HGR reduction and SAS degradation for nine defense methods applied to SD1.4 across the NSFW, Legal, and Social groups; all nine target SD1.4's U-Net, six with no published DiT implementation.
+\Tab{\ref{tab:defense}} presents \red{HGR and SAS for nine defenses on SD1.4} across the NSFW, Legal, and Social groups; all nine target SD1.4's U-Net, six with no published DiT implementation.
 
 \textbf{Insight 3: Defenses steepen the severity gradient.}
 \textit{All evaluated defenses achieve higher \emph{relative} suppression at L1 than at L3---on our common SD1.4 backbone and, at smaller magnitude, on the PixArt DiT---yet absolute residual harm still peaks at L3, so the safety gap persists in absolute terms.}
@@ -99,7 +83,7 @@ The favorable-setting caveat cuts both ways: baseline FBRs are lower bounds (ref
 \input{tables/attack_summary}
 
 \Tab{\ref{tab:attacks}} presents ASR for six attack families against TRCE + LlavaGuard, the best utility-safety tradeoff configuration (Insight~4); the MACE + LlavaGuard configuration, which suppresses more harm at a large utility and over-refusal cost, is left to the extended analysis.
-All exceed 55\% ASR: the newest, model-free PGJ\ \citep{huang2024pgj} leads at 72.4\%, followed by the multimodal MMA-Diffusion (68.7\%), query-based concept extraction (Ring-A-Bell, 65.6\%), and RL-driven prompt search (SneakyPrompt, 63.4\%), with the white-box gradient attacks UnlearnDiffAtk (61.5\%) and P4D (55.6\%) trailing (GenBreak~\citep{wang2025genbreak}: commercial-wrapper scope, omitted).
+All exceed 55\% ASR: the newest, model-free PGJ\ \citep{huang2024pgj} leads at 72.4\%, followed by the multimodal MMA-Diffusion (68.7\%), concept extraction (Ring-A-Bell, 65.6\%), and RL prompt search (SneakyPrompt, 63.4\%), with white-box gradient attacks UnlearnDiffAtk (61.5\%) and P4D (55.6\%) trailing (GenBreak~\citep{wang2025genbreak}: commercial-wrapper scope, omitted).
 
 \looseness=-1
 \textbf{Insight 7: The safety gap is an active attack surface.}
