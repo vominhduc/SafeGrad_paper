@@ -2,7 +2,7 @@
 
 \begin{figure}[tb]
     \centering
-    \includegraphics[width=0.68\linewidth]{figures/safety_gap.pdf}
+    \includegraphics[width=0.63\linewidth]{figures/safety_gap.pdf}
     \caption{The Safety Gap. HGR by severity rung (image-level rates macro-averaged over the 11 categories per model, then over the six T2I models); the steepest transition is L1$\to$L2 (mean $+28.0$ pp). Error bars: $\pm 1$ SEM over models.}
     \label{fig:safety_gap}
 \end{figure}
@@ -13,11 +13,11 @@
       \centering
       \caption{HGR (\%) per severity level plus SBS and Boundary Delta ($\Delta_B$, \%) for six evaluated T2I models across 11 risk categories. \textbf{Bold} highest HGR per column; \colorbox{gray!20}{shaded} lowest. Models ordered by increasing generative capability.}
     \label{tab:t2i_models}
-      \resizebox{0.98\linewidth}{!}{%
+      \resizebox{0.96\linewidth}{!}{%
         \input{tables/T2I_full_1}%
       }
-      \vspace{6pt}
-      \resizebox{0.98\textwidth}{!}{%
+      \vspace{2pt}
+      \resizebox{0.96\textwidth}{!}{%
         \input{tables/T2I_full_2}%
       }
 \end{table*}
@@ -25,7 +25,7 @@
 \subsection{The Safety Gap: A Failure Mode Shared by All Evaluated Models}\label{sec:gap}
 
 \Fig{\ref{fig:safety_gap}} shows the aggregated HGR gradient is far from uniform: while mean HGR@L3 is 65.8\%, the L0$\rightarrow$L1 transition already produces a 21.1 percentage-point (pp) jump.
-Escalation steepens at L1$\rightarrow$L2 (28.0 pp): prompts benign to text filters produce visually harmful outputs that evade classifiers trained on explicit L3 content. \red{Throughout, relative findings (severity orderings, transition shapes, cross-model universality) are benchmark-intrinsic, whereas absolute rates are protocol-relative under the guided evaluator (\Sec{\ref{sec:limitations}}).}
+Escalation steepens at L1$\rightarrow$L2 (28.0 pp): prompts benign to text filters produce visually harmful outputs that evade classifiers trained on explicit L3 content. \red{Relative findings (orderings, transition shapes, universality) are benchmark-intrinsic; absolute rates are protocol-relative (\Sec{\ref{sec:limitations}}).}
 
 \textbf{Insight 1: Universal boundary blind spot.} \textit{Current T2I safety systems exhibit a systematic blind spot at the low-to-mid boundary (the L0$\to$L1 and L1$\to$L2 transitions, where escalation is steepest), universal across all evaluated models and invisible to binary safe/unsafe evaluation.}
 \Tab{\ref{tab:delta}} confirms this universality (per-category SEM 0.8--1.9 pp): L1$\to$L2 is the peak transition for five of six models (HiDream's L0$\to$L1 jump leads by 0.2 pp); Boundary Delta ranges 25.7 pp (PixArt-$\alpha$) to 30.3 pp (HiDream), and stays within 25.6--30.3 pp when computed only on the 7 categories with hand-authored L1 anchors (\SuppSec{\ref{app:taxonomy}}).
@@ -49,7 +49,7 @@ Construction--evaluation backbone overlap is audited in \SuppSec{\ref{app:backbo
 \textbf{Insight 3: Defenses steepen the severity gradient.}
 \textit{All evaluated defenses achieve higher \emph{relative} suppression at L1 than at L3---on our common SD1.4 backbone and, at smaller magnitude, on the PixArt DiT---yet absolute residual harm still peaks at L3, so the safety gap persists in absolute terms.}
 Writing $\rho_\ell = (\mathrm{HGR}_{\mathrm{base}}(\ell) - \mathrm{HGR}_{\mathrm{def}}(\ell))/\mathrm{HGR}_{\mathrm{base}}(\ell)$ for the relative HGR reduction at level $\ell$, all three paradigms suppress L1 more than L3 on NSFW content: inference-guided (NP, SLD, Safree) $\bar{\rho}_{\mathrm{L1}} = 60.0\%$ vs.\ $\bar{\rho}_{\mathrm{L3}} = 34.6\%$, model-editing (UCE, SPEED) $49.7\%$ vs.\ $28.0\%$, fine-tuning (SafetyDPO, MACE, TRCE) $71.7\%$ vs.\ $50.0\%$: the strongest defenses nearly close the L1 gap on NSFW while L3 harm largely survives.
-MACE, e.g., cuts NSFW HGR 26.9\%$\to$3.9\% at L1 but only 74.5\%$\to$22.6\% at L3, raising the L3:L1 ratio from $2.8\times$ to $5.8\times$. \red{The rising ratio marks greater relative concentration of residual harm at high severity---MACE narrows the NSFW L1$\to$L2 HGR gap from 33.0 to 9.9 pp---not a widening of the absolute boundary gap.}
+MACE, e.g., cuts NSFW HGR 26.9\%$\to$3.9\% at L1 but only 74.5\%$\to$22.6\% at L3, raising the L3:L1 ratio from $2.8\times$ to $5.8\times$. \red{The rising ratio marks concentration of residual harm at high severity (NSFW L1$\to$L2 gap: 33.0$\to$9.9 pp), not a wider absolute boundary gap.}
 For Legal and Social categories, inference-guided methods stay weak at L3 ($\bar{\rho}_{\mathrm{L3}} = 13.1\%$ Legal, $21.9\%$ Social) while still reducing L1 by 40--46\%; residual L3 HGR stays 46.6--55.4\%.
 This skew requires \dataname's graded structure: a binary benchmark would report MACE as a strong defense while missing it entirely.
 Transfer to DiT backbones is positive but method-sensitive: on PixArt-$\alpha$ a safety negative prompt reproduces the asymmetry (HGR 20.2\%$\to$18.3\% at L1 vs.\ 80.8\%$\to$76.0\% at L3; $\rho_{\mathrm{L1}} = 9.5\%$ vs.\ $\rho_{\mathrm{L3}} = 6.0\%$, $n = 104$/rung), whereas a direct SLD-style port to CogView4's GLM conditioning is near-inert ($\rho_{\mathrm{L1}} = 0.0\%$ vs.\ $\rho_{\mathrm{L3}} = 1.1\%$): the Insight-3 pattern holds on a DiT, but guided-defense ports do not transfer without architecture-specific retuning.
@@ -71,18 +71,18 @@ Without MACE, defense strength and utility cost are uncorrelated ($r = 0.009$); 
 \textit{In their default unguided binary configuration, evaluated filters fail to track severity: most show nearly flat detection rates from L0 to L3, and the strongest absolute riser (Q16, 55.3\%$\to$67.2\%) does so while flagging over half of safe images.}
 CLIP-NSFW misses 75\% of L3 content; Qwen2.5-VL nearly never false-alarms (FPR = 0.7\%) but misses 88\% of harmful content (FBR = 0.880); the purpose-built SD Filter rises only from 2.3\% to 7.8\% across rungs; and InternVL2-8B behaves like the SD Filter despite being a general-purpose VLM (FPR 0.2\%, but it detects only 0.9\%/2.4\%/12.1\% of L1--L3).
 Filters are thus unable to separate safe from harmful at boundary levels; fully blind evaluation is even flatter (0.2\%/0.2\%/7.2\% at L1--L3; \SuppSec{\ref{app:metrics}}). LlavaGuard and Qwen2.5-VL return only binary verdicts, so their per-level curves are dashed in \Tab{\ref{tab:filter}}.
-One scope caveat: three of the six filters (Q16, CLIP-NSFW, SD Filter) are NSFW-targeted by design, so part of their flatness on Legal and Social content reflects out-of-domain operation; the claim that \emph{general-purpose} moderation fails to track severity is anchored by the three generalist judges (LlavaGuard, Qwen2.5-VL, InternVL2-8B), which also stay flat (InternVL2-8B: 0.9\%/2.4\% detection at L1/L2). \red{Because these curves are measured at default operating points with L0 FPRs spanning 0.2--55.3\%, flatness may partly reflect threshold calibration rather than an inability to order severity; the two binary-verdict generalists (LlavaGuard, Qwen2.5-VL) expose no scores, and calibrated matched-FPR or ROC comparisons for the score-accessible filters are future work.}
+One scope caveat: three of the six filters (Q16, CLIP-NSFW, SD Filter) are NSFW-targeted by design, so part of their flatness on Legal and Social content reflects out-of-domain operation; the claim that \emph{general-purpose} moderation fails to track severity is anchored by the three generalist judges (LlavaGuard, Qwen2.5-VL, InternVL2-8B), which also stay flat (InternVL2-8B: 0.9\%/2.4\% detection at L1/L2). \red{Measured at default operating points (L0 FPRs 0.2--55.3\%), flatness may partly reflect threshold calibration rather than an inability to order severity; the binary-verdict generalists expose no scores, and calibrated matched-FPR comparisons are future work.}
 
 The gap is diagnosable, but is it closable? As a remediation check, we fine-tune Qwen2.5-VL-7B with LoRA on (image, risk explanation) $\rightarrow$ YES/NO pairs under a ladder-respecting 80/10/10 split (\SuppSec{\ref{app:remediation}}).
 Measured on the held-out test split with the same protocol, the tuned filter reaches \textbf{95.2\%} detection at L1 with a \textbf{3.8\%} L0 false-positive rate, cutting the overall bypass rate to \textbf{0.022} (\Tab{\ref{tab:filter}}, first tuned row).
-The primary baseline is the protocol-matched zero-shot backbone (same split, same guidance), which attains FBR $0.522$: guidance alone accounts for $\sim$42\% of the total $0.880 \to 0.022$ reduction, ladder-data training for the rest (\SuppSec{\ref{app:remediation}}). \red{All tuned-vs-anchor comparisons are split- and protocol-matched; the full-reference-set baseline rows in \Tab{\ref{tab:filter}} are quoted only for context.}
+The primary baseline is the protocol-matched zero-shot backbone (same split, same guidance), which attains FBR $0.522$: guidance alone accounts for $\sim$42\% of the total $0.880 \to 0.022$ reduction, ladder-data training for the rest (\SuppSec{\ref{app:remediation}}).
 
 \textbf{Insight 6: The safety gap is trainable-away.}
 \textit{A filter fine-tuned on ladder data recovers the mid-severity band (FBR $0.522 \rightarrow 0.022$ benchmark-resident and $0.653 \rightarrow 0.024$ fresh, both against protocol-matched zero-shot anchors; $0.880$ fully unguided) while holding false alarms far below the strongest existing filter (FPR@L0 = 3.8\% vs.\ Q16's 55.3\%), converting \dataname from a diagnostic into a mitigation instrument.}
 \textbf{Fresh-generation (prompt-aware transfer) validation.} We regenerate every held-out test-split prompt with all six evaluated T2I models (\emph{not} construction models), under each model's default settings with checkers disabled and per-ladder seeds (two images per prompt; 4,992 images).
 On the remaining 4,626 images (all-black degenerates excluded) the tuned filter reaches 94.7\% L1, 99.0\% L2, and 99.0\% L3 detection (per-generator FBR 2.2--2.7\%) at a 4.0\% L0 false-positive rate; pooled FBR is 2.4\%, statistically indistinguishable from the 2.2\% reference-regime estimate, versus 65.3\% for the zero-shot backbone (\SuppTab{\ref{tab:filter_fresh}}).
 Per-generator FBR varies only 2.2--2.7\% (L1 detection 94.2--95.2\%), and a Qwen2.5-VL-3B backbone retrained under the identical protocol reaches test-split FBR of 0.6\% with 99.0\% L1 detection (pooled fresh-generation FBR 0.8\%). The recipe also transfers across model families: an InternVL2-8B backbone trained identically attains test-split FBR 1.3\% (matched zero-shot anchor 40.1\%) with 98.1\% L1 detection and 100/100 readout--generation agreement on validation samples. The tuned decision is threshold-robust over a wide operating band (\SuppSec{\ref{app:remediation}}).
-The favorable-setting caveat cuts both ways: baseline FBRs are lower bounds (reference images manifest severity clearly), while the tuned rows are optimistic because inference supplies the sample's risk description; their figures measure prompt-aware filtering, not turnkey deployment (\Sec{\ref{sec:limitations}}). \red{Similarly, the tuned filter's FPRs cover held-out \dataname L0 prompts and their fresh regenerations---not independent benign corpora; an external, policy-matched benign evaluation is future work.}
+The favorable-setting caveat cuts both ways: baseline FBRs are lower bounds (reference images manifest severity clearly), while the tuned rows are optimistic because inference supplies the sample's risk description; their figures measure prompt-aware filtering, not turnkey deployment (\Sec{\ref{sec:limitations}}). \red{The tuned filter's FPRs cover held-out \dataname L0 prompts only; evaluation on independent benign corpora is future work.}
 
 \subsection{Adversarial Robustness: Attacks Exploit the Gap} \label{sec:attack}
 
