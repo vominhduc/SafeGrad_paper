@@ -13,7 +13,7 @@ Yet current T2I safety benchmarks~\citep{yang2023sneakyprompt,qu2023unsafe,schra
 We grade harm on four rungs, from Safe (L0) through Low- and Mid-risk (L1, L2) to High-risk (L3), and identify a critical \emph{safety gap}: the regime where the text filter passes the prompt and the visual checker passes the image, yet the image already falls in a nontrivial severity band.
 Because defenses and filters are trained on binary labels and calibrated at the explicit extreme, there is little reason to expect their protection to track the severity spectrum---and no existing benchmark can verify whether it does.
 
-We address this gap with \dataname, a benchmark that maps the severity-graded landscape of T2I safety rather than binary compliance (\Fig{\ref{fig:overview}}).
+We address this gap with \dataname\red{\footnote{Project page: \url{https://vmdlab.github.io/safegrad/}}}, a benchmark that maps the severity-graded landscape of T2I safety rather than binary compliance (\Fig{\ref{fig:overview}}).
 We synthesize the usage policies of leading T2I platforms into a principled taxonomy of 11 risk categories with pre-defined escalation rules, and use our Adversarial Severity Ladders (ASL) pipeline to build 1,026 ladders escalated through these four rungs, each carrying prompts, reference images, and risk explanations constructed without manual prompt authoring.
 
 Evaluated on \dataname, the current T2I safety ecosystem shows the gap everywhere we look.
