@@ -13,7 +13,7 @@ Yet current T2I safety benchmarks~\citep{yang2023sneakyprompt,qu2023unsafe,schra
 We grade harm on four rungs, from Safe (L0) through Low- and Mid-risk (L1, L2) to High-risk (L3), and identify a critical \emph{safety gap}: the regime where the text filter passes the prompt and the visual checker passes the image, yet the image already falls in a nontrivial severity band.
 Because defenses and filters are trained on binary labels and calibrated at the explicit extreme, there is little reason to expect their protection to track the severity spectrum---and no existing benchmark can verify whether it does.
 
-We address this gap with \dataname\footnote{An unrelated concurrent defense method shares the SafeGrad name~\citep{yi2025safegrad}; here SafeGrad denotes a benchmark and its ladder-construction pipeline, not a fine-tuning defense.}, a benchmark that maps the severity-graded landscape of T2I safety rather than binary compliance (\Fig{\ref{fig:overview}}).
+We address this gap with \dataname, a benchmark that maps the severity-graded landscape of T2I safety rather than binary compliance (\Fig{\ref{fig:overview}}).
 We synthesize the usage policies of leading T2I platforms into a principled taxonomy of 11 risk categories with pre-defined escalation rules, and use our Adversarial Severity Ladders (ASL) pipeline to build 1,026 ladders escalated through these four rungs, each carrying prompts, reference images, and risk explanations constructed without manual prompt authoring.
 
 Evaluated on \dataname, the current T2I safety ecosystem shows the gap everywhere we look.
@@ -25,7 +25,7 @@ Evaluated on \dataname, the current T2I safety ecosystem shows the gap everywher
 These insights trace one arc: the gap is universal (Insight 1), even the safe rung leaks (Insight 2), neither defenses nor filters close it (Insights 3--5), ladder data can close it (Insight 6), and attacks exploit what remains (Insight 7).
 
 Our contributions are as follows:
-\begin{itemize}[leftmargin=*]
+\begin{itemize}[leftmargin=*,itemsep=1pt,topsep=2pt]
 \item A hierarchical safety taxonomy spanning 11 risk categories and 4 calibrated severity levels, providing a principled foundation for boundary-aware T2I safety evaluation.
 
 \item The automated Adversarial Severity Ladders (ASL) pipeline, which constructs semantically coherent, monotonically escalating prompt--image--explanation triplets without manual prompt authoring.

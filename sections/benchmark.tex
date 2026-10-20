@@ -10,12 +10,12 @@ Per-rung risk explanations make the intermediate regime concrete: in the Violenc
 \subsection{Hierarchical Risk Taxonomy}
 
 We define a hierarchical taxonomy covering 11 top-level risk categories (\Fig{\ref{fig:overview}}), each a distinct dimension of potential harm in T2I generation, synthesized from platform policies and existing literature~\citep{dalle3,midjourney_guideline,helff2024llavaguard,li2025t2isafety,zhang2025t2iriskyprompt,google,microsoft,metaAI}.
-Each category defines four severity levels with human-authored escalation rules, reviewed against these sources with boundary cases adjudicated manually (\SuppSec{\ref{app:taxonomy}}, \SuppTab{\ref{app:tab:severity}}, \SuppTab{\ref{app:tab:taxonomy}}); the pipeline instantiates these rules rather than defining severity itself.
+Each category defines four severity levels with human-authored escalation rules, \red{manually reviewed against these sources with boundary-case adjudication} (\SuppSec{\ref{app:taxonomy}}, \SuppTab{\ref{app:tab:severity}, \ref{app:tab:taxonomy}}); \red{the pipeline instantiates these rules rather than defining severity.}
 
 \subsection{Dataset Statistics}
 \dataname is the strict post-filtering yield of the ASL pipeline: 1,026 ladders (4,104 prompts) spanning 11 categories, each rung holding a prompt, reference image, and risk explanation (82--99 ladders per category; \SuppTab{\ref{app:tab:stats}}).
 Categories are not mutually exclusive at high severity: co-occurrence analysis (\SuppSec{\ref{app:comatrix}}) shows the largest overlap for Violence--Disturbing (18.9\%/21.4\%).
-\Tab{\ref{tab:comparison}} compares \dataname against existing benchmarks; \dataname targets continuous failure slopes at the L1/L2 boundary rather than flat coverage.
+\red{\Tab{\ref{tab:comparison}} positions \dataname{} against existing benchmarks: it targets failure slopes at the L1/L2 boundary, not flat coverage.}
 
 \begin{table}[tb]
 \centering
