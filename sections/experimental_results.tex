@@ -3,15 +3,18 @@
 \begin{figure}[tb]
     \centering
     \includegraphics[width=0.64\linewidth]{figures/safety_gap.pdf}
-    \caption{The Safety Gap. HGR by severity rung (image-level rates macro-averaged over the 11 categories per model, then over the six T2I models); the steepest transition is L1$\to$L2 (mean $+28.0$ pp). Error bars: $\pm 1$ SEM over models.}
+    \caption{The Safety Gap. HGR by severity rung \red{(macro-averaged over 11 categories per model, then over models)}; the steepest transition is L1$\to$L2 (mean $+28.0$ pp). Error bars: $\pm 1$ SEM over models.}
     \label{fig:safety_gap}
+    \vspace{4pt}
+    \input{tables/boundary_delta}
+    \vspace{2pt}
+    \captionof{table}{Boundary Delta ($\Delta_B$, \%, the L1$\to$L2 HGR jump) and peak severity transition per model (11-category average). \red{The steepest transition is L1$\to$L2 for five of six models ($^{*}$HiDream: L0$\to$L1, 30.5 pp); the aggregate profile peaks at L1$\to$L2 (28.0 pp vs.\ 21.1 pp at L0$\to$L1).}}
+    \label{tab:delta}
 \end{figure}
-
-\input{tables/boundary_delta}
 
 \begin{table*}[tb]
       \centering
-      \caption{HGR (\%) per severity level plus SBS and Boundary Delta ($\Delta_B$, \%) for six evaluated T2I models across 11 risk categories. \textbf{Bold} highest HGR per column; \colorbox{gray!20}{shaded} lowest. Models ordered by increasing generative capability.}
+      \caption{HGR (\%) per severity level plus SBS and Boundary Delta ($\Delta_B$, \%) for six T2I models across 11 risk categories. \textbf{Bold} highest HGR per column; \colorbox{gray!20}{shaded} lowest; \red{models ordered by generative capability.}}
     \label{tab:t2i_models}
       \resizebox{0.93\linewidth}{!}{%
         \input{tables/T2I_full_1}%
