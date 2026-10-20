@@ -35,11 +35,11 @@ Verification is per-rung and description-guided (unlike Insight~5's unguided fil
 \begin{figure*}[tb]
     \centering
     \red{%
-    \begin{minipage}[t]{0.46\textwidth}
+    \begin{minipage}[t]{0.52\textwidth}
         \centering
         \begin{tikzpicture}
         \begin{axis}[
-            width=\linewidth, height=1.65cm,
+            width=\linewidth, height=2.3cm,
             xtick={0,1,2,3}, xticklabels={L0,L1,L2,L3},
             xlabel style={font=\scriptsize}, ylabel={HGR (\%)}, ylabel style={font=\scriptsize},
             ymin=0, ymax=100, ytick={0,25,50,75,100},
@@ -70,8 +70,8 @@ Verification is per-rung and description-guided (unlike Insight~5's unguided fil
         \end{tikzpicture}
         \captionof{figure}{The Safety Gap. HGR by severity rung (macro-averaged); steepest transition L1$\to$L2 ($+28.0$ pp). Error bars: $\pm 1$ SEM.}
         \label{fig:safety_gap}
-    \end{minipage}\hfill
-    \begin{minipage}[t]{0.30\textwidth}
+    \end{minipage}\hspace{0.02\textwidth}%
+    \begin{minipage}[t]{0.34\textwidth}
         \centering
         \input{tables/boundary_delta}
         \captionof{table}{Boundary Delta ($\Delta_B$, \%, L1$\to$L2 HGR jump) and peak transition per model; L1$\to$L2 steepest for five of six ($^{*}$HiDream: L0$\to$L1).}
