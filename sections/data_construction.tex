@@ -10,7 +10,7 @@ Near-duplicate prompts are removed via FAISS clustering on \texttt{all-MiniLM-L6
 
 \noindent\textbf{Stage 2: Risky Prompt Synthesis.}
 Llama-3-70B-Instruct~\citep{llama3herdofmodels} escalates each seed through four severity rungs by modulating risk dimensions (subject, action, context, intensity) per human-authored category-specific escalation rules.
-Qwen2.5-7B-Instruct~\citep{qwen2.5technicalreport} scores each ladder; any adjacent gap below $0.4$ in the continuous normalized 0--3 risk score triggers regeneration.
+Qwen2.5-7B-Instruct~\citep{qwen2.5technicalreport} scores each ladder; any adjacent gap below $0.4$ in the normalized 0--3 risk score triggers regeneration.
 
 \noindent\textbf{Stage 3: Reference Image Generation.}
 Images are generated using SDXL~\citep{podell2023sdxl} (55.8\%), Z-Turbo~\citep{zimage2025efficient} (26.8\%), FLUX.1-dev~\citep{labs2025flux1} (16.4\%), and SD3.5-Large~\citep{sd35large} (1.1\%) with safety checkers disabled.
@@ -18,8 +18,8 @@ The same model and seed are used for all four rungs within a ladder, isolating s
 
 \noindent\textbf{Stage 4: Verification.}
 Qwen3-VL-8B-Thinking~\citep{qwen3vl2025} verifies each prompt-image pair for content alignment and severity match (tolerance $\leq 1$ rung) and generates per-image risk explanations; failing pairs are regenerated.
-Verification is per-rung and description-guided (unlike Insight~5's unguided deployed filters); cross-rung continuity is audited (\SuppSec{\ref{app:construction:continuity}}).
-\red{Incomplete ladders are excluded, yielding 1,026 validated ladders; the full pipeline requires ${\sim}32$ A100 GPU-hours.}
+Verification is per-rung and description-guided (unlike Insight~5's unguided filters); cross-rung continuity is audited (\SuppSec{\ref{app:construction:continuity}}).
+\red{Incomplete ladders are excluded, yielding 1,026 validated ladders (${\sim}32$ A100 GPU-hours total).}
 
 \subsection{Dataset Quality Analysis} \label{sec:quality}
 \Tab{\ref{tab:quality_full}} reports four quality dimensions across all 11 categories.
