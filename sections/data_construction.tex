@@ -32,19 +32,39 @@ Verification is per-rung and description-guided (unlike Insight~5's unguided fil
 
 \input{tables/data_quality_full}
 
+% \begin{figure*}[tb]
+%     \centering
+%     \red{%
+%     \begin{minipage}[t]{0.42\textwidth}
+%         \centering
+%         \includegraphics[width=\linewidth]{figures/safety_gap.pdf}
+%         \captionof{figure}{The Safety Gap. HGR by severity rung (macro-averaged); steepest transition L1$\to$L2 ($+28.0$ pp). Error bars: $\pm 1$ SEM.}
+%         \label{fig:safety_gap}
+%     \end{minipage}\hspace{0.03\textwidth}%
+%     \begin{minipage}[t]{0.4\textwidth}
+%         \centering
+%         \input{tables/boundary_delta}
+%         \captionof{table}{Boundary Delta ($\Delta_B$, \%, L1$\to$L2 HGR jump) and peak transition per model; L1$\to$L2 steepest for five of six ($^{*}$HiDream: L0$\to$L1).}
+%         \label{tab:delta}
+%     \end{minipage}}
+% \end{figure*}
+
 \begin{figure*}[tb]
     \centering
     \red{%
-    \begin{minipage}[t]{0.25\textwidth}
+    \begin{minipage}[t]{0.45\textwidth}
+        \vspace{0pt}% Anchor top alignment
         \centering
         \includegraphics[width=\linewidth]{figures/safety_gap.pdf}
         \captionof{figure}{The Safety Gap. HGR by severity rung (macro-averaged); steepest transition L1$\to$L2 ($+28.0$ pp). Error bars: $\pm 1$ SEM.}
         \label{fig:safety_gap}
-    \end{minipage}\hspace{0.03\textwidth}%
-    \begin{minipage}[t]{0.34\textwidth}
+    \end{minipage}\hfill
+    \begin{minipage}[t]{0.45\textwidth}
+        \vspace{0pt}% Anchor top alignment
         \centering
-        \input{tables/boundary_delta}
         \captionof{table}{Boundary Delta ($\Delta_B$, \%, L1$\to$L2 HGR jump) and peak transition per model; L1$\to$L2 steepest for five of six ($^{*}$HiDream: L0$\to$L1).}
         \label{tab:delta}
+        \vspace{0.5em}
+        \input{tables/boundary_delta}
     \end{minipage}}
 \end{figure*}
