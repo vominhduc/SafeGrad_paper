@@ -4,11 +4,11 @@ Early benchmarks like I2P~\citep{schramowski2023safe} (4,703 prompts, 7 categori
 Recent efforts~\citep{dai2024safesora,miao2024t2vsafetybench,li2025t2isafety,zhang2025t2iriskyprompt} expanded coverage to more risk dimensions.
 Most related to our work, T2ISafety~\citep{li2025t2isafety} established a broad framework assessing fairness, toxicity, and privacy across $\sim$70K prompts, and T2I-RiskyPrompt~\citep{zhang2025t2iriskyprompt} introduced a hierarchical taxonomy of 6 primary and 14 fine-grained categories with reasoning-based annotation.
 Complementary image-safety benchmarks such as UnsafeBench~\citep{yiting2025unsafebench} evaluate classifiers over real-world and AI-generated images but retain binary labels, leaving severity-graded generation risk unmeasured.
-Generation-side safety benchmarks assign each prompt a single, independently sampled binary verdict. \dataname's paired ladders instead hold the scenario fixed (same model and seed across all four rungs), exposing how a defense's suppression varies across severity. Insight~3 depends on exactly this quantity, which no flat prompt set measures.
+Generation-side safety benchmarks all still assign each prompt a single, independently sampled binary verdict; \dataname's paired ladders instead hold the scenario fixed (same model and seed across all four rungs), exposing how a defense's suppression couples across severity---\red{the quantity Insight~3 requires and no flat prompt set measures.}
 
 \noindent
 \textbf{Defenses and filters.}
 Internal defenses modify model weights~\citep{gandikota2023concept,gandikota2024unified} or retrain safety objectives~\citep{liu2024safetydpo,lu2024mace,chen2025trce}; external ones apply keyword lists~\citep{george}, text classifiers~\citep{li_NSFW_text_classifier,Detoxify,khader2024diffguard}, or image-level detectors~\citep{laionAI,Chhabra,schramowski2023safe,Giphy}.
-All of them target L3-equivalent explicit content under a binary safe/unsafe protocol.
+They all target L3-equivalent explicit content under a binary safe/unsafe protocol.
 Severity-graded ideas have also appeared outside T2I generation: BingoGuard~\citep{yin2025bingoguard} assigns five risk levels to LLM text responses, and VLSU~\citep{palaskar2026vlsu} labels multimodal inputs safe/borderline/unsafe; neither examines generative severity in T2I synthesis. Concurrent guardrail work on policy-graded image moderation (Piao et al.~\citep{piao2026policy}) targets the input-filtering setting; our focus is generation-side graded risk of the models themselves.
-\dataname provides the first graded diagnostic across all four severity rungs of generative risk.
+\dataname provides the first graded diagnostic across all four severity rungs.
