@@ -25,8 +25,7 @@ As a deployment-layer control (checker \emph{activated} on SD1.4 and HiDream), L
 \noindent\textbf{Automated evaluator.}
 Since no existing safety filter covers all 11 risk categories, we employ an ensemble of three MLLMs \emph{excluded from dataset construction} (InternVL2-8B~\citep{chen2024internvl}, Phi-4-multimodal-instruct~\citep{phi4multimodal2025}, and Gemma-3-4b-it~\citep{gemma_3_2025}) as the automated evaluator $\phi$.
 Each model receives the sample-specific risk description derived from the escalation rules, matching the information budget of a deployed severity-aware filter with policy access; $\phi(I) = 1$ if at least two of the three models flag the image.
-We validate the ensemble at three levels.
-(i) an independent Claude-3.7-Sonnet relabeling of 200 held-out stratified pairs agrees on 91\% (vs.\ 59.8\% for Q16);
+We validate the ensemble at three levels: (i) an independent Claude-3.7-Sonnet relabeling of 200 held-out stratified pairs agrees on 91\% (vs.\ 59.8\% for Q16);
 (ii) stripping the intended-level label shifts HGR by under 2.4\% on macro average, and a fully blind ensemble detects almost nothing below L3 (\SuppSec{\ref{app:metrics}}), so guidance raises sensitivity but does not create the gap;
 (iii) a blinded human study on 500 stratified pairs (three independent annotators, 60\% of the budget at the L1--L2 boundary) agrees with the pipeline's labels at $\kappa = 0.73$ (\SuppSec{\ref{app:human}}).
 \red{All absolute rates are protocol-relative; since (iii) is rule-instructed, a fully blind harm rating remains future work.}

@@ -46,7 +46,7 @@ For Legal and Social categories, inference-guided methods stay weak at L3 ($\bar
 This skew requires \dataname's graded structure: a binary benchmark would report MACE as a strong defense while missing it entirely.
 Transfer to DiT backbones is positive but method-sensitive: on PixArt-$\alpha$ a safety negative prompt reproduces the asymmetry (HGR 20.2\%$\to$18.3\% at L1 vs.\ 80.8\%$\to$76.0\% at L3; $\rho_{\mathrm{L1}} = 9.5\%$ vs.\ $\rho_{\mathrm{L3}} = 6.0\%$), whereas a direct SLD-style port to CogView4's GLM conditioning is near-inert ($\rho_{\mathrm{L1}} = 0.0\%$ vs.\ $\rho_{\mathrm{L3}} = 1.1\%$): the Insight-3 pattern holds on a DiT, but \red{guided-defense ports need architecture-specific retuning}.
 
-\textbf{Insight 4: The Utility--Safety Tradeoff Is Dominated by Two Methods.}
+\textbf{Insight 4: The utility--safety tradeoff is dominated by two methods.}
 \textit{Under our joint $\Delta$HGR/SAS criterion, TRCE Pareto-dominates six of the seven remaining methods ($\Delta$HGR = 0.506 at an SAS cost of 0.008, versus e.g.\ SLD's 0.409 at a cost of 0.018); MACE occupies a distinct extreme point on the tradeoff curve.}
 Concretely, TRCE beats NP, SLD, Safree, UCE, SPEED, and SafetyDPO on both metrics at once; the TRCE--SLD margin ($9.7$ pp) far exceeds the worst-case Bernoulli SEM ($\lesssim 0.5$ pp).
 RECE is excluded: it collapses on Legal and Social (\SuppSec{\ref{app:collapse}}).
@@ -71,7 +71,7 @@ Measured on the held-out test split with the same protocol, the tuned filter rea
 The primary baseline is the protocol-matched zero-shot backbone (same split, same guidance), which attains FBR $0.522$: guidance alone accounts for $\sim$42\% of the total $0.880 \to 0.022$ reduction, ladder-data training for the rest (\SuppSec{\ref{app:remediation}}).
 
 \looseness=-1
-\textbf{Insight 6: The safety gap is trainable-away.}
+\textbf{Insight 6: The safety gap can be trained away.}
 \textit{A filter fine-tuned on ladder data recovers the mid-severity band (FBR $0.522 \rightarrow 0.022$ benchmark-resident and $0.653 \rightarrow 0.024$ fresh, both against protocol-matched zero-shot anchors; $0.880$ fully unguided) while holding false alarms far below the strongest existing filter (FPR@L0 = 3.8\% vs.\ Q16's 55.3\%), converting \dataname from a diagnostic into a mitigation instrument.}
 \textbf{Fresh-generation (prompt-aware transfer) validation.} We regenerate every held-out test-split prompt with all six evaluated T2I models (\emph{not} construction models), under each model's default settings with checkers disabled and per-ladder seeds (two images per prompt; 4,992 images).
 On the remaining 4,626 images (all-black degenerates excluded) the tuned filter reaches 94.7\% L1, 99.0\% L2, and 99.0\% L3 detection (per-generator FBR 2.2--2.7\%) at a 4.0\% L0 false-positive rate; pooled FBR is 2.4\%, statistically indistinguishable from the 2.2\% reference-regime estimate, versus 65.3\% for the zero-shot backbone (\SuppTab{\ref{tab:filter_fresh}}).
