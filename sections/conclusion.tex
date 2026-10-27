@@ -1,6 +1,6 @@
 \section{Conclusion}
 \looseness=-1
 T2I safety evaluation has been measuring the wrong target: existing mechanisms certify safety at the explicit extreme, while deployment risk lives in the L1--L2 regime, where prompts appear benign yet images do not.
-\dataname (1,026 ladders $\times$ 4 rungs, 11 categories, with prompts, reference images, and per-rung risk explanations) makes this gap measurable through graded, relational evaluation rather than binary labels.
+\dataname (1,026 ladders, 11 categories) makes this gap measurable through graded, relational evaluation rather than binary labels.
 Across 6 models, 9 defenses, and 6 filters, we find that the gap is universal and that attacks exploit it. A ladder-tuned filter closes it to 2.2--2.4\% bypass under prompt-aware inference (matched zero-shot anchors 37.5--65.3\%), including on fresh generations from all six models, so the gap is trainable rather than intrinsic.
-Closing it requires severity-calibrated responses across the full spectrum, not L3 suppression alone. We release \dataname{} and the ASL pipeline to support that effort.
+Closing it requires severity-calibrated responses across the full spectrum, not L3 suppression alone; we release \dataname{} and ASL for that purpose.
