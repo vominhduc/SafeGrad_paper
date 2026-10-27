@@ -19,7 +19,7 @@ The same model and seed are used for all four rungs within a ladder, isolating s
 \noindent\textbf{Stage 4: Verification.}
 Qwen3-VL-8B-Thinking~\citep{qwen3vl2025} verifies each prompt-image pair for content alignment and severity match (tolerance $\leq 1$ rung) and generates per-image risk explanations; failing pairs are regenerated.
 Verification is per-rung and description-guided (unlike the unguided filters of Insight~5), and cross-rung continuity is audited separately (\SuppSec{\ref{app:construction:continuity}}).
-Incomplete ladders are excluded, yielding 1,026 validated ladders (${\sim}32$ A100 GPU-hours in total).
+Incomplete ladders are excluded, yielding 1,026 validated ladders (${\sim}32$ A100 GPU-hours).
 
 \subsection{Dataset Quality Analysis} \label{sec:quality}
 \Tab{\ref{tab:quality_full}} reports quality metrics across all 11 categories.

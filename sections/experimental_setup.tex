@@ -12,13 +12,12 @@
 
 \noindent
 \textbf{Attack Strategies.} We evaluate six attack families: SneakyPrompt~\citep{yang2023sneakyprompt}, Ring-A-Bell~\citep{tsai2024ringabell}, UnlearnDiffAtk~\citep{zhang2024unlearndiffattk}, MMA-Diffusion~\citep{yang2024mma}, P4D~\citep{chin2024p4d}, and the perception-guided jailbreak (PGJ)~\citep{huang2024pgj}, the most recent protocol-compatible attack. All target the strongest utility-preserving defended configuration we evaluate (Sec.~\ref{sec:attack}).
-We attack only L2 and L3 prompts, since lower-severity prompts rarely produce harmful outputs even under attack.
+We attack only L2 and L3 prompts, since lower rungs rarely yield harmful outputs even under attack.
 All attacks use their public reference implementations without tuning, and ASR (\Tab{\ref{tab:attacks}}) is computed over the same 2,052 L2--L3 prompts for every attack, so rows are directly comparable.
 
 \noindent\textbf{Generation protocol.}
 For prompt-conditioned evaluation (models, defenses, attacks), we generate two images per prompt per model with default inference settings and \emph{safety checkers disabled}, which measures each model's raw generative risk independent of its guard layers. Filters instead classify static reference images; the tuned filter is additionally validated on fresh generations (\Sec{\ref{sec:filter}}).
 HGR is computed per image, as the fraction of generated images flagged by the evaluator ensemble.
-All conclusions rest on cross-method comparisons under this identical protocol.
 As a deployment-layer control, we \emph{activate} the checker on SD1.4 and HiDream: L3 HGR falls to 47.3\%/63.4\%, but L1/L2 HGR drop by at most 3.6\%, leaving the L1--L2 boundary unaddressed.
 
 \noindent\textbf{Automated evaluator.}
