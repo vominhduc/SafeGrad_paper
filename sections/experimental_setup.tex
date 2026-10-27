@@ -2,36 +2,35 @@
 
 \subsection{Evaluated Methods}
 
-\textbf{T2I Models.} To ensure evaluation fairness, we exclude the four construction models
-and instead evaluate six architecturally independent open-source models: SD1.4, SD2.1~\citep{rombach2022ldm}, PixArt-$\alpha$~\citep{chen2023pixart}, CogView4~\citep{thudm2025cogview4}, Janus-Pro~\citep{chen2025janusPro}, and HiDream~\citep{cai2025hidream}.
+\textbf{T2I Models.} To keep the evaluation fair, we exclude the four construction models and evaluate six architecturally independent open-source models: SD1.4, SD2.1~\citep{rombach2022ldm}, PixArt-$\alpha$~\citep{chen2023pixart}, CogView4~\citep{thudm2025cogview4}, Janus-Pro~\citep{chen2025janusPro}, and HiDream~\citep{cai2025hidream}.
 
 \noindent
-\textbf{Defense Methods.} We implement nine methods across three paradigms: \textit{inference-guided} (NP, SLD~\citep{schramowski2023safe}, Safree~\citep{yoon2024safree}), \textit{model-editing} (UCE~\citep{gandikota2024unified}, RECE~\citep{gong2024rece}, SPEED~\citep{li2026speed}), and \textit{fine-tuning} (SafetyDPO~\citep{liu2024safetydpo}, MACE~\citep{lu2024mace}, TRCE~\citep{chen2025trce}), all applied to SD1.4: six of the nine are U-Net-specific weight editors without published DiT implementations and SD1.4 is the concept-erasure literature's standard backbone.
+\textbf{Defense Methods.} We implement nine methods across three paradigms: \textit{inference-guided} (NP, SLD~\citep{schramowski2023safe}, Safree~\citep{yoon2024safree}), \textit{model-editing} (UCE~\citep{gandikota2024unified}, RECE~\citep{gong2024rece}, SPEED~\citep{li2026speed}), and \textit{fine-tuning} (SafetyDPO~\citep{liu2024safetydpo}, MACE~\citep{lu2024mace}, TRCE~\citep{chen2025trce}), all applied to SD1.4. Six of the nine are U-Net-specific weight editors without published DiT implementations, and SD1.4 is the standard backbone of the concept-erasure literature.
 
 \noindent
 \textbf{Safety Filters.} We evaluate Q16~\citep{schramowski2022q16}, CLIP-NSFW~\citep{laionAI}, SD Filter~\citep{rombach2022ldm}, LlavaGuard~\citep{helff2024llavaguard}, Qwen2.5-VL~\citep{qwen2.5technicalreport}, and InternVL2-8B~\citep{chen2024internvl}.
 
 \noindent
-\textbf{Attack Strategies.} We evaluate six attack families---SneakyPrompt~\citep{yang2023sneakyprompt}, Ring-A-Bell~\citep{tsai2024ringabell}, UnlearnDiffAtk~\citep{zhang2024unlearndiffattk}, MMA-Diffusion~\citep{yang2024mma}, P4D~\citep{chin2024p4d}, and the recent perception-guided jailbreak (PGJ)~\citep{huang2024pgj}, the most recent protocol-compatible attack---against the strongest utility-preserving defended configuration we evaluate (Sec.~\ref{sec:attack}).
-We use only L2 and L3 prompts, as lower-severity prompts rarely produce harmful outputs even under attack.
-All attacks use their public reference implementations without tuning; ASR (\Tab{\ref{tab:attacks}}) is computed over the same 2,052 L2--L3 prompts for every attack, so rows are directly comparable.
+\textbf{Attack Strategies.} We evaluate six attack families: SneakyPrompt~\citep{yang2023sneakyprompt}, Ring-A-Bell~\citep{tsai2024ringabell}, UnlearnDiffAtk~\citep{zhang2024unlearndiffattk}, MMA-Diffusion~\citep{yang2024mma}, P4D~\citep{chin2024p4d}, and the perception-guided jailbreak (PGJ)~\citep{huang2024pgj}, the most recent protocol-compatible attack. All target the strongest utility-preserving defended configuration we evaluate (Sec.~\ref{sec:attack}).
+We attack only L2 and L3 prompts, since lower-severity prompts rarely produce harmful outputs even under attack.
+All attacks use their public reference implementations without tuning, and ASR (\Tab{\ref{tab:attacks}}) is computed over the same 2,052 L2--L3 prompts for every attack, so rows are directly comparable.
 
 \noindent\textbf{Generation protocol.}
-For prompt-conditioned evaluation (models, defenses, attacks), we generate two images per prompt per model using default inference settings \emph{with safety checkers disabled} (filters instead classify static reference images; the tuned filter is additionally validated on fresh generations, \Sec{\ref{sec:filter}}), measuring each model's raw generative risk independent of its guard layers.
-HGR is computed at the image level, as the fraction of generated images flagged by the evaluator ensemble.
+For prompt-conditioned evaluation (models, defenses, attacks), we generate two images per prompt per model with default inference settings and \emph{safety checkers disabled}, which measures each model's raw generative risk independent of its guard layers. Filters instead classify static reference images; the tuned filter is additionally validated on fresh generations (\Sec{\ref{sec:filter}}).
+HGR is computed per image, as the fraction of generated images flagged by the evaluator ensemble.
 All conclusions rest on cross-method comparisons under this identical protocol.
-As a deployment-layer control (checker \emph{activated} on SD1.4 and HiDream), L3 HGR falls to 47.3\%/63.4\% while L1/L2 HGR drop by at most 3.6\%, leaving the L1--L2 boundary unaddressed.
+As a deployment-layer control, we \emph{activate} the checker on SD1.4 and HiDream: L3 HGR falls to 47.3\%/63.4\%, but L1/L2 HGR drop by at most 3.6\%, leaving the L1--L2 boundary unaddressed.
 
 \noindent\textbf{Automated evaluator.}
-Since no existing safety filter covers all 11 risk categories, we employ an ensemble of three MLLMs \emph{excluded from dataset construction} (InternVL2-8B~\citep{chen2024internvl}, Phi-4-multimodal-instruct~\citep{phi4multimodal2025}, and Gemma-3-4b-it~\citep{gemma_3_2025}) as the automated evaluator $\phi$.
-Each model receives the sample-specific risk description derived from the escalation rules, matching the information budget of a deployed severity-aware filter with policy access; $\phi(I) = 1$ if at least two of the three models flag the image.
-We validate the ensemble at three levels.
-(i) an independent Claude-3.7-Sonnet relabeling of 200 held-out stratified pairs agrees on 91\% (vs.\ 59.8\% for Q16);
-(ii) stripping the intended-level label shifts HGR by under 2.4\% on macro average, and a fully blind ensemble detects almost nothing below L3 (\SuppSec{\ref{app:metrics}}), so guidance raises sensitivity but does not create the gap;
-(iii) a blinded human study on 500 stratified pairs (three independent annotators, 60\% of the budget at the L1--L2 boundary) agrees with the pipeline's labels at $\kappa = 0.73$ (\SuppSec{\ref{app:human}}).
-\red{All absolute rates are protocol-relative; since (iii) is rule-instructed, a fully blind harm rating remains future work.}
+Since no existing safety filter covers all 11 risk categories, the automated evaluator $\phi$ is an ensemble of three MLLMs \emph{excluded from dataset construction}: InternVL2-8B~\citep{chen2024internvl}, Phi-4-multimodal-instruct~\citep{phi4multimodal2025}, and Gemma-3-4b-it~\citep{gemma_3_2025}.
+Each model receives the sample-specific risk description derived from the escalation rules, which matches the information available to a deployed severity-aware filter with policy access. $\phi(I) = 1$ if at least two of the three models flag the image.
+We validate the ensemble in three ways.
+(i)~An independent Claude-3.7-Sonnet relabeling of 200 held-out stratified pairs agrees on 91\% (vs.\ 59.8\% for Q16).
+(ii)~Stripping the intended-level label shifts HGR by under 2.4\% on macro average, and a fully blind ensemble detects almost nothing below L3 (\SuppSec{\ref{app:metrics}}); guidance therefore raises sensitivity but does not create the gap.
+(iii)~A blinded human study on 500 stratified pairs (three independent annotators, 60\% of the budget at the L1--L2 boundary) agrees with the pipeline's labels at $\kappa = 0.73$ (\SuppSec{\ref{app:human}}).
+All absolute rates are protocol-relative, and because (iii) is rule-instructed, a fully blind harm rating remains future work.
 
 \subsection{Evaluation Metrics}
 
-We use five core metrics, plus a derived boundary statistic:
-\textbf{HGR} (harmful generation rate), \textbf{SBS} (safety boundary sharpness), \textbf{SAS} (CLIP semantic alignment), \textbf{FBR} (filter bypass rate), \textbf{ASR} (attack success rate), plus the per-model Boundary Delta $\boldsymbol{\Delta_B}$ (the L1$\to$L2 HGR jump) (\SuppSec{\ref{app:metrics}}); within-model Bernoulli SEs stay $\leq 1.1$ pp for category-pooled HGR ($n = 2{,}052$; per-category bounds larger), and aggregates report $\pm 1$ SEM across models.
+We use five core metrics and one derived statistic (\SuppSec{\ref{app:metrics}}): \textbf{HGR} (harmful generation rate), \textbf{SBS} (safety boundary sharpness), \textbf{SAS} (CLIP semantic alignment), \textbf{FBR} (filter bypass rate), \textbf{ASR} (attack success rate), and the per-model Boundary Delta $\boldsymbol{\Delta_B}$ (the L1$\to$L2 HGR jump).
+Within-model Bernoulli SEs stay $\leq 1.1$ pp for category-pooled HGR ($n = 2{,}052$; per-category bounds are larger), and aggregates report $\pm 1$ SEM across models.

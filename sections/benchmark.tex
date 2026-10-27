@@ -3,24 +3,24 @@
 \subsection{Overview and Design Philosophy}
 
 \dataname is designed around a core hypothesis: safety evaluation in T2I systems should be severity-graded rather than threshold-based.
-Rather than a large flat set of binary-labeled examples, \dataname provides \emph{relational} severity ladders: a single ladder of four prompts encodes more information about a model's safety boundary than four independent samples, exposing \emph{where} along the spectrum the model first fails and how sharply.
-Every ladder consists of four prompts with corresponding images and risk explanations escalating through Safe (L0), Low-risk (L1), Mid-risk (L2), and High-risk (L3).
-Per-rung risk explanations make the intermediate regime concrete: in the Violence ladder (\SuppFig{\ref{app:fig:sample_3}}), L1 is stylized fictional conflict while L2 escalates to realistic injury. All rungs follow the \SuppTab{\ref{app:tab:taxonomy}} anchors (\SuppSec{\ref{app:examples}}).
+Rather than a large flat set of binary-labeled examples, \dataname provides \emph{relational} severity ladders. A ladder of four prompts encodes more about a model's safety boundary than four independent samples, because it shows \emph{where} along the spectrum the model first fails and how sharply.
+Every ladder consists of four prompts, each with a reference image and a risk explanation, escalating through Safe (L0), Low-risk (L1), Mid-risk (L2), and High-risk (L3).
+The per-rung explanations make the intermediate regime concrete: in the Violence ladder (\SuppFig{\ref{app:fig:sample_3}}), L1 is stylized fictional conflict and L2 escalates to realistic injury. All rungs follow the anchors in \SuppTab{\ref{app:tab:taxonomy}} (\SuppSec{\ref{app:examples}}).
 
 \subsection{Hierarchical Risk Taxonomy}
 
 We define a hierarchical taxonomy covering 11 top-level risk categories (\Fig{\ref{fig:overview}}), each a distinct dimension of potential harm in T2I generation, synthesized from platform policies and existing literature~\citep{dalle3,midjourney_guideline,helff2024llavaguard,li2025t2isafety,zhang2025t2iriskyprompt,google,microsoft,metaAI}.
-Each category defines \red{four levels} with human-authored escalation rules, \red{manually reviewed with boundary-case adjudication} (\SuppSec{\ref{app:taxonomy}}, \SuppTab{\ref{app:tab:severity}, \ref{app:tab:taxonomy}}); \red{the pipeline instantiates these rules, not severity definitions.}
+Each category defines four levels with human-authored escalation rules, manually reviewed with boundary-case adjudication (\SuppSec{\ref{app:taxonomy}}, \SuppTab{\ref{app:tab:severity}, \ref{app:tab:taxonomy}}). The pipeline instantiates these rules; it does not define severity itself.
 
 \subsection{Dataset Statistics}
 \dataname is the strict post-filtering yield of the ASL pipeline: 1,026 ladders (4,104 prompts) spanning 11 categories, each rung holding a prompt, reference image, and risk explanation (82--99 ladders per category; \SuppTab{\ref{app:tab:stats}}).
-Categories are not mutually exclusive at high severity: co-occurrence analysis (\SuppSec{\ref{app:comatrix}}) shows the largest overlap for Violence--Disturbing (18.9\%/21.4\%).
-\red{\Tab{\ref{tab:comparison}} positions \dataname{} against existing benchmarks: it targets failure slopes at the L1/L2 boundary, not flat coverage.}
+Categories are not mutually exclusive at high severity; the largest overlap is Violence--Disturbing (18.9\%/21.4\%; \SuppSec{\ref{app:comatrix}}).
+\Tab{\ref{tab:comparison}} compares \dataname{} with existing benchmarks. It is not the largest, because it targets failure slopes at the L1/L2 boundary rather than flat coverage.
 
 \begin{table}[tb]
 \centering
 \caption{Comparison of \dataname with existing benchmarks.
-\textbf{Grad.} is severity-graded levels (vs.\ binary safe/unsafe); \textbf{PPL} is mean GPT-2 perplexity over each benchmark's highest-severity prompts (its unsafe set; L3 for \dataname), lower meaning more fluent, so metaphorical high-risk prompts avoid explicit keywords and defeat perplexity-based anomaly detection simultaneously; \textbf{Reason.} is per-sample risk explanation annotation. \dataname is the only T2I generation benchmark with graded severity, low-perplexity adversarial prompts, and risk explanations.}
+\textbf{Grad.} is severity-graded levels (vs.\ binary safe/unsafe); \textbf{PPL} is mean GPT-2 perplexity over each benchmark's highest-severity prompts (its unsafe set; L3 for \dataname); lower means more fluent, which makes perplexity-based anomaly detection harder. \textbf{Reason.} is per-sample risk explanation annotation. \dataname is the only T2I generation benchmark with graded severity, low-perplexity adversarial prompts, and risk explanations.}
 \label{tab:comparison}
 \resizebox{1.0\columnwidth}{!}{%
 \begin{tabular}{lrrrccc}

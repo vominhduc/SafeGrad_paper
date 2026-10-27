@@ -1,14 +1,15 @@
 \section{Discussion}
 
 \noindent\textbf{Calibration targets must move to the boundary.}
-All evaluated mechanisms are calibrated on binary distinctions and steepen the severity gradient; sensitive deployments must evaluate L1--L2 explicitly rather than trust L3-derived claims. The cross-modal handoff compounds it: text filters cannot decode visually adversarial prompts (the stealthiness analysis in \Sec{\ref{sec:quality}}), and image classifiers trained on explicit L3 content miss L1--L2 violations.
+All evaluated mechanisms are calibrated on binary distinctions and steepen the severity gradient, so sensitive deployments must evaluate L1--L2 explicitly rather than trust claims derived from L3. The text-to-image handoff compounds the problem: text filters cannot decode visually adversarial prompts (the stealthiness analysis in \Sec{\ref{sec:quality}}), and image classifiers trained on explicit L3 content miss L1--L2 violations.
 
 \noindent\textbf{From diagnosis to mitigation.}
 \looseness=-1
-Insight 6 turns the benchmark from a measurement tool into an instrument: LoRA-tuning Qwen2.5-VL-7B on \dataname's ladders (\SuppSec{\ref{app:remediation}}) recovers the L1--L2 band zero-shot filters miss, transfers to fresh generations from all six models (pooled FBR 2.4\%), and is taxonomy-agnostic (regenerate ladders under one's own policy, retrain).
-\red{A binary-tuned control (ladder-structure causality), description-only and image-mismatch controls (visual grounding), and description-free operation are future work; the graded labels also invite severity-aware defenses---per-rung loss weighting for guidance, severity-stratified erasure for weight editing, graded preference pairs for safety tuning (\Tab{\ref{tab:defense}}).}
+Insight~6 turns the benchmark from a measurement tool into a training resource. LoRA-tuning Qwen2.5-VL-7B on \dataname's ladders (\SuppSec{\ref{app:remediation}}) recovers the L1--L2 band that zero-shot filters miss and transfers to fresh generations from all six models (pooled FBR 2.4\%). The recipe is also taxonomy-agnostic: one can regenerate ladders under a different policy and retrain.
+Several controls remain future work: a binary-tuned control (to test whether ladder structure matters), description-only and image-mismatch controls (to test visual grounding), and description-free operation.
+The graded labels also invite severity-aware defenses beyond L3 suppression (\Tab{\ref{tab:defense}}): per-rung loss weighting for inference-time guidance, severity-stratified erasure for weight editing, and graded preference pairs for safety fine-tuning.
 
 \looseness=-1
 \noindent\textbf{Scope boundaries.}
-\red{Copyright and PID show lower HGR than NSFW (\Tab{\ref{tab:t2i_models}}): MLLM classifiers are weaker at identity harms, so the gap there is likely \emph{underestimated}.}
-\red{Severity definitions are Western (US/EU) policy-grounded; a non-Western probe (\SuppSec{\ref{app:cultural}}) quantifies the asymmetry.}
+Copyright and PID show lower HGR than NSFW (\Tab{\ref{tab:t2i_models}}). MLLM classifiers are weaker at identity harms, so the gap in these categories is likely \emph{underestimated}.
+Severity definitions are grounded in Western (US/EU) policies; a non-Western probe (\SuppSec{\ref{app:cultural}}) quantifies the resulting asymmetry.
