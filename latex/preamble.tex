@@ -98,6 +98,29 @@
 
 \newcommand{\dataname}{SafeGrad\xspace}
 
+% SafeGrad logo — exact TikZ redraw of the project-page favicon
+% (https://vmdlab.github.io/safegrad/favicon.svg; y-axis flipped to TikZ coords).
+% Usage: \sglogo[<height>] (default 2ex); scales via \resizebox, so vector-crisp at any size.
+\definecolor{sgInk}{HTML}{22201D}
+\definecolor{sgLO}{HTML}{2E7D4F}
+\definecolor{sgLI}{HTML}{B98811}
+\definecolor{sgLII}{HTML}{C25F24}
+\definecolor{sgLIII}{HTML}{B33636}
+\newcommand{\sglogo}[1][2ex]{%
+  \resizebox{!}{#1}{%
+    \begin{tikzpicture}[y=-1bp, x=1bp, line cap=round, baseline=(current bounding box.center)]
+      \draw[sgInk, line width=1.6bp, rounded corners=6bp] (1,1) rectangle (31,31);
+      \draw[sgInk, line width=2bp]
+        (11,5) -- (11,27) (21,5) -- (21,27)
+        (11,11) -- (21,11) (11,16.5) -- (21,16.5) (11,22) -- (21,22);
+      \fill[sgLO]   (11,11)   circle[radius=2.6bp];
+      \fill[sgLI]   (11,16.5) circle[radius=2.6bp];
+      \fill[sgLII]  (11,22)   circle[radius=2.6bp];
+      \fill[sgLIII] (21,16.5) circle[radius=2.6bp];
+    \end{tikzpicture}%
+  }%
+}
+
 \definecolor{bestresult}{RGB}{198,224,180}  % Light green for best
 \definecolor{worstresult}{RGB}{248,203,173} % Light orange for worst
 \definecolor{highlight}{RGB}{255,242,204}    % Light yellow for notable
