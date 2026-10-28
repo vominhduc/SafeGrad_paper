@@ -12,6 +12,8 @@
 % \usepackage[pagenumbers]{wacv} % To force page numbers, e.g. for an arXiv version
 
 \input{latex/preamble}
+% Clean builds (e.g., a wrapper defining \cleanred) render \red edits as normal text
+\ifdefined\cleanred\renewcommand{\red}[1]{#1}\fi
 
 % Resolve labels defined in the main paper (sec:*, tab:*, fig:*).
 \externaldocument{wacv_2027}
