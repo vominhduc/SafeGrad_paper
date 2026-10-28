@@ -107,6 +107,7 @@
 \definecolor{sgLII}{HTML}{C25F24}
 \definecolor{sgLIII}{HTML}{B33636}
 \newcommand{\sglogo}[1][2ex]{%
+  \raisebox{0.45ex}{% center on the text x-height, not on the baseline
   \resizebox{!}{#1}{%
     \begin{tikzpicture}[y=-1bp, x=1bp, line cap=round, baseline=(current bounding box.center)]
       \draw[sgInk, line width=1.6bp, rounded corners=6bp] (1,1) rectangle (31,31);
@@ -118,7 +119,7 @@
       \fill[sgLII]  (11,22)   circle[radius=2.6bp];
       \fill[sgLIII] (21,16.5) circle[radius=2.6bp];
     \end{tikzpicture}%
-  }%
+  }}%
 }
 
 \definecolor{bestresult}{RGB}{198,224,180}  % Light green for best
