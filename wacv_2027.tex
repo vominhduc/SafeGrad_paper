@@ -13,6 +13,12 @@
 % \usepackage[review,datasets]{wacv} % REVIEW version, datasets track
 % \usepackage[pagenumbers]{wacv} % To force page numbers, e.g. for an arXiv version
 
+% WACV 2027 camera-ready: "strongly encouraged" accessibility package
+% (improves assistive-technology reading of formulas; load right after wacv).
+% pdfTeX-only: its accsupp driver uses pdfTeX primitives (\pdfcompresslevel);
+% skipped under XeTeX/tectonic so local builds keep working.
+\ifdefined\XeTeXversion\else\usepackage[accsupp]{axessibility}\fi
+
 % Import additional packages in the preamble file, before hyperref
 \input{latex/preamble}
 % Clean builds (e.g., wacv_2027_clean.tex wrapper) render \red edits as normal text
