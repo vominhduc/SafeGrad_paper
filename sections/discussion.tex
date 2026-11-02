@@ -1,12 +1,12 @@
 \section{Discussion}
 
 \noindent\textbf{Calibration targets must move to the boundary.}
-All evaluated mechanisms are calibrated on binary distinctions and steepen the severity gradient; sensitive deployments must evaluate L1--L2 explicitly rather than trust L3-derived claims. The cross-modal handoff compounds it: text filters cannot decode visually adversarial prompts (the stealthiness analysis in \Sec{\ref{sec:quality}}), and image classifiers trained on explicit L3 content miss L1--L2 violations.
+All evaluated mechanisms are calibrated on binary distinctions and steepen the severity gradient; sensitive deployments must evaluate L1--L2 explicitly, not trust L3-derived claims. The cross-modal handoff compounds this: text filters cannot decode visually adversarial prompts (the stealthiness analysis in \Sec{\ref{sec:quality}}), and image classifiers trained on explicit L3 content miss L1--L2 violations.
 
 \noindent\textbf{From diagnosis to mitigation.}
 \looseness=-1
-Insight 6 turns the benchmark from a measurement tool into a mitigation instrument: LoRA-tuning Qwen2.5-VL-7B on \dataname's ladders (\SuppSec{\ref{app:remediation}}) recovers the L1--L2 band zero-shot filters miss, transfers to fresh generations from all six models (pooled FBR 2.4\%), and is taxonomy-agnostic (regenerate ladders under one's own policy, retrain).
-\red{A binary-tuned control (ladder-structure causality), description-only and image-mismatch controls (visual grounding), and description-free operation are future work; the graded labels also invite severity-aware defenses---per-rung loss weighting for guidance, severity-stratified erasure for weight editing, graded preference pairs for safety tuning (\Tab{\ref{tab:defense}}).}
+Insight 6 turns the benchmark into a mitigation instrument: LoRA-tuning Qwen2.5-VL-7B on ladders (\SuppSec{\ref{app:remediation}}) recovers the L1--L2 band zero-shot filters miss, transfers to fresh generations from all six models (pooled FBR 2.4\%), and is taxonomy-agnostic (regenerate ladders under one's own policy, retrain).
+\red{Binary-tuned, description-only, image-mismatch, and description-free controls are future work; graded labels also invite severity-aware defenses: per-rung loss weighting, severity-stratified erasure, and graded preference pairs (\Tab{\ref{tab:defense}}).}
 
 \looseness=-1
 \noindent\textbf{Scope boundaries.}
