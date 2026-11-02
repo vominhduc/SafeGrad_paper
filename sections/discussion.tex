@@ -1,7 +1,7 @@
 \section{Discussion}
 
 \noindent\textbf{Calibration targets must move to the boundary.}
-All evaluated mechanisms are calibrated on binary distinctions and steepen the severity gradient; sensitive deployments must evaluate L1--L2 explicitly, not trust L3-derived claims. The cross-modal handoff compounds this: text filters cannot decode visually adversarial prompts (the stealthiness analysis in \Sec{\ref{sec:quality}}), and image classifiers trained on explicit L3 content miss L1--L2 violations.
+All evaluated mechanisms are calibrated on binary distinctions and steepen the severity gradient; sensitive deployments must evaluate L1--L2 explicitly, not trust L3-derived claims. Graded ladders also let each deployment choose its own cut point (e.g., blocking from L1 for a child-facing service, from L2 for an adults-only one) and read off the residual harm at that rung (\Tab{\ref{tab:t2i_models}}). The cross-modal handoff compounds this: text filters cannot decode visually adversarial prompts (the stealthiness analysis in \Sec{\ref{sec:quality}}), and image classifiers trained on explicit L3 content miss L1--L2 violations.
 
 \noindent\textbf{From diagnosis to mitigation.}
 \looseness=-1
