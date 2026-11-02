@@ -61,7 +61,7 @@ To quantify the effect of anchor provenance, we compare the two groups directly:
 \begin{table*}[tb]
 \centering
 \small
-\caption{Complete \dataname risk taxonomy. For each category, we define the visual characteristics expected at each severity level (L0--L3). These descriptors serve as the escalation anchors in the ASL pipeline and as  detection instructions for the MLLM evaluator.}
+\caption{Complete \dataname risk taxonomy. For each category, we define the visual characteristics expected at each severity level (L0--L3). These descriptors serve as the escalation anchors in the ASL pipeline and as detection instructions for the MLLM evaluator.}
 \label{app:tab:taxonomy}
 \resizebox{0.88\textwidth}{!}{%
 \begin{tabular}{l p{3.5cm} p{3.5cm} p{3.5cm} p{3.5cm}}
@@ -99,7 +99,7 @@ To quantify the effect of anchor provenance, we compare the two groups directly:
 & Trypophobia/clusters; swarms; large-scale disasters (tsunamis/tornadoes); liminal spaces; mild body horror.
 & Deceased individuals in disasters; grotesque body horror (fused flesh); scatological imagery; jump-scares. \\
 \midrule
-\textbf{Illegal Acts}
+\textbf{Illegal Activities}
 & Crime prevention infographics; professional law enforcement equipment; scientific chemical structures.
 & Fictional/fantasy weapons; closed alcohol/tobacco in background; adult smoking/drinking in narrative contexts.
 & Medicine misuse/pill-popping; graffiti/vandalism; lifestyle alcohol/vaping promotion; visible intoxication.
@@ -181,7 +181,7 @@ PID & 82 & 25.8 & 26.3 & 30.2 & 31.2 & 28.4 \\
 \section{Dataset Analysis} \label{app:analysis}
 
 To validate that the \dataname construction pipeline produces a benchmark with the intrinsic properties required for graded safety evaluation, we conduct a systematic quality analysis on the 1,026-ladder dataset using automated metrics derived from the construction artifacts.
-We detail the analysis reported in \Tab{\ref{tab:quality_full}}
+We detail the analysis reported in \Tab{\ref{tab:quality_full}}.
 
 \noindent\textbf{Severity monotonicity.} We measure monotonicity using Spearman's rank correlation $\rho$ between assigned severity level and the VLM risk score assigned by Qwen3-VL-8B-Thinking (n = 1,026 ladders; mean $\rho$ = 0.962).
 Since the verifier is shown the intended level (Appendix~\ref{app:prompts:verify}), this correlation reflects internal pipeline self-consistency rather than independent confirmation; independent grounding comes from the blinded human study in Appendix~\ref{app:human}.
@@ -192,7 +192,7 @@ Overall stealthy attack rate is \textbf{72.32\%}: nearly three in four high-risk
 This varies substantially by category: Copyright (100\%), PID (93.9\%), and Illegal Activities (86.8\%) achieve near-perfect stealthiness, while Violence (41.7\%) and Self-Harm (41.8\%) -- categories with inherently explicit vocabulary -- are the lowest.
 
 \noindent\textbf{Semantic escalation magnitude ($\Delta\theta$).} We quantify the semantic distance traversed by each ladder using angular distance in the \texttt{all-MiniLM-L6-v2} embedding space (n = 1,026 ladders; mean $\Delta\theta$ = $40.23\degree$).
-Hate Speech (50.13\degree) and Self-Harm (46.52\degree) show the largest divergence, reflecting explicit semantic escalation, while Copyright (31.59\degree) and Disturbing Content (34.12\degree) show the smallest, reflecting subtler stylistic escalation.
+Hate Speech (50.13\degree) and Self-Harm (46.52\degree) show the largest divergence, reflecting explicit semantic escalation, while Copyright (31.59\degree) and PID (33.79\degree) show the smallest, reflecting subtler stylistic escalation.
 
 \noindent\textbf{Linguistic stealthiness via prompt perplexity.} We compute GPT-2 perplexity~\citep{radford2019language} for all 4,104 prompts.
 Mean PPL decreases monotonically from 60.32 at L0 to 33.92 at L3 (PPL ratio = 0.562, Spearman $\rho = -1.0$), confirming that higher-severity prompts are more fluent, making anomaly-based text filters structurally ineffective.
@@ -742,7 +742,7 @@ HiDream         & \xmark & \xmark & \xmark \\
 
 $^*$ Janus-Pro uses a LLaMA-based language backbone for text
 conditioning, shared with the Llama-3-70B prompt generator used
-in Stage 1--2 of the construction pipeline. However, this shared
+in Stage 2 of the construction pipeline. However, this shared
 component operates on text only and does not influence image
 generation or SAS computation. No evaluated model shares an image
 encoder or diffusion backbone with any construction component,
@@ -768,7 +768,7 @@ The severity-aware filter of Section~\ref{sec:filter} is trained as follows. Qwe
 
 \section{Dataset Examples} \label{app:examples}
 
-\Fig{\ref{app:fig:sample_1}}, \Fig{\ref{app:fig:sample_2}}, \Fig{\ref{app:fig:sample_3}}, \Fig{\ref{app:fig:sample_4}}, \Fig{\ref{app:fig:sample_5}}, \Fig{\ref{app:fig:sample_6}} , \Fig{\ref{app:fig:sample_7}}, \Fig{\ref{app:fig:sample_8}}, \Fig{\ref{app:fig:sample_9}}, \Fig{\ref{app:fig:sample_10}}, \Fig{\ref{app:fig:sample_11}} show the examples of our \dataname dataset.
+\Fig{\ref{app:fig:sample_1}}, \Fig{\ref{app:fig:sample_2}}, \Fig{\ref{app:fig:sample_3}}, \Fig{\ref{app:fig:sample_4}}, \Fig{\ref{app:fig:sample_5}}, \Fig{\ref{app:fig:sample_6}}, \Fig{\ref{app:fig:sample_7}}, \Fig{\ref{app:fig:sample_8}}, \Fig{\ref{app:fig:sample_9}}, \Fig{\ref{app:fig:sample_10}}, \Fig{\ref{app:fig:sample_11}} show the examples of our \dataname dataset.
 
 \begin{figure*}[tb]
     \centering

@@ -27,7 +27,7 @@ Escalation steepens at L1$\rightarrow$L2 (28.0 pp): prompts benign to text filte
 \Tab{\ref{tab:t2i_models}} reports the per-category HGR matrix for the six models together with the SBS and $\Delta_B$ summaries. SBS should be read only alongside absolute HGR: it marks concentration sharpness, not safety (the two highest-SBS models, HiDream 0.80 and Janus-Pro 0.74, are also the two most harmful at L3).
 
 \textbf{Insight 2: Even the safe rung is not safe.}
-\textit{All six models produce non-zero harm at L0 (0.5--3.5\%, of the same order as the evaluator's noise floor), and harm rates rise with generative capability; safety posture appears to be baked into model weights through training and alignment data, not supplied by guard rails.}
+\textit{All six models produce non-zero harm at L0 (0.5--3.5\%, of the same order as the evaluator's noise floor), and harm rates rise with generative capability; safety posture appears to be baked into model weights through training and alignment data, not supplied by guardrails.}
 PixArt-$\alpha$'s fine-tuning suppresses sexual HGR@L3 to \red{38.9\%} versus 59.4\% for violence, but no model suppresses hate speech or misinformation equivalently---societal harms are likely underrepresented in safety fine-tuning data. At least 47.6\% of L3 content stays harmful, so deployment needs output monitoring even for safe prompts.
 
 \red{Backbone overlap with construction models is audited (\SuppSec{\ref{app:backbone}}): no evaluated model shares encoder or diffusion backbones.}
