@@ -62,7 +62,7 @@ Without MACE, defense strength and utility cost are uncorrelated ($r = 0.009$); 
 \textbf{Insight 5: Filter insensitivity to severity.}
 \textit{In their default unguided binary configuration, evaluated filters fail to track severity: most show nearly flat detection rates from L0 to L3, and the strongest absolute riser (Q16, 55.3\%$\to$67.2\%) does so while flagging over half of safe images.}
 CLIP-NSFW misses 75\% of L3 content; Qwen2.5-VL nearly never false-alarms (FPR = 0.7\%) but misses 88\% of harmful content (FBR = 0.880); the purpose-built SD Filter rises only 2.3\%$\to$7.8\% across rungs; and InternVL2-8B behaves similarly despite being a general-purpose VLM (FPR 0.2\%, but it detects only 0.9\%/2.4\%/12.1\% of L1--L3).
-Filters thus fail to separate safe from harmful content at boundary levels; fully blind evaluation is even flatter (0.2\%/0.2\%/7.2\% at L1--L3; \SuppSec{\ref{app:metrics}}). LlavaGuard and Qwen2.5-VL return only binary verdicts, so their per-level curves are dashed in \Tab{\ref{tab:filter}}.
+Filters thus fail to separate safe from harmful at boundary levels; fully blind evaluation is even flatter (0.2\%/0.2\%/7.2\% at L1--L3; \SuppSec{\ref{app:metrics}}). LlavaGuard and Qwen2.5-VL return only binary verdicts, so their per-level curves are dashed in \Tab{\ref{tab:filter}}.
 One scope caveat: three of the six filters (Q16, CLIP-NSFW, SD Filter) are NSFW-targeted by design, so part of their flatness on Legal and Social content reflects out-of-domain operation; the claim that \emph{general-purpose} moderation fails to track severity is anchored by the three generalist judges, which also stay flat (InternVL2-8B: 0.9\%/2.4\% at L1/L2). \red{Measured at default operating points (L0 FPRs 0.2--55.3\%), flatness may partly reflect threshold calibration rather than an inability to order severity; the binary-verdict generalists expose no scores, and calibrated matched-FPR comparisons are future work.}
 
 \looseness=-1
@@ -72,7 +72,7 @@ The primary baseline is the protocol-matched zero-shot backbone (same split, sam
 
 \looseness=-1
 \textbf{Insight 6: The safety gap can be trained away.}
-\textit{A filter fine-tuned on ladder data recovers the mid-severity band (FBR $0.522 \rightarrow 0.022$ benchmark-resident and $0.653 \rightarrow 0.024$ fresh, both against protocol-matched zero-shot anchors; $0.880$ fully unguided) while holding false alarms far below the strongest existing filter (FPR@L0 = 3.8\% vs.\ 55.3\% for Q16, the most sensitive existing filter), converting \dataname from a diagnostic into a mitigation instrument.}
+\textit{A filter fine-tuned on ladder data recovers the mid-severity band (FBR $0.522 \rightarrow 0.022$ benchmark-resident and $0.653 \rightarrow 0.024$ fresh, both against protocol-matched zero-shot anchors; $0.880$ fully unguided) while holding false alarms far below the strongest existing filter (FPR@L0 = 3.8\% vs.\ 55.3\% for Q16), converting \dataname from a diagnostic into a mitigation instrument.}
 \textbf{Fresh-generation (prompt-aware transfer) validation.} We regenerate every held-out test-split prompt with all six evaluated T2I models (\emph{not} construction models), under each model's default settings with checkers disabled and per-ladder seeds (two images per prompt; 4,992 images).
 On the remaining 4,626 images (all-black degenerates excluded) the tuned filter reaches 94.7\% L1, 99.0\% L2, and 99.0\% L3 detection at a 4.0\% L0 false-positive rate; pooled FBR is 2.4\%, statistically indistinguishable from the 2.2\% reference-regime estimate, versus 65.3\% for the zero-shot backbone (\SuppTab{\ref{tab:filter_fresh}}).
 Per-generator FBR varies only 2.2--2.7\% (L1 detection 94.2--95.2\%), and a Qwen2.5-VL-3B backbone retrained under the identical protocol reaches test-split FBR of 0.6\% with 99.0\% L1 detection (pooled fresh-generation FBR 0.8\%). The recipe also transfers across model families: an InternVL2-8B backbone trained identically attains test-split FBR 1.3\% (matched zero-shot anchor 40.1\%) with 98.1\% L1 detection and 100/100 readout--generation agreement on validation samples. The tuned decision is threshold-robust over a wide operating band (\SuppSec{\ref{app:remediation}}).
@@ -82,7 +82,7 @@ The favorable-setting caveat cuts both ways: baseline FBRs are lower bounds (ref
 
 \input{tables/attack_summary}
 
-\Tab{\ref{tab:attacks}} presents ASR for six attack families against TRCE + LlavaGuard, the best utility-safety tradeoff configuration (Insight~4); the MACE + LlavaGuard configuration, which suppresses more harm at a large utility and over-refusal cost, is left to the extended analysis.
+\Tab{\ref{tab:attacks}} presents ASR for six attack families against TRCE + LlavaGuard, the best utility-safety tradeoff configuration (Insight~4); MACE + LlavaGuard, which pays a large utility and over-refusal cost, is left to extended analysis.
 All exceed 55\% ASR: the newest, model-free PGJ\ \citep{huang2024pgj} leads at 72.4\%, followed by the multimodal MMA-Diffusion (68.7\%), concept extraction (Ring-A-Bell, 65.6\%), and RL prompt search (SneakyPrompt, 63.4\%), with white-box gradient attacks UnlearnDiffAtk (61.5\%) and P4D (55.6\%) trailing (GenBreak~\citep{wang2025genbreak}: commercial-wrapper scope, omitted).
 
 \looseness=-1
