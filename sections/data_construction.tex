@@ -1,7 +1,7 @@
 \section{Adversarial Severity Ladders Pipeline} \label{sec:pipeline}
 
 \subsection{Pipeline Overview}
-We introduce the Adversarial Severity Ladders (ASL) pipeline, an automated construction approach operating under human oversight: the taxonomy, severity definitions, and escalation rules are authored and reviewed by the human authors, with four advantages over fully human annotation: (1) scale without annotator self-selection bias; (2) programmatic severity calibration via escalation rules, bypassing inter-rater inconsistency on fine-grained severity judgments~\citep{aroyo2015truth}; (3) deterministic reproducibility given fixed seeds and checkpoints; and (4) no large-scale harmful-content exposure for workers, which carries documented psychological risks~\citep{steiger2021psychological}.
+We introduce the Adversarial Severity Ladders (ASL) pipeline, an automated construction approach operating under human oversight: the taxonomy, severity definitions, and escalation rules are authored and reviewed by the human authors, which offers four advantages over fully human annotation: (1) scale without annotator self-selection bias; (2) programmatic severity calibration via escalation rules, bypassing inter-rater inconsistency on fine-grained severity judgments~\citep{aroyo2015truth}; (3) deterministic reproducibility given fixed seeds and checkpoints; and (4) no large-scale harmful-content exposure for workers, which carries documented psychological risks~\citep{steiger2021psychological}.
 The pipeline operates in four stages.
 
 \noindent\textbf{Stage 1: Safe Prompt Generation.}
@@ -22,7 +22,7 @@ Verification is per-rung and description-guided (unlike Insight~5's unguided fil
 \red{Incomplete ladders are excluded, yielding 1,026 validated ladders (${\sim}32$ A100 GPU-hours total).}
 
 \subsection{Dataset Quality Analysis} \label{sec:quality}
-\Tab{\ref{tab:quality_full}} reports four quality dimensions across all 11 categories.
+\Tab{\ref{tab:quality_full}} reports quality statistics across all 11 categories.
 \textbf{Severity monotonicity.} Spearman $\rho = 0.962$ between rung index and verifier risk scores measures rubric-internal consistency of the construction pipeline (images are verified to within $\pm 1$ rung of their assigned label; Stage~4); human grounding of the rung labels is established separately by the blinded validation study ($\kappa = 0.73$; \SuppSec{\ref{app:human}}).
 \textbf{Adversarial stealthiness} (mean stealthy rate 72.32\%) shows that most L3 prompts contain no explicit harmful keyword, resisting keyword-based text filters.
 \textbf{Prompt fluency} (mean PPL@L3 $= 33.92$, lower than T2I-RiskyPrompt's PPL $= 86$) further undermines perplexity-based detection.
