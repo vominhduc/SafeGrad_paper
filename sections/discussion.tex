@@ -2,7 +2,7 @@
 
 \looseness=-1
 \noindent\textbf{Calibration targets must move to the boundary.}
-All evaluated mechanisms are calibrated on binary distinctions and steepen the severity gradient; sensitive deployments must evaluate L1--L2 explicitly, not trust L3-derived claims. Graded ladders also let each deployment choose its cut point (block from L1 for child-facing, from L2 for adults-only) and read off residual harm at that rung (\Tab{\ref{tab:t2i_models}}). The cross-modal handoff compounds this: text filters cannot decode visually adversarial prompts (the stealthiness analysis in \Sec{\ref{sec:quality}}), and image classifiers trained on explicit L3 content miss L1--L2 violations.
+All evaluated mechanisms are calibrated on binary distinctions and steepen the severity gradient; sensitive deployments must evaluate L1--L2 explicitly, not trust L3-derived claims. Graded ladders also let each deployment choose its cut point (block from L1 for child-facing, from L2 for adults-only) and read off residual harm at that rung (\Tab{\ref{tab:t2i_models}}). The cross-modal handoff compounds this: text filters cannot decode visually adversarial prompts (stealthiness, \Sec{\ref{sec:quality}}), and image classifiers trained on explicit L3 content miss L1--L2 violations.
 
 \noindent\textbf{From diagnosis to mitigation.}
 \looseness=-1
@@ -11,5 +11,4 @@ Insight 6 turns the benchmark into a mitigation instrument: LoRA-tuning Qwen2.5-
 
 \looseness=-1
 \noindent\textbf{Scope boundaries.}
-\red{Copyright and PID show lower HGR than NSFW (\Tab{\ref{tab:t2i_models}}): MLLM classifiers are weaker at identity harms, so the gap there is likely \emph{underestimated}.}
-\red{Severity definitions are Western (US/EU) policy-grounded; a non-Western probe (\SuppSec{\ref{app:cultural}}) quantifies the asymmetry.}
+\red{Copyright and PID show lower HGR than NSFW (\Tab{\ref{tab:t2i_models}}): MLLM classifiers are weaker at identity harms, so the gap there is likely \emph{underestimated}; severity definitions are Western (US/EU) policy-grounded (non-Western probe: \SuppSec{\ref{app:cultural}}).}
