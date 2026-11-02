@@ -48,7 +48,7 @@ Transfer to DiT backbones is positive but method-sensitive: on PixArt-$\alpha$ a
 
 \textbf{Insight 4: The utility--safety tradeoff is dominated by two methods.}
 \textit{Under our joint $\Delta$HGR/SAS criterion, TRCE Pareto-dominates six of the seven remaining methods ($\Delta$HGR = 0.506 at an SAS cost of 0.008, versus e.g.\ SLD's 0.409 at a cost of 0.018); MACE occupies a distinct extreme point on the tradeoff curve.}
-Concretely, TRCE beats NP, SLD, Safree, UCE, SPEED, and SafetyDPO on both metrics at once; the TRCE--SLD margin ($9.7$ pp) far exceeds the Bernoulli SEM ($\lesssim 0.5$ pp).
+Concretely, TRCE beats NP, SLD, Safree, UCE, SPEED, and SafetyDPO on both metrics at once; the TRCE--SLD margin ($9.7$ pp) far exceeds the worst-case Bernoulli SEM ($\lesssim 0.5$ pp).
 RECE is excluded: it collapses on Legal and Social (\SuppSec{\ref{app:collapse}}).
 The remaining tradeoff is between TRCE and MACE: MACE erases more harm ($\Delta\mathrm{HGR} = 0.683$, $+35\%$ relative) but pays $11\times$ the SAS penalty and $2.7\times$ the over-refusal rate (ORR 34.2\% vs.\ 12.8\%; \SuppSec{\ref{app:overrefusal}}), degrading benign-portrait SAS by 40.1\%.
 Without MACE, defense strength and utility cost are uncorrelated ($r = 0.009$); including MACE, $r = 0.862$: the apparent tradeoff is driven by MACE's aggressive erasure alone.
